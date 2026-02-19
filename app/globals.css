@@ -1,26 +1,245 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Static palette used by Tailwind utility classes (bg-navy-800, etc.) */
+  /* These are the DARK mode defaults — actual runtime values are set via :root / [data-theme] */
+  --color-navy-950: #0a0f1e;
+  --color-navy-900: #0f1629;
+  --color-navy-800: #151d35;
+  --color-navy-700: #1c2744;
+  --color-navy-600: #263356;
+  --color-charcoal-900: #1a1d24;
+  --color-charcoal-800: #22262f;
+  --color-charcoal-700: #2d323d;
+
+  /* Accent – constant across themes */
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-accent-muted: #2563eb;
+  --color-accent-amber: #d97706;
+  --color-accent-red: #dc2626;
+  --color-accent-green: #059669;
+  --color-accent-purple: #7c3aed;
+  --color-accent-cyan: #0891b2;
+  --color-accent-lime: #65a30d;
+
+  /* Surfaces */
+  --color-surface-primary: #0f1629;
+  --color-surface-secondary: #151d35;
+  --color-surface-card: #151d35;
+  --color-surface-card-hover: #1c2744;
+
+  /* Text */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-text-accent: #3b82f6;
+
+  /* Borders */
+  --color-border-subtle: rgba(148, 163, 184, 0.1);
+  --color-border-medium: rgba(148, 163, 184, 0.2);
+
+  /* Font */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Dark theme (default) ────────────────────────────────────────────────── */
+:root {
+  --nav-height: 3.5rem;
+
+  --t-bg: #0a0f1e;
+  --t-surface: #0f1629;
+  --t-card: #151d35;
+  --t-card-hover: #1c2744;
+  --t-border-strong: #263356;
+  --t-border-subtle: rgba(148, 163, 184, 0.1);
+  --t-border-medium: rgba(148, 163, 184, 0.2);
+
+  --t-text: #f1f5f9;
+  --t-text-secondary: #94a3b8;
+  --t-text-muted: #64748b;
+
+  --t-nav-bg: rgba(10, 15, 30, 0.7);
+  --t-nav-bg-scroll: rgba(10, 15, 30, 0.9);
+
+  /* Chart hex (resolved, for Recharts SVG) */
+  --ch-accent: #3b82f6;
+  --ch-red: #ef4444;
+  --ch-amber: #f59e0b;
+  --ch-green: #10b981;
+  --ch-purple: #8b5cf6;
+  --ch-cyan: #06b6d4;
+  --ch-lime: #84cc16;
+  --ch-text: #f1f5f9;
+  --ch-muted: #94a3b8;
+  --ch-border: #263356;
+  --ch-tooltip-bg: #0a1628;
+}
+
+/* ── Light theme ────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --t-bg: #f8fafc;
+  --t-surface: #f1f5f9;
+  --t-card: #ffffff;
+  --t-card-hover: #f8fafc;
+  --t-border-strong: #cbd5e1;
+  --t-border-subtle: rgba(51, 65, 85, 0.12);
+  --t-border-medium: rgba(51, 65, 85, 0.2);
+
+  --t-text: #0f172a;
+  --t-text-secondary: #475569;
+  --t-text-muted: #64748b;
+
+  --t-nav-bg: rgba(248, 250, 252, 0.7);
+  --t-nav-bg-scroll: rgba(248, 250, 252, 0.92);
+
+  /* Chart hex – darker/stronger for light backgrounds */
+  --ch-accent: #2563eb;
+  --ch-red: #dc2626;
+  --ch-amber: #d97706;
+  --ch-green: #059669;
+  --ch-purple: #7c3aed;
+  --ch-cyan: #0891b2;
+  --ch-lime: #65a30d;
+  --ch-text: #0f172a;
+  --ch-muted: #64748b;
+  --ch-border: #cbd5e1;
+  --ch-tooltip-bg: #ffffff;
+
+  /* Override Tailwind colour vars so utility classes adapt to light mode */
+  --color-navy-950: #f8fafc;
+  --color-navy-900: #f1f5f9;
+  --color-navy-800: #ffffff;
+  --color-navy-700: #f8fafc;
+  --color-navy-600: #cbd5e1;
+
+  --color-surface-primary: #f1f5f9;
+  --color-surface-secondary: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-surface-card-hover: #f8fafc;
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+
+  --color-border-subtle: rgba(51, 65, 85, 0.12);
+  --color-border-medium: rgba(51, 65, 85, 0.2);
+}
+
+html,
+body {
+  background-color: var(--t-bg);
+  color: var(--t-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--t-card-hover) var(--t-bg);
+}
+
+/* Selection */
+::selection {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3.5rem;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Card hover glow */
+.card-glow {
+  position: relative;
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.06),
+      transparent 40%);
+  pointer-events: none;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 2000px;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out both;
+}
+
+/* Staggered children */
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 300ms;
 }
