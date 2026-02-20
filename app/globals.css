@@ -96,6 +96,8 @@ body {
   background-color: var(--t-bg);
   color: var(--t-text);
   transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll — stops fixed nav from shifting off-screen on mobile */
 }
 
 body {
