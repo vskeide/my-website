@@ -11,98 +11,30 @@ const allCategories = [
     "Calculators",
 ];
 
-const archiveEntries: ArchiveEntry[] = [
+const archiveEntries: (ArchiveEntry & { year: number })[] = [
     // 2026
-    {
-        slug: "silver-price-analysis",
-        title: "Silver Price Dynamics and Jewelry Sector Margins",
-        date: "Feb 18",
-        category: "Investing & Finance",
-    },
-    {
-        slug: "understanding-index-funds",
-        title: "Understanding Index Funds: A Beginner's Guide",
-        date: "Feb 15",
-        category: "Investing & Finance",
-    },
-    {
-        slug: "budgeting-50-30-20-rule",
-        title: "The 50/30/20 Rule: Managing Your Money",
-        date: "Feb 8",
-        category: "Personal Economy",
-    },
-    {
-        slug: "local-infrastructure-spending",
-        title: "Municipal Infrastructure Budget Breakdown",
-        date: "Jan 29",
-        category: "Local Politics",
-    },
-    {
-        slug: "emergency-fund-strategies",
-        title: "How to Build an Emergency Fund That Works",
-        date: "Jan 20",
-        category: "Personal Economy",
-    },
-    {
-        slug: "etf-vs-mutual-funds",
-        title: "ETFs vs. Mutual Funds: Which to Choose?",
-        date: "Jan 12",
-        category: "Investing & Finance",
-    },
-    {
-        slug: "property-tax-explained",
-        title: "Property Tax Changes for Local Homeowners",
-        date: "Jan 5",
-        category: "Local Politics",
-    },
-    {
-        slug: "compound-interest-calculator",
-        title: "Compound Interest Calculator",
-        date: "Jan 2",
-        category: "Calculators",
-        type: "calculator",
-    },
+    { year: 2026, slug: "silver-price-analysis", title: "Silver Price Dynamics and Jewelry Sector Margins", date: "Feb 18", category: "Investing & Finance" },
+    { year: 2026, slug: "understanding-index-funds", title: "Understanding Index Funds: A Beginner's Guide", date: "Feb 15", category: "Investing & Finance" },
+    { year: 2026, slug: "budgeting-50-30-20-rule", title: "The 50/30/20 Rule: Managing Your Money", date: "Feb 8", category: "Personal Economy" },
+    { year: 2026, slug: "local-infrastructure-spending", title: "Municipal Infrastructure Budget Breakdown", date: "Jan 29", category: "Local Politics" },
+    { year: 2026, slug: "emergency-fund-strategies", title: "How to Build an Emergency Fund That Works", date: "Jan 20", category: "Personal Economy" },
+    { year: 2026, slug: "etf-vs-mutual-funds", title: "ETFs vs. Mutual Funds: Which to Choose?", date: "Jan 12", category: "Investing & Finance" },
+    { year: 2026, slug: "property-tax-explained", title: "Property Tax Changes for Local Homeowners", date: "Jan 5", category: "Local Politics" },
+    { year: 2026, slug: "compound-interest-calculator", title: "Compound Interest Calculator", date: "Jan 2", category: "Calculators", type: "calculator" },
     // 2025
-    {
-        slug: "year-end-financial-review",
-        title: "How to Conduct Your Year-End Financial Review",
-        date: "Dec 20",
-        category: "Personal Economy",
-    },
-    {
-        slug: "dividend-investing-basics",
-        title: "Dividend Investing: Building Passive Income",
-        date: "Nov 15",
-        category: "Investing & Finance",
-    },
-    {
-        slug: "municipal-budget-transparency",
-        title: "Grading Your Municipality on Budget Transparency",
-        date: "Oct 30",
-        category: "Local Politics",
-    },
-    {
-        slug: "high-yield-savings",
-        title: "High-Yield Savings Accounts: Worth the Switch?",
-        date: "Sep 8",
-        category: "Personal Economy",
-    },
-    {
-        slug: "bonds-introduction",
-        title: "Bonds 101: A Safe Harbor in Volatile Markets",
-        date: "Aug 22",
-        category: "Investing & Finance",
-    },
+    { year: 2025, slug: "year-end-financial-review", title: "How to Conduct Your Year-End Financial Review", date: "Dec 20", category: "Personal Economy" },
+    { year: 2025, slug: "dividend-investing-basics", title: "Dividend Investing: Building Passive Income", date: "Nov 15", category: "Investing & Finance" },
+    { year: 2025, slug: "municipal-budget-transparency", title: "Grading Your Municipality on Budget Transparency", date: "Oct 30", category: "Local Politics" },
+    { year: 2025, slug: "high-yield-savings", title: "High-Yield Savings Accounts: Worth the Switch?", date: "Sep 8", category: "Personal Economy" },
+    { year: 2025, slug: "bonds-introduction", title: "Bonds 101: A Safe Harbor in Volatile Markets", date: "Aug 22", category: "Investing & Finance" },
 ];
 
-// Group by year
-function groupByYear(entries: ArchiveEntry[]) {
+// Group by explicit year field — no index-based heuristics
+function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
     const years: Record<number, ArchiveEntry[]> = {};
-    // Simulated year assignment
-    entries.forEach((entry, i) => {
-        const year = i < 8 ? 2026 : 2025;
-        if (!years[year]) years[year] = [];
-        years[year].push(entry);
+    entries.forEach((entry) => {
+        if (!years[entry.year]) years[entry.year] = [];
+        years[entry.year].push(entry);
     });
     return Object.entries(years)
         .map(([y, e]) => ({ year: Number(y), entries: e }))
@@ -120,28 +52,34 @@ export default function ArchivePage() {
     const grouped = groupByYear(filtered);
 
     return (
-        <main className="mx-auto max-w-4xl px-4 sm:px-6">
+        <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             {/* Header */}
             <section className="pb-4 pt-8">
-                <h1 className="mb-1 text-xl font-bold tracking-tight text-text-primary">
+                <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
                     Archive
                 </h1>
-                <p className="text-xs text-text-muted">
+                <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
                     Browse all articles and calculators by year and category.
                 </p>
             </section>
 
             {/* Section jump buttons */}
-            <section className="sticky top-[var(--nav-height)] z-30 -mx-4 bg-navy-950/90 px-4 py-3 backdrop-blur-xl sm:-mx-6 sm:px-6">
+            <section
+                className="sticky top-[var(--nav-height)] z-30 -mx-4 px-4 py-3 sm:-mx-6 sm:px-6"
+                style={{ backgroundColor: "var(--t-bg)", borderBottom: "1px solid var(--t-border-subtle)" }}
+            >
                 <div className="flex flex-wrap gap-2">
                     {allCategories.map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveFilter(cat)}
-                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${activeFilter === cat
-                                ? "bg-accent text-white shadow-md shadow-accent/25"
-                                : "bg-surface-secondary text-text-secondary hover:bg-surface-card-hover hover:text-text-primary border border-border-subtle"
-                                }`}
+                            className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+                            style={{
+                                background: activeFilter === cat ? "var(--ch-accent)" : "var(--t-card)",
+                                color: activeFilter === cat ? "#ffffff" : "var(--t-text-secondary)",
+                                border: `1px solid ${activeFilter === cat ? "var(--ch-accent)" : "var(--t-border-subtle)"}`,
+                                borderRadius: 0,
+                            }}
                         >
                             {cat}
                         </button>
@@ -162,7 +100,7 @@ export default function ArchivePage() {
 
                 {grouped.length === 0 && (
                     <div className="py-16 text-center">
-                        <p className="text-sm text-text-muted">
+                        <p className="text-sm" style={{ color: "var(--t-text-muted)" }}>
                             No entries found for this category.
                         </p>
                     </div>

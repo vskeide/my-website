@@ -84,9 +84,12 @@ export default function BlogPage() {
         : articles;
 
     return (
-        <main className="mx-auto max-w-6xl px-4 sm:px-6">
+        <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             {/* Category filters */}
-            <section className="sticky top-[var(--nav-height)] z-30 -mx-4 bg-navy-950/90 px-4 pt-10 pb-4 backdrop-blur-xl sm:-mx-6 sm:px-6">
+            <section
+                className="sticky top-[var(--nav-height)] z-30 -mx-4 px-4 pt-10 pb-4 sm:-mx-6 sm:px-6"
+                style={{ backgroundColor: "var(--t-bg)", borderBottom: "1px solid var(--t-border-subtle)" }}
+            >
                 <CategoryFilter
                     categories={categories}
                     active={activeCategory}

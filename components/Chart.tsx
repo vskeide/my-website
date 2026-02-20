@@ -24,9 +24,11 @@ interface ChartProps {
     config: ChartConfig;
     compact?: boolean;
     height?: number | `${number}%`;
+    /** When true, renders without interactivity (inline in article body) */
+    static?: boolean;
 }
 
-const PALETTE = ["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
+const PALETTE = ["#2563eb", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function ChartTooltip({ active, payload, label }: any) {
@@ -34,21 +36,21 @@ function ChartTooltip({ active, payload, label }: any) {
     return (
         <div
             style={{
-                background: "#151d35",
-                border: "1px solid rgba(148,163,184,0.2)",
-                borderRadius: 8,
+                background: "var(--ch-tooltip-bg)",
+                border: "1px solid var(--t-border-medium)",
+                borderRadius: 0,
                 padding: "8px 12px",
                 fontSize: 12,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
             }}
         >
             {label !== undefined && label !== null && (
-                <p style={{ color: "#f1f5f9", fontWeight: 600, marginBottom: 4 }}>
+                <p style={{ color: "var(--t-text)", fontWeight: 600, marginBottom: 4 }}>
                     {label}
                 </p>
             )}
             {payload.map((entry: any, i: number) => (
-                <p key={i} style={{ color: entry.color || "#94a3b8", margin: "2px 0" }}>
+                <p key={i} style={{ color: entry.color || "var(--t-text-secondary)", margin: "2px 0" }}>
                     {entry.name}:{" "}
                     {typeof entry.value === "number"
                         ? entry.value.toLocaleString(undefined, { maximumFractionDigits: 1 })
@@ -59,107 +61,136 @@ function ChartTooltip({ active, payload, label }: any) {
     );
 }
 
-export default function Chart({ config, compact = false, height: heightProp }: ChartProps) {
+/* Wrapper that gives charts a white/light background */
+function ChartBackground({ children, h }: { children: React.ReactNode; h: number | string }) {
+    return (
+        <div
+            style={{
+                background: "var(--ch-tooltip-bg)",
+                border: "1px solid var(--t-border-subtle)",
+                padding: "8px 4px 4px",
+                width: "100%",
+                height: typeof h === "number" ? h + 16 : h,
+            }}
+        >
+            {children}
+        </div>
+    );
+}
+
+export default function Chart({ config, compact = false, height: heightProp, static: isStatic = false }: ChartProps) {
     const { type, data, xKey, yKey, yKeys, colors } = config;
     const palette = colors ?? PALETTE;
-    const h = heightProp ?? (compact ? 220 : 340);
+    const h = heightProp ?? (compact ? 200 : 320);
     const margin = { top: 8, right: 16, bottom: 4, left: 0 };
 
     const axisProps: any = {
-        tick: { fontSize: 11, fill: "#64748b" },
-        axisLine: { stroke: "rgba(148,163,184,0.15)" },
-        tickLine: { stroke: "rgba(148,163,184,0.15)" },
+        tick: { fontSize: 11, fill: "var(--ch-muted)" },
+        axisLine: { stroke: "var(--t-border-subtle)" },
+        tickLine: { stroke: "var(--t-border-subtle)" },
     };
 
     const grid = (
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.08)" />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--t-border-subtle)" />
     );
 
-    switch (type) {
-        case "line":
-            return (
-                <ResponsiveContainer width="100%" height={h}>
-                    <LineChart data={data} margin={margin}>
-                        {grid}
-                        <XAxis dataKey={xKey} {...axisProps} />
-                        <YAxis {...axisProps} />
-                        <Tooltip content={<ChartTooltip />} />
-                        <Line
-                            type="monotone"
-                            dataKey={yKey}
-                            stroke={palette[0]}
-                            strokeWidth={2}
-                            dot={{ fill: palette[0], r: compact ? 2 : 3 }}
-                            activeDot={{ r: compact ? 4 : 6, stroke: palette[0], strokeWidth: 2, fill: "#0a0f1e" }}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            );
+    const tooltip = isStatic ? undefined : <Tooltip content={<ChartTooltip />} />;
 
-        case "bar":
-            return (
-                <ResponsiveContainer width="100%" height={h}>
-                    <BarChart data={data} margin={margin}>
-                        {grid}
-                        <XAxis dataKey={xKey} {...axisProps} />
-                        <YAxis {...axisProps} />
-                        <Tooltip content={<ChartTooltip />} />
-                        <Bar dataKey={yKey} radius={[4, 4, 0, 0]}>
-                            {data.map((_, i) => (
-                                <Cell key={i} fill={palette[i % palette.length]} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
-            );
-
-        case "stackedBar": {
-            const keys = yKeys ?? [yKey];
-            return (
-                <ResponsiveContainer width="100%" height={h}>
-                    <BarChart data={data} margin={margin}>
-                        {grid}
-                        <XAxis dataKey={xKey} {...axisProps} />
-                        <YAxis {...axisProps} />
-                        <Tooltip content={<ChartTooltip />} />
-                        <Legend
-                            wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
-                            formatter={(value: string) => (
-                                <span style={{ color: "#94a3b8" }}>{value}</span>
-                            )}
-                        />
-                        {keys.map((key, i) => (
-                            <Bar
-                                key={key}
-                                dataKey={key}
-                                stackId="a"
-                                fill={palette[i % palette.length]}
-                                radius={i === keys.length - 1 ? [4, 4, 0, 0] : [0, 0, 0, 0]}
+    const renderChart = () => {
+        switch (type) {
+            case "line":
+                return (
+                    <ResponsiveContainer width="100%" height={h}>
+                        <LineChart data={data} margin={margin}>
+                            {grid}
+                            <XAxis dataKey={xKey} {...axisProps} />
+                            <YAxis {...axisProps} />
+                            {tooltip}
+                            <Line
+                                type="monotone"
+                                dataKey={yKey}
+                                stroke={palette[0]}
+                                strokeWidth={2}
+                                dot={{ fill: palette[0], r: compact ? 2 : 3 }}
+                                activeDot={isStatic ? false : { r: compact ? 4 : 6, stroke: palette[0], strokeWidth: 2, fill: "var(--ch-tooltip-bg)" }}
+                                isAnimationActive={false}
                             />
-                        ))}
-                    </BarChart>
-                </ResponsiveContainer>
-            );
-        }
+                        </LineChart>
+                    </ResponsiveContainer>
+                );
 
-        case "scatter":
-            return (
-                <ResponsiveContainer width="100%" height={h}>
-                    <ScatterChart margin={margin}>
-                        {grid}
-                        <XAxis type="number" dataKey={xKey} name={xKey} {...axisProps} />
-                        <YAxis type="number" dataKey={yKey} name={yKey} {...axisProps} />
-                        <Tooltip content={<ChartTooltip />} cursor={{ strokeDasharray: "3 3", stroke: "rgba(148,163,184,0.2)" }} />
-                        <Scatter data={data} fill={palette[0]}>
-                            {data.map((_, i) => (
-                                <Cell key={i} fill={palette[0]} opacity={0.8} />
+            case "bar":
+                return (
+                    <ResponsiveContainer width="100%" height={h}>
+                        <BarChart data={data} margin={margin}>
+                            {grid}
+                            <XAxis dataKey={xKey} {...axisProps} />
+                            <YAxis {...axisProps} />
+                            {tooltip}
+                            <Bar dataKey={yKey} radius={[0, 0, 0, 0]} isAnimationActive={false}>
+                                {data.map((_, i) => (
+                                    <Cell key={i} fill={palette[i % palette.length]} />
+                                ))}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                );
+
+            case "stackedBar": {
+                const keys = yKeys ?? [yKey];
+                return (
+                    <ResponsiveContainer width="100%" height={h}>
+                        <BarChart data={data} margin={margin}>
+                            {grid}
+                            <XAxis dataKey={xKey} {...axisProps} />
+                            <YAxis {...axisProps} />
+                            {tooltip}
+                            <Legend
+                                wrapperStyle={{ fontSize: 11, paddingTop: 8, color: "var(--ch-muted)" }}
+                                formatter={(value: string) => (
+                                    <span style={{ color: "var(--ch-muted)" }}>{value}</span>
+                                )}
+                            />
+                            {keys.map((key, i) => (
+                                <Bar
+                                    key={key}
+                                    dataKey={key}
+                                    stackId="a"
+                                    fill={palette[i % palette.length]}
+                                    radius={[0, 0, 0, 0]}
+                                    isAnimationActive={false}
+                                />
                             ))}
-                        </Scatter>
-                    </ScatterChart>
-                </ResponsiveContainer>
-            );
+                        </BarChart>
+                    </ResponsiveContainer>
+                );
+            }
 
-        default:
-            return null;
-    }
+            case "scatter":
+                return (
+                    <ResponsiveContainer width="100%" height={h}>
+                        <ScatterChart margin={margin}>
+                            {grid}
+                            <XAxis type="number" dataKey={xKey} name={xKey} {...axisProps} />
+                            <YAxis type="number" dataKey={yKey} name={yKey} {...axisProps} />
+                            {tooltip}
+                            <Scatter data={data} fill={palette[0]} isAnimationActive={false}>
+                                {data.map((_, i) => (
+                                    <Cell key={i} fill={palette[0]} opacity={0.8} />
+                                ))}
+                            </Scatter>
+                        </ScatterChart>
+                    </ResponsiveContainer>
+                );
+
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <ChartBackground h={h}>
+            {renderChart()}
+        </ChartBackground>
+    );
 }

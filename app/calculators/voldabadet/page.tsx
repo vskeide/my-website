@@ -160,7 +160,7 @@ const fmtM = (v: number) => (v / 1e6).toFixed(1);
 const DarkTip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 14px", maxWidth: 280 }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 280 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 6, fontSize: 13 }}>{label}</p>
             {payload.filter((p: any) => p.dataKey !== "_total").map((p: any, i: number) => (
                 <p key={i} style={{ color: p.color || C.text, fontSize: 12, margin: "2px 0" }}>
@@ -175,7 +175,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
     const v = payload[0]?.value ?? 0;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 14px", maxWidth: 270 }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 270 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 4, fontSize: 13 }}>{label}</p>
             <p style={{ color: v > 0 ? C.red : v < 0 ? C.green : C.muted, fontSize: 12, margin: 0 }}>
                 {v > 0 ? `Betalar ${Math.abs(v).toLocaleString("nb-NO")} kr meir per pers enn flat fordeling`
@@ -189,7 +189,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
 const PieTip = ({ active, payload }: any) => {
     if (!active || !payload?.length) return null;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 14px" }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px" }}>
             <p style={{ color: C.text, fontWeight: 700, fontSize: 13, margin: "0 0 3px" }}>{payload[0].name}</p>
             <p style={{ color: payload[0].payload.color, fontSize: 12, margin: 0 }}>
                 {fmtM(payload[0].value)} MNOK ({(payload[0].payload.percent * 100).toFixed(1)}%)
@@ -207,24 +207,24 @@ const TotalBarLabel = ({ x, y, width, value }: any) => {
     );
 };
 
-// ─── Slider ──────────────────────────────────────────────────────────────────
+// ─── Compact Slider ───────────────────────────────────────────────────────────
 const Slider = ({ label, value, min, max, step, onChange, format, color }: {
     label: string; value: number; min: number; max: number; step: number;
     onChange: (v: number) => void; format: (v: number) => string; color?: string;
 }) => (
-    <div style={{ marginBottom: 20 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
-            <span style={{ fontSize: 12, color: C.muted, lineHeight: 1.4 }}>{label}</span>
-            <span style={{ fontSize: 16, fontWeight: 800, color: color || C.accent, marginLeft: 12, whiteSpace: "nowrap" }}>
+    <div style={{ marginBottom: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 3 }}>
+            <span style={{ fontSize: 11, color: C.muted, lineHeight: 1.3 }}>{label}</span>
+            <span style={{ fontSize: 14, fontWeight: 800, color: color || C.accent, marginLeft: 10, whiteSpace: "nowrap" }}>
                 {format(value)}
             </span>
         </div>
         <input type="range" min={min} max={max} step={step} value={value}
             onChange={e => onChange(Number(e.target.value))}
-            style={{ width: "100%", accentColor: color || "var(--ch-accent)", cursor: "pointer", height: 6 }} />
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 5 }}>
-            <span style={{ fontSize: 12, color: C.muted, fontWeight: 500 }}>{format(min)}</span>
-            <span style={{ fontSize: 12, color: C.muted, fontWeight: 500 }}>{format(max)}</span>
+            style={{ width: "100%", accentColor: color || "var(--ch-accent)", cursor: "pointer", height: 4 }} />
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
+            <span style={{ fontSize: 10, color: C.muted }}>{format(min)}</span>
+            <span style={{ fontSize: 10, color: C.muted }}>{format(max)}</span>
         </div>
     </div>
 );
@@ -285,17 +285,17 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
 const InfoBox = ({ children, color = "59,130,246" }: { children: React.ReactNode; color?: string }) => (
     <div style={{
         background: `rgba(${color},0.07)`, border: `1px solid rgba(${color},0.22)`,
-        borderRadius: 8, padding: "13px 16px", marginBottom: 20
+        borderRadius: 0, padding: "13px 16px", marginBottom: 20
     }}>
         <p style={{ margin: 0, fontSize: 13, color: C.muted, lineHeight: 1.75 }}>{children}</p>
     </div>
 );
 
 const StatCard = ({ label, val, sub, c }: { label: string; val: string; sub?: string; c: string }) => (
-    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: "15px 18px" }}>
-        <p style={{ color: C.muted, fontSize: 10, margin: "0 0 5px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{label}</p>
-        <p style={{ color: c, fontSize: 20, fontWeight: 800, margin: "0 0 3px" }}>{val}</p>
-        {sub && <p style={{ color: C.muted, fontSize: 11, margin: 0 }}>{sub}</p>}
+    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 12px" }}>
+        <p style={{ color: C.muted, fontSize: 9, margin: "0 0 3px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{label}</p>
+        <p style={{ color: c, fontSize: 16, fontWeight: 800, margin: "0 0 2px" }}>{val}</p>
+        {sub && <p style={{ color: C.muted, fontSize: 10, margin: 0 }}>{sub}</p>}
     </div>
 );
 
@@ -364,7 +364,19 @@ export default function VoldabadViz() {
 
     return (
         <div style={{ minHeight: "100vh", color: C.text }}>
-            <div style={{ maxWidth: "96rem", margin: "0 auto", padding: "24px 28px" }}>
+            <style>{`
+                @media (max-width: 640px) {
+                    .vb-grid-2 { grid-template-columns: 1fr !important; }
+                    /* On mobile, vb-grid-3 stays as auto-fit (3 across) — items are compact enough */
+                    .vb-grid-3 { grid-template-columns: repeat(auto-fit, minmax(90px,1fr)) !important; }
+                    .vb-top { flex-direction: column !important; }
+                    /* On mobile, sliders box is full-width */
+                    .vb-top > div:first-child { width: 100% !important; }
+                    /* Summary stat cards: 2 columns on mobile */
+                    .vb-stat-grid { grid-template-columns: 1fr 1fr !important; }
+                }
+            `}</style>
+            <div className="mx-auto max-w-[90rem]" style={{ padding: "20px 16px", paddingTop: "calc(var(--nav-height) + 20px)" }}>
 
                 {/* header */}
                 <div style={{ marginBottom: 22 }}>
@@ -379,45 +391,59 @@ export default function VoldabadViz() {
                     </p>
                 </div>
 
-                {/* sliders */}
-                <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 24, marginBottom: 22 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 18 }}>
-                        <div>
-                            <h3 style={{
-                                margin: "0 0 2px", fontSize: 12, fontWeight: 700, color: C.accent,
-                                textTransform: "uppercase", letterSpacing: "0.07em"
-                            }}>Juster føresetnadane</h3>
-                            <p style={{ color: C.muted, fontSize: 12, margin: 0 }}>Alle tal og diagram oppdaterast automatisk.</p>
-                        </div>
-                        <button onClick={reset} disabled={isDefault}
-                            style={{
-                                background: isDefault ? "transparent" : `rgba(59,130,246,0.12)`,
-                                border: `1px solid ${isDefault ? C.border : C.accent}`,
-                                color: isDefault ? C.border : C.accent,
-                                borderRadius: 6, padding: "6px 16px", fontSize: 12, fontWeight: 600,
-                                cursor: isDefault ? "default" : "pointer", transition: "all 0.15s",
-                            }}>
-                            ↩ Tilbakestill
-                        </button>
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 40px" }}>
-                        <Slider label="Investeringskost (MNOK, ex mva og spelemidlar)"
-                            value={investment} min={50} max={350} step={5}
-                            onChange={setInvestment} format={v => `${v} MNOK`} color={C.amber} />
-                        <Slider label="Rente (%)" value={rate} min={2} max={8} step={0.25}
-                            onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.red} />
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
-                        {[
-                            { label: "Rentekostnad/år", val: rente.toFixed(2) + " MNOK", c: C.red },
-                            { label: "Avskriving/år (20 år)", val: avskriving.toFixed(2) + " MNOK", c: C.amber },
-                            { label: "Total kapitalkost/år", val: kapital.toFixed(2) + " MNOK", c: C.text },
-                        ].map((f, i) => (
-                            <div key={i} style={{ background: C.bg, borderRadius: 8, padding: "12px 16px", borderLeft: `3px solid ${f.c}` }}>
-                                <p style={{ color: C.muted, fontSize: 10, margin: "0 0 3px", textTransform: "uppercase" }}>{f.label}</p>
-                                <p style={{ color: f.c, fontSize: 17, fontWeight: 800, margin: 0 }}>{f.val}</p>
+                {/* sliders + summary — side by side */}
+                <div className="vb-top" style={{ display: "flex", gap: 16, marginBottom: 16 }}>
+                    {/* Left: sliders */}
+                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 18px", flex: "0 0 auto", width: "52%" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+                            <div>
+                                <h3 style={{
+                                    margin: "0 0 1px", fontSize: 11, fontWeight: 700, color: C.accent,
+                                    textTransform: "uppercase", letterSpacing: "0.07em"
+                                }}>Juster føresetnadane</h3>
+                                <p style={{ color: C.muted, fontSize: 10, margin: 0 }}>Alle tal og diagram oppdaterast automatisk.</p>
                             </div>
-                        ))}
+                            <button onClick={reset} disabled={isDefault}
+                                style={{
+                                    background: isDefault ? "transparent" : `rgba(59,130,246,0.12)`,
+                                    border: `1px solid ${isDefault ? C.border : C.accent}`,
+                                    color: isDefault ? C.border : C.accent,
+                                    borderRadius: 0, padding: "4px 12px", fontSize: 11, fontWeight: 600,
+                                    cursor: isDefault ? "default" : "pointer", transition: "all 0.15s",
+                                }}>
+                                ↩ Tilbakestill
+                            </button>
+                        </div>
+                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px" }}>
+                            <Slider label="Investeringskost (MNOK, ex mva og spelemidlar)"
+                                value={investment} min={50} max={350} step={5}
+                                onChange={setInvestment} format={v => `${v} MNOK`} color={C.amber} />
+                            <Slider label="Rente (%)" value={rate} min={2} max={8} step={0.25}
+                                onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.red} />
+                        </div>
+                        {/* Derived values under sliders */}
+                        <div className="vb-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+                            {[
+                                { label: "Rentekostnad/år", val: rente.toFixed(2) + " MNOK", c: C.red },
+                                { label: "Avskriving/år (20 år)", val: avskriving.toFixed(2) + " MNOK", c: C.amber },
+                                { label: "Total kapitalkost/år", val: kapital.toFixed(2) + " MNOK", c: C.text },
+                            ].map((f, i) => (
+                                <div key={i} style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", borderLeft: `2px solid ${f.c}` }}>
+                                    <p style={{ color: C.muted, fontSize: 9, margin: "0 0 2px", textTransform: "uppercase" }}>{f.label}</p>
+                                    <p style={{ color: f.c, fontSize: 14, fontWeight: 800, margin: 0 }}>{f.val}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right: summary stat cards */}
+                    <div className="vb-stat-grid" style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8, alignContent: "start" }}>
+                        <StatCard label="Investeringskost" val={investment + " MNOK"} sub="Ex mva og spelemidlar" c={C.amber} />
+                        <StatCard label="Kapitalkost/år" val={kapital.toFixed(1) + " MNOK"} sub={`Renter ${rente.toFixed(1)} + avskr. ${avskriving.toFixed(1)}`} c={C.red} />
+                        <StatCard label="Netto driftsunderskot/år" val={fmtM(netDrift) + " MNOK"} sub={`Drift ${fmtM(grossDrift)} − billettsal ${fmtM(billettsal)}`} c={C.purple} />
+                        <StatCard label="Total skattebelasting/år" val={totalBurdenMNOK.toFixed(1) + " MNOK"} sub="Kapital + netto drift" c={C.text} />
+                        <StatCard label="Per vaksen/år (skatt)" val={perAdultRounded.toLocaleString("nb-NO") + " kr"} sub="8 800 vaksne" c={C.accent} />
+                        <StatCard label="Flat per innbyggar/år" val={perPersonRounded.toLocaleString("nb-NO") + " kr"} sub="Om fordelt på 11 000 innb." c={C.green} />
                     </div>
                 </div>
 
@@ -445,15 +471,7 @@ export default function VoldabadViz() {
                             Du betalar dette <strong style={{ color: C.text }}>uavhengig av om du badar eller ikkje</strong>.
                             Brukarbetalinga (årskortet) kjem <strong style={{ color: C.text }}>i tillegg</strong> for dei som nyttar anlegget.
                         </InfoBox>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(195px,1fr))", gap: 13, marginBottom: 22 }}>
-                            <StatCard label="Investeringskost" val={investment + " MNOK"} sub="Ex mva og spelemidlar" c={C.amber} />
-                            <StatCard label="Kapitalkost/år" val={kapital.toFixed(1) + " MNOK"} sub={`Renter ${rente.toFixed(1)} + avskr. ${avskriving.toFixed(1)}`} c={C.red} />
-                            <StatCard label="Netto driftsunderskot/år" val={fmtM(netDrift) + " MNOK"} sub={`Drift ${fmtM(grossDrift)} − billettsal ${fmtM(billettsal)}`} c={C.purple} />
-                            <StatCard label="Total skattebelasting/år" val={totalBurdenMNOK.toFixed(1) + " MNOK"} sub="Kapital + netto drift" c={C.text} />
-                            <StatCard label="Per vaksen/år (skatt)" val={perAdultRounded.toLocaleString("nb-NO") + " kr"} sub="8 800 vaksne" c={C.accent} />
-                            <StatCard label="Flat per innbyggar/år" val={perPersonRounded.toLocaleString("nb-NO") + " kr"} sub="Om fordelt på 11 000 innb." c={C.green} />
-                        </div>
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 24 }}>
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                             <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
                             <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
                                 Nedste tre delar = skatt (betalast uansett). Blå = brukarbetaling for dei som badar. Y-aksen er fast.
@@ -484,13 +502,13 @@ export default function VoldabadViz() {
                             <strong style={{ color: C.text }}>8 800 vaksne</strong> — born betalar ingenting over budsjettet.
                             Brukarbetaling kjem i tillegg. Klikk for detaljar.
                         </InfoBox>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(162px,1fr))", gap: 11, marginBottom: 22 }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(118px,1fr))", gap: 9, marginBottom: 20 }}>
                             {households.map((h, i) => (
                                 <div key={i} onClick={() => setSelected(selected?.type === h.type ? null : h)}
                                     style={{
                                         background: selected?.type === h.type ? C.bg : C.card,
                                         border: `1px solid ${selected?.type === h.type ? C.accent : C.border}`,
-                                        borderRadius: 10, padding: 15, cursor: "pointer", transition: "all 0.15s"
+                                        borderRadius: 0, padding: 15, cursor: "pointer", transition: "all 0.15s"
                                     }}>
                                     <div style={{ marginBottom: 10 }}><HouseholdIcon adults={h.adults} kids={h.kids} size={40} /></div>
                                     <p style={{ fontWeight: 700, margin: "0 0 2px", fontSize: 14 }}>{h.type}</p>
@@ -507,7 +525,7 @@ export default function VoldabadViz() {
                             ))}
                         </div>
                         {selected && (
-                            <div style={{ background: C.card, border: `1px solid ${C.accent}`, borderRadius: 12, padding: 22 }}>
+                            <div style={{ background: C.card, border: `1px solid ${C.accent}`, borderRadius: 0, padding: 22 }}>
                                 <h3 style={{ margin: "0 0 14px", fontSize: 14, fontWeight: 700 }}>Detaljar: {selected.type}</h3>
                                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 14 }}>
                                     {[
@@ -537,75 +555,65 @@ export default function VoldabadViz() {
                             Kapitalkostnadane er reaktive til sliders øvst.
                         </InfoBox>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                             {/* Capital */}
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 22 }}>
-                                <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 700 }}>Kapitalkostnadar/år</h3>
-                                <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>Reaktiv til sliders over.</p>
+                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 16px" }}>
+                                <h3 style={{ margin: "0 0 2px", fontSize: 12, fontWeight: 700 }}>Kapitalkostnadar/år</h3>
+                                <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>Reaktiv til sliders over.</p>
                                 {[
                                     { label: "Renter", val: rente * 1e6, color: CH.red, pct: (rente / kapital * 100).toFixed(0) + "%" },
                                     { label: `Avskriving (${LOAN_YEARS} år)`, val: avskriving * 1e6, color: CH.amber, pct: (avskriving / kapital * 100).toFixed(0) + "%" },
                                 ].map((item, i, arr) => (
                                     <div key={i} style={{
                                         display: "flex", justifyContent: "space-between", alignItems: "center",
-                                        marginBottom: i < arr.length - 1 ? 14 : 0, paddingBottom: i < arr.length - 1 ? 14 : 0,
+                                        marginBottom: i < arr.length - 1 ? 9 : 0, paddingBottom: i < arr.length - 1 ? 9 : 0,
                                         borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none"
                                     }}>
-                                        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                                            <div style={{ width: 12, height: 12, borderRadius: 3, background: item.color }} />
+                                        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                                            <div style={{ width: 10, height: 10, borderRadius: 2, background: item.color }} />
                                             <div>
-                                                <p style={{ fontSize: 13, color: C.text, margin: 0 }}>{item.label}</p>
-                                                <p style={{ fontSize: 11, color: C.muted, margin: 0 }}>{item.pct} av kapital</p>
+                                                <p style={{ fontSize: 12, color: C.text, margin: 0 }}>{item.label}</p>
+                                                <p style={{ fontSize: 10, color: C.muted, margin: 0 }}>{item.pct} av kapital</p>
                                             </div>
                                         </div>
                                         <div style={{ textAlign: "right" }}>
-                                            <p style={{ fontWeight: 700, fontSize: 14, color: item.color, margin: 0 }}>{fmtM(item.val)} MNOK</p>
-                                            <p style={{ fontSize: 11, color: C.muted, margin: 0 }}>
-                                                {Math.round(item.val / POPULATION).toLocaleString("nb-NO")} kr/innb.
-                                            </p>
+                                            <p style={{ fontWeight: 700, fontSize: 12, color: item.color, margin: 0 }}>{fmtM(item.val)} MNOK</p>
+                                            <p style={{ fontSize: 10, color: C.muted, margin: 0 }}>{Math.round(item.val / POPULATION).toLocaleString("nb-NO")} kr/innb.</p>
                                         </div>
                                     </div>
                                 ))}
-                                <div style={{
-                                    background: C.bg, borderRadius: 8, padding: "11px 14px", marginTop: 16,
-                                    display: "flex", justifyContent: "space-between"
-                                }}>
-                                    <span style={{ fontWeight: 700, fontSize: 14 }}>Sum kapital</span>
-                                    <span style={{ fontWeight: 800, fontSize: 14, color: C.red }}>{kapital.toFixed(2)} MNOK</span>
+                                <div style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", marginTop: 10, display: "flex", justifyContent: "space-between" }}>
+                                    <span style={{ fontWeight: 700, fontSize: 12 }}>Sum kapital</span>
+                                    <span style={{ fontWeight: 800, fontSize: 12, color: C.red }}>{kapital.toFixed(2)} MNOK</span>
                                 </div>
                             </div>
 
                             {/* Drift — editable */}
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 22 }}>
-                                <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 700 }}>Reine driftskostnadar/år</h3>
-                                <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
-                                    Klikk på eit tal for å endre det.
-                                </p>
+                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 16px" }}>
+                                <h3 style={{ margin: "0 0 2px", fontSize: 12, fontWeight: 700 }}>Reine driftskostnadar/år</h3>
+                                <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>Klikk på eit tal for å endre det.</p>
                                 {DRIFT_DEFAULTS.map(d => (
                                     <CostInput key={d.key} name={d.name} value={driftValues[d.key]}
                                         color={CH[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
                                 ))}
-                                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 12, marginBottom: 10 }}>
-                                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                                        <span style={{ fontSize: 13, color: C.muted }}>Sum driftskostnadar</span>
-                                        <span style={{ fontWeight: 700, fontSize: 13 }}>{fmtM(grossDrift)} MNOK</span>
+                                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 8, marginBottom: 7 }}>
+                                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 7 }}>
+                                        <span style={{ fontSize: 12, color: C.muted }}>Sum driftskostnadar</span>
+                                        <span style={{ fontWeight: 700, fontSize: 12 }}>{fmtM(grossDrift)} MNOK</span>
                                     </div>
                                     <CostInput name="Billettsal (inntekt)" value={billettsal}
                                         color={CH.green} onChange={setBillettsal} isIncome />
                                 </div>
-                                <div style={{
-                                    background: C.bg, borderRadius: 8, padding: "11px 14px",
-                                    display: "flex", justifyContent: "space-between"
-                                }}>
-                                    <span style={{ fontWeight: 700, fontSize: 14 }}>Netto driftsunderskot</span>
-                                    <span style={{ fontWeight: 800, fontSize: 14, color: C.purple }}>{fmtM(netDrift)} MNOK</span>
+                                <div style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", display: "flex", justifyContent: "space-between" }}>
+                                    <span style={{ fontWeight: 700, fontSize: 12 }}>Netto driftsunderskot</span>
+                                    <span style={{ fontWeight: 800, fontSize: 12, color: C.purple }}>{fmtM(netDrift)} MNOK</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Total summary bar */}
                         <div style={{
-                            background: C.bg, border: `1px solid ${C.border}`, borderRadius: 10,
+                            background: C.bg, border: `1px solid ${C.border}`, borderRadius: 0,
                             padding: "14px 20px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center"
                         }}>
                             <div>
@@ -620,13 +628,13 @@ export default function VoldabadViz() {
                         </div>
 
                         {/* Pie chart */}
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 24 }}>
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                             <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Kostnadsfordeling (brutto, ex. billettsal)</h3>
                             <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
                                 Viser kapital og drift som del av totale bruttokostnadar ({(kapital + grossDrift / 1e6).toFixed(1)} MNOK).
                                 Billettsal på {fmtM(billettsal)} MNOK kjem til frå og reduserer netto belastning.
                             </p>
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
+                            <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
                                 <ResponsiveContainer width="100%" height={260}>
                                     <PieChart>
                                         <Pie data={pieDataPositive} cx="50%" cy="50%" outerRadius={100}
@@ -703,8 +711,8 @@ export default function VoldabadViz() {
                             si eiga innebygde subsidie gjennom kvantumsrabatt for familier.
                         </InfoBox>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 24 }}>
+                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                                 <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Subsidie per person (kr/år)</h3>
                                 <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
                                     Raudt = betalar meir enn flat fordeling. Grønt = subsidiert.
@@ -722,7 +730,7 @@ export default function VoldabadViz() {
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: 24 }}>
+                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                                 <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Subsidie per husstand (kr/år)</h3>
                                 <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
                                     Totalt avvik frå flat fordeling for heile husstanden.
@@ -742,7 +750,7 @@ export default function VoldabadViz() {
                             </div>
                         </div>
 
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, overflow: "hidden" }}>
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, overflow: "hidden" }}>
                             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                                 <thead>
                                     <tr style={{ background: C.bg }}>

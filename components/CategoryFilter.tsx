@@ -11,14 +11,19 @@ export default function CategoryFilter({
     active,
     onSelect,
 }: CategoryFilterProps) {
+    const btnStyle = (isActive: boolean) => ({
+        background: isActive ? "var(--ch-accent)" : "var(--t-card)",
+        color: isActive ? "#ffffff" : "var(--t-text-secondary)",
+        border: `1px solid ${isActive ? "var(--ch-accent)" : "var(--t-border-subtle)"}`,
+        borderRadius: 0,
+    });
+
     return (
         <div className="flex flex-wrap gap-2">
             <button
                 onClick={() => onSelect(null)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${active === null
-                        ? "bg-accent text-white shadow-md shadow-accent/25"
-                        : "bg-surface-secondary text-text-secondary hover:bg-surface-card-hover hover:text-text-primary border border-border-subtle"
-                    }`}
+                className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+                style={btnStyle(active === null)}
             >
                 All
             </button>
@@ -26,10 +31,8 @@ export default function CategoryFilter({
                 <button
                     key={cat}
                     onClick={() => onSelect(cat)}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${active === cat
-                            ? "bg-accent text-white shadow-md shadow-accent/25"
-                            : "bg-surface-secondary text-text-secondary hover:bg-surface-card-hover hover:text-text-primary border border-border-subtle"
-                        }`}
+                    className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+                    style={btnStyle(active === cat)}
                 >
                     {cat}
                 </button>

@@ -10,7 +10,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-    theme: "dark",
+    theme: "light",
     toggle: () => { },
 });
 
@@ -19,16 +19,15 @@ export function useTheme() {
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setTheme] = useState<Theme>("dark");
+    const [theme, setTheme] = useState<Theme>("light");
     const [mounted, setMounted] = useState(false);
 
-    // Read saved preference on mount
+    // Read saved preference on mount; default to light
     useEffect(() => {
         const saved = localStorage.getItem("theme") as Theme | null;
-        if (saved === "light" || saved === "dark") {
-            setTheme(saved);
-            document.documentElement.setAttribute("data-theme", saved);
-        }
+        const resolved: Theme = (saved === "light" || saved === "dark") ? saved : "light";
+        setTheme(resolved);
+        document.documentElement.setAttribute("data-theme", resolved);
         setMounted(true);
     }, []);
 

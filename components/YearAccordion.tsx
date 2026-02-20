@@ -18,10 +18,10 @@ interface YearAccordionProps {
 }
 
 const categoryBadge: Record<string, string> = {
-    "Investing & Finance": "bg-accent/15 text-accent-hover",
-    "Personal Economy": "bg-emerald-500/15 text-emerald-400",
-    "Local Politics": "bg-accent-amber/15 text-accent-amber",
-    Calculators: "bg-purple-500/15 text-purple-400",
+    "Investing & Finance": "bg-blue-100 text-blue-800",
+    "Personal Economy": "bg-emerald-100 text-emerald-800",
+    "Local Politics": "bg-amber-100 text-amber-800",
+    Calculators: "bg-purple-100 text-purple-800",
 };
 
 export default function YearAccordion({
@@ -32,24 +32,29 @@ export default function YearAccordion({
     const [open, setOpen] = useState(defaultOpen);
 
     return (
-        <div className="border-b border-border-subtle last:border-b-0">
+        <div style={{ borderBottom: "1px solid var(--t-border-subtle)" }} className="last:border-b-0">
+            {/* Full-width banner button */}
             <button
                 onClick={() => setOpen(!open)}
-                className="group flex w-full items-center justify-between py-3 text-left transition-colors hover:bg-white/[0.02] px-2 rounded-lg"
+                className="flex w-full items-center justify-between px-5 py-3.5 text-left transition-colors"
+                style={{
+                    backgroundColor: open ? "#1c2744" : "#0f1629",
+                    color: "#f1f5f9",
+                    borderRadius: 0,
+                }}
                 aria-expanded={open}
             >
-                <div className="flex items-center gap-3">
-                    <span className="text-lg font-bold text-text-primary">{year}</span>
-                    <span className="text-xs font-medium text-text-muted">
+                <div className="flex items-center gap-4">
+                    <span className="text-lg font-bold tracking-tight">{year}</span>
+                    <span className="text-xs font-medium" style={{ color: "#94a3b8" }}>
                         {entries.length} {entries.length === 1 ? "entry" : "entries"}
                     </span>
                 </div>
                 <svg
-                    className={`h-4 w-4 text-text-muted transition-transform duration-300 ${open ? "rotate-180" : ""
-                        }`}
+                    className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="#94a3b8"
                     strokeWidth={2}
                 >
                     <path
@@ -61,12 +66,12 @@ export default function YearAccordion({
             </button>
 
             {open && (
-                <div className="animate-slide-down pb-3">
-                    <ul className="space-y-0.5">
+                <div className="animate-slide-down" style={{ backgroundColor: "var(--t-card)" }}>
+                    <ul className="divide-y" style={{ borderColor: "var(--t-border-subtle)" }}>
                         {entries.map((entry) => {
                             const badge =
                                 categoryBadge[entry.category] ??
-                                "bg-accent/15 text-accent-hover";
+                                "bg-blue-100 text-blue-800";
                             const href =
                                 entry.type === "calculator"
                                     ? "/calculators"
@@ -76,17 +81,21 @@ export default function YearAccordion({
                                 <li key={entry.slug}>
                                     <Link
                                         href={href}
-                                        className="group/item flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-white/[0.03]"
+                                        className="group/item flex items-center gap-3 px-5 py-3 transition-colors"
+                                        style={{ color: "inherit" }}
+                                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = "var(--t-surface)")}
+                                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
                                     >
-                                        <time className="w-20 shrink-0 text-xs font-medium text-text-muted">
+                                        <time className="w-20 shrink-0 text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
                                             {entry.date}
                                         </time>
                                         <span
-                                            className={`shrink-0 rounded px-1.5 py-0.5 text-[0.65rem] font-semibold leading-tight ${badge}`}
+                                            className={`shrink-0 px-1.5 py-0.5 text-[0.65rem] font-semibold leading-tight ${badge}`}
+                                            style={{ borderRadius: 0 }}
                                         >
                                             {entry.category}
                                         </span>
-                                        <span className="truncate text-sm font-medium text-text-secondary transition-colors group-hover/item:text-text-primary">
+                                        <span className="truncate text-sm font-medium" style={{ color: "var(--t-text-secondary)" }}>
                                             {entry.title}
                                         </span>
                                     </Link>

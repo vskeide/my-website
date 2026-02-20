@@ -7,7 +7,7 @@ const calculators = [
         description:
             "Kva kostar symjeanlegget kvar innbyggar? Interaktiv kalkulator med justérbare føresetnader, husstandstypar og subsidieanalyse.",
         icon: "🏊",
-        gradient: "from-accent/40 to-navy-800",
+        accentColor: "#2563eb",
         ready: true,
     },
     {
@@ -16,7 +16,7 @@ const calculators = [
         description:
             "See how your investments grow over time. Adjust principal, rate, and period to plan your savings strategy.",
         icon: "%",
-        gradient: "from-accent-muted/40 to-navy-800",
+        accentColor: "#1e40af",
     },
     {
         id: "savings-goal",
@@ -24,7 +24,7 @@ const calculators = [
         description:
             "Figure out how much you need to save every month to reach your financial goals on time.",
         icon: "🎯",
-        gradient: "from-emerald-600/30 to-navy-800",
+        accentColor: "#059669",
     },
     {
         id: "loan-repayment",
@@ -32,19 +32,19 @@ const calculators = [
         description:
             "Estimate your monthly repayment and total interest on any loan. Compare different repayment strategies.",
         icon: "📊",
-        gradient: "from-accent-amber/30 to-navy-800",
+        accentColor: "#d97706",
     },
 ];
 
 export default function CalculatorsPage() {
     return (
-        <main className="mx-auto max-w-6xl px-4 sm:px-6">
+        <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             {/* Header */}
             <section className="pb-6 pt-8">
-                <h1 className="mb-1 text-xl font-bold tracking-tight text-text-primary">
+                <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
                     Calculators
                 </h1>
-                <p className="max-w-xl text-xs text-text-muted">
+                <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
                     Interactive financial tools to help you plan, save, and invest smarter.
                     More calculators coming soon.
                 </p>
@@ -54,24 +54,34 @@ export default function CalculatorsPage() {
             <section className="stagger-children grid gap-4 pb-12 sm:grid-cols-2 lg:grid-cols-3">
                 {calculators.map((calc) => {
                     const inner = (
-                        <div className="card-glow group h-full overflow-hidden rounded-xl border border-border-subtle bg-surface-card transition-all duration-300 hover:border-border-medium hover:bg-surface-card-hover hover:shadow-xl hover:shadow-black/20">
+                        <div
+                            className="group h-full overflow-hidden transition-all duration-200 hover:shadow-lg"
+                            style={{
+                                background: "var(--t-card)",
+                                border: "1px solid var(--t-border-subtle)",
+                                borderRadius: 0,
+                            }}
+                        >
                             {/* Top visual */}
                             <div
-                                className={`flex h-28 items-center justify-center bg-gradient-to-br ${calc.gradient}`}
+                                className="flex h-28 items-center justify-center"
+                                style={{
+                                    background: `linear-gradient(135deg, ${calc.accentColor}33, #0f172a)`,
+                                }}
                             >
-                                <span className="text-4xl font-black text-text-primary opacity-80 transition-transform group-hover:scale-110">
+                                <span className="text-4xl font-black transition-transform group-hover:scale-110" style={{ color: "var(--t-text)" }}>
                                     {calc.icon}
                                 </span>
                             </div>
                             {/* Content */}
                             <div className="p-4">
-                                <h2 className="mb-1.5 text-sm font-semibold text-text-primary transition-colors group-hover:text-accent">
+                                <h2 className="mb-1.5 text-sm font-semibold transition-colors group-hover:underline" style={{ color: "var(--t-text)" }}>
                                     {calc.title}
                                 </h2>
-                                <p className="mb-3 text-xs leading-relaxed text-text-secondary">
+                                <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
                                     {calc.description}
                                 </p>
-                                <span className="inline-flex items-center gap-1 text-xs font-medium text-accent transition-colors group-hover:text-accent-hover">
+                                <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
                                     {calc.ready ? "Open calculator →" : "Coming soon"}
                                 </span>
                             </div>
@@ -88,23 +98,14 @@ export default function CalculatorsPage() {
             </section>
 
             {/* CTA back */}
-            <section className="border-t border-border-subtle py-6">
+            <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link
                     href="/"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-colors hover:text-accent-hover"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline"
+                    style={{ color: "var(--ch-accent)" }}
                 >
-                    <svg
-                        className="h-3 w-3"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15 19l-7-7 7-7"
-                        />
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                     Back to home
                 </Link>
