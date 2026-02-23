@@ -28,7 +28,10 @@ interface ChartProps {
     static?: boolean;
 }
 
-const PALETTE = ["#2563eb", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
+const PALETTE = [
+    "var(--ch-c1)", "var(--ch-c2)", "var(--ch-c3)", "var(--ch-c4)",
+    "var(--ch-c5)", "var(--ch-c6)", "var(--ch-c7)", "var(--ch-c8)"
+];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function ChartTooltip({ active, payload, label }: any) {
@@ -66,7 +69,7 @@ function ChartBackground({ children, h }: { children: React.ReactNode; h: number
     return (
         <div
             style={{
-                background: "var(--ch-tooltip-bg)",
+                background: "var(--ch-bg)",
                 border: "1px solid var(--t-border-subtle)",
                 padding: "8px 4px 4px",
                 width: "100%",

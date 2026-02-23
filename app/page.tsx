@@ -9,7 +9,7 @@ const latestArticles = [
       "Index funds have transformed how ordinary people build wealth. Here's what you need to know before you start investing passively.",
     date: "Feb 15, 2026",
     category: "Investing & Finance",
-    thumbnailColor: "#2563eb",
+    imageUrl: "/images/finance.svg",
   },
   {
     slug: "budgeting-50-30-20-rule",
@@ -18,7 +18,7 @@ const latestArticles = [
       "Not sure where your money is going? This budgeting framework makes it easy to allocate your income effectively.",
     date: "Feb 8, 2026",
     category: "Personal Economy",
-    thumbnailColor: "#059669",
+    imageUrl: "/images/economy.svg",
   },
   {
     slug: "local-infrastructure-spending",
@@ -27,7 +27,7 @@ const latestArticles = [
       "A breakdown of local government spending priorities and how they affect your daily life and property values.",
     date: "Jan 29, 2026",
     category: "Local Politics",
-    thumbnailColor: "#d97706",
+    imageUrl: "/images/politics.svg",
   },
 ];
 
@@ -96,7 +96,7 @@ export default function HomePage() {
               {/* Left: visual */}
               <div
                 className="flex h-36 items-center justify-center sm:h-auto sm:w-64"
-                style={{ background: "linear-gradient(135deg, #1e40af33, #0f172a)" }}
+                style={{ background: "color-mix(in srgb, var(--ch-c1) 15%, var(--t-surface))" }}
               >
                 <div className="text-center">
                   <div className="text-4xl font-black" style={{ color: "var(--ch-accent)" }}>%</div>

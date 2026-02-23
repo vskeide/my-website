@@ -55,17 +55,14 @@ export default function Navigation() {
                     <Link
                         href="/"
                         className="group flex items-center gap-2 text-lg font-bold tracking-tight transition-colors"
-                        style={{ color: "var(--t-text)" }}
+                        style={{ color: "var(--t-nav-text)" }}
                     >
-                        <span
-                            className="inline-flex h-7 w-7 items-center justify-center text-xs font-black text-white transition-transform group-hover:scale-110"
-                            style={{ background: "var(--ch-accent)", borderRadius: 0 }}
-                        >
-                            S
-                        </span>
-                        <span>
-                            Skeide<span style={{ color: "var(--ch-accent)" }}>.me</span>
-                        </span>
+                        {/* Global Logo */}
+                        <img
+                            src="/images/logo-light.png"
+                            alt="Skeide.me Logo"
+                            className="h-8 w-auto transition-transform group-hover:scale-105"
+                        />
                     </Link>
 
                     {/* Desktop links */}
@@ -80,14 +77,14 @@ export default function Navigation() {
                                             : ""
                                             }`}
                                         style={{
-                                            color: isActive(link.href) ? "var(--ch-accent)" : "var(--t-text-secondary)",
-                                            backgroundColor: isActive(link.href) ? "rgba(37,99,235,0.08)" : "transparent",
+                                            color: isActive(link.href) ? "var(--t-nav-text)" : "var(--t-nav-text-muted)",
+                                            backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.08)" : "transparent",
                                             borderRadius: 0,
                                         }}
                                     >
                                         {link.label}
                                         {isActive(link.href) && (
-                                            <span className="absolute bottom-0 left-3 right-3 h-px" style={{ background: "var(--ch-accent)" }} />
+                                            <span className="absolute bottom-0 left-3 right-3 h-px" style={{ background: "var(--ch-c1)" }} />
                                         )}
                                     </Link>
                                 </li>
@@ -95,8 +92,8 @@ export default function Navigation() {
                         </ul>
                         <button
                             onClick={toggle}
-                            className="ml-2 flex h-8 w-8 items-center justify-center transition-colors"
-                            style={{ color: "var(--t-text-muted)" }}
+                            className="ml-2 flex h-8 w-8 items-center justify-center transition-colors hover:text-white"
+                            style={{ color: "var(--t-nav-text-muted)" }}
                             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                             title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                         >
@@ -121,15 +118,15 @@ export default function Navigation() {
                     >
                         <span
                             className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
-                            style={{ background: mobileOpen ? "var(--t-text)" : "var(--t-text)" }}
+                            style={{ background: mobileOpen ? "var(--t-text)" : "var(--t-nav-text)" }}
                         />
                         <span
                             className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-                            style={{ background: "var(--t-text)" }}
+                            style={{ background: "var(--t-nav-text)" }}
                         />
                         <span
                             className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
-                            style={{ background: "var(--t-text)" }}
+                            style={{ background: "var(--t-nav-text)" }}
                         />
                     </button>
                 </nav>
@@ -148,8 +145,12 @@ export default function Navigation() {
                     >
                         {/* Logo replica */}
                         <span className="flex items-center gap-2 font-bold text-base" style={{ color: "var(--t-text)" }}>
-                            <span className="inline-flex h-7 w-7 items-center justify-center text-xs font-black text-white" style={{ background: "var(--ch-accent)", borderRadius: 0 }}>S</span>
-                            Skeide<span style={{ color: "var(--ch-accent)" }}>.me</span>
+                            {/* Global Logo */}
+                            <img
+                                src="/images/logo-light.png"
+                                alt="Skeide.me Logo"
+                                className="h-7 w-auto"
+                            />
                         </span>
                         {/* Explicit X close button */}
                         <button

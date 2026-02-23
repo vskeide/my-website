@@ -7,7 +7,8 @@ const calculators = [
         description:
             "Kva kostar symjeanlegget kvar innbyggar? Interaktiv kalkulator med justérbare føresetnader, husstandstypar og subsidieanalyse.",
         icon: "🏊",
-        accentColor: "#2563eb",
+        accentColor: "var(--ch-c1)",
+        imageUrl: "/images/calc_pool.svg",
         ready: true,
     },
     {
@@ -16,7 +17,8 @@ const calculators = [
         description:
             "See how your investments grow over time. Adjust principal, rate, and period to plan your savings strategy.",
         icon: "%",
-        accentColor: "#1e40af",
+        accentColor: "var(--ch-c2)",
+        imageUrl: "/images/calc_growth.svg",
     },
     {
         id: "savings-goal",
@@ -24,7 +26,8 @@ const calculators = [
         description:
             "Figure out how much you need to save every month to reach your financial goals on time.",
         icon: "🎯",
-        accentColor: "#059669",
+        accentColor: "var(--ch-c6)",
+        imageUrl: "/images/calc_target.svg",
     },
     {
         id: "loan-repayment",
@@ -32,7 +35,8 @@ const calculators = [
         description:
             "Estimate your monthly repayment and total interest on any loan. Compare different repayment strategies.",
         icon: "📊",
-        accentColor: "#d97706",
+        accentColor: "var(--ch-c5)",
+        imageUrl: "/images/calc_loan.svg",
     },
 ];
 
@@ -64,14 +68,18 @@ export default function CalculatorsPage() {
                         >
                             {/* Top visual */}
                             <div
-                                className="flex h-28 items-center justify-center"
+                                className="relative flex h-28 items-center justify-center overflow-hidden"
                                 style={{
-                                    background: `linear-gradient(135deg, ${calc.accentColor}33, #0f172a)`,
+                                    background: calc.imageUrl
+                                        ? `url(${calc.imageUrl}) center/cover no-repeat var(--t-surface)`
+                                        : `color-mix(in srgb, ${calc.accentColor} 15%, var(--t-surface))`,
                                 }}
                             >
-                                <span className="text-4xl font-black transition-transform group-hover:scale-110" style={{ color: "var(--t-text)" }}>
-                                    {calc.icon}
-                                </span>
+                                {!calc.imageUrl && (
+                                    <span className="relative z-10 text-4xl font-black transition-transform group-hover:scale-110" style={{ color: "var(--t-text)" }}>
+                                        {calc.icon}
+                                    </span>
+                                )}
                             </div>
                             {/* Content */}
                             <div className="p-4">

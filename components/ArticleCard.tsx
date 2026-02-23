@@ -8,14 +8,10 @@ export interface ArticleCardProps {
     excerpt: string;
     date: string;
     category: string;
-    thumbnailColor?: string;
+    imageUrl?: string;
 }
 
-const categoryColors: Record<string, { bg: string; text: string }> = {
-    "Investing & Finance": { bg: "#dbeafe", text: "#1e40af" },
-    "Personal Economy": { bg: "#d1fae5", text: "#065f46" },
-    "Local Politics": { bg: "#fef3c7", text: "#92400e" },
-};
+import { getCategoryBadgeStyle } from "@/lib/categories";
 
 export default function ArticleCard({
     slug,
@@ -23,9 +19,9 @@ export default function ArticleCard({
     excerpt,
     date,
     category,
-    thumbnailColor,
+    imageUrl,
 }: ArticleCardProps) {
-    const tag = categoryColors[category] ?? { bg: "#dbeafe", text: "#1e40af" };
+    const tag = getCategoryBadgeStyle(category);
 
     return (
         <Link href={`/blog/${slug}`} className="group block h-full">
@@ -47,9 +43,9 @@ export default function ArticleCard({
                 <div
                     className="relative h-36 w-full overflow-hidden"
                     style={{
-                        background: thumbnailColor
-                            ? `linear-gradient(135deg, ${thumbnailColor}cc, ${thumbnailColor}44)`
-                            : "linear-gradient(135deg, #1e40af44, #0f172a)",
+                        background: imageUrl
+                            ? `url(${imageUrl}) center/cover no-repeat var(--t-surface)`
+                            : `color-mix(in srgb, ${tag.bg} 15%, var(--t-surface))`,
                     }}
                 >
                     {/* Bottom fade */}

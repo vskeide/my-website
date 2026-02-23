@@ -31,64 +31,84 @@
 :root {
   --nav-height: 3.5rem;
 
-  --t-bg: #f5f3ef;
-  --t-surface: #edeae4;
+  --t-bg: #ffffff;
+  --t-surface: #f8f9fa;
   --t-card: #ffffff;
-  --t-card-hover: #f9f8f6;
-  --t-border-strong: #c8c4bc;
-  --t-border-subtle: rgba(51, 65, 85, 0.12);
-  --t-border-medium: rgba(51, 65, 85, 0.22);
+  --t-card-hover: #f1f5f9;
+  --t-border-strong: #e2e8f0;
+  --t-border-subtle: rgba(51, 65, 85, 0.08);
+  --t-border-medium: rgba(51, 65, 85, 0.15);
 
   --t-text: #0f172a;
   --t-text-secondary: #374151;
   --t-text-muted: #6b7280;
 
-  --t-nav-bg: rgba(245, 243, 239, 0.92);
-  --t-nav-bg-scroll: rgba(245, 243, 239, 0.98);
+  --t-nav-bg: #000000;
+  --t-nav-text: #ffffff;
+  --t-nav-text-muted: #a1a1aa;
+  --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
-  /* Chart hex – strong on light backgrounds */
-  --ch-accent: #2563eb;
-  --ch-red: #dc2626;
-  --ch-amber: #d97706;
-  --ch-green: #059669;
-  --ch-purple: #7c3aed;
-  --ch-cyan: #0891b2;
-  --ch-lime: #65a30d;
+  /* Chart hex – visually softer schema */
+  --ch-c1: #3b82f6;
+  /* blue-500 */
+  --ch-c2: #d946ef;
+  /* fuchsia-500 */
+  --ch-c3: #06b6d4;
+  /* cyan-500 */
+  --ch-c4: #f43f5e;
+  /* rose-500 */
+  --ch-c5: #eab308;
+  /* yellow-500 */
+  --ch-c6: #22c55e;
+  /* green-500 */
+  --ch-c7: #a855f7;
+  /* purple-500 */
+  --ch-c8: #94a3b8;
+  /* slate-400 */
   --ch-text: #0f172a;
   --ch-muted: #6b7280;
-  --ch-border: #d1cdc6;
+  --ch-border: #e2e8f0;
   --ch-tooltip-bg: #ffffff;
+  --ch-bg: #ffffff;
+  /* Light grey background for charts */
+  --ch-axis-text: #1f2937;
 }
 
 /* ── Dark theme ────────────────────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --t-bg: #0a0f1e;
-  --t-surface: #0f1629;
-  --t-card: #151d35;
-  --t-card-hover: #1c2744;
-  --t-border-strong: #263356;
-  --t-border-subtle: rgba(148, 163, 184, 0.1);
-  --t-border-medium: rgba(148, 163, 184, 0.2);
+  --t-bg: #1c1c1e;
+  --t-surface: #242426;
+  --t-card: #2c2c2e;
+  --t-card-hover: #3a3a3c;
+  --t-border-strong: #48484a;
+  --t-border-subtle: rgba(255, 255, 255, 0.1);
+  --t-border-medium: rgba(255, 255, 255, 0.2);
 
   --t-text: #f1f5f9;
   --t-text-secondary: #94a3b8;
   --t-text-muted: #64748b;
 
-  --t-nav-bg: rgba(10, 15, 30, 0.7);
-  --t-nav-bg-scroll: rgba(10, 15, 30, 0.9);
+  --t-nav-bg: #000000;
+  --t-nav-text: #ffffff;
+  --t-nav-text-muted: #a1a1aa;
+  --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
   /* Chart hex */
-  --ch-accent: #3b82f6;
-  --ch-red: #ef4444;
-  --ch-amber: #f59e0b;
-  --ch-green: #10b981;
-  --ch-purple: #8b5cf6;
-  --ch-cyan: #06b6d4;
-  --ch-lime: #84cc16;
+  --ch-c1: #3b82f6;
+  --ch-c2: #d946ef;
+  --ch-c3: #06b6d4;
+  --ch-c4: #f43f5e;
+  --ch-c5: #eab308;
+  --ch-c6: #22c55e;
+  --ch-c7: #a855f7;
+  --ch-c8: #94a3b8;
   --ch-text: #f1f5f9;
   --ch-muted: #94a3b8;
-  --ch-border: #263356;
-  --ch-tooltip-bg: #0a1628;
+  --ch-border: #444444;
+  --ch-tooltip-bg: #222222;
+  --ch-bg: #e2e8f0;
+  /* Light gray chart background in dark mode */
+  --ch-axis-text: #1f2937;
 }
 
 html,
@@ -98,6 +118,15 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
   /* Prevent horizontal scroll — stops fixed nav from shifting off-screen on mobile */
+}
+
+/* Theme-responsive logos (Avoids SSR Hydration mismatch) */
+:root:not([data-theme="dark"]) .logo-dark {
+  display: none !important;
+}
+
+[data-theme="dark"] .logo-light {
+  display: none !important;
 }
 
 body {

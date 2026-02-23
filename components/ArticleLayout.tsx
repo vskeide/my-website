@@ -17,11 +17,7 @@ interface ArticleLayoutProps {
     sections: ContentBlock[];
 }
 
-const categoryTag: Record<string, { bg: string; color: string }> = {
-    "Investing & Finance": { bg: "rgba(37,99,235,0.12)", color: "#2563eb" },
-    "Personal Economy": { bg: "rgba(5,150,105,0.12)", color: "#059669" },
-    "Local Politics": { bg: "rgba(217,119,6,0.12)", color: "#d97706" },
-};
+import { getCategoryBadgeStyle } from "@/lib/categories";
 
 const MAX_PINNED = 3;
 const MIN_FLEX = 0.25;
@@ -110,7 +106,7 @@ export default function ArticleLayout({
 
     const pinnedCharts = pinnedIds.map(getChart).filter(Boolean) as ChartConfig[];
     const maximizedChart = maximizedId ? getChart(maximizedId) : null;
-    const tag = categoryTag[category] ?? { bg: "rgba(37,99,235,0.12)", color: "#2563eb" };
+    const tag = getCategoryBadgeStyle(category);
     const isFull = pinnedIds.length >= MAX_PINNED;
 
     return (
@@ -195,7 +191,7 @@ export default function ArticleLayout({
                         {/* Category tag */}
                         <span
                             className="mb-2 inline-block px-1.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider"
-                            style={{ background: tag.bg, color: tag.color, borderRadius: 0 }}
+                            style={{ background: tag.bg, color: tag.text, borderRadius: 0 }}
                         >
                             {category}
                         </span>
@@ -241,9 +237,9 @@ export default function ArticleLayout({
                                                 disabled={!isPinned && isFull}
                                                 className="hidden items-center gap-1 px-2 py-0.5 text-[0.6rem] font-semibold transition-all lg:inline-flex"
                                                 style={{
-                                                    background: isPinned ? "rgba(37,99,235,0.12)" : "var(--t-card)",
-                                                    color: isPinned ? "var(--ch-accent)" : "var(--t-text-muted)",
-                                                    border: `1px solid ${isPinned ? "var(--ch-accent)" : "var(--t-border-subtle)"}`,
+                                                    background: isPinned ? "var(--ch-c1)" : "var(--t-card)",
+                                                    color: isPinned ? "#ffffff" : "var(--t-text-muted)",
+                                                    border: `1px solid ${isPinned ? "var(--ch-c1)" : "var(--t-border-subtle)"}`,
                                                     borderRadius: 0,
                                                     opacity: !isPinned && isFull ? 0.4 : 1,
                                                     cursor: !isPinned && isFull ? "not-allowed" : "pointer",

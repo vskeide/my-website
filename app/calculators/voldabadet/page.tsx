@@ -9,49 +9,24 @@ import {
 import { useTheme } from "@/components/ThemeProvider";
 
 // ─── palette (CSS variables for DOM elements) ─────────────────────────────────
-const C = {
-    bg: "var(--t-bg)",
+const C: Record<string, string> = {
+    bg: "var(--ch-bg)",
     card: "var(--t-card)",
     border: "var(--t-border-strong)",
-    accent: "var(--color-accent)",
-    green: "var(--color-accent-green)",
-    amber: "var(--color-accent-amber)",
-    red: "var(--color-accent-red)",
-    purple: "var(--color-accent-purple)",
-    cyan: "var(--color-accent-cyan)",
-    lime: "var(--color-accent-lime)",
+    c1: "var(--ch-c1)",
+    c2: "var(--ch-c2)",
+    c3: "var(--ch-c3)",
+    c4: "var(--ch-c4)",
+    c5: "var(--ch-c5)",
+    c6: "var(--ch-c6)",
+    c7: "var(--ch-c7)",
+    c8: "var(--ch-c8)",
     text: "var(--t-text)",
     muted: "var(--t-text-secondary)",
     tooltipBg: "var(--ch-tooltip-bg)",
+    axisText: "var(--ch-axis-text, #1f2937)",
+    grid: "var(--t-border-subtle, #e2e8f0)",
 };
-
-// Recharts needs resolved hex — read from CSS --ch-* variables
-function useChartColors() {
-    const { theme } = useTheme();
-    const [colors, setColors] = useState({
-        accent: "#3b82f6", red: "#ef4444", amber: "#f59e0b",
-        green: "#10b981", purple: "#8b5cf6", cyan: "#06b6d4",
-        lime: "#84cc16", text: "#f1f5f9", muted: "#94a3b8",
-        border: "#263356", tooltipBg: "#0a1628",
-    });
-    useEffect(() => {
-        const s = getComputedStyle(document.documentElement);
-        setColors({
-            accent: s.getPropertyValue("--ch-accent").trim() || "#3b82f6",
-            red: s.getPropertyValue("--ch-red").trim() || "#ef4444",
-            amber: s.getPropertyValue("--ch-amber").trim() || "#f59e0b",
-            green: s.getPropertyValue("--ch-green").trim() || "#10b981",
-            purple: s.getPropertyValue("--ch-purple").trim() || "#8b5cf6",
-            cyan: s.getPropertyValue("--ch-cyan").trim() || "#06b6d4",
-            lime: s.getPropertyValue("--ch-lime").trim() || "#84cc16",
-            text: s.getPropertyValue("--ch-text").trim() || "#f1f5f9",
-            muted: s.getPropertyValue("--ch-muted").trim() || "#94a3b8",
-            border: s.getPropertyValue("--ch-border").trim() || "#263356",
-            tooltipBg: s.getPropertyValue("--ch-tooltip-bg").trim() || "#0a1628",
-        });
-    }, [theme]);
-    return colors;
-}
 
 // ─── constants ───────────────────────────────────────────────────────────────
 const ADULTS = 8800;
@@ -63,10 +38,10 @@ const DEFAULT_INVESTMENT = 230;
 const DEFAULT_RATE = 4.0;
 
 const DRIFT_DEFAULTS = [
-    { key: "strom", name: "Strøm", value: 3_000_000, colorKey: "accent" as const },
-    { key: "bad", name: "Badevakter", value: 2_400_000, colorKey: "cyan" as const },
-    { key: "tilsette", name: "Andre tilsette", value: 4_200_000, colorKey: "amber" as const },
-    { key: "kjemi", name: "Kjemikaliar mm", value: 500_000, colorKey: "lime" as const },
+    { key: "strom", name: "Strøm", value: 3_000_000, colorKey: "c5" }, // yellow
+    { key: "bad", name: "Badevakter", value: 2_400_000, colorKey: "c3" }, // cyan
+    { key: "tilsette", name: "Andre tilsette", value: 4_200_000, colorKey: "c8" }, // grey
+    { key: "kjemi", name: "Kjemikaliar mm", value: 500_000, colorKey: "c7" }, // purple
 ];
 const DEFAULT_BILLETTSAL = 4_000_000;
 
@@ -177,7 +152,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
     return (
         <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 270 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 4, fontSize: 13 }}>{label}</p>
-            <p style={{ color: v > 0 ? C.red : v < 0 ? C.green : C.muted, fontSize: 12, margin: 0 }}>
+            <p style={{ color: v > 0 ? C.c4 : v < 0 ? C.c6 : C.muted, fontSize: 12, margin: 0 }}>
                 {v > 0 ? `Betalar ${Math.abs(v).toLocaleString("nb-NO")} kr meir per pers enn flat fordeling`
                     : v < 0 ? `Sparer ${Math.abs(v).toLocaleString("nb-NO")} kr per pers vs flat fordeling`
                         : "Lik flat fordeling"}
@@ -201,7 +176,7 @@ const PieTip = ({ active, payload }: any) => {
 const TotalBarLabel = ({ x, y, width, value }: any) => {
     if (!value) return null;
     return (
-        <text x={x + width / 2} y={y - 6} fill="var(--ch-text)" textAnchor="middle" fontSize={11} fontWeight={700}>
+        <text x={x + width / 2} y={y - 6} fill="#000000" textAnchor="middle" fontSize={11} fontWeight={700}>
             {Math.round(value).toLocaleString("nb-NO")}
         </text>
     );
@@ -248,10 +223,10 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 11 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
                 <div style={{ width: 10, height: 10, borderRadius: 2, background: color, flexShrink: 0 }} />
-                <span style={{ fontSize: 13, color: isIncome ? C.green : C.text }}>{name}</span>
+                <span style={{ fontSize: 13, color: C.text }}>{name}</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                {isIncome && <span style={{ color: C.green, fontSize: 12 }}>−</span>}
+                {isIncome && <span style={{ color: C.c6, fontSize: 12 }}>−</span>}
                 {editing ? (
                     <input
                         autoFocus
@@ -260,7 +235,7 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
                         onBlur={commit}
                         onKeyDown={e => { if (e.key === "Enter") commit(); if (e.key === "Escape") setEditing(false); }}
                         style={{
-                            width: 72, background: C.tooltipBg, border: `1px solid ${C.accent}`,
+                            width: 72, background: C.tooltipBg, border: `1px solid ${C.border}`,
                             borderRadius: 5, color: C.text, fontSize: 13, fontWeight: 700,
                             padding: "3px 7px", textAlign: "right", outline: "none",
                         }}
@@ -269,7 +244,7 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
                     <button onClick={startEdit} title="Klikk for å endre"
                         style={{
                             background: "transparent", border: `1px solid ${C.border}`, borderRadius: 5,
-                            color: isIncome ? C.green : color || C.text, fontSize: 13, fontWeight: 700,
+                            color: C.text, fontSize: 13, fontWeight: 700,
                             padding: "3px 10px", cursor: "pointer", transition: "border-color 0.15s",
                             minWidth: 72, textAlign: "right",
                         }}>
@@ -301,7 +276,7 @@ const StatCard = ({ label, val, sub, c }: { label: string; val: string; sub?: st
 
 // ─── main ─────────────────────────────────────────────────────────────────────
 export default function VoldabadViz() {
-    const CH = useChartColors();
+    const CH = C;
     const [tab, setTab] = useState("overview");
     const [selected, setSelected] = useState<ReturnType<typeof calcAll>["households"][number] | null>(null);
     const [investment, setInvestment] = useState(DEFAULT_INVESTMENT);
@@ -337,10 +312,10 @@ export default function VoldabadViz() {
     const Y_MAX = 25000;
 
     const pieData = [
-        { name: "Renter", value: rente * 1e6, color: CH.red, percent: 0, isIncome: false },
-        { name: "Avskriving", value: avskriving * 1e6, color: CH.amber, percent: 0, isIncome: false },
+        { name: "Renter", value: rente * 1e6, color: CH.c1, percent: 0, isIncome: false },
+        { name: "Avskriving", value: avskriving * 1e6, color: CH.c2, percent: 0, isIncome: false },
         ...DRIFT_DEFAULTS.map(d => ({ name: d.name, value: driftValues[d.key], color: CH[d.colorKey], percent: 0, isIncome: false })),
-        { name: "Billettsal (inntekt)", value: billettsal, color: CH.green, percent: 0, isIncome: true },
+        { name: "Billettsal (inntekt)", value: billettsal, color: CH.c6, percent: 0, isIncome: true },
     ];
     const totalCosts = pieData.filter(d => !d.isIncome).reduce((s, d) => s + d.value, 0);
     pieData.forEach(d => { d.percent = d.value / totalCosts; });
@@ -381,7 +356,7 @@ export default function VoldabadViz() {
                 {/* header */}
                 <div style={{ marginBottom: 22 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 5 }}>
-                        <div style={{ width: 4, height: 28, background: C.accent, borderRadius: 2 }} />
+                        <div style={{ width: 4, height: 28, background: C.c1, borderRadius: 2 }} />
                         <h1 style={{ fontSize: 21, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
                             Voldabadet — Kostnadsanalyse
                         </h1>
@@ -393,70 +368,88 @@ export default function VoldabadViz() {
 
                 {/* sliders + summary — side by side */}
                 <div className="vb-top" style={{ display: "flex", gap: 16, marginBottom: 16 }}>
-                    {/* Left: sliders */}
-                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 18px", flex: "0 0 auto", width: "52%" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+                    {/* Left: inputs */}
+                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "16px 20px", flex: "0 0 auto", width: "52%" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
                             <div>
                                 <h3 style={{
-                                    margin: "0 0 1px", fontSize: 11, fontWeight: 700, color: C.accent,
-                                    textTransform: "uppercase", letterSpacing: "0.07em"
+                                    margin: "0 0 2px", fontSize: 13, fontWeight: 700, color: C.text,
+                                    textTransform: "uppercase", letterSpacing: "0.05em"
                                 }}>Juster føresetnadane</h3>
-                                <p style={{ color: C.muted, fontSize: 10, margin: 0 }}>Alle tal og diagram oppdaterast automatisk.</p>
+                                <p style={{ color: C.muted, fontSize: 11, margin: 0 }}>Alle tal og diagram oppdaterast automatisk.</p>
                             </div>
                             <button onClick={reset} disabled={isDefault}
                                 style={{
-                                    background: isDefault ? "transparent" : `rgba(59,130,246,0.12)`,
-                                    border: `1px solid ${isDefault ? C.border : C.accent}`,
-                                    color: isDefault ? C.border : C.accent,
-                                    borderRadius: 0, padding: "4px 12px", fontSize: 11, fontWeight: 600,
+                                    background: isDefault ? "transparent" : "var(--t-text)",
+                                    border: `1px solid ${isDefault ? "var(--t-border-subtle)" : "transparent"}`,
+                                    color: isDefault ? "var(--t-text-muted)" : "var(--t-bg)",
+                                    borderRadius: 4, padding: "4px 12px", fontSize: 11, fontWeight: 600,
                                     cursor: isDefault ? "default" : "pointer", transition: "all 0.15s",
                                 }}>
                                 ↩ Tilbakestill
                             </button>
                         </div>
-                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px" }}>
-                            <Slider label="Investeringskost (MNOK, ex mva og spelemidlar)"
+
+                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 24px", marginBottom: 16 }}>
+                            <Slider label="Investeringskost (MNOK ex mva/spelemidlar)"
                                 value={investment} min={50} max={350} step={5}
-                                onChange={setInvestment} format={v => `${v} MNOK`} color={C.amber} />
+                                onChange={setInvestment} format={v => `${v}`} color={C.c2} />
                             <Slider label="Rente (%)" value={rate} min={2} max={8} step={0.25}
-                                onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.red} />
+                                onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.c1} />
                         </div>
-                        {/* Derived values under sliders */}
-                        <div className="vb-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
-                            {[
-                                { label: "Rentekostnad/år", val: rente.toFixed(2) + " MNOK", c: C.red },
-                                { label: "Avskriving/år (20 år)", val: avskriving.toFixed(2) + " MNOK", c: C.amber },
-                                { label: "Total kapitalkost/år", val: kapital.toFixed(2) + " MNOK", c: C.text },
-                            ].map((f, i) => (
-                                <div key={i} style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", borderLeft: `2px solid ${f.c}` }}>
-                                    <p style={{ color: C.muted, fontSize: 9, margin: "0 0 2px", textTransform: "uppercase" }}>{f.label}</p>
-                                    <p style={{ color: f.c, fontSize: 14, fontWeight: 800, margin: 0 }}>{f.val}</p>
-                                </div>
-                            ))}
+
+                        <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16 }}>
+                            <h4 style={{ margin: "0 0 12px", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>Drift og Inntekter</h4>
+                            <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 24px" }}>
+                                {DRIFT_DEFAULTS.map(d => (
+                                    <CostInput key={d.key} name={d.name} value={driftValues[d.key]}
+                                        color={C[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
+                                ))}
+                                <CostInput name="Billettsal (inntekt)" value={billettsal}
+                                    color={C.c6} onChange={setBillettsal} isIncome />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Right: summary stat cards */}
-                    <div className="vb-stat-grid" style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8, alignContent: "start" }}>
-                        <StatCard label="Investeringskost" val={investment + " MNOK"} sub="Ex mva og spelemidlar" c={C.amber} />
-                        <StatCard label="Kapitalkost/år" val={kapital.toFixed(1) + " MNOK"} sub={`Renter ${rente.toFixed(1)} + avskr. ${avskriving.toFixed(1)}`} c={C.red} />
-                        <StatCard label="Netto driftsunderskot/år" val={fmtM(netDrift) + " MNOK"} sub={`Drift ${fmtM(grossDrift)} − billettsal ${fmtM(billettsal)}`} c={C.purple} />
-                        <StatCard label="Total skattebelasting/år" val={totalBurdenMNOK.toFixed(1) + " MNOK"} sub="Kapital + netto drift" c={C.text} />
-                        <StatCard label="Per vaksen/år (skatt)" val={perAdultRounded.toLocaleString("nb-NO") + " kr"} sub="8 800 vaksne" c={C.accent} />
-                        <StatCard label="Flat per innbyggar/år" val={perPersonRounded.toLocaleString("nb-NO") + " kr"} sub="Om fordelt på 11 000 innb." c={C.green} />
+                    {/* Right: summary stat cards - Classic summary */}
+                    <div className="vb-stat-grid" style={{ flex: 1, background: C.card, border: `1px solid ${C.border}`, padding: "16px 20px" }}>
+                        <h3 style={{ fontSize: 13, fontWeight: 700, margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em", color: C.text }}>Årleg kostnadssamandrag</h3>
+
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                            <span style={{ fontSize: 13, color: C.muted }}>Kapitalkostnad</span>
+                            <span style={{ fontSize: 13, fontWeight: 600 }}>{kapital.toFixed(1)} MNOK</span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                            <span style={{ fontSize: 13, color: C.muted }}>Netto driftsunderskot</span>
+                            <span style={{ fontSize: 13, fontWeight: 600 }}>{fmtM(netDrift)} MNOK</span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+                            <span style={{ fontSize: 14, fontWeight: 700, color: C.text }}>Total kommunal byrde</span>
+                            <span style={{ fontSize: 14, fontWeight: 800 }}>{totalBurdenMNOK.toFixed(1)} MNOK</span>
+                        </div>
+
+                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24, paddingTop: 16, borderTop: `1px dashed ${C.border}` }}>
+                            <span style={{ fontSize: 12, color: C.muted }}>Per vaksen (8 800)</span>
+                            <span style={{ fontSize: 13, fontWeight: 600 }}>{perAdultRounded.toLocaleString("nb-NO")} kr</span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+                            <span style={{ fontSize: 12, color: C.muted }}>Flatt per innbyggar (11 000)</span>
+                            <span style={{ fontSize: 13, fontWeight: 600 }}>{perPersonRounded.toLocaleString("nb-NO")} kr</span>
+                        </div>
                     </div>
                 </div>
 
                 {/* tabs */}
-                <div style={{ display: "flex", gap: 4, marginBottom: 24, borderBottom: `1px solid ${C.border}` }}>
+                <div style={{ background: "#000000", borderRadius: 4, marginBottom: 24, display: "flex", overflow: "hidden" }}>
                     {TABS.map(t => (
                         <button key={t.id} onClick={() => setTab(t.id)} style={{
-                            background: "none", border: "none",
-                            color: tab === t.id ? C.accent : C.muted,
-                            fontWeight: tab === t.id ? 700 : 400,
-                            fontSize: 14, cursor: "pointer", padding: "8px 18px",
-                            borderBottom: tab === t.id ? `2px solid ${C.accent}` : "2px solid transparent",
-                            marginBottom: -1, transition: "color 0.15s",
+                            background: tab === t.id ? C.c1 : "transparent",
+                            border: "none",
+                            color: tab === t.id ? "#ffffff" : "#a1a1aa",
+                            fontWeight: tab === t.id ? 600 : 400,
+                            fontSize: 14, cursor: "pointer", padding: "12px 24px",
+                            transition: "all 0.15s",
+                            flex: "1 1 auto"
                         }}>{t.label}</button>
                     ))}
                 </div>
@@ -464,6 +457,49 @@ export default function VoldabadViz() {
                 {/* ══ OVERVIEW ══ */}
                 {tab === "overview" && (
                     <div>
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20 }}>
+                            <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
+                            <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
+                                Nedste tre delar = skatt (betalast uansett). Y-aksen er fast.
+                            </p>
+                            <div style={{ position: "relative" }}>
+                                <ResponsiveContainer width="100%" height={320} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                    <BarChart data={stackedData} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 11 }} />
+                                        <YAxis domain={[0, Y_MAX]} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} tick={{ fill: CH.axisText, fontSize: 11 }} />
+
+                                        <Bar dataKey="Renter (skatt)" stackId="a" fill={CH.c1} isAnimationActive={false} />
+                                        <Bar dataKey="Avskriving (skatt)" stackId="a" fill={CH.c2} isAnimationActive={false} />
+                                        <Bar dataKey="Netto drift (skatt)" stackId="a" fill={CH.c3} isAnimationActive={false} />
+                                        <Bar dataKey="Brukarbetaling" stackId="a" fill={CH.c4} radius={[4, 4, 0, 0]}
+                                            isAnimationActive={false} label={<TotalBarLabel />} />
+                                    </BarChart>
+                                </ResponsiveContainer>
+
+                                {/* Floating Legend explicitly removed from Recharts hierarchy to avoid margin reservation */}
+                                <div style={{ position: "absolute", top: 20, left: 80, backgroundColor: "transparent", pointerEvents: "none", zIndex: 10 }}>
+                                    <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c4, marginRight: 8, borderRadius: 2 }} />
+                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Brukarbetaling</span>
+                                        </li>
+                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c3, marginRight: 8, borderRadius: 2 }} />
+                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Netto drift (skatt)</span>
+                                        </li>
+                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c2, marginRight: 8, borderRadius: 2 }} />
+                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Avskriving (skatt)</span>
+                                        </li>
+                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c1, marginRight: 8, borderRadius: 2 }} />
+                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Renter (skatt)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <InfoBox>
                             <strong style={{ color: C.text }}>Kva betalar du uansett?</strong>{" "}
                             Kapitalkostnaden (renter + avskriving) og netto driftsunderskot vert dekte over{" "}
@@ -471,26 +507,6 @@ export default function VoldabadViz() {
                             Du betalar dette <strong style={{ color: C.text }}>uavhengig av om du badar eller ikkje</strong>.
                             Brukarbetalinga (årskortet) kjem <strong style={{ color: C.text }}>i tillegg</strong> for dei som nyttar anlegget.
                         </InfoBox>
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
-                            <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
-                            <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
-                                Nedste tre delar = skatt (betalast uansett). Blå = brukarbetaling for dei som badar. Y-aksen er fast.
-                            </p>
-                            <ResponsiveContainer width="100%" height={380}>
-                                <BarChart data={stackedData} margin={{ top: 28, right: 20, left: 10, bottom: 0 }}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke={CH.border} />
-                                    <XAxis dataKey="type" tick={{ fill: CH.muted, fontSize: 11 }} />
-                                    <YAxis domain={[0, Y_MAX]} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} tick={{ fill: CH.muted, fontSize: 11 }} />
-                                    <Tooltip content={<DarkTip />} />
-                                    <Legend wrapperStyle={{ color: CH.muted, fontSize: 12 }} />
-                                    <Bar dataKey="Renter (skatt)" stackId="a" fill={CH.red} isAnimationActive={false} />
-                                    <Bar dataKey="Avskriving (skatt)" stackId="a" fill={CH.amber} isAnimationActive={false} />
-                                    <Bar dataKey="Netto drift (skatt)" stackId="a" fill={CH.purple} isAnimationActive={false} />
-                                    <Bar dataKey="Brukarbetaling" stackId="a" fill={CH.accent} radius={[4, 4, 0, 0]}
-                                        isAnimationActive={false} label={<TotalBarLabel />} />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
                     </div>
                 )}
 
@@ -507,16 +523,16 @@ export default function VoldabadViz() {
                                 <div key={i} onClick={() => setSelected(selected?.type === h.type ? null : h)}
                                     style={{
                                         background: selected?.type === h.type ? C.bg : C.card,
-                                        border: `1px solid ${selected?.type === h.type ? C.accent : C.border}`,
+                                        border: `1px solid ${selected?.type === h.type ? C.c4 : C.border}`,
                                         borderRadius: 0, padding: 15, cursor: "pointer", transition: "all 0.15s"
                                     }}>
                                     <div style={{ marginBottom: 10 }}><HouseholdIcon adults={h.adults} kids={h.kids} size={40} /></div>
                                     <p style={{ fontWeight: 700, margin: "0 0 2px", fontSize: 14 }}>{h.type}</p>
                                     <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>{h.persons} person{h.persons > 1 ? "ar" : ""}</p>
                                     <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>Skatt/år</p>
-                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.red, margin: "0 0 6px" }}>{h.taxShare.toLocaleString("nb-NO")} kr</p>
+                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.text, margin: "0 0 6px" }}>{h.taxShare.toLocaleString("nb-NO")} kr</p>
                                     <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>+ Brukarbetaling</p>
-                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.accent, margin: "0 0 8px" }}>{h.arskort.toLocaleString("nb-NO")} kr</p>
+                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.c4, margin: "0 0 8px" }}>{h.arskort.toLocaleString("nb-NO")} kr</p>
                                     <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 8 }}>
                                         <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>Total (badar du)</p>
                                         <p style={{ fontSize: 17, fontWeight: 800, color: C.text, margin: 0 }}>{h.total.toLocaleString("nb-NO")} kr</p>
@@ -525,15 +541,15 @@ export default function VoldabadViz() {
                             ))}
                         </div>
                         {selected && (
-                            <div style={{ background: C.card, border: `1px solid ${C.accent}`, borderRadius: 0, padding: 22 }}>
+                            <div style={{ background: C.card, border: `1px solid ${C.c4}`, borderRadius: 0, padding: 22 }}>
                                 <h3 style={{ margin: "0 0 14px", fontSize: 14, fontWeight: 700 }}>Detaljar: {selected.type}</h3>
                                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 14 }}>
                                     {[
-                                        { label: "Rentedel (skatt)", val: selected.renteDel, c: C.red },
-                                        { label: "Avskrivingsdel (skatt)", val: selected.avskrivDel, c: C.amber },
-                                        { label: "Driftsandel (skatt)", val: selected.driftDel, c: C.purple },
+                                        { label: "Rentedel (skatt)", val: selected.renteDel, c: C.c1 },
+                                        { label: "Avskrivingsdel (skatt)", val: selected.avskrivDel, c: C.c2 },
+                                        { label: "Driftsandel (skatt)", val: selected.driftDel, c: C.c3 },
                                         { label: "Sum skattebelasting", val: selected.taxShare, c: C.text },
-                                        { label: "Brukarbetaling (årskort)", val: selected.arskort, c: C.accent },
+                                        { label: "Brukarbetaling (årskort)", val: selected.arskort, c: C.c4 },
                                         { label: "Total om du badar", val: selected.total, c: C.text },
                                     ].map((item, i) => (
                                         <div key={i} style={{ borderLeft: `3px solid ${item.c}`, paddingLeft: 11 }}>
@@ -550,83 +566,6 @@ export default function VoldabadViz() {
                 {/* ══ COSTS ══ */}
                 {tab === "costs" && (
                     <div>
-                        <InfoBox>
-                            Klikk på eit tal for å endre det. Alle berekningar oppdaterast i sanntid.
-                            Kapitalkostnadane er reaktive til sliders øvst.
-                        </InfoBox>
-
-                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
-                            {/* Capital */}
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 16px" }}>
-                                <h3 style={{ margin: "0 0 2px", fontSize: 12, fontWeight: 700 }}>Kapitalkostnadar/år</h3>
-                                <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>Reaktiv til sliders over.</p>
-                                {[
-                                    { label: "Renter", val: rente * 1e6, color: CH.red, pct: (rente / kapital * 100).toFixed(0) + "%" },
-                                    { label: `Avskriving (${LOAN_YEARS} år)`, val: avskriving * 1e6, color: CH.amber, pct: (avskriving / kapital * 100).toFixed(0) + "%" },
-                                ].map((item, i, arr) => (
-                                    <div key={i} style={{
-                                        display: "flex", justifyContent: "space-between", alignItems: "center",
-                                        marginBottom: i < arr.length - 1 ? 9 : 0, paddingBottom: i < arr.length - 1 ? 9 : 0,
-                                        borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none"
-                                    }}>
-                                        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                                            <div style={{ width: 10, height: 10, borderRadius: 2, background: item.color }} />
-                                            <div>
-                                                <p style={{ fontSize: 12, color: C.text, margin: 0 }}>{item.label}</p>
-                                                <p style={{ fontSize: 10, color: C.muted, margin: 0 }}>{item.pct} av kapital</p>
-                                            </div>
-                                        </div>
-                                        <div style={{ textAlign: "right" }}>
-                                            <p style={{ fontWeight: 700, fontSize: 12, color: item.color, margin: 0 }}>{fmtM(item.val)} MNOK</p>
-                                            <p style={{ fontSize: 10, color: C.muted, margin: 0 }}>{Math.round(item.val / POPULATION).toLocaleString("nb-NO")} kr/innb.</p>
-                                        </div>
-                                    </div>
-                                ))}
-                                <div style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", marginTop: 10, display: "flex", justifyContent: "space-between" }}>
-                                    <span style={{ fontWeight: 700, fontSize: 12 }}>Sum kapital</span>
-                                    <span style={{ fontWeight: 800, fontSize: 12, color: C.red }}>{kapital.toFixed(2)} MNOK</span>
-                                </div>
-                            </div>
-
-                            {/* Drift — editable */}
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "14px 16px" }}>
-                                <h3 style={{ margin: "0 0 2px", fontSize: 12, fontWeight: 700 }}>Reine driftskostnadar/år</h3>
-                                <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>Klikk på eit tal for å endre det.</p>
-                                {DRIFT_DEFAULTS.map(d => (
-                                    <CostInput key={d.key} name={d.name} value={driftValues[d.key]}
-                                        color={CH[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
-                                ))}
-                                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 8, marginBottom: 7 }}>
-                                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 7 }}>
-                                        <span style={{ fontSize: 12, color: C.muted }}>Sum driftskostnadar</span>
-                                        <span style={{ fontWeight: 700, fontSize: 12 }}>{fmtM(grossDrift)} MNOK</span>
-                                    </div>
-                                    <CostInput name="Billettsal (inntekt)" value={billettsal}
-                                        color={CH.green} onChange={setBillettsal} isIncome />
-                                </div>
-                                <div style={{ background: C.bg, borderRadius: 0, padding: "8px 10px", display: "flex", justifyContent: "space-between" }}>
-                                    <span style={{ fontWeight: 700, fontSize: 12 }}>Netto driftsunderskot</span>
-                                    <span style={{ fontWeight: 800, fontSize: 12, color: C.purple }}>{fmtM(netDrift)} MNOK</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Total summary bar */}
-                        <div style={{
-                            background: C.bg, border: `1px solid ${C.border}`, borderRadius: 0,
-                            padding: "14px 20px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center"
-                        }}>
-                            <div>
-                                <p style={{ margin: 0, color: C.muted, fontSize: 12 }}>Total belasting over kommunebudsjettet</p>
-                                <p style={{ margin: "3px 0 0", color: C.muted, fontSize: 11 }}>
-                                    Kapital {kapital.toFixed(1)} MNOK + netto drift {fmtM(netDrift)} MNOK
-                                </p>
-                            </div>
-                            <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: C.red }}>
-                                {totalBurdenMNOK.toFixed(1)} MNOK/år
-                            </p>
-                        </div>
-
                         {/* Pie chart */}
                         <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                             <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Kostnadsfordeling (brutto, ex. billettsal)</h3>
@@ -635,11 +574,20 @@ export default function VoldabadViz() {
                                 Billettsal på {fmtM(billettsal)} MNOK kjem til frå og reduserer netto belastning.
                             </p>
                             <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
-                                <ResponsiveContainer width="100%" height={260}>
+                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                     <PieChart>
                                         <Pie data={pieDataPositive} cx="50%" cy="50%" outerRadius={100}
                                             innerRadius={40} dataKey="value" isAnimationActive={false}
-                                            label={({ percent }: { percent?: number }) => (percent ?? 0) > 0.06 ? `${((percent ?? 0) * 100).toFixed(0)}%` : ""}
+                                            label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+                                                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                                                const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
+                                                const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
+                                                return (percent ?? 0) > 0.05 ? (
+                                                    <text x={x} y={y} fill="#000000" textAnchor="middle" dominantBaseline="central" fontSize={11} fontWeight={700}>
+                                                        {`${((percent ?? 0) * 100).toFixed(0)}%`}
+                                                    </text>
+                                                ) : null;
+                                            }}
                                             labelLine={false}>
                                             {pieDataPositive.map((d, i) => <Cell key={i} fill={d.color} />)}
                                         </Pie>
@@ -657,7 +605,7 @@ export default function VoldabadViz() {
                                                 <span style={{ fontSize: 13, color: C.text }}>{d.name}</span>
                                             </div>
                                             <div style={{ textAlign: "right", marginLeft: 12 }}>
-                                                <span style={{ fontWeight: 700, fontSize: 13, color: d.color }}>
+                                                <span style={{ fontWeight: 700, fontSize: 13, color: C.text }}>
                                                     {fmtM(d.value)} MNOK
                                                 </span>
                                                 <span style={{ fontSize: 11, color: C.muted, marginLeft: 6 }}>
@@ -671,13 +619,13 @@ export default function VoldabadViz() {
                                         display: "flex", justifyContent: "space-between"
                                     }}>
                                         <span style={{ fontWeight: 700, fontSize: 13 }}>Brutto total</span>
-                                        <span style={{ fontWeight: 800, color: C.red, fontSize: 13 }}>
+                                        <span style={{ fontWeight: 800, color: C.c4, fontSize: 13 }}>
                                             {(kapital + grossDrift / 1e6).toFixed(1)} MNOK
                                         </span>
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
-                                        <span style={{ fontSize: 12, color: C.green }}>− Billettsal</span>
-                                        <span style={{ fontWeight: 700, color: C.green, fontSize: 12 }}>
+                                        <span style={{ fontSize: 12, color: C.c6 }}>− Billettsal</span>
+                                        <span style={{ fontWeight: 700, color: C.c6, fontSize: 12 }}>
                                             {fmtM(billettsal)} MNOK
                                         </span>
                                     </div>
@@ -685,8 +633,8 @@ export default function VoldabadViz() {
                                         display: "flex", justifyContent: "space-between", marginTop: 6,
                                         paddingTop: 8, borderTop: `1px solid ${C.border}`
                                     }}>
-                                        <span style={{ fontWeight: 700, fontSize: 13 }}>Netto skattebyrde</span>
-                                        <span style={{ fontWeight: 800, color: C.red, fontSize: 13 }}>
+                                        <span style={{ fontWeight: 700, fontSize: 13 }}>Netto kommunal byrde over året</span>
+                                        <span style={{ fontWeight: 800, color: C.text, fontSize: 13 }}>
                                             {totalBurdenMNOK.toFixed(1)} MNOK
                                         </span>
                                     </div>
@@ -717,15 +665,15 @@ export default function VoldabadViz() {
                                 <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
                                     Raudt = betalar meir enn flat fordeling. Grønt = subsidiert.
                                 </p>
-                                <ResponsiveContainer width="100%" height={260}>
-                                    <BarChart data={households} margin={{ top: 8, right: 10, left: 10, bottom: 0 }}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke={CH.border} />
-                                        <XAxis dataKey="type" tick={{ fill: CH.muted, fontSize: 10 }} />
-                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.muted, fontSize: 10 }} />
+                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                    <BarChart data={households} margin={{ top: 12, right: 10, left: 10, bottom: 0 }}>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
+                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.axisText, fontSize: 10 }} />
                                         <Tooltip content={<SubsidieTip />} />
-                                        <ReferenceLine y={0} stroke={CH.muted} strokeWidth={1.5} />
+                                        <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1.5} />
                                         <Bar dataKey="subsidiePerPers" name="Subsidie per person" radius={[4, 4, 0, 0]}>
-                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerPers > 0 ? CH.red : CH.green} />)}
+                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerPers > 0 ? CH.c4 : CH.c6} />)}
                                         </Bar>
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -735,15 +683,15 @@ export default function VoldabadViz() {
                                 <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
                                     Totalt avvik frå flat fordeling for heile husstanden.
                                 </p>
-                                <ResponsiveContainer width="100%" height={260}>
-                                    <BarChart data={households} margin={{ top: 8, right: 10, left: 10, bottom: 0 }}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke={CH.border} />
-                                        <XAxis dataKey="type" tick={{ fill: CH.muted, fontSize: 10 }} />
-                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.muted, fontSize: 10 }} />
+                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                    <BarChart data={households} margin={{ top: 12, right: 10, left: 10, bottom: 0 }}>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
+                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.axisText, fontSize: 10 }} />
                                         <Tooltip content={<SubsidieTip />} />
-                                        <ReferenceLine y={0} stroke={CH.muted} strokeWidth={1.5} />
+                                        <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1.5} />
                                         <Bar dataKey="subsidiePerHH" name="Subsidie per husstand" radius={[4, 4, 0, 0]}>
-                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.red : CH.green} />)}
+                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.c4 : CH.c6} />)}
                                         </Bar>
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -769,17 +717,17 @@ export default function VoldabadViz() {
                                             background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.015)"
                                         }}>
                                             <td style={{ padding: "10px 14px", fontWeight: 600 }}>{h.type}</td>
-                                            <td style={{ padding: "10px 14px", textAlign: "right", color: C.red }}>{h.taxShare.toLocaleString("nb-NO")}</td>
+                                            <td style={{ padding: "10px 14px", textAlign: "right", color: C.c4 }}>{h.taxShare.toLocaleString("nb-NO")}</td>
                                             <td style={{ padding: "10px 14px", textAlign: "right", color: C.muted }}>{perPersonRounded.toLocaleString("nb-NO")}</td>
                                             <td style={{
                                                 padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                                                color: h.subsidiePerPers > 0 ? C.red : C.green
+                                                color: h.subsidiePerPers > 0 ? C.c4 : C.c6
                                             }}>
                                                 {h.subsidiePerPers > 0 ? "+" : ""}{h.subsidiePerPers.toLocaleString("nb-NO")}
                                             </td>
                                             <td style={{
                                                 padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                                                color: h.subsidiePerHH > 0 ? C.red : C.green
+                                                color: h.subsidiePerHH > 0 ? C.c4 : C.c6
                                             }}>
                                                 {h.subsidiePerHH > 0 ? "+" : ""}{h.subsidiePerHH.toLocaleString("nb-NO")}
                                             </td>

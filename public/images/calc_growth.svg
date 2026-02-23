@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="growthBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#growthBg)"/>
+  <polyline points="100,300 300,250 500,150 700,50" fill="none" stroke="#a855f7" stroke-width="12" stroke-linejoin="round"/>
+  <circle cx="100" cy="300" r="12" fill="#d946ef"/>
+  <circle cx="300" cy="250" r="16" fill="#d946ef"/>
+  <circle cx="500" cy="150" r="20" fill="#d946ef"/>
+  <circle cx="700" cy="50" r="28" fill="#d946ef"/>
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="2">
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+  </g>
+</svg>

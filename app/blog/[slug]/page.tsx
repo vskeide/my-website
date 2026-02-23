@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ArticleLayout from "@/components/ArticleLayout";
 import { silverPriceAnalysis } from "@/lib/articles/silver-price-analysis";
+import { getCategoryBadgeStyle } from "@/lib/categories";
 
 // ---------- Text-only articles ----------
 const textArticles: Record<
@@ -89,13 +90,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
     // Text-only article → simple layout
     const article = textArticles[slug] ?? fallbackArticle;
-    const categoryColors: Record<string, string> = {
-        "Investing & Finance": "bg-accent/15 text-accent-hover",
-        "Personal Economy": "bg-emerald-500/15 text-emerald-400",
-        "Local Politics": "bg-accent-amber/15 text-accent-amber",
-    };
-    const tagStyle =
-        categoryColors[article.category] ?? "bg-accent/15 text-accent-hover";
+    const badgeStyle = getCategoryBadgeStyle(article.category);
 
     return (
         <main className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
@@ -108,7 +103,7 @@ export default async function ArticlePage({ params }: PageProps) {
             </nav>
 
             <header className="pb-6">
-                <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-semibold ${tagStyle} mb-3`}>
+                <span className={`inline-block px-2 py-0.5 text-xs font-semibold mb-3`} style={{ background: badgeStyle.bg, color: badgeStyle.text, borderRadius: 0 }}>
                     {article.category}
                 </span>
                 <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-text-primary sm:text-3xl">

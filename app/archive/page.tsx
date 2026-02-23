@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import YearAccordion, { type ArchiveEntry } from "@/components/YearAccordion";
+import { getCategoryBadgeStyle } from "@/lib/categories";
 
 const allCategories = [
     "All",
@@ -75,9 +76,9 @@ export default function ArchivePage() {
                             onClick={() => setActiveFilter(cat)}
                             className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
                             style={{
-                                background: activeFilter === cat ? "var(--ch-accent)" : "var(--t-card)",
-                                color: activeFilter === cat ? "#ffffff" : "var(--t-text-secondary)",
-                                border: `1px solid ${activeFilter === cat ? "var(--ch-accent)" : "var(--t-border-subtle)"}`,
+                                background: activeFilter === cat ? getCategoryBadgeStyle(cat).bg : "var(--t-card)",
+                                color: activeFilter === cat ? getCategoryBadgeStyle(cat).text : "var(--t-text-secondary)",
+                                border: `1px solid ${activeFilter === cat ? getCategoryBadgeStyle(cat).bg : "var(--t-border-subtle)"}`,
                                 borderRadius: 0,
                             }}
                         >
