@@ -21,11 +21,14 @@ const C: Record<string, string> = {
     c6: "var(--ch-c6)",
     c7: "var(--ch-c7)",
     c8: "var(--ch-c8)",
+    positive: "#1F9D55", // Green for subsidy (negative values)
+    negative: "#D64545", // Red for costs (positive values)
+    neutralColor: "#6B7280",
     text: "var(--t-text)",
     muted: "var(--t-text-secondary)",
     tooltipBg: "var(--ch-tooltip-bg)",
-    axisText: "var(--ch-axis-text, #1f2937)",
-    grid: "var(--t-border-subtle, #e2e8f0)",
+    axisText: "var(--ch-axis-text)",
+    grid: "var(--t-border-subtle)",
 };
 
 // ─── constants ───────────────────────────────────────────────────────────────
@@ -38,10 +41,10 @@ const DEFAULT_INVESTMENT = 230;
 const DEFAULT_RATE = 4.0;
 
 const DRIFT_DEFAULTS = [
-    { key: "strom", name: "Strøm", value: 3_000_000, colorKey: "c5" }, // yellow
-    { key: "bad", name: "Badevakter", value: 2_400_000, colorKey: "c3" }, // cyan
-    { key: "tilsette", name: "Andre tilsette", value: 4_200_000, colorKey: "c8" }, // grey
-    { key: "kjemi", name: "Kjemikaliar mm", value: 500_000, colorKey: "c7" }, // purple
+    { key: "strom", name: "Strøm", value: 3_000_000, colorKey: "c4" }, // amber
+    { key: "bad", name: "Badevakter", value: 2_400_000, colorKey: "c3" }, // teal
+    { key: "tilsette", name: "Andre tilsette", value: 4_200_000, colorKey: "c8" }, // slate blue
+    { key: "kjemi", name: "Kjemikaliar mm", value: 500_000, colorKey: "c6" }, // plum
 ];
 const DEFAULT_BILLETTSAL = 4_000_000;
 
@@ -152,7 +155,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
     return (
         <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 270 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 4, fontSize: 13 }}>{label}</p>
-            <p style={{ color: v > 0 ? C.c4 : v < 0 ? C.c6 : C.muted, fontSize: 12, margin: 0 }}>
+            <p style={{ color: v > 0 ? C.negative : v < 0 ? C.positive : C.neutralColor, fontSize: 12, margin: 0 }}>
                 {v > 0 ? `Betalar ${Math.abs(v).toLocaleString("nb-NO")} kr meir per pers enn flat fordeling`
                     : v < 0 ? `Sparer ${Math.abs(v).toLocaleString("nb-NO")} kr per pers vs flat fordeling`
                         : "Lik flat fordeling"}
@@ -226,7 +229,7 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
                 <span style={{ fontSize: 13, color: C.text }}>{name}</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                {isIncome && <span style={{ color: C.c6, fontSize: 12 }}>−</span>}
+                {isIncome && <span style={{ color: C.positive, fontSize: 12 }}>−</span>}
                 {editing ? (
                     <input
                         autoFocus
@@ -315,7 +318,7 @@ export default function VoldabadViz() {
         { name: "Renter", value: rente * 1e6, color: CH.c1, percent: 0, isIncome: false },
         { name: "Avskriving", value: avskriving * 1e6, color: CH.c2, percent: 0, isIncome: false },
         ...DRIFT_DEFAULTS.map(d => ({ name: d.name, value: driftValues[d.key], color: CH[d.colorKey], percent: 0, isIncome: false })),
-        { name: "Billettsal (inntekt)", value: billettsal, color: CH.c6, percent: 0, isIncome: true },
+        { name: "Billettsal (inntekt)", value: billettsal, color: CH.positive, percent: 0, isIncome: true },
     ];
     const totalCosts = pieData.filter(d => !d.isIncome).reduce((s, d) => s + d.value, 0);
     pieData.forEach(d => { d.percent = d.value / totalCosts; });
@@ -347,9 +350,12 @@ export default function VoldabadViz() {
                 @media (max-width: 640px) {
                     .vb-grid-3 { grid-template-columns: repeat(auto-fit, minmax(90px,1fr)) !important; }
                     .vb-stat-grid { grid-template-columns: 1fr 1fr !important; }
+                    .vb-tabs { flex-wrap: wrap; }
+                    .vb-tabs button { flex: 1 1 50%; font-size: 13px !important; padding: 10px 12px !important; }
+                    .vb-chart-container { padding: 16px 12px !important; }
                 }
             `}</style>
-            <div className="mx-auto max-w-[90rem]" style={{ padding: "20px 16px", paddingTop: "calc(var(--nav-height) + 20px)" }}>
+            <div className="mx-auto max-w-[90rem]" style={{ padding: "20px 16px", paddingTop: "calc(var(--nav-height) + 20px)", minWidth: 0, overflowX: "hidden" }}>
 
                 {/* header */}
                 <div style={{ marginBottom: 22 }}>
@@ -364,7 +370,7 @@ export default function VoldabadViz() {
                     </p>
                 </div>
 
-                <div className="vb-main-layout" style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gap: 20, alignItems: "flex-start" }}>
+                <div className="vb-main-layout" style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gap: 20, alignItems: "flex-start", minWidth: 0 }}>
 
                     {/* Left Column: Inputs & Summary (1/4) */}
                     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -406,7 +412,7 @@ export default function VoldabadViz() {
                                             color={C[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
                                     ))}
                                     <CostInput name="Billettsal (inntekt)" value={billettsal}
-                                        color={C.c6} onChange={setBillettsal} isIncome />
+                                        color={C.positive} onChange={setBillettsal} isIncome />
                                 </div>
                             </div>
                         </div>
@@ -440,9 +446,9 @@ export default function VoldabadViz() {
                     </div>
 
                     {/* Right Column: Tabs & Visualizations (3/4) */}
-                    <div>
+                    <div style={{ minWidth: 0 }}>
                         {/* tabs */}
-                        <div style={{ background: "#000000", borderRadius: 4, marginBottom: 16, display: "flex", overflow: "hidden" }}>
+                        <div className="vb-tabs" style={{ background: "#000000", borderRadius: 4, marginBottom: 16, display: "flex", overflow: "hidden" }}>
                             {TABS.map(t => (
                                 <button key={t.id} onClick={() => setTab(t.id)} style={{
                                     background: tab === t.id ? C.c1 : "transparent",
@@ -460,14 +466,14 @@ export default function VoldabadViz() {
                         <div style={{ minHeight: "400px" }}>
                             {/* ══ OVERVIEW ══ */}
                             {tab === "overview" && (
-                                <div>
-                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20 }}>
+                                <div style={{ minWidth: 0, width: "100%" }}>
+                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20, overflowX: "auto" }}>
                                         <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
                                         <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
                                             Nedste tre delar = skatt (betalast uansett). Y-aksen er fast.
                                         </p>
                                         <div style={{ position: "relative" }}>
-                                            <ResponsiveContainer width="100%" height={490} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                            <ResponsiveContainer width="99%" height={490} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                                 <BarChart data={stackedData} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
                                                     <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                                                     <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 11 }} />
@@ -553,7 +559,7 @@ export default function VoldabadViz() {
                                 <div>
                                     <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
                                         <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
-                                            <ResponsiveContainer width="100%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                            <ResponsiveContainer width="99%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                                 <PieChart>
                                                     <Pie data={pieDataPositive} cx="50%" cy="50%" outerRadius={90}
                                                         innerRadius={40} dataKey="value" isAnimationActive={false}
@@ -582,10 +588,10 @@ export default function VoldabadViz() {
 
                             {/* ══ SUBSIDY ══ */}
                             {tab === "subsidy" && (
-                                <div>
-                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
+                                <div style={{ minWidth: 0, width: "100%" }}>
+                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, overflowX: "auto" }}>
                                         <h3 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700 }}>Subsidie per husstand (kr/år)</h3>
-                                        <ResponsiveContainer width="100%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                        <ResponsiveContainer width="99%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                             <BarChart data={households} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
                                                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                                                 <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
@@ -593,7 +599,7 @@ export default function VoldabadViz() {
                                                 <Tooltip content={<SubsidieTip />} />
                                                 <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1} />
                                                 <Bar dataKey="subsidiePerHH" name="Subsidie" radius={[4, 4, 0, 0]}>
-                                                    {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.c4 : CH.c6} />)}
+                                                    {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.negative : CH.positive} />)}
                                                 </Bar>
                                             </BarChart>
                                         </ResponsiveContainer>

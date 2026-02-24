@@ -11,10 +11,12 @@
   --color-charcoal-800: #22262f;
   --color-charcoal-700: #2d323d;
 
-  /* Accent – constant across themes */
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-muted: #1e40af;
+  /* Accent – Royal Purple (Identity) */
+  --color-accent: #6E3CBC;
+  --color-accent-hover: #5A2FA3;
+  --color-accent-muted: #8E5BE6;
+
+  /* Legacy aliases to keep Tailwind building if used elsewhere */
   --color-accent-amber: #d97706;
   --color-accent-red: #dc2626;
   --color-accent-green: #059669;
@@ -31,84 +33,107 @@
 :root {
   --nav-height: 3.5rem;
 
-  --t-bg: #ffffff;
-  --t-surface: #f8f9fa;
-  --t-card: #ffffff;
-  --t-card-hover: #f1f5f9;
-  --t-border-strong: #e2e8f0;
-  --t-border-subtle: rgba(51, 65, 85, 0.08);
-  --t-border-medium: rgba(51, 65, 85, 0.15);
+  --t-bg: #F4F6F9;
+  --t-surface: #F4F6F9;
+  --t-card: #FFFFFF;
+  --t-card-hover: #F8F9FA;
+  --t-border-strong: #D8DCE3;
+  --t-border-subtle: rgba(17, 19, 24, 0.05);
+  /* Softened from D8DCE3 for subtlety */
+  --t-border-medium: #D8DCE3;
 
-  --t-text: #0f172a;
-  --t-text-secondary: #374151;
-  --t-text-muted: #6b7280;
+  --t-text: #111318;
+  --t-text-secondary: #4B5563;
+  --t-text-muted: #6B7280;
 
   --t-nav-bg: #000000;
   --t-nav-text: #ffffff;
   --t-nav-text-muted: #a1a1aa;
   --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
-  /* Chart hex – visually softer schema */
-  --ch-c1: #3b82f6;
-  /* blue-500 */
-  --ch-c2: #d946ef;
-  /* fuchsia-500 */
-  --ch-c3: #06b6d4;
-  /* cyan-500 */
-  --ch-c4: #f43f5e;
-  /* rose-500 */
-  --ch-c5: #eab308;
-  /* yellow-500 */
-  --ch-c6: #22c55e;
-  /* green-500 */
-  --ch-c7: #a855f7;
-  /* purple-500 */
-  --ch-c8: #94a3b8;
-  /* slate-400 */
-  --ch-text: #0f172a;
-  --ch-muted: #6b7280;
-  --ch-border: #e2e8f0;
-  --ch-tooltip-bg: #ffffff;
-  --ch-bg: #ffffff;
-  /* Light grey background for charts */
-  --ch-axis-text: #1f2937;
+  /* 8-Color Chart Palette (Optimized for White BG) */
+  --ch-c1: #6E3CBC;
+  /* Brand Purple */
+  --ch-c2: #1F3A8A;
+  /* Deep Blue */
+  --ch-c3: #0F766E;
+  /* Teal */
+  --ch-c4: #D97706;
+  /* Amber */
+  --ch-c5: #2563EB;
+  /* Steel Blue */
+  --ch-c6: #9333EA;
+  /* Plum */
+  --ch-c7: #B45309;
+  /* Copper */
+  --ch-c8: #475569;
+  /* Slate Blue */
+
+  --ch-text: #111318;
+  --ch-muted: #4B5563;
+  --ch-border: #D8DCE3;
+  --ch-tooltip-bg: #FFFFFF;
+  --ch-bg: #FFFFFF;
+  /* High contrast chart backgrounds */
+  --ch-axis-text: #4B5563;
+
+  /* Direct chart semantic overrides to avoid Tailwind v4 JIT compilation dropping them */
+  --ch-positive: #1F9D55;
+  --ch-negative: #D64545;
+  --ch-neutral: #6B7280;
 }
 
 /* ── Dark theme ────────────────────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --t-bg: #1c1c1e;
-  --t-surface: #242426;
-  --t-card: #2c2c2e;
-  --t-card-hover: #3a3a3c;
-  --t-border-strong: #48484a;
-  --t-border-subtle: rgba(255, 255, 255, 0.1);
-  --t-border-medium: rgba(255, 255, 255, 0.2);
+  --t-bg: #0F1115;
+  --t-surface: #161A22;
+  --t-card: #161A22;
+  --t-card-hover: #1A1F29;
+  --t-border-strong: #2A2F3A;
+  --t-border-subtle: rgba(255, 255, 255, 0.05);
+  --t-border-medium: #2A2F3A;
 
-  --t-text: #f1f5f9;
-  --t-text-secondary: #94a3b8;
-  --t-text-muted: #64748b;
+  --t-text: #F1F3F7;
+  --t-text-secondary: #A1A7B3;
+  --t-text-muted: #6B7280;
 
   --t-nav-bg: #000000;
   --t-nav-text: #ffffff;
   --t-nav-text-muted: #a1a1aa;
   --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
-  /* Chart hex */
-  --ch-c1: #3b82f6;
-  --ch-c2: #d946ef;
-  --ch-c3: #06b6d4;
-  --ch-c4: #f43f5e;
-  --ch-c5: #eab308;
-  --ch-c6: #22c55e;
-  --ch-c7: #a855f7;
-  --ch-c8: #94a3b8;
-  --ch-text: #f1f5f9;
-  --ch-muted: #94a3b8;
-  --ch-border: #444444;
-  --ch-tooltip-bg: #222222;
-  --ch-bg: #e2e8f0;
-  /* Light gray chart background in dark mode */
-  --ch-axis-text: #1f2937;
+  /* 8-Color Chart Palette (Optimized for White BG) */
+  --ch-c1: #6E3CBC;
+  /* Brand Purple */
+  --ch-c2: #1F3A8A;
+  /* Deep Blue */
+  --ch-c3: #0F766E;
+  /* Teal */
+  --ch-c4: #D97706;
+  /* Amber */
+  --ch-c5: #2563EB;
+  /* Steel Blue */
+  --ch-c6: #9333EA;
+  /* Plum */
+  --ch-c7: #B45309;
+  /* Copper */
+  --ch-c8: #475569;
+  /* Slate Blue */
+
+  --ch-text: #111318;
+  /* Black text on white chart surfaces */
+  --ch-muted: #4B5563;
+  --ch-border: #E5E7EB;
+  /* Lighter borders for interior white chart items */
+  --ch-tooltip-bg: #FFFFFF;
+  --ch-bg: #FFFFFF;
+  /* Forced White Charts per requirement */
+  --ch-axis-text: #4B5563;
+
+  /* Direct chart semantic overrides to avoid Tailwind v4 JIT compilation dropping them */
+  --ch-positive: #1F9D55;
+  --ch-negative: #D64545;
+  --ch-neutral: #6B7280;
 }
 
 html,
