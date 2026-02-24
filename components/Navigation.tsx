@@ -16,6 +16,7 @@ export default function Navigation() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { theme, toggle } = useTheme();
+    const logoSrc = theme === "dark" ? "/images/logo-light.png" : "/images/logo-dark.png";
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 8);
@@ -141,13 +142,17 @@ export default function Navigation() {
                     {/* Top bar with close button */}
                     <div
                         className="flex items-center justify-between px-4"
-                        style={{ height: "var(--nav-height)", borderBottom: "1px solid var(--t-border-subtle)" }}
+                        style={{
+                            height: "var(--nav-height)",
+                            borderBottom: "1px solid var(--t-border-subtle)",
+                            backgroundColor: theme === "dark" ? "#000000" : "transparent"
+                        }}
                     >
                         {/* Logo replica */}
                         <span className="flex items-center gap-2 font-bold text-base" style={{ color: "var(--t-text)" }}>
                             {/* Global Logo */}
                             <img
-                                src="/images/logo-light.png"
+                                src={logoSrc}
                                 alt="Skeide.me Logo"
                                 className="h-7 w-auto"
                             />

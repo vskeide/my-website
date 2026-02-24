@@ -340,14 +340,12 @@ export default function VoldabadViz() {
     return (
         <div style={{ minHeight: "100vh", color: C.text }}>
             <style>{`
-                @media (max-width: 640px) {
+                @media (max-width: 1024px) {
+                    .vb-main-layout { grid-template-columns: 1fr !important; }
                     .vb-grid-2 { grid-template-columns: 1fr !important; }
-                    /* On mobile, vb-grid-3 stays as auto-fit (3 across) — items are compact enough */
+                }
+                @media (max-width: 640px) {
                     .vb-grid-3 { grid-template-columns: repeat(auto-fit, minmax(90px,1fr)) !important; }
-                    .vb-top { flex-direction: column !important; }
-                    /* On mobile, sliders box is full-width */
-                    .vb-top > div:first-child { width: 100% !important; }
-                    /* Summary stat cards: 2 columns on mobile */
                     .vb-stat-grid { grid-template-columns: 1fr 1fr !important; }
                 }
             `}</style>
@@ -366,389 +364,253 @@ export default function VoldabadViz() {
                     </p>
                 </div>
 
-                {/* sliders + summary — side by side */}
-                <div className="vb-top" style={{ display: "flex", gap: 16, marginBottom: 16 }}>
-                    {/* Left: inputs */}
-                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "16px 20px", flex: "0 0 auto", width: "52%" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-                            <div>
-                                <h3 style={{
-                                    margin: "0 0 2px", fontSize: 13, fontWeight: 700, color: C.text,
-                                    textTransform: "uppercase", letterSpacing: "0.05em"
-                                }}>Juster føresetnadane</h3>
-                                <p style={{ color: C.muted, fontSize: 11, margin: 0 }}>Alle tal og diagram oppdaterast automatisk.</p>
-                            </div>
-                            <button onClick={reset} disabled={isDefault}
-                                style={{
-                                    background: isDefault ? "transparent" : "var(--t-text)",
-                                    border: `1px solid ${isDefault ? "var(--t-border-subtle)" : "transparent"}`,
-                                    color: isDefault ? "var(--t-text-muted)" : "var(--t-bg)",
-                                    borderRadius: 4, padding: "4px 12px", fontSize: 11, fontWeight: 600,
-                                    cursor: isDefault ? "default" : "pointer", transition: "all 0.15s",
-                                }}>
-                                ↩ Tilbakestill
-                            </button>
-                        </div>
+                <div className="vb-main-layout" style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gap: 20, alignItems: "flex-start" }}>
 
-                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 24px", marginBottom: 16 }}>
-                            <Slider label="Investeringskost (MNOK ex mva/spelemidlar)"
-                                value={investment} min={50} max={350} step={5}
-                                onChange={setInvestment} format={v => `${v}`} color={C.c2} />
-                            <Slider label="Rente (%)" value={rate} min={2} max={8} step={0.25}
-                                onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.c1} />
-                        </div>
-
-                        <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16 }}>
-                            <h4 style={{ margin: "0 0 12px", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>Drift og Inntekter</h4>
-                            <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 24px" }}>
-                                {DRIFT_DEFAULTS.map(d => (
-                                    <CostInput key={d.key} name={d.name} value={driftValues[d.key]}
-                                        color={C[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
-                                ))}
-                                <CostInput name="Billettsal (inntekt)" value={billettsal}
-                                    color={C.c6} onChange={setBillettsal} isIncome />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right: summary stat cards - Classic summary */}
-                    <div className="vb-stat-grid" style={{ flex: 1, background: C.card, border: `1px solid ${C.border}`, padding: "16px 20px" }}>
-                        <h3 style={{ fontSize: 13, fontWeight: 700, margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em", color: C.text }}>Årleg kostnadssamandrag</h3>
-
-                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                            <span style={{ fontSize: 13, color: C.muted }}>Kapitalkostnad</span>
-                            <span style={{ fontSize: 13, fontWeight: 600 }}>{kapital.toFixed(1)} MNOK</span>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                            <span style={{ fontSize: 13, color: C.muted }}>Netto driftsunderskot</span>
-                            <span style={{ fontSize: 13, fontWeight: 600 }}>{fmtM(netDrift)} MNOK</span>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
-                            <span style={{ fontSize: 14, fontWeight: 700, color: C.text }}>Total kommunal byrde</span>
-                            <span style={{ fontSize: 14, fontWeight: 800 }}>{totalBurdenMNOK.toFixed(1)} MNOK</span>
-                        </div>
-
-                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24, paddingTop: 16, borderTop: `1px dashed ${C.border}` }}>
-                            <span style={{ fontSize: 12, color: C.muted }}>Per vaksen (8 800)</span>
-                            <span style={{ fontSize: 13, fontWeight: 600 }}>{perAdultRounded.toLocaleString("nb-NO")} kr</span>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
-                            <span style={{ fontSize: 12, color: C.muted }}>Flatt per innbyggar (11 000)</span>
-                            <span style={{ fontSize: 13, fontWeight: 600 }}>{perPersonRounded.toLocaleString("nb-NO")} kr</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* tabs */}
-                <div style={{ background: "#000000", borderRadius: 4, marginBottom: 24, display: "flex", overflow: "hidden" }}>
-                    {TABS.map(t => (
-                        <button key={t.id} onClick={() => setTab(t.id)} style={{
-                            background: tab === t.id ? C.c1 : "transparent",
-                            border: "none",
-                            color: tab === t.id ? "#ffffff" : "#a1a1aa",
-                            fontWeight: tab === t.id ? 600 : 400,
-                            fontSize: 14, cursor: "pointer", padding: "12px 24px",
-                            transition: "all 0.15s",
-                            flex: "1 1 auto"
-                        }}>{t.label}</button>
-                    ))}
-                </div>
-
-                {/* ══ OVERVIEW ══ */}
-                {tab === "overview" && (
-                    <div>
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20 }}>
-                            <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
-                            <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
-                                Nedste tre delar = skatt (betalast uansett). Y-aksen er fast.
-                            </p>
-                            <div style={{ position: "relative" }}>
-                                <ResponsiveContainer width="100%" height={320} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
-                                    <BarChart data={stackedData} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 11 }} />
-                                        <YAxis domain={[0, Y_MAX]} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} tick={{ fill: CH.axisText, fontSize: 11 }} />
-
-                                        <Bar dataKey="Renter (skatt)" stackId="a" fill={CH.c1} isAnimationActive={false} />
-                                        <Bar dataKey="Avskriving (skatt)" stackId="a" fill={CH.c2} isAnimationActive={false} />
-                                        <Bar dataKey="Netto drift (skatt)" stackId="a" fill={CH.c3} isAnimationActive={false} />
-                                        <Bar dataKey="Brukarbetaling" stackId="a" fill={CH.c4} radius={[4, 4, 0, 0]}
-                                            isAnimationActive={false} label={<TotalBarLabel />} />
-                                    </BarChart>
-                                </ResponsiveContainer>
-
-                                {/* Floating Legend explicitly removed from Recharts hierarchy to avoid margin reservation */}
-                                <div style={{ position: "absolute", top: 20, left: 80, backgroundColor: "transparent", pointerEvents: "none", zIndex: 10 }}>
-                                    <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c4, marginRight: 8, borderRadius: 2 }} />
-                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Brukarbetaling</span>
-                                        </li>
-                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c3, marginRight: 8, borderRadius: 2 }} />
-                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Netto drift (skatt)</span>
-                                        </li>
-                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c2, marginRight: 8, borderRadius: 2 }} />
-                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Avskriving (skatt)</span>
-                                        </li>
-                                        <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-                                            <div style={{ width: 12, height: 12, backgroundColor: CH.c1, marginRight: 8, borderRadius: 2 }} />
-                                            <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Renter (skatt)</span>
-                                        </li>
-                                    </ul>
+                    {/* Left Column: Inputs & Summary (1/4) */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                        {/* inputs */}
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "16px 20px" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+                                <div>
+                                    <h3 style={{
+                                        margin: "0 0 2px", fontSize: 13, fontWeight: 700, color: C.text,
+                                        textTransform: "uppercase", letterSpacing: "0.05em"
+                                    }}>Juster føresetnadane</h3>
+                                    <p style={{ color: C.muted, fontSize: 11, margin: 0 }}>Diagram oppdaterast automatisk.</p>
                                 </div>
-                            </div>
-                        </div>
-                        <InfoBox>
-                            <strong style={{ color: C.text }}>Kva betalar du uansett?</strong>{" "}
-                            Kapitalkostnaden (renter + avskriving) og netto driftsunderskot vert dekte over{" "}
-                            <strong style={{ color: C.text }}>kommunebudsjettet</strong> — gjennom kommuneskatten din.
-                            Du betalar dette <strong style={{ color: C.text }}>uavhengig av om du badar eller ikkje</strong>.
-                            Brukarbetalinga (årskortet) kjem <strong style={{ color: C.text }}>i tillegg</strong> for dei som nyttar anlegget.
-                        </InfoBox>
-                    </div>
-                )}
-
-                {/* ══ HOUSEHOLD ══ */}
-                {tab === "household" && (
-                    <div>
-                        <InfoBox>
-                            <strong style={{ color: C.text }}>Skatteandelen</strong> vert fordelt på dei{" "}
-                            <strong style={{ color: C.text }}>8 800 vaksne</strong> — born betalar ingenting over budsjettet.
-                            Brukarbetaling kjem i tillegg. Klikk for detaljar.
-                        </InfoBox>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(118px,1fr))", gap: 9, marginBottom: 20 }}>
-                            {households.map((h, i) => (
-                                <div key={i} onClick={() => setSelected(selected?.type === h.type ? null : h)}
+                                <button onClick={reset} disabled={isDefault}
                                     style={{
-                                        background: selected?.type === h.type ? C.bg : C.card,
-                                        border: `1px solid ${selected?.type === h.type ? C.c4 : C.border}`,
-                                        borderRadius: 0, padding: 15, cursor: "pointer", transition: "all 0.15s"
+                                        background: isDefault ? "transparent" : "var(--t-text)",
+                                        border: `1px solid ${isDefault ? "var(--t-border-subtle)" : "transparent"}`,
+                                        color: isDefault ? "var(--t-text-muted)" : "var(--t-bg)",
+                                        borderRadius: 4, padding: "4px 10px", fontSize: 10, fontWeight: 600,
+                                        cursor: isDefault ? "default" : "pointer", transition: "all 0.15s",
                                     }}>
-                                    <div style={{ marginBottom: 10 }}><HouseholdIcon adults={h.adults} kids={h.kids} size={40} /></div>
-                                    <p style={{ fontWeight: 700, margin: "0 0 2px", fontSize: 14 }}>{h.type}</p>
-                                    <p style={{ color: C.muted, fontSize: 11, margin: "0 0 10px" }}>{h.persons} person{h.persons > 1 ? "ar" : ""}</p>
-                                    <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>Skatt/år</p>
-                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.text, margin: "0 0 6px" }}>{h.taxShare.toLocaleString("nb-NO")} kr</p>
-                                    <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>+ Brukarbetaling</p>
-                                    <p style={{ fontSize: 15, fontWeight: 700, color: C.c4, margin: "0 0 8px" }}>{h.arskort.toLocaleString("nb-NO")} kr</p>
-                                    <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 8 }}>
-                                        <p style={{ fontSize: 10, color: C.muted, margin: "0 0 1px", textTransform: "uppercase" }}>Total (badar du)</p>
-                                        <p style={{ fontSize: 17, fontWeight: 800, color: C.text, margin: 0 }}>{h.total.toLocaleString("nb-NO")} kr</p>
-                                    </div>
+                                    ↩ Nullstill
+                                </button>
+                            </div>
+
+                            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 16 }}>
+                                <Slider label="Investeringskost (MNOK)"
+                                    value={investment} min={50} max={350} step={5}
+                                    onChange={setInvestment} format={v => `${v}`} color={C.c2} />
+                                <Slider label="Rente (%)" value={rate} min={2} max={8} step={0.25}
+                                    onChange={setRate} format={v => `${v.toFixed(2)}%`} color={C.c1} />
+                            </div>
+
+                            <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16 }}>
+                                <h4 style={{ margin: "0 0 12px", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>Drift og Inntekter</h4>
+                                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                                    {DRIFT_DEFAULTS.map(d => (
+                                        <CostInput key={d.key} name={d.name} value={driftValues[d.key]}
+                                            color={C[d.colorKey]} onChange={val => updateDrift(d.key, val)} />
+                                    ))}
+                                    <CostInput name="Billettsal (inntekt)" value={billettsal}
+                                        color={C.c6} onChange={setBillettsal} isIncome />
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Summary stat cards */}
+                        <div className="vb-stat-grid" style={{ background: C.card, border: `1px solid ${C.border}`, padding: "16px 20px" }}>
+                            <h3 style={{ fontSize: 13, fontWeight: 700, margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em", color: C.text }}>Årleg samandrag</h3>
+
+                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                                <span style={{ fontSize: 13, color: C.muted }}>Kapitalkostnad</span>
+                                <span style={{ fontSize: 13, fontWeight: 600 }}>{kapital.toFixed(1)} MNOK</span>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                                <span style={{ fontSize: 13, color: C.muted }}>Netto drift</span>
+                                <span style={{ fontSize: 13, fontWeight: 600 }}>{fmtM(netDrift)} MNOK</span>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+                                <span style={{ fontSize: 14, fontWeight: 700, color: C.text }}>Total byrde</span>
+                                <span style={{ fontSize: 14, fontWeight: 800 }}>{totalBurdenMNOK.toFixed(1)} MNOK</span>
+                            </div>
+
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 20, paddingTop: 16, borderTop: `1px dashed ${C.border}` }}>
+                                <span style={{ fontSize: 12, color: C.muted }}>Per vaksen</span>
+                                <span style={{ fontSize: 13, fontWeight: 600 }}>{perAdultRounded.toLocaleString("nb-NO")} kr</span>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+                                <span style={{ fontSize: 12, color: C.muted }}>Per innb.</span>
+                                <span style={{ fontSize: 13, fontWeight: 600 }}>{perPersonRounded.toLocaleString("nb-NO")} kr</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Tabs & Visualizations (3/4) */}
+                    <div>
+                        {/* tabs */}
+                        <div style={{ background: "#000000", borderRadius: 4, marginBottom: 16, display: "flex", overflow: "hidden" }}>
+                            {TABS.map(t => (
+                                <button key={t.id} onClick={() => setTab(t.id)} style={{
+                                    background: tab === t.id ? C.c1 : "transparent",
+                                    border: "none",
+                                    color: tab === t.id ? "#ffffff" : "#a1a1aa",
+                                    fontWeight: tab === t.id ? 600 : 400,
+                                    fontSize: 14, cursor: "pointer", padding: "12px 24px",
+                                    transition: "all 0.15s",
+                                    flex: "1 1 auto"
+                                }}>{t.label}</button>
                             ))}
                         </div>
-                        {selected && (
-                            <div style={{ background: C.card, border: `1px solid ${C.c4}`, borderRadius: 0, padding: 22 }}>
-                                <h3 style={{ margin: "0 0 14px", fontSize: 14, fontWeight: 700 }}>Detaljar: {selected.type}</h3>
-                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 14 }}>
-                                    {[
-                                        { label: "Rentedel (skatt)", val: selected.renteDel, c: C.c1 },
-                                        { label: "Avskrivingsdel (skatt)", val: selected.avskrivDel, c: C.c2 },
-                                        { label: "Driftsandel (skatt)", val: selected.driftDel, c: C.c3 },
-                                        { label: "Sum skattebelasting", val: selected.taxShare, c: C.text },
-                                        { label: "Brukarbetaling (årskort)", val: selected.arskort, c: C.c4 },
-                                        { label: "Total om du badar", val: selected.total, c: C.text },
-                                    ].map((item, i) => (
-                                        <div key={i} style={{ borderLeft: `3px solid ${item.c}`, paddingLeft: 11 }}>
-                                            <p style={{ color: C.muted, fontSize: 11, margin: "0 0 3px" }}>{item.label}</p>
-                                            <p style={{ color: item.c, fontSize: 17, fontWeight: 700, margin: 0 }}>{nok(item.val)}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                )}
 
-                {/* ══ COSTS ══ */}
-                {tab === "costs" && (
-                    <div>
-                        {/* Pie chart */}
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
-                            <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Kostnadsfordeling (brutto, ex. billettsal)</h3>
-                            <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
-                                Viser kapital og drift som del av totale bruttokostnadar ({(kapital + grossDrift / 1e6).toFixed(1)} MNOK).
-                                Billettsal på {fmtM(billettsal)} MNOK kjem til frå og reduserer netto belastning.
-                            </p>
-                            <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
-                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
-                                    <PieChart>
-                                        <Pie data={pieDataPositive} cx="50%" cy="50%" outerRadius={100}
-                                            innerRadius={40} dataKey="value" isAnimationActive={false}
-                                            label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
-                                                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-                                                const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
-                                                const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
-                                                return (percent ?? 0) > 0.05 ? (
-                                                    <text x={x} y={y} fill="#000000" textAnchor="middle" dominantBaseline="central" fontSize={11} fontWeight={700}>
-                                                        {`${((percent ?? 0) * 100).toFixed(0)}%`}
-                                                    </text>
-                                                ) : null;
-                                            }}
-                                            labelLine={false}>
-                                            {pieDataPositive.map((d, i) => <Cell key={i} fill={d.color} />)}
-                                        </Pie>
-                                        <Tooltip content={<PieTip />} />
-                                    </PieChart>
-                                </ResponsiveContainer>
+                        {/* tab content */}
+                        <div style={{ minHeight: "400px" }}>
+                            {/* ══ OVERVIEW ══ */}
+                            {tab === "overview" && (
                                 <div>
-                                    {pieDataPositive.map((d, i) => (
-                                        <div key={i} style={{
-                                            display: "flex", justifyContent: "space-between",
-                                            alignItems: "center", marginBottom: 10
-                                        }}>
-                                            <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-                                                <div style={{ width: 12, height: 12, borderRadius: 3, background: d.color, flexShrink: 0 }} />
-                                                <span style={{ fontSize: 13, color: C.text }}>{d.name}</span>
-                                            </div>
-                                            <div style={{ textAlign: "right", marginLeft: 12 }}>
-                                                <span style={{ fontWeight: 700, fontSize: 13, color: C.text }}>
-                                                    {fmtM(d.value)} MNOK
-                                                </span>
-                                                <span style={{ fontSize: 11, color: C.muted, marginLeft: 6 }}>
-                                                    ({(d.percent * 100).toFixed(0)}%)
-                                                </span>
+                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20 }}>
+                                        <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
+                                        <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
+                                            Nedste tre delar = skatt (betalast uansett). Y-aksen er fast.
+                                        </p>
+                                        <div style={{ position: "relative" }}>
+                                            <ResponsiveContainer width="100%" height={490} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                                <BarChart data={stackedData} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
+                                                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                                                    <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 11 }} />
+                                                    <YAxis domain={[0, Y_MAX]} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} tick={{ fill: CH.axisText, fontSize: 11 }} />
+
+                                                    <Bar dataKey="Renter (skatt)" stackId="a" fill={CH.c1} isAnimationActive={false} />
+                                                    <Bar dataKey="Avskriving (skatt)" stackId="a" fill={CH.c2} isAnimationActive={false} />
+                                                    <Bar dataKey="Netto drift (skatt)" stackId="a" fill={CH.c3} isAnimationActive={false} />
+                                                    <Bar dataKey="Brukarbetaling" stackId="a" fill={CH.c4} radius={[4, 4, 0, 0]}
+                                                        isAnimationActive={false} label={<TotalBarLabel />} />
+                                                </BarChart>
+                                            </ResponsiveContainer>
+
+                                            <div style={{ position: "absolute", top: 20, left: 80, backgroundColor: "transparent", pointerEvents: "none", zIndex: 10 }}>
+                                                <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+                                                    <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                                        <div style={{ width: 12, height: 12, backgroundColor: CH.c4, marginRight: 8, borderRadius: 2 }} />
+                                                        <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Brukarbetaling</span>
+                                                    </li>
+                                                    <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                                        <div style={{ width: 12, height: 12, backgroundColor: CH.c3, marginRight: 8, borderRadius: 2 }} />
+                                                        <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Netto drift (skatt)</span>
+                                                    </li>
+                                                    <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                                        <div style={{ width: 12, height: 12, backgroundColor: CH.c2, marginRight: 8, borderRadius: 2 }} />
+                                                        <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Avskriving (skatt)</span>
+                                                    </li>
+                                                    <li style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
+                                                        <div style={{ width: 12, height: 12, backgroundColor: CH.c1, marginRight: 8, borderRadius: 2 }} />
+                                                        <span style={{ color: CH.axisText, fontSize: 11, fontWeight: 600 }}>Renter (skatt)</span>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                    ))}
-                                    <div style={{
-                                        borderTop: `1px solid ${C.border}`, paddingTop: 10, marginTop: 4,
-                                        display: "flex", justifyContent: "space-between"
-                                    }}>
-                                        <span style={{ fontWeight: 700, fontSize: 13 }}>Brutto total</span>
-                                        <span style={{ fontWeight: 800, color: C.c4, fontSize: 13 }}>
-                                            {(kapital + grossDrift / 1e6).toFixed(1)} MNOK
-                                        </span>
                                     </div>
-                                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
-                                        <span style={{ fontSize: 12, color: C.c6 }}>− Billettsal</span>
-                                        <span style={{ fontWeight: 700, color: C.c6, fontSize: 12 }}>
-                                            {fmtM(billettsal)} MNOK
-                                        </span>
+                                    <InfoBox>
+                                        <strong style={{ color: C.text }}>Kva betalar du uansett?</strong> Kapitalkostnaden (renter + avskriving) og netto driftsunderskot vert dekte over <strong style={{ color: C.text }}>kommunebudsjettet</strong>.
+                                    </InfoBox>
+                                </div>
+                            )}
+
+                            {/* ══ HOUSEHOLD ══ */}
+                            {tab === "household" && (
+                                <div>
+                                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(125px,1fr))", gap: 10, marginBottom: 20 }}>
+                                        {households.map((h, i) => (
+                                            <div key={i} onClick={() => setSelected(selected?.type === h.type ? null : h)}
+                                                style={{
+                                                    background: selected?.type === h.type ? C.bg : C.card,
+                                                    border: `1px solid ${selected?.type === h.type ? C.c4 : C.border}`,
+                                                    borderRadius: 0, padding: 15, cursor: "pointer", transition: "all 0.15s"
+                                                }}>
+                                                <div style={{ marginBottom: 10 }}><HouseholdIcon adults={h.adults} kids={h.kids} size={36} /></div>
+                                                <p style={{ fontWeight: 700, margin: "0 0 2px", fontSize: 13 }}>{h.type}</p>
+                                                <p style={{ color: C.muted, fontSize: 11, margin: "0 0 8px" }}>{h.persons} personar</p>
+                                                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 8 }}>
+                                                    <p style={{ fontSize: 15, fontWeight: 800, color: C.text, margin: 0 }}>{h.total.toLocaleString("nb-NO")} kr</p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div style={{
-                                        display: "flex", justifyContent: "space-between", marginTop: 6,
-                                        paddingTop: 8, borderTop: `1px solid ${C.border}`
-                                    }}>
-                                        <span style={{ fontWeight: 700, fontSize: 13 }}>Netto kommunal byrde over året</span>
-                                        <span style={{ fontWeight: 800, color: C.text, fontSize: 13 }}>
-                                            {totalBurdenMNOK.toFixed(1)} MNOK
-                                        </span>
+                                    {selected && (
+                                        <div style={{ background: C.card, border: `1px solid ${C.c4}`, borderRadius: 0, padding: 20 }}>
+                                            <h3 style={{ margin: "0 0 14px", fontSize: 13, fontWeight: 700 }}>Detaljar: {selected.type}</h3>
+                                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                                                {[
+                                                    { label: "Skatt", val: selected.taxShare, c: C.text },
+                                                    { label: "Brukarbetaling", val: selected.arskort, c: C.c4 },
+                                                ].map((item, i) => (
+                                                    <div key={i} style={{ borderLeft: `3px solid ${item.c}`, paddingLeft: 10 }}>
+                                                        <p style={{ color: C.muted, fontSize: 11, margin: "0 0 2px" }}>{item.label}</p>
+                                                        <p style={{ color: item.c, fontSize: 16, fontWeight: 700, margin: 0 }}>{nok(item.val)}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* ══ COSTS ══ */}
+                            {tab === "costs" && (
+                                <div>
+                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
+                                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
+                                            <ResponsiveContainer width="100%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                                <PieChart>
+                                                    <Pie data={pieDataPositive} cx="50%" cy="50%" outerRadius={90}
+                                                        innerRadius={40} dataKey="value" isAnimationActive={false}
+                                                        label={({ percent }: any) => (percent ?? 0) > 0.05 ? `${((percent ?? 0) * 100).toFixed(0)}%` : null}
+                                                        labelLine={false}>
+                                                        {pieDataPositive.map((d, i) => <Cell key={i} fill={d.color} />)}
+                                                    </Pie>
+                                                    <Tooltip content={<PieTip />} />
+                                                </PieChart>
+                                            </ResponsiveContainer>
+                                            <div>
+                                                {pieDataPositive.map((d, i) => (
+                                                    <div key={i} style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                                                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                                            <div style={{ width: 10, height: 10, borderRadius: 2, background: d.color }} />
+                                                            <span style={{ fontSize: 12, color: C.text }}>{d.name}</span>
+                                                        </div>
+                                                        <span style={{ fontWeight: 700, fontSize: 12 }}>{fmtM(d.value)}M</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
+
+                            {/* ══ SUBSIDY ══ */}
+                            {tab === "subsidy" && (
+                                <div>
+                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
+                                        <h3 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700 }}>Subsidie per husstand (kr/år)</h3>
+                                        <ResponsiveContainer width="100%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
+                                            <BarChart data={households} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+                                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                                                <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
+                                                <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.axisText, fontSize: 10 }} />
+                                                <Tooltip content={<SubsidieTip />} />
+                                                <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1} />
+                                                <Bar dataKey="subsidiePerHH" name="Subsidie" radius={[4, 4, 0, 0]}>
+                                                    {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.c4 : CH.c6} />)}
+                                                </Bar>
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* footer */}
+                        <div style={{ marginTop: 24, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
+                            <p style={{ color: C.muted, fontSize: 10, margin: 0, lineHeight: 1.5 }}>
+                                Investeringskost {investment} MNOK. Rente {rate.toFixed(1)}%. Driftskostnadar {fmtM(grossDrift)} MNOK.
+                                Billettsal {fmtM(billettsal)} MNOK. {POPULATION.toLocaleString("nb-NO")} innb.
+                            </p>
                         </div>
                     </div>
-                )}
-
-                {/* ══ SUBSIDY ══ */}
-                {tab === "subsidy" && (
-                    <div>
-                        <InfoBox color="239,68,68">
-                            <strong style={{ color: C.text }}>Kva betyr subsidie her?</strong> Kommunekostnaden (kapital + netto drift)
-                            vert fordelt på dei <strong style={{ color: C.text }}>8 800 vaksne</strong> — born betalar ingenting over
-                            budsjettet. Om vi i staden fordelte same kostnad <strong style={{ color: C.text }}>flatt per person</strong>{" "}
-                            (11 000 innb.) ville kostnaden per person vore{" "}
-                            <strong style={{ color: C.text }}>{perPersonRounded.toLocaleString("nb-NO")} kr/år</strong> mot{" "}
-                            <strong style={{ color: C.text }}>{perAdultRounded.toLocaleString("nb-NO")} kr/år</strong> per vaksen.
-                            Husstandar med born betalar <strong style={{ color: C.green }}>mindre per person</strong> enn flat fordeling
-                            — subsidierte av vaksne utan born. Merk: årskortet er ikkje med i subsidieberekningane, men inneheld
-                            si eiga innebygde subsidie gjennom kvantumsrabatt for familier.
-                        </InfoBox>
-
-                        <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
-                                <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Subsidie per person (kr/år)</h3>
-                                <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
-                                    Raudt = betalar meir enn flat fordeling. Grønt = subsidiert.
-                                </p>
-                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
-                                    <BarChart data={households} margin={{ top: 12, right: 10, left: 10, bottom: 0 }}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
-                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.axisText, fontSize: 10 }} />
-                                        <Tooltip content={<SubsidieTip />} />
-                                        <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1.5} />
-                                        <Bar dataKey="subsidiePerPers" name="Subsidie per person" radius={[4, 4, 0, 0]}>
-                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerPers > 0 ? CH.c4 : CH.c6} />)}
-                                        </Bar>
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
-                            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
-                                <h3 style={{ margin: "0 0 5px", fontSize: 14, fontWeight: 700 }}>Subsidie per husstand (kr/år)</h3>
-                                <p style={{ color: C.muted, fontSize: 12, margin: "0 0 16px" }}>
-                                    Totalt avvik frå flat fordeling for heile husstanden.
-                                </p>
-                                <ResponsiveContainer width="100%" height={260} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
-                                    <BarChart data={households} margin={{ top: 12, right: 10, left: 10, bottom: 0 }}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                                        <XAxis dataKey="type" tick={{ fill: CH.axisText, fontSize: 10 }} />
-                                        <YAxis tickFormatter={(v: number) => v.toLocaleString("nb-NO")} tick={{ fill: CH.axisText, fontSize: 10 }} />
-                                        <Tooltip content={<SubsidieTip />} />
-                                        <ReferenceLine y={0} stroke={CH.axisText} strokeWidth={1.5} />
-                                        <Bar dataKey="subsidiePerHH" name="Subsidie per husstand" radius={[4, 4, 0, 0]}>
-                                            {households.map((h, i) => <Cell key={i} fill={h.subsidiePerHH > 0 ? CH.c4 : CH.c6} />)}
-                                        </Bar>
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
-                        </div>
-
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, overflow: "hidden" }}>
-                            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-                                <thead>
-                                    <tr style={{ background: C.bg }}>
-                                        {["Husstandstype", "Skatt/år (vaksne)", "Flat per pers", "Subsidie/pers", "Subsidie/husstand"].map((h, i) => (
-                                            <th key={i} style={{
-                                                padding: "10px 14px", textAlign: i === 0 ? "left" : "right",
-                                                color: C.muted, fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em"
-                                            }}>{h}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {households.map((h, i) => (
-                                        <tr key={i} style={{
-                                            borderTop: `1px solid ${C.border}`,
-                                            background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.015)"
-                                        }}>
-                                            <td style={{ padding: "10px 14px", fontWeight: 600 }}>{h.type}</td>
-                                            <td style={{ padding: "10px 14px", textAlign: "right", color: C.c4 }}>{h.taxShare.toLocaleString("nb-NO")}</td>
-                                            <td style={{ padding: "10px 14px", textAlign: "right", color: C.muted }}>{perPersonRounded.toLocaleString("nb-NO")}</td>
-                                            <td style={{
-                                                padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                                                color: h.subsidiePerPers > 0 ? C.c4 : C.c6
-                                            }}>
-                                                {h.subsidiePerPers > 0 ? "+" : ""}{h.subsidiePerPers.toLocaleString("nb-NO")}
-                                            </td>
-                                            <td style={{
-                                                padding: "10px 14px", textAlign: "right", fontWeight: 700,
-                                                color: h.subsidiePerHH > 0 ? C.c4 : C.c6
-                                            }}>
-                                                {h.subsidiePerHH > 0 ? "+" : ""}{h.subsidiePerHH.toLocaleString("nb-NO")}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                )}
-
-                {/* footer */}
-                <div style={{ marginTop: 32, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
-                    <p style={{ color: C.muted, fontSize: 11, margin: 0, lineHeight: 1.6 }}>
-                        Kjelde: Eigen kalkyle. Investeringskost {investment} MNOK ex mva og spelemidlar. Rente {rate.toFixed(2)}%,
-                        avskrivingstid {LOAN_YEARS} år. Driftskostnadar {fmtM(grossDrift)} MNOK, billettsal {fmtM(billettsal)} MNOK,
-                        netto drift {fmtM(netDrift)} MNOK. {POPULATION.toLocaleString("nb-NO")} innbyggarar,
-                        {ADULTS.toLocaleString("nb-NO")} vaksne, {HOUSEHOLDS.toLocaleString("nb-NO")} husstandar.
-                    </p>
-                </div>
-            </div>
+                </div>            </div>
         </div>
     );
 }
