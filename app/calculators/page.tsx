@@ -12,32 +12,15 @@ const calculators = [
         ready: true,
     },
     {
-        id: "compound-interest",
-        title: "Compound Interest Calculator",
+        id: "norgespris",
+        title: "Norgespris vs. Spotpris",
         description:
-            "See how your investments grow over time. Adjust principal, rate, and period to plan your savings strategy.",
-        icon: "%",
+            "Analyse av strømkostnader: Lønner fastpristilbudet 'Norgespris' seg kontra tradisjonell spotpris og strømstøtte?",
+        icon: "⚡",
         accentColor: "var(--ch-c2)",
-        imageUrl: "/images/calc_growth.svg",
-    },
-    {
-        id: "savings-goal",
-        title: "Savings Goal Calculator",
-        description:
-            "Figure out how much you need to save every month to reach your financial goals on time.",
-        icon: "🎯",
-        accentColor: "var(--ch-c6)",
-        imageUrl: "/images/calc_target.svg",
-    },
-    {
-        id: "loan-repayment",
-        title: "Loan Repayment Calculator",
-        description:
-            "Estimate your monthly repayment and total interest on any loan. Compare different repayment strategies.",
-        icon: "📊",
-        accentColor: "var(--ch-c5)",
-        imageUrl: "/images/calc_loan.svg",
-    },
+        imageUrl: null, // Fallbacks to icon+accentColor rendering
+        ready: true,
+    }
 ];
 
 export default function CalculatorsPage() {
