@@ -53,6 +53,7 @@ export default function RootLayout({
                   <a href="/blog" className="text-xs text-text-muted transition-colors hover:text-text-secondary">Blog</a>
                   <a href="/archive" className="text-xs text-text-muted transition-colors hover:text-text-secondary">Archive</a>
                   <a href="/calculators" className="text-xs text-text-muted transition-colors hover:text-text-secondary">Calculators</a>
+                  <a href="/apps" className="text-xs text-text-muted transition-colors hover:text-text-secondary">Apps</a>
                 </nav>
               </div>
             </footer>
