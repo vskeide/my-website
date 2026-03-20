@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persian Gulf Energy Infrastructure Monitor</title>
+    <meta name="description" content="Real-time tracking of energy infrastructure status and disruptions in the Persian Gulf region.">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --border: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --red: #ef4444;
+            --orange: #f97316;
+            --blue: #3b82f6;
+            --teal: #2dd4bf;
+            --green: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .header-title h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+        .header-title p { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+        .header-title a { color: var(--blue); text-decoration: none; }
+        .header-title a:hover { text-decoration: underline; }
+
+        .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; }
+        .kpi-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 14px;
+            min-width: 140px;
+        }
+        .kpi-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+        .kpi-value { font-family: 'SF Mono', 'Fira Code', monospace; font-weight: 700; font-size: 1.15rem; margin-top: 2px; }
+        .kpi-change { font-size: 0.6rem; color: var(--text-muted); margin-top: 1px; }
+
+        /* Main layout */
+        .main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+            padding: 12px;
+            min-height: 0;
+        }
+
+        .left-col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+
+        /* Map */
+        .map-container {
+            flex: 1;
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 0;
+        }
+        #map { height: 100%; width: 100%; z-index: 10; }
+
+        .map-legend {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.68rem;
+        }
+        .map-legend h4 { font-weight: 700; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        /* Popups */
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+        }
+        .custom-popup .leaflet-popup-content { margin: 0; width: 300px !important; }
+        .custom-popup .leaflet-popup-tip { background: var(--bg-primary); }
+
+        .popup-header {
+            height: 120px;
+            width: 100%;
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+        .popup-header img { object-fit: cover; width: 100%; height: 100%; opacity: 0.7; }
+        .popup-header .gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: linear-gradient(transparent, var(--bg-primary)); }
+        .popup-header h4 { position: absolute; bottom: 8px; left: 12px; font-size: 0.9rem; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+
+        .popup-body { padding: 12px; }
+        .popup-body table { width: 100%; font-size: 0.7rem; border-collapse: collapse; }
+        .popup-body td { padding: 5px 0; }
+        .popup-body td:first-child { color: var(--text-muted); font-weight: 600; }
+        .popup-body td:last-child { text-align: right; font-weight: 500; }
+        .popup-body tr { border-bottom: 1px solid rgba(51,65,85,0.5); }
+        .popup-body tr:last-child { border-bottom: none; }
+
+        .popup-desc {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            padding-left: 8px;
+            border-left: 2px solid var(--border);
+            line-height: 1.5;
+        }
+        .popup-links { margin-top: 8px; display: flex; gap: 6px; }
+        .popup-link {
+            font-size: 0.6rem;
+            color: var(--blue);
+            text-decoration: none;
+            background: rgba(59,130,246,0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .popup-link:hover { background: rgba(59,130,246,0.2); }
+
+        .popup-status {
+            margin-top: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+        }
+        .popup-status .row { font-size: 0.65rem; margin-bottom: 4px; }
+        .popup-status .label { color: var(--text-muted); font-weight: 700; }
+        .popup-btn {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 0.68rem;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+        }
+        .popup-btn:hover { background: var(--border); }
+
+        /* Price chart */
+        .chart-container {
+            height: 200px;
+            flex-shrink: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-container h3 { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 8px; }
+        .chart-wrapper { flex: 1; position: relative; width: 100%; }
+
+        /* Event log */
+        .event-log {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .event-log-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .event-log-header h2 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .event-log-header .legend { display: flex; gap: 14px; font-size: 0.68rem; color: var(--text-muted); }
+        .event-log-header .legend-bar { width: 3px; height: 14px; border-radius: 2px; }
+        .event-log-body { overflow-y: auto; flex: 1; padding: 10px; }
+
+        .event-card {
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .event-card:hover { background: rgba(51, 65, 85, 0.5); }
+        .event-card.actor-iran { border-left: 4px solid var(--orange); }
+        .event-card.actor-us_israel { border-left: 4px solid var(--blue); }
+        .event-card.actor-unknown { border-left: 4px solid var(--text-muted); }
+
+        .event-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px; }
+        .event-date { font-size: 0.68rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+        .event-prices { text-align: right; }
+        .event-price { font-size: 0.68rem; font-family: monospace; font-weight: 700; display: block; }
+        .event-title { font-size: 0.8rem; font-weight: 700; }
+        .event-desc { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+        .event-source { font-size: 0.6rem; margin-top: 4px; }
+        .event-source a { color: var(--blue); text-decoration: none; }
+        .event-source a:hover { text-decoration: underline; }
+
+        /* Flash animation */
+        @keyframes highlight-flash {
+            0%, 100% { background-color: rgba(30, 41, 59, 0.5); transform: scale(1); }
+            50% { background-color: rgba(51, 65, 85, 0.9); transform: scale(1.01); box-shadow: 0 0 12px rgba(148, 163, 184, 0.25); }
+        }
+        .flash-active { animation: highlight-flash 0.7s ease-in-out 3; border-color: var(--text-secondary) !important; }
+
+        /* Pulse for recent hits */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .recent-hit-pulse { animation: pulse-ring 1.5s infinite; }
+
+        /* Loading state */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.4s;
+        }
+        .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+        .loading-spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main { grid-template-columns: 1fr; grid-template-rows: 1fr auto auto; }
+            .kpi-row { flex-wrap: wrap; }
+            .kpi-card { min-width: 110px; flex: 1; }
+            .event-log { max-height: 300px; }
+        }
+        @media (max-width: 640px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .kpi-card { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-title">
+            <h1>Geopolitical Energy Monitor: Persian Gulf</h1>
+            <p id="last-updated">Loading...</p>
+        </div>
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-label">Brent Crude (ICE)</div>
+                <div class="kpi-value" id="kpi-brent" style="color: var(--red);">—</div>
+                <div class="kpi-change" id="kpi-brent-change"></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">EU TTF Gas</div>
+                <div class="kpi-value" id="kpi-ttf" style="color: var(--teal);">—</div>
+                <div class="kpi-change" id="kpi-ttf-change"></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Crude Offline (Est.)</div>
+                <div class="kpi-value" id="kpi-oil-offline" style="color: var(--orange);">—</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">LNG Offline (Global)</div>
+                <div class="kpi-value" id="kpi-lng-offline" style="color: var(--orange);">—</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="left-col">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-legend">
+                    <h4>Infrastructure Status</h4>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Critical / Shutdown</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--orange);"></div> Damaged / Reduced</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--blue);"></div> Operational (At Risk)</div>
+                    <div style="border-top:1px solid var(--border); margin:8px 0 6px;"></div>
+                    <div class="legend-item">
+                        <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--red);display:flex;align-items:center;justify-content:center;">
+                            <div style="width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-ring 1.5s infinite;"></div>
+                        </div>
+                        Recently hit (&lt;48h)
+                    </div>
+                    <div class="legend-item" style="color:var(--text-muted);font-size:0.6rem;margin-top:4px;">
+                        ○ Size indicates capacity
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Oil &amp; Gas Price Trajectory</h3>
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-log">
+            <div class="event-log-header">
+                <h2>Event Log</h2>
+                <div class="legend">
+                    <span style="display:flex;align-items:center;gap:4px;"><div class="legend-bar" style="background:var(--orange);"></div> Iran / Allies</span>
+                    <span style="display:flex;align-items:center;gap:4px;"><div class="legend-bar" style="background:var(--blue);"></div> USA / Israel</span>
+                </div>
+            </div>
+            <div class="event-log-body" id="event-log-container"></div>
+        </div>
+    </main>
+
+    <script>
+    (async function() {
+        // --- Configuration ---
+        const DATA_DIR = './data';
+        const GOOGLE_API_KEY = ''; // Optional: for satellite imagery
+
+        // --- Fallback images ---
+        const fallbackImages = {
+            refinery: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=400&q=80',
+            port: 'https://images.unsplash.com/photo-1605152276897-4f618f831968?w=400&q=80',
+            offshore: 'https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?w=400&q=80',
+            desert: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&q=80'
+        };
+
+        const typeToFallback = {
+            'Refinery': fallbackImages.refinery,
+            'Processing': fallbackImages.refinery,
+            'Export Terminal': fallbackImages.port,
+            'LNG': fallbackImages.port,
+            'Gas/LNG': fallbackImages.offshore,
+            'Gas/Sulfur': fallbackImages.desert,
+            'Oil Field': fallbackImages.desert,
+            'Oil Field (Offshore)': fallbackImages.offshore
+        };
+
+        function getImageUrl(lat, lng, type) {
+            if (GOOGLE_API_KEY && GOOGLE_API_KEY.length > 10) {
+                return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=400x150&maptype=satellite&key=${GOOGLE_API_KEY}`;
+            }
+            return typeToFallback[type] || fallbackImages.refinery;
+        }
+
+        function formatDate(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
+        function formatDateShort(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        }
+
+        // --- Load data ---
+        let infraData, eventsData, pricesData;
+        try {
+            const [infraRes, eventsRes, pricesRes] = await Promise.all([
+                fetch(`${DATA_DIR}/infrastructure.json`),
+                fetch(`${DATA_DIR}/events.json`),
+                fetch(`${DATA_DIR}/prices.json`)
+            ]);
+            infraData = await infraRes.json();
+            eventsData = await eventsRes.json();
+            pricesData = await pricesRes.json();
+        } catch(e) {
+            console.error('Failed to load data:', e);
+            document.getElementById('loading').innerHTML = '<div style="color:#ef4444;text-align:center;"><p style="font-size:1.2rem;font-weight:700;">Data Load Error</p><p style="font-size:0.8rem;margin-top:8px;color:#94a3b8;">Could not load JSON files. Ensure data/ folder is accessible.</p><p style="font-size:0.7rem;margin-top:4px;color:#64748b;">If opening locally, use a local server (e.g., <code>python -m http.server</code>)</p></div>';
+            return;
+        }
+
+        // --- Populate KPIs ---
+        const lastUpdated = new Date(pricesData.lastUpdated);
+        document.getElementById('last-updated').innerHTML = `Last updated: ${lastUpdated.toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})} ${lastUpdated.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})} | Sources: <a href="https://www.theice.com/products/219/Brent-Crude-Futures/data" target="_blank">ICE Brent</a>, <a href="https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data" target="_blank">ICE TTF</a>, <a href="https://www.eia.gov/international/data/world" target="_blank">EIA</a>`;
+
+        document.getElementById('kpi-brent').textContent = `${pricesData.current.brent.toFixed(2)} USD`;
+        document.getElementById('kpi-ttf').textContent = `${pricesData.current.ttf.toFixed(2)} EUR`;
+        document.getElementById('kpi-oil-offline').textContent = `~${pricesData.summary.oilOfflineMbpd.toFixed(1)} Mn bpd`;
+        document.getElementById('kpi-lng-offline').textContent = `~${pricesData.summary.lngOfflinePct.toFixed(1)}%`;
+
+        // Price change from first to last
+        const hist = pricesData.history;
+        if (hist.length >= 2) {
+            const brentStart = hist[0].brent;
+            const ttfStart = hist[0].ttf;
+            const brentChg = ((pricesData.current.brent - brentStart) / brentStart * 100).toFixed(1);
+            const ttfChg = ((pricesData.current.ttf - ttfStart) / ttfStart * 100).toFixed(1);
+            document.getElementById('kpi-brent-change').textContent = `${brentChg > 0 ? '+' : ''}${brentChg}% since ${formatDateShort(hist[0].date)}`;
+            document.getElementById('kpi-ttf-change').textContent = `${ttfChg > 0 ? '+' : ''}${ttfChg}% since ${formatDateShort(hist[0].date)}`;
+        }
+
+        // --- Initialize map ---
+        const map = L.map('map', { zoomControl: false }).setView([26.5, 51.0], 5);
+        L.control.zoom({ position: 'topright' }).addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OSM &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        const markers = {};
+
+        function createIcon(item) {
+            const size = item.size || 14;
+            const pulseClass = item.recentHit ? 'recent-hit-pulse' : '';
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div class="${pulseClass}" style="background-color:${item.color};width:${size}px;height:${size}px;border-radius:50%;border:2px solid rgba(255,255,255,0.8);box-shadow:0 0 8px ${item.color};transition:all 0.3s;"></div>`,
+                iconSize: [size, size],
+                iconAnchor: [size/2, size/2]
+            });
+        }
+
+        infraData.forEach(item => {
+            const marker = L.marker([item.lat, item.lng], { icon: createIcon(item) }).addTo(map);
+            const imgUrl = getImageUrl(item.lat, item.lng, item.type);
+
+            let statusHtml = '';
+            if (item.offlineDate) {
+                statusHtml = `
+                    <div class="popup-status">
+                        <div class="row"><span class="label">Offline since:</span> <span style="font-family:monospace;">${formatDate(item.offlineDate)}</span></div>
+                        <div class="row"><span class="label">Cause:</span> ${item.cause}</div>
+                        ${item.triggerEventId ? `<button class="popup-btn" onclick="window.triggerHighlight('${item.triggerEventId}')">Find in Event Log →</button>` : ''}
+                    </div>
+                `;
+            }
+
+            const linksHtml = `
+                <div class="popup-links">
+                    ${item.wikiUrl ? `<a href="${item.wikiUrl}" target="_blank" class="popup-link">Wikipedia</a>` : ''}
+                    ${item.mapsUrl ? `<a href="${item.mapsUrl}" target="_blank" class="popup-link">Google Maps</a>` : ''}
+                </div>
+            `;
+
+            const popupContent = `
+                <div style="background:var(--bg-primary);">
+                    <div class="popup-header">
+                        <img src="${imgUrl}" alt="${item.name}" onerror="this.style.display='none'">
+                        <div class="gradient"></div>
+                        <h4>${item.name}</h4>
+                    </div>
+                    <div class="popup-body">
+                        <table>
+                            <tr><td>Operator</td><td>${item.owner}</td></tr>
+                            <tr><td>Capacity</td><td style="font-family:monospace;">${item.capacity}</td></tr>
+                            <tr><td>Global Share</td><td style="font-family:monospace;">${item.globalShare}</td></tr>
+                            <tr><td>Recovery Est.</td><td>${item.recoveryTime}</td></tr>
+                            <tr><td>Status</td><td style="color:${item.status === 'Operational' ? 'var(--blue)' : 'var(--red)'};font-weight:700;">${item.status}</td></tr>
+                        </table>
+                        <p class="popup-desc">${item.desc}</p>
+                        ${linksHtml}
+                        ${statusHtml}
+                    </div>
+                </div>
+            `;
+            marker.bindPopup(popupContent, { className: 'custom-popup', maxWidth: 300 });
+            markers[item.id] = marker;
+        });
+
+        // --- Strait of Hormuz annotation ---
+        const hormuzMarker = L.marker([26.56, 56.25], {
+            icon: L.divIcon({
+                className: 'custom-div-icon',
+                html: '<div style="background:rgba(239,68,68,0.15);border:1px dashed rgba(239,68,68,0.5);border-radius:4px;padding:3px 8px;font-size:0.6rem;color:#f87171;font-weight:700;white-space:nowrap;">Strait of Hormuz</div>',
+                iconSize: [120, 24],
+                iconAnchor: [60, 12]
+            })
+        }).addTo(map);
+
+        // --- Event log ---
+        const logContainer = document.getElementById('event-log-container');
+        const reversed = [...eventsData].reverse();
+
+        reversed.forEach(ev => {
+            const div = document.createElement('div');
+            div.id = ev.id;
+            div.className = `event-card actor-${ev.actor || 'unknown'}`;
+
+            let pricesHtml = '';
+            if (ev.priceBrent) pricesHtml += `<span class="event-price" style="color:var(--red);">Brent: ${ev.priceBrent.toFixed(2)}</span>`;
+            if (ev.priceTTF) pricesHtml += `<span class="event-price" style="color:var(--teal);">TTF: ${ev.priceTTF.toFixed(2)}</span>`;
+
+            let sourceHtml = '';
+            if (ev.sourceUrl) {
+                sourceHtml = `<div class="event-source">Source: <a href="${ev.sourceUrl}" target="_blank">${ev.sourceLabel || 'Link'}</a></div>`;
+            }
+
+            div.innerHTML = `
+                <div class="event-top">
+                    <span class="event-date">${formatDate(ev.date)}</span>
+                    <div class="event-prices">${pricesHtml}</div>
+                </div>
+                <div class="event-title">${ev.title}</div>
+                <div class="event-desc">${ev.desc}</div>
+                ${sourceHtml}
+            `;
+
+            div.addEventListener('click', () => {
+                let lat, lng;
+                if (ev.targetId && markers[ev.targetId]) {
+                    const ll = markers[ev.targetId].getLatLng();
+                    lat = ll.lat; lng = ll.lng;
+                    markers[ev.targetId].openPopup();
+                } else if (ev.lat && ev.lng) {
+                    lat = ev.lat; lng = ev.lng;
+                    map.closePopup();
+                }
+                if (lat && lng) map.flyTo([lat, lng], 7, { animate: true, duration: 1 });
+            });
+
+            logContainer.appendChild(div);
+        });
+
+        // --- Highlight function ---
+        window.triggerHighlight = function(eventId) {
+            const el = document.getElementById(eventId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.remove('flash-active');
+                void el.offsetWidth;
+                el.classList.add('flash-active');
+            }
+        };
+
+        // --- Price chart ---
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const chartLabels = hist.map(h => formatDateShort(h.date));
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: 'Brent Crude (USD/bbl)',
+                        data: hist.map(h => h.brent),
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointBackgroundColor: '#0f172a',
+                        pointBorderColor: '#ef4444',
+                        pointRadius: 3,
+                        yAxisID: 'y',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'EU TTF Gas (EUR/MWh)',
+                        data: hist.map(h => h.ttf),
+                        borderColor: '#2dd4bf',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointBackgroundColor: '#0f172a',
+                        pointBorderColor: '#2dd4bf',
+                        pointRadius: 3,
+                        yAxisID: 'y1',
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } } },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleColor: '#94a3b8',
+                        bodyColor: '#f8fafc',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear', position: 'left',
+                        title: { display: true, text: 'USD/bbl', color: '#ef4444', font: { size: 10 } },
+                        grid: { color: 'rgba(51,65,85,0.4)', borderDash: [4, 4] },
+                        ticks: { color: '#ef4444', font: { family: 'monospace', size: 10 } }
+                    },
+                    y1: {
+                        type: 'linear', position: 'right',
+                        title: { display: true, text: 'EUR/MWh', color: '#2dd4bf', font: { size: 10 } },
+                        grid: { drawOnChartArea: false },
+                        ticks: { color: '#2dd4bf', font: { family: 'monospace', size: 10 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', maxRotation: 45, minRotation: 45, font: { size: 10 } }
+                    }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+
+        // --- Hide loading overlay ---
+        document.getElementById('loading').classList.add('hidden');
+        setTimeout(() => document.getElementById('loading').remove(), 500);
+
+    })();
+    </script>
+</body>
+</html>

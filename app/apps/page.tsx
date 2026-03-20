@@ -2,6 +2,16 @@ import Link from "next/link";
 
 const apps = [
     {
+        id: "iran-oil-monitor",
+        title: "Persian Gulf Energy Monitor",
+        description:
+            "Interactive dashboard tracking energy infrastructure status and disruptions in the Persian Gulf. Leaflet map with Brent/TTF price chart and event timeline.",
+        icon: "🛢️",
+        accentColor: "var(--ch-c2)",
+        url: "/iran-oil-monitor/",
+        tags: ["Leaflet", "Chart.js", "Geopolitics"],
+    },
+    {
         id: "handleliste",
         title: "Handleliste",
         description:
