@@ -86,6 +86,32 @@
     "sourceLabel": "Reuters Energy"
   },
   {
+    "id": "ev-1003-2",
+    "date": "2026-03-10",
+    "actor": "iran",
+    "title": "Iran Begins Mining Strait of Hormuz",
+    "desc": "Iran starts laying sea mines in the Strait of Hormuz. US CENTCOM destroys 16 Iranian minelayers in response. Shipping firms begin suspending Gulf operations.",
+    "priceBrent": 102.00,
+    "priceTTF": 44.00,
+    "lat": 26.56,
+    "lng": 56.25,
+    "sourceUrl": "https://www.cnn.com/2026/03/10/politics/iran-begins-laying-mines-in-strait-of-hormuz",
+    "sourceLabel": "CNN"
+  },
+  {
+    "id": "ev-1103",
+    "date": "2026-03-11",
+    "actor": "iran",
+    "title": "Hormuz Minefield Expands — Tankers Reroute",
+    "desc": "US destroys 44 Iranian mine-laying vessels as Hormuz blockade tightens. 15 million bpd of crude stranded in the Gulf. Brent hits $100+ for first time in four years.",
+    "priceBrent": 103.00,
+    "priceTTF": 46.50,
+    "lat": 26.56,
+    "lng": 56.25,
+    "sourceUrl": "https://www.cnbc.com/2026/03/11/us-strikes-iran-mine-ships-strait-of-hormuz-war-oil.html",
+    "sourceLabel": "CNBC"
+  },
+  {
     "id": "ev-1203",
     "date": "2026-03-12",
     "actor": "iran",
@@ -140,9 +166,73 @@
     "title": "LNG Shock & Kuwait Attack",
     "desc": "Fires at Ras Laffan (Qatar). Kuwaiti refineries bombed.",
     "priceBrent": 113.26,
-    "priceTTF": 145.50,
+    "priceTTF": 74.00,
     "targetId": "ras-laffan",
     "sourceUrl": "https://www.aljazeera.com/tag/qatar/",
     "sourceLabel": "Al Jazeera"
+  },
+  {
+    "id": "ev-2003-1",
+    "date": "2026-03-20",
+    "actor": "us_israel",
+    "title": "16 Cargo Ships Bombed in Southern Iranian Ports",
+    "desc": "US and Israel bomb 16 cargo ships in the ports of Bandar Lengeh and Bandar Kong in Hormozgan province. All 16 vessels destroyed by fire, disrupting remaining Iranian coastal logistics.",
+    "priceBrent": 110.71,
+    "priceTTF": 49.80,
+    "lat": 26.55,
+    "lng": 54.88,
+    "sourceUrl": "https://www.nrk.no/urix/usa-og-israel-bombet-16-lasteskip-i-to-havner-sor-i-iran-1.17817475",
+    "sourceLabel": "NRK"
+  },
+  {
+    "id": "ev-2003-2",
+    "date": "2026-03-20",
+    "actor": "us_israel",
+    "title": "US Strikes Iranian Coastal Bunkers at Hormuz",
+    "desc": "US forces target Iranian military bunkers along the Hormuzgan coastline near the Strait of Hormuz, degrading Iran's capacity to lay further mines and threaten tanker traffic.",
+    "priceBrent": 110.71,
+    "priceTTF": 49.80,
+    "lat": 26.56,
+    "lng": 56.25,
+    "sourceUrl": "https://www.kristeligt-dagblad.dk/udland/usa-angriber-iranske-bunkere-ved-kysten-i-hormuzstraedet",
+    "sourceLabel": "Kristeligt Dagblad"
+  },
+  {
+    "id": "ev-2003-3",
+    "date": "2026-03-20",
+    "actor": "iran",
+    "title": "Mina Al-Ahmadi Hit Again",
+    "desc": "Fires broke out across multiple units at Kuwait's Mina al-Ahmadi refinery early Friday morning following renewed Iranian drone attacks. The 730k bpd facility suffered further damage.",
+    "priceBrent": 107.40,
+    "priceTTF": 61.90,
+    "targetId": "kuwait",
+    "sourceUrl": "https://www.aljazeera.com/news/2026/3/20/kuwait-oil-refinery-hit-again-as-iran-targets-gulf-energy-infrastructure",
+    "sourceLabel": "Al Jazeera"
+  },
+  {
+    "id": "ev-2003-4",
+    "date": "2026-03-20",
+    "actor": "iran",
+    "title": "Yanbu Refinery Drone Strike",
+    "desc": "Iranian drone struck the Yanbu refinery on Saudi Arabia's Red Sea coast, targeting infrastructure outside the Persian Gulf chokepoint.",
+    "priceBrent": 107.40,
+    "priceTTF": 61.90,
+    "lat": 24.09,
+    "lng": 38.06,
+    "sourceUrl": "https://borsen.dagbladet.no/nyheter/energipanikk-etter-flere-angrep/84388915",
+    "sourceLabel": "Dagbladet Børsen"
+  },
+  {
+    "id": "ev-2103-1",
+    "date": "2026-03-21",
+    "actor": "iran",
+    "title": "Iranian Missile Strikes Haifa Refinery",
+    "desc": "An Iranian missile struck the Haifa oil refinery complex in Israel. Israeli Energy Minister said damage was minor; black smoke seen rising from the facility.",
+    "priceBrent": 107.20,
+    "priceTTF": 59.26,
+    "lat": 32.82,
+    "lng": 35.00,
+    "sourceUrl": "https://www.pbs.org/newshour/world/iran-intensifies-attacks-on-gulf-energy-sites-after-israel-struck-its-key-gas-field",
+    "sourceLabel": "PBS NewsHour"
   }
 ]

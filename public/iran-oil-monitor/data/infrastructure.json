@@ -16,7 +16,7 @@
     "offlineDate": "2026-03-18",
     "cause": "Targeted bombing (IDF)",
     "triggerEventId": "ev-1803",
-    "recentHit": true,
+    "recentHit": false,
     "wikiUrl": "https://en.wikipedia.org/wiki/South_Pars/North_Dome_gas-condensate_field",
     "mapsUrl": "https://www.google.com/maps?q=26.70,51.30"
   },
@@ -37,7 +37,7 @@
     "offlineDate": "2026-03-19",
     "cause": "Missile attack with fire (Iran)",
     "triggerEventId": "ev-1903",
-    "recentHit": true,
+    "recentHit": false,
     "wikiUrl": "https://en.wikipedia.org/wiki/Ras_Laffan_Industrial_City",
     "mapsUrl": "https://www.google.com/maps?q=25.89,51.53"
   },
@@ -202,9 +202,9 @@
     "desc": "Major Euro-4/5 fuel producer for Gulf region.",
     "color": "#ef4444",
     "size": 16,
-    "offlineDate": "2026-03-19",
-    "cause": "Fires, drone attack (Iran)",
-    "triggerEventId": "ev-1903",
+    "offlineDate": "2026-03-20",
+    "cause": "Renewed drone attack with fires (Iran)",
+    "triggerEventId": "ev-2003-3",
     "recentHit": true,
     "wikiUrl": "https://en.wikipedia.org/wiki/Mina_Al_Ahmadi_Refinery",
     "mapsUrl": "https://www.google.com/maps?q=29.07,48.14"
@@ -301,5 +301,26 @@
     "recentHit": false,
     "wikiUrl": "https://en.wikipedia.org/wiki/Rumaila_oil_field",
     "mapsUrl": "https://www.google.com/maps?q=30.15,47.42"
+  },
+  {
+    "id": "hormuz",
+    "name": "Strait of Hormuz",
+    "lat": 26.56,
+    "lng": 56.25,
+    "type": "Chokepoint",
+    "capacity": "~21 Mn bpd",
+    "status": "Critical",
+    "owner": "International Waters",
+    "globalShare": "~21% global oil",
+    "recoveryTime": "Weeks (mine clearance)",
+    "desc": "World's most critical oil chokepoint. Iran began laying mines 10 Mar 2026. US CENTCOM has destroyed 44+ Iranian minelayers, but passage remains severely disrupted. 15 Mn bpd stranded in Gulf.",
+    "color": "#ef4444",
+    "size": 28,
+    "offlineDate": "2026-03-10",
+    "cause": "Iranian sea mines (ongoing)",
+    "triggerEventId": "ev-1003-2",
+    "recentHit": false,
+    "wikiUrl": "https://en.wikipedia.org/wiki/Strait_of_Hormuz",
+    "mapsUrl": "https://www.google.com/maps?q=26.56,56.25"
   }
 ]
