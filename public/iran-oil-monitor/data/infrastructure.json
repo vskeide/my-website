@@ -202,9 +202,9 @@
     "desc": "Major Euro-4/5 fuel producer for Gulf region.",
     "color": "#ef4444",
     "size": 16,
-    "offlineDate": "2026-03-20",
-    "cause": "Renewed drone attack with fires (Iran)",
-    "triggerEventId": "ev-2003-3",
+    "offlineDate": "2026-03-21",
+    "cause": "Second consecutive drone attack (Iran)",
+    "triggerEventId": "ev-2103-2",
     "recentHit": true,
     "wikiUrl": "https://en.wikipedia.org/wiki/Mina_Al_Ahmadi_Refinery",
     "mapsUrl": "https://www.google.com/maps?q=29.07,48.14"

@@ -234,5 +234,19 @@
     "lng": 35.00,
     "sourceUrl": "https://www.pbs.org/newshour/world/iran-intensifies-attacks-on-gulf-energy-sites-after-israel-struck-its-key-gas-field",
     "sourceLabel": "PBS NewsHour"
+  },
+  {
+    "id": "ev-2103-2",
+    "date": "2026-03-21",
+    "actor": "iran",
+    "title": "Mina Al-Ahmadi Hit Second Consecutive Day",
+    "desc": "Iranian drones struck Kuwait's Mina al-Ahmadi refinery for the second consecutive day, causing fires across multiple units. Kuwait's military actively intercepting incoming drone and missile threats; no casualties reported.",
+    "priceBrent": 107.20,
+    "priceTTF": 59.26,
+    "targetId": "kuwait",
+    "lat": 29.07,
+    "lng": 48.14,
+    "sourceUrl": "https://www.npr.org/2026/03/20/nx-s1-5754550/israel-strikes-tehran-iran-attacks-gulf",
+    "sourceLabel": "NPR"
   }
 ]
