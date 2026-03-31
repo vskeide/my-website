@@ -172,6 +172,19 @@
     "sourceLabel": "Al Jazeera"
   },
   {
+    "id": "ev-1903-2",
+    "date": "2026-03-19",
+    "actor": "iran",
+    "title": "UAE Habshan Gas Facility Bombed",
+    "desc": "Iran targeted the Habshan gas field in Abu Dhabi's Western Region with ballistic missiles and drones. UAE air defenses intercepted 13 missiles and 27 drones; debris caused explosions and fires, forcing suspension of operations.",
+    "priceBrent": 113.26,
+    "priceTTF": 74.00,
+    "lat": 23.75,
+    "lng": 53.76,
+    "sourceUrl": "https://www.pbs.org/newshour/world/iran-intensifies-attacks-on-gulf-energy-sites-after-israel-struck-its-key-gas-field",
+    "sourceLabel": "PBS NewsHour"
+  },
+  {
     "id": "ev-2003-1",
     "date": "2026-03-20",
     "actor": "us_israel",
@@ -248,5 +261,31 @@
     "lng": 48.14,
     "sourceUrl": "https://www.npr.org/2026/03/20/nx-s1-5754550/israel-strikes-tehran-iran-attacks-gulf",
     "sourceLabel": "NPR"
+  },
+  {
+    "id": "ev-3003-1",
+    "date": "2026-03-30",
+    "actor": "iran",
+    "title": "Haifa Bazan Refinery Struck Again",
+    "desc": "An Iranian missile struck the Bazan oil refinery in Haifa for a second time, igniting a fire at a benzene tanker on the site perimeter. Fire was contained within hours; Israeli Energy Minister confirmed minor damage, no risk to fuel supply.",
+    "priceBrent": 113.37,
+    "priceTTF": 53.73,
+    "lat": 32.82,
+    "lng": 35.00,
+    "sourceUrl": "https://www.aljazeera.com/news/2026/3/30/fire-contained-after-missile-attack-on-oil-refinery-in-israels-haifa",
+    "sourceLabel": "Al Jazeera"
+  },
+  {
+    "id": "ev-3103-1",
+    "date": "2026-03-31",
+    "actor": "iran",
+    "title": "Kuwaiti VLCC Al-Salmi Hit at Dubai",
+    "desc": "Iran struck the Kuwait-flagged Very Large Crude Carrier Al-Salmi while it was anchored at the Port of Dubai, setting the fully loaded tanker ablaze. Kuwait Petroleum Corporation warned of a potential oil spill.",
+    "priceBrent": 113.37,
+    "priceTTF": 53.73,
+    "lat": 25.04,
+    "lng": 55.13,
+    "sourceUrl": "https://www.al-monitor.com/originals/2026/03/giant-oil-tanker-dubai-hit-iranian-strike-trump-threatens-obliterate-iran-energy",
+    "sourceLabel": "Al-Monitor"
   }
 ]
