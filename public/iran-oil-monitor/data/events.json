@@ -287,5 +287,60 @@
     "lng": 55.13,
     "sourceUrl": "https://www.al-monitor.com/originals/2026/03/giant-oil-tanker-dubai-hit-iranian-strike-trump-threatens-obliterate-iran-energy",
     "sourceLabel": "Al-Monitor"
+  },
+  {
+    "id": "ev-0304-1",
+    "date": "2026-04-03",
+    "actor": "iran",
+    "title": "Mina Al-Ahmadi Drone Attack Resumes",
+    "desc": "Iranian drone attack caused fires across multiple operational units at Kuwait's Mina al-Ahmadi refinery on April 3. Kuwait National Petroleum Co. emergency teams deployed to contain the fires.",
+    "priceBrent": 110.05,
+    "priceTTF": 49.95,
+    "targetId": "kuwait",
+    "lat": 29.07,
+    "lng": 48.14,
+    "sourceUrl": "https://www.npr.org/2026/04/03/g-s1-116314/iran-hits-gulf-refineries-as-trump-warns-u-s-will-attack-iranian-bridges-power-plants",
+    "sourceLabel": "NPR"
+  },
+  {
+    "id": "ev-0504-1",
+    "date": "2026-04-05",
+    "actor": "iran",
+    "title": "Kuwait KPC and PIC Facilities Significantly Damaged",
+    "desc": "Kuwait National Petroleum Co. and Petrochemical Industries Co. facilities suffered significant damage as emergency and fire response teams worked to contain multiple conflagrations at several sites.",
+    "priceBrent": 110.05,
+    "priceTTF": 49.95,
+    "targetId": "kuwait",
+    "lat": 29.07,
+    "lng": 48.14,
+    "sourceUrl": "https://www.insurancejournal.com/news/international/2026/04/07/864740.htm",
+    "sourceLabel": "Insurance Journal"
+  },
+  {
+    "id": "ev-0504-2",
+    "date": "2026-04-05",
+    "actor": "iran",
+    "title": "Ruwais Refinery Multiple Fires from Air Defense Debris",
+    "desc": "Ruwais refinery suffered multiple fires caused by falling debris from UAE air-defense interception of incoming Iranian missiles, Abu Dhabi government confirmed. The already-damaged ADNOC complex sustained further hits.",
+    "priceBrent": 110.05,
+    "priceTTF": 49.95,
+    "targetId": "ruwais",
+    "lat": 24.106,
+    "lng": 52.727,
+    "sourceUrl": "https://www.insurancejournal.com/news/international/2026/04/07/864740.htm",
+    "sourceLabel": "Insurance Journal"
+  },
+  {
+    "id": "ev-0504-3",
+    "date": "2026-04-05",
+    "actor": "iran",
+    "title": "Bahrain GPIC Petrochemical Plant Drone Strike",
+    "desc": "Several operational units at Gulf Petrochemical Industries Co. (GPIC) in Bahrain caught fire following Iranian drone attacks. The facility, adjacent to the Bapco Sitra refinery, sustained significant damage.",
+    "priceBrent": 110.05,
+    "priceTTF": 49.95,
+    "lat": 26.16,
+    "lng": 50.62,
+    "sourceUrl": "https://www.insurancejournal.com/news/international/2026/04/07/864740.htm",
+    "sourceLabel": "Insurance Journal"
   }
 ]
