@@ -58,7 +58,7 @@
     "offlineDate": "2026-04-05",
     "cause": "Ongoing missile attacks, air defense debris fires (Iran)",
     "triggerEventId": "ev-0504-2",
-    "recentHit": true,
+    "recentHit": false,
     "wikiUrl": "https://en.wikipedia.org/wiki/Ruwais",
     "mapsUrl": "https://www.google.com/maps?q=24.106,52.727"
   },
@@ -205,7 +205,7 @@
     "offlineDate": "2026-04-05",
     "cause": "Ongoing drone attacks (Iran)",
     "triggerEventId": "ev-0504-1",
-    "recentHit": true,
+    "recentHit": false,
     "wikiUrl": "https://en.wikipedia.org/wiki/Mina_Al_Ahmadi_Refinery",
     "mapsUrl": "https://www.google.com/maps?q=29.07,48.14"
   },

@@ -342,5 +342,18 @@
     "lng": 50.62,
     "sourceUrl": "https://www.insurancejournal.com/news/international/2026/04/07/864740.htm",
     "sourceLabel": "Insurance Journal"
+  },
+  {
+    "id": "ev-0804-1",
+    "date": "2026-04-08",
+    "actor": "iran",
+    "title": "Saudi East-West Pipeline Pumping Station Struck",
+    "desc": "An IRGC drone strike hit a pumping station on Saudi Arabia's 1,200 km East-West Petroline pipeline early April 8, the same day a US-Iran ceasefire was announced. The pipeline had been running at emergency capacity of 7 million bpd to route oil to the Red Sea bypassing the Strait of Hormuz.",
+    "priceBrent": 94.47,
+    "priceTTF": 44.10,
+    "lat": 24.09,
+    "lng": 38.06,
+    "sourceUrl": "https://www.bloomberg.com/news/articles/2026-04-08/saudi-arabia-s-crucial-east-west-pipeline-hit-by-drone-attack",
+    "sourceLabel": "Bloomberg"
   }
 ]
