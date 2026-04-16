@@ -355,5 +355,19 @@
     "lng": 38.06,
     "sourceUrl": "https://www.bloomberg.com/news/articles/2026-04-08/saudi-arabia-s-crucial-east-west-pipeline-hit-by-drone-attack",
     "sourceLabel": "Bloomberg"
+  },
+  {
+    "id": "ev-0904-1",
+    "date": "2026-04-09",
+    "actor": "iran",
+    "title": "Iran Strikes Saudi Refineries, Cuts 600k bpd",
+    "desc": "Iranian attacks hit multiple Saudi facilities including SATORP Jubail, Ras Tanura, SAMREF Yanbu, and the Riyadh refinery, cutting Saudi Arabia's oil production capacity by ~600,000 bpd and reducing East-West Pipeline throughput by ~700,000 bpd. Fires also broke out at Ju'aymah processing facilities.",
+    "priceBrent": 94.47,
+    "priceTTF": 44.10,
+    "targetId": "ras-tanura",
+    "lat": 26.64,
+    "lng": 50.16,
+    "sourceUrl": "https://www.bloomberg.com/news/articles/2026-04-09/saudi-oil-output-capacity-cut-600-000-barrels-a-day-in-attacks",
+    "sourceLabel": "Bloomberg"
   }
 ]
