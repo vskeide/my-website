@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Static palette used by Tailwind utility classes */
+  /* Static palette */
   --color-navy-950: #0a0f1e;
   --color-navy-900: #0f1629;
   --color-navy-800: #151d35;
@@ -11,12 +11,12 @@
   --color-charcoal-800: #22262f;
   --color-charcoal-700: #2d323d;
 
-  /* Accent – Royal Purple (Identity) */
-  --color-accent: #6E3CBC;
-  --color-accent-hover: #5A2FA3;
-  --color-accent-muted: #8E5BE6;
+  /* Accent – Electric Blue (Macrobond-inspired data viz primary) */
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-muted: #3B82F6;
 
-  /* Legacy aliases to keep Tailwind building if used elsewhere */
+  /* Legacy aliases */
   --color-accent-amber: #d97706;
   --color-accent-red: #dc2626;
   --color-accent-green: #059669;
@@ -24,26 +24,24 @@
   --color-accent-cyan: #0891b2;
   --color-accent-lime: #65a30d;
 
-  /* Font */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Light theme (default) ────────────────────────────────────────────────── */
+/* ── Light theme ─────────────────────────────────────────────────────────── */
 :root {
   --nav-height: 3.5rem;
 
-  --t-bg: #F4F6F9;
-  --t-surface: #F4F6F9;
+  --t-bg: #F2F5F9;
+  --t-surface: #E8EBF0;
   --t-card: #FFFFFF;
-  --t-card-hover: #F8F9FA;
-  --t-border-strong: #D8DCE3;
-  --t-border-subtle: rgba(17, 19, 24, 0.05);
-  /* Softened from D8DCE3 for subtlety */
-  --t-border-medium: #D8DCE3;
+  --t-card-hover: #F8F9FB;
+  --t-border-strong: #CBD2DB;
+  --t-border-subtle: rgba(15, 23, 42, 0.06);
+  --t-border-medium: #CBD2DB;
 
-  --t-text: #111318;
-  --t-text-secondary: #4B5563;
+  --t-text: #0D1117;
+  --t-text-secondary: #374151;
   --t-text-muted: #6B7280;
 
   --t-nav-bg: #000000;
@@ -51,88 +49,68 @@
   --t-nav-text-muted: #a1a1aa;
   --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
-  /* 8-Color Chart Palette (Optimized for White BG) */
-  --ch-c1: #6E3CBC;
-  /* Brand Purple */
-  --ch-c2: #1F3A8A;
-  /* Deep Blue */
-  --ch-c3: #0F766E;
-  /* Teal */
-  --ch-c4: #D97706;
-  /* Amber */
-  --ch-c5: #2563EB;
-  /* Steel Blue */
-  --ch-c6: #9333EA;
-  /* Plum */
-  --ch-c7: #B45309;
-  /* Copper */
-  --ch-c8: #475569;
-  /* Slate Blue */
+  /* Chart palette — Macrobond grade, full saturation */
+  --ch-c1: #0070C0;   /* Macrobond Blue  */
+  --ch-c2: #FF3333;   /* Vivid Red       */
+  --ch-c3: #FFC000;   /* Chart Gold      */
+  --ch-c4: #7030A0;   /* Deep Purple     */
+  --ch-c5: #00B050;   /* Signal Green    */
+  --ch-c6: #FF66CC;   /* Hot Pink        */
+  --ch-c7: #FF8C00;   /* Saturated Orange*/
+  --ch-c8: #00B0F0;   /* Sky Cyan        */
 
-  --ch-text: #111318;
-  --ch-muted: #4B5563;
-  --ch-border: #D8DCE3;
+  --ch-accent: #0070C0;
+  --ch-text: #0D1117;
+  --ch-muted: #374151;
+  --ch-border: #CBD2DB;
   --ch-tooltip-bg: #FFFFFF;
   --ch-bg: #FFFFFF;
-  /* High contrast chart backgrounds */
-  --ch-axis-text: #4B5563;
+  --ch-axis-text: #374151;
 
-  /* Direct chart semantic overrides to avoid Tailwind v4 JIT compilation dropping them */
-  --ch-positive: #1F9D55;
-  --ch-negative: #D64545;
+  --ch-positive: #10B981;
+  --ch-negative: #EF4444;
   --ch-neutral: #6B7280;
 }
 
-/* ── Dark theme ────────────────────────────────────────────────────────────── */
+/* ── Dark theme ──────────────────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --t-bg: #0F1115;
-  --t-surface: #161A22;
-  --t-card: #161A22;
-  --t-card-hover: #1A1F29;
-  --t-border-strong: #2A2F3A;
-  --t-border-subtle: rgba(255, 255, 255, 0.05);
-  --t-border-medium: #2A2F3A;
+  --t-bg: #080C14;
+  --t-surface: #0F1520;
+  --t-card: #141B2D;
+  --t-card-hover: #1A2238;
+  --t-border-strong: #253047;
+  --t-border-subtle: rgba(255, 255, 255, 0.055);
+  --t-border-medium: #253047;
 
-  --t-text: #F1F3F7;
-  --t-text-secondary: #A1A7B3;
-  --t-text-muted: #6B7280;
+  --t-text: #E8EDF5;
+  --t-text-secondary: #9AA8BC;
+  --t-text-muted: #5C6E8A;
 
   --t-nav-bg: #000000;
   --t-nav-text: #ffffff;
   --t-nav-text-muted: #a1a1aa;
   --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
 
-  /* 8-Color Chart Palette (Optimized for White BG) */
-  --ch-c1: #6E3CBC;
-  /* Brand Purple */
-  --ch-c2: #1F3A8A;
-  /* Deep Blue */
-  --ch-c3: #0F766E;
-  /* Teal */
-  --ch-c4: #D97706;
-  /* Amber */
-  --ch-c5: #2563EB;
-  /* Steel Blue */
-  --ch-c6: #9333EA;
-  /* Plum */
-  --ch-c7: #B45309;
-  /* Copper */
-  --ch-c8: #475569;
-  /* Slate Blue */
+  /* Same Macrobond palette on white chart surfaces */
+  --ch-c1: #0070C0;
+  --ch-c2: #FF3333;
+  --ch-c3: #FFC000;
+  --ch-c4: #7030A0;
+  --ch-c5: #00B050;
+  --ch-c6: #FF66CC;
+  --ch-c7: #FF8C00;
+  --ch-c8: #00B0F0;
 
-  --ch-text: #111318;
-  /* Black text on white chart surfaces */
-  --ch-muted: #4B5563;
+  --ch-accent: #0070C0;
+  --ch-text: #0D1117;
+  --ch-muted: #374151;
   --ch-border: #E5E7EB;
-  /* Lighter borders for interior white chart items */
   --ch-tooltip-bg: #FFFFFF;
   --ch-bg: #FFFFFF;
-  /* Forced White Charts per requirement */
-  --ch-axis-text: #4B5563;
+  --ch-axis-text: #374151;
 
-  /* Direct chart semantic overrides to avoid Tailwind v4 JIT compilation dropping them */
-  --ch-positive: #1F9D55;
-  --ch-negative: #D64545;
+  --ch-positive: #10B981;
+  --ch-negative: #EF4444;
   --ch-neutral: #6B7280;
 }
 
@@ -142,10 +120,9 @@ body {
   color: var(--t-text);
   transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
-  /* Prevent horizontal scroll — stops fixed nav from shifting off-screen on mobile */
 }
 
-/* Theme-responsive logos (Avoids SSR Hydration mismatch) */
+/* Theme-responsive logos */
 :root:not([data-theme="dark"]) .logo-dark {
   display: none !important;
 }
@@ -178,35 +155,70 @@ html {
   scroll-padding-top: 3.5rem;
 }
 
-/* Focus styles */
+/* Focus */
 :focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Range inputs — global base style.
+   Height on the *element* must accommodate the thumb (18px), not just the track (4px).
+   The track is drawn via the pseudo-element, not the element background. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;        /* tall enough for the 18px thumb — do NOT use 4px */
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--t-border-strong, #CBD2DB);
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ch-accent, #0070C0);
+  cursor: pointer;
+  margin-top: -7px;    /* (18px thumb - 4px track) / 2 */
+  border: 2px solid var(--t-card, #fff);
+  box-shadow: 0 0 0 1.5px var(--ch-accent, #0070C0);
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--t-border-strong, #CBD2DB);
+  cursor: pointer;
+  border: none;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ch-accent, #0070C0);
+  cursor: pointer;
+  border: 2px solid var(--t-card, #fff);
+}
+
 /* Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-
-  to {
-    opacity: 1;
-    max-height: 2000px;
-  }
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 2000px; }
 }
 
 .animate-fade-in-up {
@@ -218,26 +230,9 @@ html {
 }
 
 /* Staggered children */
-.stagger-children>*:nth-child(1) {
-  animation-delay: 0ms;
-}
-
-.stagger-children>*:nth-child(2) {
-  animation-delay: 60ms;
-}
-
-.stagger-children>*:nth-child(3) {
-  animation-delay: 120ms;
-}
-
-.stagger-children>*:nth-child(4) {
-  animation-delay: 180ms;
-}
-
-.stagger-children>*:nth-child(5) {
-  animation-delay: 240ms;
-}
-
-.stagger-children>*:nth-child(6) {
-  animation-delay: 300ms;
-}
+.stagger-children > *:nth-child(1) { animation-delay:   0ms; }
+.stagger-children > *:nth-child(2) { animation-delay:  60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }

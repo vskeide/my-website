@@ -1,0 +1,80 @@
+{
+  "lastUpdated": "2026-06-02",
+  "zone": "NO3",
+  "year": 2026,
+  "note": "spotAvg = monthly average spot price in NOK/kWh (excl. VAT). Updated by GitHub Action.",
+  "months": [
+    {
+      "month": 1,
+      "name": "Jan",
+      "spotAvg": 1.194,
+      "norgespris": 0.4
+    },
+    {
+      "month": 2,
+      "name": "Feb",
+      "spotAvg": 1.197,
+      "norgespris": 0.4
+    },
+    {
+      "month": 3,
+      "name": "Mar",
+      "spotAvg": 0.781,
+      "norgespris": 0.4
+    },
+    {
+      "month": 4,
+      "name": "Apr",
+      "spotAvg": 1.033,
+      "norgespris": 0.4
+    },
+    {
+      "month": 5,
+      "name": "Mai",
+      "spotAvg": 0.79,
+      "norgespris": 0.4
+    },
+    {
+      "month": 6,
+      "name": "Jun",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 7,
+      "name": "Jul",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 8,
+      "name": "Aug",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 9,
+      "name": "Sep",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 10,
+      "name": "Okt",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 11,
+      "name": "Nov",
+      "spotAvg": null,
+      "norgespris": 0.4
+    },
+    {
+      "month": 12,
+      "name": "Des",
+      "spotAvg": null,
+      "norgespris": 0.4
+    }
+  ]
+}

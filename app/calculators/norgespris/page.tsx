@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
     BarChart,
     Bar,
@@ -110,14 +110,69 @@ export default function NorgesprisKalkulator() {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
 
+    // Tracks which row indices have real historical spot data (for visual highlight)
+    const [historicalMonths, setHistoricalMonths] = useState<Set<number>>(new Set());
+    // Ref to store the loaded prices for the reset button (avoids state timing issues)
+    const defaultPricesRef = useRef<typeof monthlyData | null>(null);
+
+    // Load actual spot prices from data file; fall back to hardcoded defaults silently
+    useEffect(() => {
+        fetch("/data/strompriser.json")
+            .then((r) => r.json())
+            .then((data: { year: number; months: { month: number; spotAvg: number | null; norgespris: number }[] }) => {
+                const now = new Date();
+                if (data.year !== now.getFullYear()) return;
+                const currentMonth = now.getMonth() + 1;
+                const historical = new Set<number>();
+
+                setMonthlyData((prev) => {
+                    const updated = prev.map((m, idx) => {
+                        const monthNum = idx + 1;
+                        const entry = data.months.find((d) => d.month === monthNum);
+                        if (!entry) return m;
+
+                        const isPast = monthNum < currentMonth && entry.spotAvg !== null;
+                        if (isPast) historical.add(idx);
+
+                        return {
+                            ...m,
+                            spot: isPast ? entry.spotAvg! : m.spot,
+                            norgespris: isPast ? entry.spotAvg! : entry.norgespris,
+                        };
+                    });
+
+                    // Save to ref for reset button
+                    defaultPricesRef.current = updated;
+                    setHistoricalMonths(historical);
+                    return updated;
+                });
+            })
+            .catch(() => {});
+    }, []);
+
     // --- CONFIG & STATE ---
-    const [totalForbruk, setTotalForbruk] = useState(35000);
-    const [nettleige, setNettleige] = useState(0.30); // Variabelt ledd eks mva
-    const [fastledd, setFastledd] = useState(500);   // Fastledd inkl mva
-    const [mvaPa, setMvaPa] = useState(true);
+    const DEFAULT_FORBRUK = 35000;
+    const DEFAULT_NETTLEIGE = 0.30;
+    const DEFAULT_FASTLEDD = 500;
+    const DEFAULT_MVA = true;
+    const DEFAULT_TERSKEL = 0.77;
+
+    const [totalForbruk, setTotalForbruk] = useState(DEFAULT_FORBRUK);
+    const [nettleige, setNettleige] = useState(DEFAULT_NETTLEIGE);
+    const [fastledd, setFastledd] = useState(DEFAULT_FASTLEDD);
+    const [mvaPa, setMvaPa] = useState(DEFAULT_MVA);
 
     // Strømstøtte parametere
-    const [stotteTerskel, setStotteTerskel] = useState(0.77);
+    const [stotteTerskel, setStotteTerskel] = useState(DEFAULT_TERSKEL);
+
+    const resetAll = () => {
+        setTotalForbruk(DEFAULT_FORBRUK);
+        setNettleige(DEFAULT_NETTLEIGE);
+        setFastledd(DEFAULT_FASTLEDD);
+        setMvaPa(DEFAULT_MVA);
+        setStotteTerskel(DEFAULT_TERSKEL);
+        if (defaultPricesRef.current) setMonthlyData(defaultPricesRef.current);
+    };
     const STOTTE_DEKNINGSGRAD = 0.90;
 
     // Normaliserte andeler som summerer til 100%
@@ -309,6 +364,12 @@ export default function NorgesprisKalkulator() {
                             Strømkalkulator <span style={{ fontWeight: 400, color: C.muted }}>| Norgespris</span>
                         </h1>
                     </div>
+                    <button
+                        onClick={resetAll}
+                        style={{ fontSize: 12, fontWeight: 600, padding: "6px 14px", background: C.surface, border: `1px solid ${C.border}`, color: C.muted, cursor: "pointer", borderRadius: 6, display: "flex", alignItems: "center", gap: 6 }}
+                    >
+                        ↺ Nullstill
+                    </button>
                 </div>
 
                 <div className="np-main-grid" style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gap: 24, alignItems: "flex-start", minWidth: 0 }}>
@@ -381,12 +442,16 @@ export default function NorgesprisKalkulator() {
                         </Card>
 
                         {/* TABLE UNDER INPUTS */}
-                        <Card className="np-item-table" style={{ display: "flex", flexDirection: "column", minWidth: 0, width: "100%", flex: 1, maxHeight: 600 }}>
-                            <div style={{ padding: "12px 16px", borderBottom: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center", background: C.surface, flexWrap: "wrap", gap: 8 }}>
-                                <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.05em" }}>Detaljert Datagrunnlag</h3>
+                        <Card className="np-item-table" style={{ display: "flex", flexDirection: "column", minWidth: 0, width: "100%" }}>
+                            <div style={{ padding: "8px 12px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 12, background: C.surface, flexWrap: "wrap" }}>
+                                <h3 style={{ margin: 0, fontSize: 11, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.05em" }}>Datagrunnlag</h3>
+                                <span style={{ width: 9, height: 9, borderRadius: 2, background: "color-mix(in srgb, var(--ch-positive) 25%, transparent)", border: "1px solid var(--ch-positive)", display: "inline-block" }} />
+                                <span style={{ fontSize: 10, color: C.muted }}>Faktisk (NO3)</span>
+                                <span style={{ width: 9, height: 9, borderRadius: 2, background: C.surface, border: `1px solid ${C.border}`, display: "inline-block" }} />
+                                <span style={{ fontSize: 10, color: C.muted }}>Estimert</span>
                             </div>
 
-                            <div style={{ flex: 1, overflowY: "auto", overflowX: "auto", minWidth: 0 }}>
+                            <div style={{ overflowX: "auto", minWidth: 0 }}>
                                 <table style={{ width: "100%", fontSize: 12, borderCollapse: "collapse", minWidth: 280 }}>
                                     <thead style={{ position: "sticky", top: 0, zIndex: 10, background: C.surface, color: C.muted, fontSize: 10, textTransform: "uppercase" }}>
                                         <tr>
@@ -397,20 +462,31 @@ export default function NorgesprisKalkulator() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {monthlyData.map((row, i) => (
-                                            <tr key={row.mnd} style={{ borderBottom: `1px solid ${C.border}` }}>
-                                                <td style={{ padding: "6px 12px", fontWeight: 600, color: C.text }}>{row.mnd}</td>
-                                                <td style={{ padding: "6px 12px" }}>
-                                                    <input type="number" step="0.01" value={row.spot} onChange={(e) => updateMonth(i, "spot", e.target.value)} className="np-table-input" style={{ textAlign: "right" }} />
-                                                </td>
-                                                <td style={{ padding: "6px 12px" }}>
-                                                    <input type="number" step="0.001" value={row.norgespris} onChange={(e) => updateMonth(i, "norgespris", e.target.value)} className="np-table-input" style={{ textAlign: "right", borderColor: row.mnd === "Jan" ? C.c4 : C.border, color: row.mnd === "Jan" ? C.c4 : C.text, fontWeight: row.mnd === "Jan" ? 700 : 400 }} />
-                                                </td>
-                                                <td style={{ padding: "6px 12px" }}>
-                                                    <input type="number" step="0.1" value={row.andel} onChange={(e) => updateMonth(i, "andel", e.target.value)} className="np-table-input" style={{ textAlign: "right" }} />
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {monthlyData.map((row, i) => {
+                                            const isHistorical = historicalMonths.has(i);
+                                            const rowBg = isHistorical
+                                                ? "color-mix(in srgb, var(--ch-positive) 8%, var(--t-card))"
+                                                : "transparent";
+                                            const cellStyle = isHistorical
+                                                ? { background: "color-mix(in srgb, var(--ch-positive) 14%, var(--t-surface))", borderColor: "color-mix(in srgb, var(--ch-positive) 35%, transparent)", color: C.text }
+                                                : {};
+                                            return (
+                                                <tr key={row.mnd} style={{ borderBottom: `1px solid ${C.border}`, background: rowBg }}>
+                                                    <td style={{ padding: "6px 12px", fontWeight: 600, color: isHistorical ? C.positive : C.text }}>
+                                                        {row.mnd}
+                                                    </td>
+                                                    <td style={{ padding: "6px 12px" }}>
+                                                        <input type="number" step="0.01" value={row.spot} onChange={(e) => updateMonth(i, "spot", e.target.value)} className="np-table-input" style={{ textAlign: "right", ...cellStyle }} />
+                                                    </td>
+                                                    <td style={{ padding: "6px 12px" }}>
+                                                        <input type="number" step="0.001" value={row.norgespris} onChange={(e) => updateMonth(i, "norgespris", e.target.value)} className="np-table-input" style={{ textAlign: "right", ...cellStyle }} />
+                                                    </td>
+                                                    <td style={{ padding: "6px 12px" }}>
+                                                        <input type="number" step="0.1" value={row.andel} onChange={(e) => updateMonth(i, "andel", e.target.value)} className="np-table-input" style={{ textAlign: "right" }} />
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                     <tfoot style={{
                                         position: "sticky", bottom: 0,
