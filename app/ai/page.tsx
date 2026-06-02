@@ -1,132 +1,69 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-
-const defaultSongs = [
-    {
-        id: 1,
-        title: "Untitled",
-        style: "AI Generated",
-        sunoUrl: "https://suno.com/s/pL49xluRbYJUIXIW",
-    },
-];
 
 export default function AIPage() {
-    const [songs] = useState(defaultSongs);
-
     return (
         <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             <section className="pb-6 pt-8">
                 <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
-                    Music Made with Suno
+                    AI
                 </h1>
                 <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    Exploring AI-generated music and creative possibilities.
+                    Things I&apos;m exploring with AI — music, tools, experiments.
                 </p>
             </section>
 
-            {/* Article with sidebar */}
+            {/* Music with Suno */}
             <section className="pb-12">
-                <div className="grid gap-8 lg:grid-cols-3">
-                    {/* Main article content (2/3 width) */}
-                    <div className="lg:col-span-2">
-                        {/* Featured image */}
-                        <div
-                            className="relative mb-8 h-96 w-full overflow-hidden rounded"
-                            style={{
-                                background: "url(/images/articles/suno.png) center/cover no-repeat",
-                            }}
+                <div className="mb-6 flex items-baseline gap-3">
+                    <h2 className="text-sm font-semibold" style={{ color: "var(--t-text)" }}>
+                        Music
+                    </h2>
+                </div>
+
+                <Link href="/ai/suno" className="group block transition-all duration-200 hover:shadow-lg" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}>
+                    {/* Visual header */}
+                    <div
+                        className="relative flex h-28 items-end overflow-hidden p-3"
+                        style={{ background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1d4ed8 100%)" }}
+                    >
+                        {/* Waveform decoration */}
+                        <svg
+                            viewBox="0 0 200 48"
+                            className="absolute inset-0 h-full w-full opacity-20"
+                            preserveAspectRatio="none"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                        </div>
-
-                        {/* Article text */}
-                        <article style={{ color: "var(--t-text)" }}>
-                            <h2 className="mb-4 text-lg font-semibold">Creating Music with AI</h2>
-
-                            <p className="mb-4 leading-relaxed text-sm" style={{ color: "var(--t-text)" }}>
-                                Suno is a powerful AI music generation platform that makes it easy to create original songs from text descriptions. Whether you're looking to generate background music for projects, explore new musical styles, or simply experiment with AI creativity, Suno provides an intuitive interface and impressive audio quality.
-                            </p>
-
-                            <p className="mb-4 leading-relaxed text-sm" style={{ color: "var(--t-text)" }}>
-                                The platform uses advanced machine learning models trained on diverse music styles and genres. By providing a simple prompt describing the mood, style, instruments, and lyrics, Suno generates complete, original compositions in seconds. This democratizes music creation, allowing anyone to produce professional-sounding tracks without years of musical training.
-                            </p>
-
-                            <p className="mb-4 leading-relaxed text-sm" style={{ color: "var(--t-text)" }}>
-                                I've been exploring Suno to understand how AI approaches composition, harmony, and rhythm. Below you'll find a curated collection of tracks I've created, ranging from experimental electronic pieces to more structured melodic compositions. Each song represents a different exploration of what's possible with AI-assisted creativity.
-                            </p>
-
-                            <div className="mt-6 rounded" style={{ background: "var(--t-surface)", padding: "16px", borderLeft: "3px solid var(--ch-c1)" }}>
-                                <p className="text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
-                                    Explore more on{" "}
-                                    <a
-                                        href="https://suno.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="transition-colors hover:underline"
-                                        style={{ color: "var(--ch-accent)" }}
-                                    >
-                                        Suno.com ↗
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
+                            {Array.from({ length: 40 }).map((_, i) => {
+                                const h = 8 + Math.sin(i * 0.7) * 12 + Math.sin(i * 0.3) * 8;
+                                return (
+                                    <rect
+                                        key={i}
+                                        x={i * 5 + 1}
+                                        y={(48 - h) / 2}
+                                        width={3}
+                                        height={h}
+                                        fill="white"
+                                        rx={1}
+                                    />
+                                );
+                            })}
+                        </svg>
+                        <span
+                            className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold"
+                            style={{ background: "rgba(255,255,255,0.15)", color: "#c7d2fe" }}
+                        >
+                            Suno
+                        </span>
                     </div>
 
-                    {/* Sidebar: Playlist (1/3 width) */}
-                    <aside>
-                        <div
-                            className="sticky top-[calc(var(--nav-height)+20px)] rounded"
-                            style={{
-                                background: "var(--t-surface)",
-                                border: "1px solid var(--t-border-subtle)",
-                                padding: "20px",
-                            }}
-                        >
-                            <h3 className="mb-4 text-sm font-semibold" style={{ color: "var(--t-text)" }}>
-                                My Songs
-                            </h3>
-
-                            <div className="space-y-3">
-                                {songs.map((song) => (
-                                    <a
-                                        key={song.id}
-                                        href={song.sunoUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block rounded p-3 transition-colors hover:bg-opacity-80"
-                                        style={{
-                                            background: "var(--t-card)",
-                                            border: "1px solid var(--t-border-subtle)",
-                                        }}
-                                    >
-                                        <p className="truncate text-xs font-medium" style={{ color: "var(--t-text)" }}>
-                                            {song.title}
-                                        </p>
-                                        <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
-                                            {song.style}
-                                        </p>
-                                        <p className="mt-2 text-xs" style={{ color: "var(--ch-accent)" }}>
-                                            Listen on Suno ↗
-                                        </p>
-                                    </a>
-                                ))}
-                            </div>
-
-                            <div
-                                className="mt-4 rounded p-3 text-center text-xs"
-                                style={{
-                                    background: "var(--t-card)",
-                                    border: "1px dashed var(--t-border-subtle)",
-                                    color: "var(--t-text-muted)",
-                                }}
-                            >
-                                Add more songs here
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+                    <div className="p-4">
+                        <p className="mb-1 text-sm font-semibold group-hover:underline" style={{ color: "var(--t-text)" }}>
+                            Music Made with Suno
+                        </p>
+                        <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
+                            AI-generated music and creative exploration
+                        </p>
+                    </div>
+                </Link>
             </section>
 
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
