@@ -2,10 +2,7 @@ import ArchiveList from "@/components/ArchiveList";
 import { getAllArticles } from "@/lib/articles";
 import { type ArchiveEntry } from "@/components/YearAccordion";
 
-// Non-MDX entries (calculators etc.)
-const staticEntries: (ArchiveEntry & { year: number })[] = [
-    { year: 2026, slug: "compound-interest-calculator", title: "Compound Interest Calculator", date: "Jan 2", category: "Calculators", type: "calculator" },
-];
+const staticEntries: (ArchiveEntry & { year: number })[] = [];
 
 function formatDate(iso: string): string {
     const [, month, day] = iso.split("-");
