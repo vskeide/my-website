@@ -5,6 +5,7 @@ import { silverPriceAnalysis } from "@/lib/articles/silver-price-analysis";
 import { getCategoryBadgeStyle } from "@/lib/categories";
 import { getArticle, getAllArticles } from "@/lib/articles";
 import { notFound } from "next/navigation";
+import DatawrapperResizer from "@/components/DatawrapperResizer";
 
 // Chart articles that use a specialised layout instead of MDX prose
 const chartArticles: Record<string, typeof silverPriceAnalysis> = {
@@ -95,7 +96,6 @@ export default async function ArticlePage({ params }: PageProps) {
                                     style={{
                                         display: "block",
                                         width: "100%",
-                                        minHeight: "680px",
                                         border: "none",
                                     }}
                                 />
@@ -116,6 +116,7 @@ export default async function ArticlePage({ params }: PageProps) {
                     Back to all articles
                 </Link>
             </div>
+            <DatawrapperResizer />
         </main>
     );
 }
