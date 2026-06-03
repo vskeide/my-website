@@ -2,14 +2,9 @@ import ArchiveList from "@/components/ArchiveList";
 import { getAllArticles } from "@/lib/articles";
 import { type ArchiveEntry } from "@/components/YearAccordion";
 
-// Entries that don't have MDX files (historical articles, calculators)
+// Non-MDX entries (calculators etc.)
 const staticEntries: (ArchiveEntry & { year: number })[] = [
-    { year: 2026, slug: "compound-interest-calculator", title: "Compound Interest Calculator",                     date: "Jan 2",  category: "Calculators", type: "calculator" },
-    { year: 2025, slug: "year-end-financial-review",    title: "How to Conduct Your Year-End Financial Review",    date: "Dec 20", category: "Personal Economy" },
-    { year: 2025, slug: "dividend-investing-basics",    title: "Dividend Investing: Building Passive Income",      date: "Nov 15", category: "Investing & Finance" },
-    { year: 2025, slug: "municipal-budget-transparency", title: "Grading Your Municipality on Budget Transparency", date: "Oct 30", category: "Local Politics" },
-    { year: 2025, slug: "high-yield-savings",           title: "High-Yield Savings Accounts: Worth the Switch?",   date: "Sep 8",  category: "Personal Economy" },
-    { year: 2025, slug: "bonds-introduction",           title: "Bonds 101: A Safe Harbor in Volatile Markets",     date: "Aug 22", category: "Investing & Finance" },
+    { year: 2026, slug: "compound-interest-calculator", title: "Compound Interest Calculator", date: "Jan 2", category: "Calculators", type: "calculator" },
 ];
 
 function formatDate(iso: string): string {
