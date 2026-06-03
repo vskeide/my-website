@@ -74,13 +74,31 @@ export default async function ArticlePage({ params }: PageProps) {
                 />
             )}
 
-            <article className="prose pb-12 text-sm leading-7 text-text-secondary">
+            <article className="pb-12">
                 <MDXRemote
                     source={article.content}
                     components={{
+                        p: (props) => (
+                            <p style={{ marginBottom: "1.25rem", fontSize: "0.875rem", lineHeight: "1.75", color: "var(--t-text-secondary)" }} {...props} />
+                        ),
+                        h2: (props) => (
+                            <h2 style={{ marginTop: "2.5rem", marginBottom: "0.75rem", fontSize: "1.1rem", fontWeight: 700, color: "var(--t-text)" }} {...props} />
+                        ),
+                        h3: (props) => (
+                            <h3 style={{ marginTop: "2rem", marginBottom: "0.5rem", fontSize: "0.95rem", fontWeight: 700, color: "var(--t-text)" }} {...props} />
+                        ),
                         iframe: (props) => (
-                            <div style={{ margin: "3.5rem 0" }}>
-                                <iframe {...props} scrolling="no" style={{ display: "block", overflow: "hidden" }} />
+                            <div style={{ margin: "3rem 0 3.5rem" }}>
+                                <iframe
+                                    {...props}
+                                    scrolling="no"
+                                    style={{
+                                        display: "block",
+                                        width: "100%",
+                                        minHeight: "500px",
+                                        border: "none",
+                                    }}
+                                />
                             </div>
                         ),
                     }}
