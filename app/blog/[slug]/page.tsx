@@ -79,8 +79,8 @@ export default async function ArticlePage({ params }: PageProps) {
                     source={article.content}
                     components={{
                         iframe: (props) => (
-                            <div style={{ margin: "2.5rem 0" }}>
-                                <iframe {...props} />
+                            <div style={{ margin: "3.5rem 0" }}>
+                                <iframe {...props} scrolling="no" style={{ display: "block", overflow: "hidden" }} />
                             </div>
                         ),
                     }}
