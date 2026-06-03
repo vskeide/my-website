@@ -95,7 +95,7 @@ export default async function ArticlePage({ params }: PageProps) {
                                     style={{
                                         display: "block",
                                         width: "100%",
-                                        minHeight: "500px",
+                                        minHeight: "680px",
                                         border: "none",
                                     }}
                                 />
