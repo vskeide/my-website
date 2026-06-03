@@ -10,6 +10,29 @@ const apps = [
         accentColor: "var(--ch-c1)",
         url: "https://handleliste-nine.vercel.app",
         tags: ["Next.js", "Supabase", "PWA"],
+        cta: "Open app",
+    },
+    {
+        id: "finsankey",
+        title: "FinSankey",
+        description:
+            "Excel add-in that renders financial flows as interactive Sankey diagrams. Visualise how revenue moves through costs, margins, and profit — directly inside your spreadsheet.",
+        icon: "🔀",
+        accentColor: "#6366f1",
+        url: "https://github.com/vskeide/FinSankey",
+        tags: ["Excel Add-in", "D3.js", "React"],
+        cta: "View on GitHub",
+    },
+    {
+        id: "monte-carlo",
+        title: "Monte Carlo Sim",
+        description:
+            "Excel add-in for probabilistic financial modelling. Define inputs with PERT, triangular, normal, or uniform distributions using custom MC.* functions, run thousands of iterations, and get histogram output with percentile bands — ideal for DCF and project valuation.",
+        icon: "🎲",
+        accentColor: "#f59e0b",
+        url: "https://github.com/vskeide/monte-carlo-anitgravity",
+        tags: ["Excel Add-in", "TypeScript", "Monte Carlo"],
+        cta: "View on GitHub",
     },
 ];
 
@@ -74,7 +97,7 @@ export default function AppsPage() {
                                         ))}
                                     </div>
                                     <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
-                                        Open app
+                                        {app.cta}
                                         <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                         </svg>
