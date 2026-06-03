@@ -75,7 +75,16 @@ export default async function ArticlePage({ params }: PageProps) {
             )}
 
             <article className="prose pb-12 text-sm leading-7 text-text-secondary">
-                <MDXRemote source={article.content} />
+                <MDXRemote
+                    source={article.content}
+                    components={{
+                        iframe: (props) => (
+                            <div style={{ margin: "2.5rem 0" }}>
+                                <iframe {...props} />
+                            </div>
+                        ),
+                    }}
+                />
             </article>
 
             <div className="border-t border-border-subtle py-6">
