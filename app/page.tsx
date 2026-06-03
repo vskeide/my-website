@@ -23,7 +23,7 @@ const calculators = [
     },
     {
         id: "sparing",
-        title: "Kostnad & avkastning",
+        title: "Investeringskalkulator",
         description: "Sjå korleis startkapital, årlege innskot, gebyr og inflasjon formar det du faktisk sit att med.",
         gradient: "linear-gradient(135deg, #052e16 0%, #166534 60%, #16a34a 100%)",
         accentColor: "#4ade80",
