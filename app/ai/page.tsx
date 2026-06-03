@@ -14,56 +14,58 @@ export default function AIPage() {
 
             {/* Music with Suno */}
             <section className="pb-12">
-                <div className="mb-6 flex items-baseline gap-3">
-                    <h2 className="text-sm font-semibold" style={{ color: "var(--t-text)" }}>
+                <div className="mb-4 flex items-center justify-between">
+                    <h2 className="text-base font-semibold" style={{ color: "var(--t-text)" }}>
                         Music
                     </h2>
-                </div>
-
-                <Link href="/ai/suno" className="group block transition-all duration-200 hover:shadow-lg" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}>
-                    {/* Visual header */}
-                    <div
-                        className="relative flex h-28 items-end overflow-hidden p-3"
-                        style={{ background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1d4ed8 100%)" }}
+                    <Link
+                        href="/ai/suno"
+                        className="text-xs font-medium transition-colors hover:underline"
+                        style={{ color: "var(--ch-accent)" }}
                     >
-                        {/* Waveform decoration */}
-                        <svg
-                            viewBox="0 0 200 48"
-                            className="absolute inset-0 h-full w-full opacity-20"
-                            preserveAspectRatio="none"
+                        Explore →
+                    </Link>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <Link href="/ai/suno" className="group block h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>
+                        {/* Visual header with image */}
+                        <div
+                            className="relative flex h-36 items-end overflow-hidden p-4"
+                            style={{
+                                backgroundImage: "url(/images/articles/suno.png)",
+                                backgroundSize: "cover",
+                                backgroundPosition: "center top",
+                            }}
                         >
-                            {Array.from({ length: 40 }).map((_, i) => {
-                                const h = 8 + Math.sin(i * 0.7) * 12 + Math.sin(i * 0.3) * 8;
-                                return (
-                                    <rect
-                                        key={i}
-                                        x={i * 5 + 1}
-                                        y={(48 - h) / 2}
-                                        width={3}
-                                        height={h}
-                                        fill="white"
-                                        rx={1}
-                                    />
-                                );
-                            })}
-                        </svg>
-                        <span
-                            className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold"
-                            style={{ background: "rgba(255,255,255,0.15)", color: "#c7d2fe" }}
-                        >
-                            Suno
-                        </span>
-                    </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <span
+                                className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold tracking-wide"
+                                style={{
+                                    background: "rgba(0,0,0,0.55)",
+                                    color: "#c7d2fe",
+                                    border: "1px solid color-mix(in srgb, #c7d2fe 50%, transparent)",
+                                }}
+                            >
+                                Suno
+                            </span>
+                        </div>
 
-                    <div className="p-4">
-                        <p className="mb-1 text-sm font-semibold group-hover:underline" style={{ color: "var(--t-text)" }}>
-                            Music Made with Suno
-                        </p>
-                        <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
-                            AI-generated music and creative exploration
-                        </p>
-                    </div>
-                </Link>
+                        <div className="p-4">
+                            <h3
+                                className="mb-1.5 text-sm font-semibold transition-colors group-hover:underline"
+                                style={{ color: "var(--t-text)" }}
+                            >
+                                We were golden
+                            </h3>
+                            <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                                by Sortina
+                            </p>
+                            <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
+                                Read story →
+                            </span>
+                        </div>
+                    </Link>
+                </div>
             </section>
 
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
