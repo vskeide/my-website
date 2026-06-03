@@ -49,56 +49,44 @@ export default function SunoArticle() {
                         {/* Article text */}
                         <article className="text-sm leading-relaxed" style={{ color: "var(--t-text)" }}>
                             <p className="mb-5">
-                                I&apos;ve been curious about AI music for a while — not in a &quot;this will replace musicians&quot; way, but in the same way I&apos;m curious about any new creative tool. What does it feel like to use? What can you make with it that you couldn&apos;t make before? Suno was the first platform that made me actually sit down and try.
+                                I&apos;ve probably made around 500 songs on Suno at this point. Maybe more. The vast majority of them are gone — tried, listened to once or twice, and discarded. What you see in the playlist here is maybe 10–20 that felt worth keeping. That ratio tells you something important about what this actually involves.
+                            </p>
+
+                            <h2 className="mb-3 mt-8 text-base font-semibold">It&apos;s not just pressing a button</h2>
+
+                            <p className="mb-5">
+                                The plug-and-play version of Suno exists. You type a vague prompt, something comes out, you move on. But that&apos;s not how you get something you actually want to listen to again. Getting a song that feels right takes a lot of retrying — listening to the same track in slight variations, tweaking a word in the prompt, rolling the dice again, comparing versions. It&apos;s closer to editing than generating. Most of the time is spent rejecting things.
                             </p>
 
                             <p className="mb-5">
-                                The process is simpler than you&apos;d expect. You describe the kind of song you want — mood, genre, rough lyrical theme — and within a minute you have a complete track: melody, arrangement, vocals, the lot. Most attempts are forgettable. But occasionally something comes out that catches you off guard.
+                                The lyrics are where most of the work happens. I use Claude to help — describing the context, the goal, the feeling I&apos;m after, a rough thematic direction. We go back and forth drafting and refining before anything goes into Suno. Getting the lyrics right before you generate saves a lot of wasted iterations.
                             </p>
 
-                            <h2 className="mb-3 mt-8 text-base font-semibold">The song</h2>
+                            <h2 className="mb-3 mt-8 text-base font-semibold">Norwegian lyrics are a different problem</h2>
 
                             <p className="mb-5">
-                                &quot;We were golden&quot; came out of an evening I wasn&apos;t trying too hard. I had been playing with different prompts — some cinematic, some stripped-back — and typed something about nostalgia, late summers, a feeling you can&apos;t quite hold onto. Suno produced a few versions; the one that stuck had this washed-out indie-pop quality, the kind of sound that sits halfway between confidence and melancholy.
-                            </p>
-
-                            <p className="mb-5">
-                                The artist name Sortina came with it, generated as part of the track metadata. I kept it. It felt right for a song that doesn&apos;t quite belong to the present.
+                                Writing in Norwegian — and especially nynorsk — introduces a specific set of difficulties that English lyrics don&apos;t have. Direct translation almost never works. The natural stress patterns are different, rhymes that work on paper sound forced when sung, and nynorsk in particular has a cadence that resists the kind of lyrical shorthand English thrives on. You can&apos;t just swap in a Norwegian phrase where an English one would go; you have to rebuild the line from scratch around how it will actually sound.
                             </p>
 
                             <p className="mb-5">
-                                What surprised me most wasn&apos;t the production quality — it was how cohesive the thing felt. The lyrics don&apos;t land every line, but the ones that do carry actual weight. There&apos;s a hook that kept coming back to me the next day, which is more than I can say for a lot of music I&apos;ve intentionally sought out.
+                                Removing overused words and tired themes takes time too. The first draft of almost anything is full of clichés — the same imagery, the same emotional beats, the same rhyme schemes. Stripping those out and finding something that actually says what you mean, in a way that flows when it&apos;s sung, is most of the creative work.
                             </p>
 
-                            <h2 className="mb-3 mt-8 text-base font-semibold">What I took from it</h2>
+                            <h2 className="mb-3 mt-8 text-base font-semibold">What it&apos;s done to how I listen</h2>
 
                             <p className="mb-5">
-                                AI music tools like Suno are not going to replace the experience of a human making something meaningful over years of practice. But they do something different and interesting: they collapse the distance between an idea and a listenable thing. For someone with no formal music training, that&apos;s genuinely new.
+                                Making music — even this way — has made me appreciate music considerably more. I pay attention to lyric structure now in a way I didn&apos;t before. I notice production choices, how a beat sits under a vocal line, where the energy in a track comes from. I&apos;ve learned more about how songs actually work by trying to make them than I did from years of just listening.
                             </p>
 
                             <p className="mb-5">
-                                I&apos;ll keep using it — less to &quot;make music&quot; and more to see what happens when you describe a feeling and let a machine try to translate it. Sometimes the gap between what you imagined and what comes out is the most interesting part.
+                                It&apos;s also a more productive use of a late evening than watching another Netflix series. That probably sounds like a low bar, but it&apos;s genuinely how I think about it. You come away with something — sometimes something you actually like.
                             </p>
 
-                            <div
-                                className="mt-8 p-4 text-xs"
-                                style={{
-                                    background: "var(--t-surface)",
-                                    borderLeft: "3px solid var(--ch-accent)",
-                                    color: "var(--t-text-muted)",
-                                }}
-                            >
-                                Listen to{" "}
-                                <a
-                                    href="https://suno.com/s/pL49xluRbYJUIXIW"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-medium transition-colors hover:underline"
-                                    style={{ color: "var(--ch-accent)" }}
-                                >
-                                    We were golden on Suno ↗
-                                </a>
-                            </div>
+                            <h2 className="mb-3 mt-8 text-base font-semibold">Connection, which might be narcissistic</h2>
+
+                            <p className="mb-5">
+                                The songs I&apos;ve spent real time on mean something to me in a way that songs I just consumed don&apos;t. That might be slightly narcissistic — liking your own work more because it&apos;s yours — but I think it&apos;s also just how creative investment works. When you&apos;ve spent an evening going back and forth on a lyric, listening to ten versions, finally landing on something that feels right, you&apos;re attached to it. The ones in the playlist here are the ones I kept coming back to. That&apos;s the only filter that matters.
+                            </p>
                         </article>
                     </div>
 
