@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 const songs = [
-    {
-        id: 1,
-        title: "We were golden",
-        artist: "Sortina",
-        style: "Indie pop / dream pop",
-        sunoUrl: "https://suno.com/s/pL49xluRbYJUIXIW",
-    },
+    { id: 1, title: "We were golden",          artist: "Sortina", sunoUrl: "https://suno.com/s/pL49xluRbYJUIXIW" },
+    { id: 2, title: "Discounted Dreams",        artist: "Sortina", sunoUrl: "https://suno.com/s/y9Ob1ehfB3z7zSbl" },
+    { id: 3, title: "Buy the Dip, Ride the Wave", artist: "Sortina", sunoUrl: "https://suno.com/s/gmFpS6zwi9kINfpa" },
+    { id: 4, title: "Carbon Soles",             artist: "Sortina", sunoUrl: "https://suno.com/s/zwSv1iQcNONgmDKw" },
+    { id: 5, title: "Grus til VM",              artist: "Sortina", sunoUrl: "https://suno.com/s/9GuEUD7nDVefkkMK" },
+    { id: 6, title: "Satelite",                 artist: "Sortina", sunoUrl: "https://suno.com/s/81x1nxyEv7MDaYQp" },
+    { id: 7, title: "The Rush Of Us",           artist: "Sortina", sunoUrl: "https://suno.com/s/synQrTie60hVac0i" },
+    { id: 8, title: "Written on the Wall",      artist: "Sortina", sunoUrl: "https://suno.com/s/wbV4Qwg5LujJ7zp1" },
 ];
 
 export default function SunoArticle() {
@@ -33,8 +34,8 @@ export default function SunoArticle() {
             {/* Article with sidebar */}
             <section className="pb-12">
                 <div className="grid gap-8 lg:grid-cols-3">
-                    {/* Main article content (2/3 width) */}
-                    <div className="lg:col-span-2">
+                    {/* Main article content (2/3 width) — below sidebar on mobile */}
+                    <div className="order-2 lg:order-1 lg:col-span-2">
                         {/* Featured image */}
                         <div
                             className="relative mb-8 h-72 w-full overflow-hidden"
@@ -101,8 +102,8 @@ export default function SunoArticle() {
                         </article>
                     </div>
 
-                    {/* Sidebar: Playlist (1/3 width) */}
-                    <aside>
+                    {/* Sidebar: Playlist (1/3 width) — top on mobile */}
+                    <aside className="order-1 lg:order-2">
                         <div
                             className="sticky top-[calc(var(--nav-height)+20px)]"
                             style={{
@@ -135,9 +136,6 @@ export default function SunoArticle() {
                                         </p>
                                         <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
                                             {song.artist}
-                                        </p>
-                                        <p className="mt-0.5 text-xs" style={{ color: "var(--t-text-muted)" }}>
-                                            {song.style}
                                         </p>
                                         <p className="mt-2 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
                                             Listen on Suno ↗
