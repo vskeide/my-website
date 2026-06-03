@@ -1,35 +1,6 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ArticleCard";
-
-const latestArticles = [
-    {
-        slug: "ai-job-market-disruption",
-        title: "How AI Is Reshaping White-Collar Job Markets",
-        excerpt:
-            "New data from job postings shows accelerating displacement in accounting, software, and media. What the numbers mean for workers and investors.",
-        date: "Jun 1, 2026",
-        category: "AI",
-        imageUrl: "/images/articles/ai-jobs.png",
-    },
-    {
-        slug: "china-economic-slowdown",
-        title: "China's Economic Slowdown: What Investors Should Know",
-        excerpt:
-            "From property crisis to deflationary pressure, China's structural headwinds are deepening. A data-driven look at the risks and opportunities.",
-        date: "May 24, 2026",
-        category: "China",
-        imageUrl: "/images/articles/china-economy.png",
-    },
-    {
-        slug: "silver-price-analysis",
-        title: "Silver Price Dynamics and Jewelry Sector Margins",
-        excerpt:
-            "An analysis of silver spot price movements and their impact on jewelry sector profitability and margin correlations.",
-        date: "Feb 18, 2026",
-        category: "Investing & Finance",
-        imageUrl: "/images/articles/silver-finance.png",
-    },
-];
+import { getAllArticles } from "@/lib/articles";
 
 const calculators = [
     {
@@ -62,6 +33,7 @@ const calculators = [
 ];
 
 export default function HomePage() {
+    const latestArticles = getAllArticles().slice(0, 3);
     return (
         <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             {/* Intro */}
