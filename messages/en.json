@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "blog": "Blog",
+    "archive": "Archive",
+    "calculators": "Calculators",
+    "ai": "AI",
+    "apps": "Apps",
+    "switchLight": "Switch to light mode",
+    "switchDark": "Switch to dark mode",
+    "switchLightShort": "Light",
+    "switchDarkShort": "Dark"
+  },
+  "lang": {
+    "toggle": "NO",
+    "current": "EN"
+  },
+  "home": {
+    "title": "Personal Finance & Economics",
+    "subtitle": "Independent analysis and practical insights on investing, personal economy, and local economic policy. Cut through the noise and make better financial decisions.",
+    "calculators": "Calculators",
+    "allCalculators": "All calculators →",
+    "latestArticles": "Latest Articles",
+    "viewAll": "View all →",
+    "openCalculator": "Open calculator",
+    "openApp": "Open app",
+    "viewOnGithub": "View on GitHub",
+    "readStory": "Read story →",
+    "backToHome": "Back to home"
+  },
+  "blog": {
+    "title": "Blog",
+    "backToArticles": "Back to all articles",
+    "readMore": "Read more",
+    "explore": "Explore →",
+    "noArticles": "No articles found in this category yet."
+  },
+  "archive": {
+    "title": "Archive",
+    "subtitle": "Browse all articles and calculators by year and category.",
+    "noEntries": "No entries found for this category."
+  },
+  "ai": {
+    "title": "AI",
+    "subtitle": "Things I'm exploring with AI — music, tools, experiments.",
+    "music": "Music",
+    "backToHome": "Back to home"
+  },
+  "suno": {
+    "tag": "Music · Suno",
+    "by": "by",
+    "madeWith": "— made with Suno",
+    "songs": "Songs",
+    "listenOn": "Listen on Suno ↗",
+    "backToAI": "Back to AI"
+  },
+  "apps": {
+    "title": "Apps",
+    "subtitle": "Web apps and tools I've built. Open source and free to use.",
+    "backToHome": "Back to home"
+  },
+  "calculators": {
+    "title": "Calculators",
+    "subtitle": "Interactive tools for personal finance and public policy.",
+    "backToHome": "Back to home",
+    "openCalculator": "Open calculator"
+  },
+  "article": {
+    "backToBlog": "Back to all articles",
+    "notAvailable": "This article is not yet available in English. Showing Norwegian version.",
+    "showIn": "Show in",
+    "norwegian": "Norwegian",
+    "english": "English"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "categories": {
+    "all": "All",
+    "investing": "Investing & Finance",
+    "personal": "Personal Economy",
+    "local": "Local Politics",
+    "ai": "AI",
+    "china": "China",
+    "calculators": "Calculators"
+  }
+}

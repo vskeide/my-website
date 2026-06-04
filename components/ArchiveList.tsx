@@ -25,7 +25,7 @@ function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
         .sort((a, b) => b.year - a.year);
 }
 
-export default function ArchiveList({ entries }: { entries: (ArchiveEntry & { year: number })[] }) {
+export default function ArchiveList({ entries, locale = "en" }: { entries: (ArchiveEntry & { year: number })[]; locale?: string }) {
     const [activeFilter, setActiveFilter] = useState("All");
 
     const filtered =

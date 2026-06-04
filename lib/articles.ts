@@ -2,8 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
-
 export interface ArticleMeta {
     slug: string;
     title: string;
@@ -17,12 +15,17 @@ export interface Article extends ArticleMeta {
     content: string;
 }
 
-export function getAllArticles(): ArticleMeta[] {
-    if (!fs.existsSync(CONTENT_DIR)) return [];
+function contentDir(locale: string) {
+    return path.join(process.cwd(), "content", locale);
+}
 
-    const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
+export function getAllArticles(locale = "en"): ArticleMeta[] {
+    const dir = contentDir(locale);
+    if (!fs.existsSync(dir)) return [];
 
-    // Deduplicate by slug, preferring .mdx over .md
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
+
+    // Deduplicate by slug, preferring .mdx
     const bySlug = new Map<string, string>();
     for (const f of files) {
         const slug = f.replace(/\.mdx?$/, "");
@@ -32,25 +35,26 @@ export function getAllArticles(): ArticleMeta[] {
     return Array.from(bySlug.values())
         .map((filename) => {
             const slug = filename.replace(/\.mdx?$/, "");
-            const raw = fs.readFileSync(path.join(CONTENT_DIR, filename), "utf-8");
+            const raw = fs.readFileSync(path.join(dir, filename), "utf-8");
             const { data } = matter(raw);
-            if (!data.title) return null; // skip files without frontmatter
+            if (!data.title) return null;
             return {
                 slug,
-                title: data.title,
-                date: data.date ?? "",
-                category: data.category ?? "General",
-                excerpt: data.excerpt ?? "",
-                imageUrl: data.imageUrl ?? "",
+                title: data.title as string,
+                date: (data.date as string) ?? "",
+                category: (data.category as string) ?? "General",
+                excerpt: (data.excerpt as string) ?? "",
+                imageUrl: (data.imageUrl as string) ?? "",
             };
         })
         .filter(Boolean)
         .sort((a, b) => (a!.date < b!.date ? 1 : -1)) as ArticleMeta[];
 }
 
-export function getArticle(slug: string): Article | null {
-    const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`);
-    const mdPath = path.join(CONTENT_DIR, `${slug}.md`);
+export function getArticle(locale: string, slug: string): Article | null {
+    const dir = contentDir(locale);
+    const mdxPath = path.join(dir, `${slug}.mdx`);
+    const mdPath = path.join(dir, `${slug}.md`);
     const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null;
 
     if (!filePath) return null;
@@ -60,11 +64,26 @@ export function getArticle(slug: string): Article | null {
 
     return {
         slug,
-        title: data.title ?? slug,
-        date: data.date ?? "",
-        category: data.category ?? "General",
-        excerpt: data.excerpt ?? "",
-        imageUrl: data.imageUrl ?? "",
+        title: (data.title as string) ?? slug,
+        date: (data.date as string) ?? "",
+        category: (data.category as string) ?? "General",
+        excerpt: (data.excerpt as string) ?? "",
+        imageUrl: (data.imageUrl as string) ?? "",
         content,
     };
+}
+
+/** Returns the article for the requested locale, falling back to the other locale. */
+export function getArticleWithFallback(
+    locale: string,
+    slug: string
+): { article: Article; isFallback: boolean; fallbackLocale?: string } | null {
+    const article = getArticle(locale, slug);
+    if (article) return { article, isFallback: false };
+
+    const fallback = locale === "no" ? "en" : "no";
+    const fallbackArticle = getArticle(fallback, slug);
+    if (fallbackArticle) return { article: fallbackArticle, isFallback: true, fallbackLocale: fallback };
+
+    return null;
 }

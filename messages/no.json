@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "blog": "Blogg",
+    "archive": "Arkiv",
+    "calculators": "Kalkulatorer",
+    "ai": "AI",
+    "apps": "Apper",
+    "switchLight": "Bytt til lyst tema",
+    "switchDark": "Bytt til mørkt tema",
+    "switchLightShort": "Lyst",
+    "switchDarkShort": "Mørkt"
+  },
+  "lang": {
+    "toggle": "EN",
+    "current": "NO"
+  },
+  "home": {
+    "title": "Personlig økonomi og samfunnsøkonomi",
+    "subtitle": "Uavhengige analyser og praktiske innsikter om investering, personlig økonomi og lokalpolitikk. Kutt gjennom støyen og ta bedre økonomiske beslutninger.",
+    "calculators": "Kalkulatorer",
+    "allCalculators": "Alle kalkulatorer →",
+    "latestArticles": "Siste artikler",
+    "viewAll": "Se alle →",
+    "openCalculator": "Åpne kalkulator",
+    "openApp": "Åpne app",
+    "viewOnGithub": "Se på GitHub",
+    "readStory": "Les mer →",
+    "backToHome": "Tilbake til forsiden"
+  },
+  "blog": {
+    "title": "Blogg",
+    "backToArticles": "Tilbake til alle artikler",
+    "readMore": "Les mer",
+    "explore": "Utforsk →",
+    "noArticles": "Ingen artikler funnet i denne kategorien ennå."
+  },
+  "archive": {
+    "title": "Arkiv",
+    "subtitle": "Bla gjennom alle artikler og kalkulatorer etter år og kategori.",
+    "noEntries": "Ingen oppføringer funnet for denne kategorien."
+  },
+  "ai": {
+    "title": "AI",
+    "subtitle": "Ting jeg utforsker med AI — musikk, verktøy og eksperimenter.",
+    "music": "Musikk",
+    "backToHome": "Tilbake til forsiden"
+  },
+  "suno": {
+    "tag": "Musikk · Suno",
+    "by": "av",
+    "madeWith": "— laget med Suno",
+    "songs": "Sanger",
+    "listenOn": "Lytt på Suno ↗",
+    "backToAI": "Tilbake til AI"
+  },
+  "apps": {
+    "title": "Apper",
+    "subtitle": "Nettapper og verktøy jeg har bygget. Åpen kildekode og gratis å bruke.",
+    "backToHome": "Tilbake til forsiden"
+  },
+  "calculators": {
+    "title": "Kalkulatorer",
+    "subtitle": "Interaktive verktøy for personlig økonomi og offentlig politikk.",
+    "backToHome": "Tilbake til forsiden",
+    "openCalculator": "Åpne kalkulator"
+  },
+  "article": {
+    "backToBlog": "Tilbake til alle artikler",
+    "notAvailable": "Denne artikkelen er ikke tilgjengelig på norsk ennå. Viser engelsk versjon.",
+    "showIn": "Vis på",
+    "norwegian": "norsk",
+    "english": "engelsk"
+  },
+  "footer": {
+    "rights": "Alle rettigheter forbeholdt"
+  },
+  "categories": {
+    "all": "Alle",
+    "investing": "Investering og finans",
+    "personal": "Personlig økonomi",
+    "local": "Lokalpolitikk",
+    "ai": "AI",
+    "china": "Kina",
+    "calculators": "Kalkulatorer"
+  }
+}

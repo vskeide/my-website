@@ -10,6 +10,7 @@ export interface ArticleCardProps {
     date: string;
     category: string;
     imageUrl?: string | null;
+    locale?: string;
 }
 
 /* ── Per-category gradient backgrounds ────────────────────────────────────── */
@@ -293,10 +294,11 @@ function ArticleThumbnail({ category, imageUrl }: { category: string; imageUrl?:
 }
 
 /* ── Card ─────────────────────────────────────────────────────────────────── */
-export default function ArticleCard({ slug, title, excerpt, date, category, imageUrl }: ArticleCardProps) {
+export default function ArticleCard({ slug, title, excerpt, date, category, imageUrl, locale }: ArticleCardProps) {
     const tag = getCategoryBadgeStyle(category);
+    const href = locale === "en" ? `/en/blog/${slug}` : `/blog/${slug}`;
     return (
-        <Link href={`/blog/${slug}`} className="group block h-full">
+        <Link href={href} className="group block h-full">
             <article
                 className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg"
                 style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}
