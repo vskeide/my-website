@@ -15,11 +15,15 @@ export interface ArticleCardProps {
 
 /* ── Per-category gradient backgrounds ────────────────────────────────────── */
 const GRADIENTS: Record<string, string> = {
-    "Investing & Finance": "linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%)",
-    "Personal Economy":    "linear-gradient(135deg, #042f2e 0%, #0f766e 60%, #0d9488 100%)",
-    "Local Politics":      "linear-gradient(135deg, #1c1917 0%, #7c2d12 60%, #c2410c 100%)",
-    "AI":                  "linear-gradient(135deg, #022c22 0%, #065f46 55%, #059669 100%)",
-    "China":               "linear-gradient(135deg, #0c1a2e 0%, #0e4272 55%, #0284c7 100%)",
+    "Investing & Finance":   "linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%)",
+    "Investering og finans": "linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%)",
+    "Personal Economy":      "linear-gradient(135deg, #042f2e 0%, #0f766e 60%, #0d9488 100%)",
+    "Personlig økonomi":     "linear-gradient(135deg, #042f2e 0%, #0f766e 60%, #0d9488 100%)",
+    "Local Politics":        "linear-gradient(135deg, #1c1917 0%, #7c2d12 60%, #c2410c 100%)",
+    "Lokalpolitikk":         "linear-gradient(135deg, #1c1917 0%, #7c2d12 60%, #c2410c 100%)",
+    "AI":                    "linear-gradient(135deg, #022c22 0%, #065f46 55%, #059669 100%)",
+    "China":                 "linear-gradient(135deg, #0c1a2e 0%, #0e4272 55%, #0284c7 100%)",
+    "Kina":                  "linear-gradient(135deg, #0c1a2e 0%, #0e4272 55%, #0284c7 100%)",
 };
 const DEFAULT_GRADIENT = "linear-gradient(135deg, #1e1b4b 0%, #3730a3 60%, #4f46e5 100%)";
 
@@ -261,22 +265,30 @@ function CategoryIllustration({ category }: { category: string }) {
     const s = getCategoryBadgeStyle(category);
     // Resolve CSS variable to a real hex — use inline fallbacks per category
     const accentMap: Record<string, string> = {
-        "Investing & Finance": "#60a5fa",
-        "Personal Economy":    "#5eead4",
-        "Local Politics":      "#fdba74",
-        "AI":                  "#6ee7b7",
-        "China":               "#7dd3fc",
+        "Investing & Finance":   "#60a5fa",
+        "Investering og finans": "#60a5fa",
+        "Personal Economy":      "#5eead4",
+        "Personlig økonomi":     "#5eead4",
+        "Local Politics":        "#fdba74",
+        "Lokalpolitikk":         "#fdba74",
+        "AI":                    "#6ee7b7",
+        "China":                 "#7dd3fc",
+        "Kina":                  "#7dd3fc",
     };
     const accent = accentMap[category] ?? "#a5b4fc";
     void s; // getCategoryBadgeStyle used elsewhere; keep import live
 
     switch (category) {
-        case "Investing & Finance": return <CandlestickSVG accent={accent} />;
-        case "Personal Economy":    return <BudgetDonutSVG accent={accent} />;
-        case "Local Politics":      return <CitySkylineSVG accent={accent} />;
-        case "AI":                  return <NeuralNetworkSVG accent={accent} />;
-        case "China":               return <ChinaEconomySVG accent={accent} />;
-        default:                    return <DefaultChartSVG accent={accent} />;
+        case "Investing & Finance":
+        case "Investering og finans": return <CandlestickSVG accent={accent} />;
+        case "Personal Economy":
+        case "Personlig økonomi":     return <BudgetDonutSVG accent={accent} />;
+        case "Local Politics":
+        case "Lokalpolitikk":         return <CitySkylineSVG accent={accent} />;
+        case "AI":                    return <NeuralNetworkSVG accent={accent} />;
+        case "China":
+        case "Kina":                  return <ChinaEconomySVG accent={accent} />;
+        default:                      return <DefaultChartSVG accent={accent} />;
     }
 }
 

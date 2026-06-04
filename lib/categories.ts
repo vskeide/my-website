@@ -10,6 +10,11 @@ export const categoryIndex: Record<string, number> = {
     "Calculators":         3,   // #7030A0 purple
     "AI":                  4,   // #00B050 green
     "China":               1,   // #FF3333 red   (swapped)
+    // Norwegian equivalents
+    "Investering og finans": 0,
+    "Personlig økonomi":     7,
+    "Lokalpolitikk":         2,
+    "Kina":                  1,
 };
 
 // Positions whose background colour is too light for white text
