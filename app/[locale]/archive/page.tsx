@@ -28,7 +28,7 @@ export default async function ArchivePage({ params }: { params: Promise<{ locale
                 </h1>
                 <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>
                     {locale === "no"
-                        ? "Bla gjennom alle artikler etter år og kategori."
+                        ? "Bla gjennom alle artiklar etter år og kategori."
                         : "Browse all articles by year and category."}
                 </p>
             </section>

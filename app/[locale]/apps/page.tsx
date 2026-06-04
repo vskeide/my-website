@@ -11,33 +11,33 @@ const apps = [
         accentColor: "var(--ch-c1)",
         url: "https://handleliste-nine.vercel.app",
         tags: ["Next.js", "Supabase", "PWA"],
-        ctaNo: "Åpne app",
+        ctaNo: "Opna app",
         ctaEn: "Open app",
     },
     {
         id: "finsankey",
         titleNo: "FinSankey",
         titleEn: "FinSankey",
-        descNo: "Excel-tillegg som viser finansielle strømmer som interaktive Sankey-diagrammer. Visualiser hvordan inntekter beveger seg gjennom kostnader, marginer og resultat.",
+        descNo: "Excel-tillegg som viser finansielle straumar som interaktive Sankey-diagram. Visualiser korleis inntekter rører seg gjennom kostnader, marginar og resultat.",
         descEn: "Excel add-in that renders financial flows as interactive Sankey diagrams. Visualise how revenue moves through costs, margins, and profit — directly inside your spreadsheet.",
         icon: "🔀",
         accentColor: "#6366f1",
         url: "https://github.com/vskeide/FinSankey",
         tags: ["Excel Add-in", "D3.js", "React"],
-        ctaNo: "Se på GitHub",
+        ctaNo: "Sjå på GitHub",
         ctaEn: "View on GitHub",
     },
     {
         id: "monte-carlo",
         titleNo: "Monte Carlo Sim",
         titleEn: "Monte Carlo Sim",
-        descNo: "Excel-tillegg for probabilistisk finansmodellering. Definer innganger med PERT-, triangulær-, normal- eller uniformfordeling med egendefinerte MC.*-funksjoner og få histogramutdata med persentilbånd.",
+        descNo: "Excel-tillegg for probabilistisk finansmodellering. Definer inngangar med PERT-, triangulær-, normal- eller uniformfordeling med eigendefinerte MC.*-funksjonar og få histogramutdata med persentilbånd.",
         descEn: "Excel add-in for probabilistic financial modelling. Define inputs with PERT, triangular, normal, or uniform distributions using custom MC.* functions, run thousands of iterations, and get histogram output with percentile bands — ideal for DCF and project valuation.",
         icon: "🎲",
         accentColor: "#f59e0b",
         url: "https://github.com/vskeide/monte-carlo-anitgravity",
         tags: ["Excel Add-in", "TypeScript", "Monte Carlo"],
-        ctaNo: "Se på GitHub",
+        ctaNo: "Sjå på GitHub",
         ctaEn: "View on GitHub",
     },
 ];
@@ -53,7 +53,7 @@ export default async function AppsPage({ params }: { params: Promise<{ locale: s
                     {no ? "Apper" : "Apps"}
                 </h1>
                 <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    {no ? "Nettapper og verktøy jeg har bygget. Åpen kildekode og gratis å bruke." : "Web apps and tools I've built. Open source and free to use."}
+                    {no ? "Nettappar og verktøy eg har bygd. Open kjeldekode og gratis å bruka." : "Web apps and tools I've built. Open source and free to use."}
                 </p>
             </section>
 
@@ -93,7 +93,7 @@ export default async function AppsPage({ params }: { params: Promise<{ locale: s
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {no ? "Tilbake til forsiden" : "Back to home"}
+                    {no ? "Attende til framsida" : "Back to home"}
                 </Link>
             </section>
         </main>

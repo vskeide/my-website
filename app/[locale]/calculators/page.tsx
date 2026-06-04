@@ -47,10 +47,10 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
         <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             <section className="pb-6 pt-8">
                 <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
-                    {no ? "Kalkulatorer" : "Calculators"}
+                    {no ? "Kalkulatorar" : "Calculators"}
                 </h1>
                 <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    {no ? "Interaktive verktøy for personlig økonomi og offentleg politikk." : "Interactive tools for personal finance and public policy."}
+                    {no ? "Interaktive verktøy for personleg økonomi og offentleg politikk." : "Interactive tools for personal finance and public policy."}
                 </p>
             </section>
 
@@ -73,7 +73,7 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
                                         {no ? calc.descNo : calc.descEn}
                                     </p>
                                     <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
-                                        {no ? "Åpne kalkulator →" : "Open calculator →"}
+                                        {no ? "Opna kalkulator →" : "Open calculator →"}
                                     </span>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {no ? "Tilbake til forsiden" : "Back to home"}
+                    {no ? "Attende til framsida" : "Back to home"}
                 </Link>
             </section>
         </main>

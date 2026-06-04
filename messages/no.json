@@ -2,11 +2,11 @@
   "nav": {
     "blog": "Blogg",
     "archive": "Arkiv",
-    "calculators": "Kalkulatorer",
+    "calculators": "Kalkulatorar",
     "ai": "AI",
-    "apps": "Apper",
-    "switchLight": "Bytt til lyst tema",
-    "switchDark": "Bytt til mørkt tema",
+    "apps": "Appar",
+    "switchLight": "Byt til lyst tema",
+    "switchDark": "Byt til mørkt tema",
     "switchLightShort": "Lyst",
     "switchDarkShort": "Mørkt"
   },
@@ -15,72 +15,72 @@
     "current": "NO"
   },
   "home": {
-    "title": "Personlig økonomi og samfunnsøkonomi",
-    "subtitle": "Uavhengige analyser og praktiske innsikter om investering, personlig økonomi og lokalpolitikk. Kutt gjennom støyen og ta bedre økonomiske beslutninger.",
-    "calculators": "Kalkulatorer",
-    "allCalculators": "Alle kalkulatorer →",
-    "latestArticles": "Siste artikler",
-    "viewAll": "Se alle →",
-    "openCalculator": "Åpne kalkulator",
-    "openApp": "Åpne app",
-    "viewOnGithub": "Se på GitHub",
-    "readStory": "Les mer →",
-    "backToHome": "Tilbake til forsiden"
+    "title": "Personleg økonomi og samfunnsøkonomi",
+    "subtitle": "Uavhengige analysar og praktiske innsikter om investering, personleg økonomi og lokalpolitikk. Kut gjennom støyen og ta betre økonomiske avgjerder.",
+    "calculators": "Kalkulatorar",
+    "allCalculators": "Alle kalkulatorar →",
+    "latestArticles": "Siste artiklar",
+    "viewAll": "Sjå alle →",
+    "openCalculator": "Opna kalkulator",
+    "openApp": "Opna app",
+    "viewOnGithub": "Sjå på GitHub",
+    "readStory": "Les meir →",
+    "backToHome": "Attende til framsida"
   },
   "blog": {
     "title": "Blogg",
-    "backToArticles": "Tilbake til alle artikler",
-    "readMore": "Les mer",
+    "backToArticles": "Attende til alle artiklar",
+    "readMore": "Les meir",
     "explore": "Utforsk →",
-    "noArticles": "Ingen artikler funnet i denne kategorien ennå."
+    "noArticles": "Ingen artiklar funne i denne kategorien enno."
   },
   "archive": {
     "title": "Arkiv",
-    "subtitle": "Bla gjennom alle artikler og kalkulatorer etter år og kategori.",
-    "noEntries": "Ingen oppføringer funnet for denne kategorien."
+    "subtitle": "Bla gjennom alle artiklar etter år og kategori.",
+    "noEntries": "Ingen oppføringar funne for denne kategorien."
   },
   "ai": {
     "title": "AI",
-    "subtitle": "Ting jeg utforsker med AI — musikk, verktøy og eksperimenter.",
+    "subtitle": "Ting eg utforskar med AI — musikk, verktøy og eksperiment.",
     "music": "Musikk",
-    "backToHome": "Tilbake til forsiden"
+    "backToHome": "Attende til framsida"
   },
   "suno": {
     "tag": "Musikk · Suno",
     "by": "av",
-    "madeWith": "— laget med Suno",
-    "songs": "Sanger",
+    "madeWith": "— laga med Suno",
+    "songs": "Songar",
     "listenOn": "Lytt på Suno ↗",
-    "backToAI": "Tilbake til AI"
+    "backToAI": "Attende til AI"
   },
   "apps": {
-    "title": "Apper",
-    "subtitle": "Nettapper og verktøy jeg har bygget. Åpen kildekode og gratis å bruke.",
-    "backToHome": "Tilbake til forsiden"
+    "title": "Appar",
+    "subtitle": "Nettappar og verktøy eg har bygd. Open kjeldekode og gratis å bruka.",
+    "backToHome": "Attende til framsida"
   },
   "calculators": {
-    "title": "Kalkulatorer",
-    "subtitle": "Interaktive verktøy for personlig økonomi og offentlig politikk.",
-    "backToHome": "Tilbake til forsiden",
-    "openCalculator": "Åpne kalkulator"
+    "title": "Kalkulatorar",
+    "subtitle": "Interaktive verktøy for personleg økonomi og offentleg politikk.",
+    "backToHome": "Attende til framsida",
+    "openCalculator": "Opna kalkulator"
   },
   "article": {
-    "backToBlog": "Tilbake til alle artikler",
-    "notAvailable": "Denne artikkelen er ikke tilgjengelig på norsk ennå. Viser engelsk versjon.",
+    "backToBlog": "Attende til alle artiklar",
+    "notAvailable": "Denne artikkelen er ikkje tilgjengeleg på norsk enno. Viser engelsk versjon.",
     "showIn": "Vis på",
     "norwegian": "norsk",
     "english": "engelsk"
   },
   "footer": {
-    "rights": "Alle rettigheter forbeholdt"
+    "rights": "Alle rettar atterhaldne"
   },
   "categories": {
     "all": "Alle",
     "investing": "Investering og finans",
-    "personal": "Personlig økonomi",
+    "personal": "Personleg økonomi",
     "local": "Lokalpolitikk",
     "ai": "AI",
     "china": "Kina",
-    "calculators": "Kalkulatorer"
+    "calculators": "Kalkulatorar"
   }
 }

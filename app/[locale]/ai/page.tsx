@@ -9,7 +9,7 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
             <section className="pb-6 pt-8">
                 <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>AI</h1>
                 <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    {no ? "Ting jeg utforsker med AI — musikk, verktøy og eksperimenter." : "Things I'm exploring with AI — music, tools, experiments."}
+                    {no ? "Ting eg utforskar med AI — musikk, verktøy og eksperiment." : "Things I'm exploring with AI — music, tools, experiments."}
                 </p>
             </section>
 
@@ -34,7 +34,7 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
                             </h3>
                             <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>by Sortina</p>
                             <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
-                                {no ? "Les mer →" : "Read story →"}
+                                {no ? "Les meir →" : "Read story →"}
                             </span>
                         </div>
                     </Link>
@@ -44,7 +44,7 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {no ? "Tilbake til forsiden" : "Back to home"}
+                    {no ? "Attende til framsida" : "Back to home"}
                 </Link>
             </section>
         </main>

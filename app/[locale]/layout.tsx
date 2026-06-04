@@ -54,12 +54,12 @@ export default async function LocaleLayout({
                             <footer className="border-t border-border-subtle" style={{ backgroundColor: "var(--t-bg)" }}>
                                 <div className="mx-auto flex max-w-[90rem] flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
                                     <p className="text-xs text-text-muted">
-                                        © {new Date().getFullYear()} Skeide.me — {locale === "no" ? "Alle rettigheter forbeholdt" : "All rights reserved"}
+                                        © {new Date().getFullYear()} Skeide.me — {locale === "no" ? "Alle rettar atterhaldne" : "All rights reserved"}
                                     </p>
                                     <nav className="flex items-center gap-4">
                                         <a href={locale === "en" ? "/en/blog" : "/blog"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">{locale === "no" ? "Blogg" : "Blog"}</a>
                                         <a href={locale === "en" ? "/en/archive" : "/archive"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">{locale === "no" ? "Arkiv" : "Archive"}</a>
-                                        <a href={locale === "en" ? "/en/calculators" : "/calculators"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">{locale === "no" ? "Kalkulatorer" : "Calculators"}</a>
+                                        <a href={locale === "en" ? "/en/calculators" : "/calculators"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">{locale === "no" ? "Kalkulatorar" : "Calculators"}</a>
                                         <a href={locale === "en" ? "/en/ai" : "/ai"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">AI</a>
                                         <a href={locale === "en" ? "/en/apps" : "/apps"} className="text-xs text-text-muted transition-colors hover:text-text-secondary">{locale === "no" ? "Apper" : "Apps"}</a>
                                     </nav>

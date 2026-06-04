@@ -52,7 +52,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
     const otherArticle = getArticle(otherLocale, slug);
 
     const fallbackMessage = locale === "no"
-        ? "Denne artikkelen er ikke tilgjengelig på norsk ennå. Viser engelsk versjon."
+        ? "Denne artikkelen er ikkje tilgjengeleg på norsk enno. Viser engelsk versjon."
         : "This article is not yet available in English. Showing Norwegian version.";
 
     const currentContent = <MDXRemote source={article.content} components={mdxComponents} />;
@@ -61,7 +61,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
     return (
         <main className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
             <nav className="pb-4 text-xs text-text-muted">
-                <Link href="/" className="transition-colors hover:text-text-secondary">{locale === "no" ? "Hjem" : "Home"}</Link>
+                <Link href="/" className="transition-colors hover:text-text-secondary">{locale === "no" ? "Heim" : "Home"}</Link>
                 <span className="mx-2">/</span>
                 <Link href="/blog" className="transition-colors hover:text-text-secondary">{locale === "no" ? "Blogg" : "Blog"}</Link>
                 <span className="mx-2">/</span>
@@ -96,7 +96,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
             <div className="border-t border-border-subtle py-6">
                 <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-colors hover:text-accent-hover">
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {locale === "no" ? "Tilbake til alle artikler" : "Back to all articles"}
+                    {locale === "no" ? "Attende til alle artiklar" : "Back to all articles"}
                 </Link>
             </div>
             <DatawrapperResizer />

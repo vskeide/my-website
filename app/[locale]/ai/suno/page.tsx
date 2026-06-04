@@ -17,18 +17,18 @@ const songs = [
 
 const articleNo = (
     <>
-        <p className="mb-5">Jeg har nok laget rundt 500 sanger på Suno på dette tidspunktet. Kanskje mer. De aller fleste er borte — prøvd, lyttet til én eller to ganger og forkastet. Det du ser i spillelisten her er kanskje 10–20 som føltes verdt å beholde. Det forholdet forteller noe viktig om hva dette faktisk innebærer.</p>
-        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Det er ikke bare å trykke på en knapp</h2>
-        <p className="mb-5">Det enkleste Suno-opplegget finnes. Du skriver en vag prompt, noe kommer ut, du går videre. Men slik får du ikke noe du faktisk vil høre igjen. Å få en sang som føles riktig krever mye gjenprøving — lytte til det samme sporet i lette variasjoner, justere et ord i prompten, kaste terningen igjen, sammenligne versjoner. Det ligner mer på redigering enn på generering. Det meste av tiden brukes på å forkaste ting.</p>
-        <p className="mb-5">Tekstene er der det meste av arbeidet skjer. Jeg bruker Claude til å hjelpe meg — beskriver konteksten, målet, følelsen jeg er ute etter og en grov tematisk retning. Vi går fram og tilbake med å skrive utkast og forbedre dem før noe går inn i Suno. Å få tekstene riktige før du genererer sparer mye bortkastede iterasjoner.</p>
-        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Norske tekster er et eget problem</h2>
-        <p className="mb-5">Å skrive på norsk — og spesielt nynorsk — introduserer en rekke vanskeligheter som engelske tekster ikke har. Direkte oversettelse fungerer nesten aldri. De naturlige trykkmønstrene er annerledes, rim som fungerer på papiret høres kunstige ut når de synges, og nynorsk har spesielt en rytme som motarbeider den typen lyrisk stenografi som engelsken trives med. Du kan ikke bare bytte inn en norsk frase der en engelsk ville gå; du må bygge linjen på nytt fra bunnen av basert på hvordan den faktisk vil høres ut.</p>
-        <p className="mb-5">Å fjerne overbrukte ord og slitte temaer tar tid også. Det første utkastet av nesten hva som helst er fullt av klisjeer — de samme bildene, de samme emosjonelle mønstrene, de samme rimordningene. Å strippe disse ut og finne noe som faktisk sier det du mener, på en måte som flyter når det synges, er det meste av det kreative arbeidet.</p>
-        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Hva det har gjort med måten jeg lytter på</h2>
-        <p className="mb-5">Å lage musikk — selv på denne måten — har gjort at jeg setter stor pris på musikk. Jeg er oppmerksom på tekststruktur nå på en måte jeg ikke var før. Jeg legger merke til produksjonsvalg, hvordan en beat sitter under en vokal linje, hvor energien i et spor kommer fra. Jeg har lært mer om hvordan sanger faktisk fungerer ved å prøve å lage dem, enn jeg gjorde fra mange år med bare å lytte.</p>
-        <p className="mb-5">Det er også mer produktiv bruk av en sen kveld enn å se enda en Netflix-serie. Det høres kanskje ut som en lav standard, men det er ærlig talt slik jeg tenker på det. Du går ut med noe — noen ganger noe du faktisk liker.</p>
-        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Tilknytning, som kanskje er litt narsissistisk</h2>
-        <p className="mb-5">Sangene jeg har brukt skikkelig tid på betyr noe for meg på en måte som sanger jeg bare har konsumert ikke gjør. Det er kanskje litt narsissistisk — å like sitt eget verk mer fordi det er ditt — men jeg tror det også bare er slik kreativ investering fungerer. Når du har brukt en kveld på å gå fram og tilbake på en tekst, lytte til ti versjoner, endelig lande på noe som føles riktig, er du knyttet til det. De i spillelisten her er de jeg holdt på å komme tilbake til. Det er det eneste filteret som betyr noe.</p>
+        <p className="mb-5">Eg har nok laga rundt 500 songar på Suno på dette tidspunktet. Kanskje meir. Dei aller fleste er borte — prøvde, lytta til éin eller to gonger og kasta. Det du ser i spellelista her er kanskje 10–20 som kjendest verd å halda på. Det forholdet seier noko viktig om kva dette faktisk inneber.</p>
+        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Det er ikkje berre å trykkja på ein knapp</h2>
+        <p className="mb-5">Den enklaste Suno-bruken finst. Du skriv ein vag prompt, noko kjem ut, du går vidare. Men slik får du ikkje noko du faktisk vil høyra igjen. Å få ein song som kjennest rett krev mykje gjenprøving — lytta til det same sporet i lette variasjonar, justera eit ord i prompten, kasta terningen igjen, samanlikna versjonar. Det liknar meir på redigering enn på generering. Det meste av tida vert brukt på å kasta ting.</p>
+        <p className="mb-5">Tekstane er der det meste av arbeidet skjer. Eg brukar Claude til å hjelpa meg — skildrar konteksten, målet, kjensla eg er ute etter og ein grov tematisk retning. Me går fram og attende med å skriva utkast og forbetra dei før noko går inn i Suno. Å få tekstane rette før du genererer sparar mange bortkasta iterasjonar.</p>
+        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Nynorske tekstar er eit eige problem</h2>
+        <p className="mb-5">Å skriva på norsk — og særleg nynorsk — innfører ei rekkje vanskar som engelske tekstar ikkje har. Direkte omsetjing fungerer nesten aldri. Dei naturlege trykkmønstrana er annleis, rim som fungerer på papiret høyrest kunstige ut når dei vert sunge, og nynorsk har ein rytme som motarbeidar den typen lyrisk stenografi som engelsken trivst med. Du kan ikkje berre byta inn ein norsk frase der ein engelsk ville gå; du må byggja linja på nytt frå botnen av, basert på korleis ho faktisk vil høyrast ut.</p>
+        <p className="mb-5">Å fjerna overbrukte ord og slitne tema tek tid òg. Det fyrste utkastet av nesten kva som helst er fullt av klisjear — dei same bileta, dei same kjenslemessige mønstra, dei same rimordningane. Å strippa desse ut og finna noko som faktisk seier det du meiner, på ein måte som flyt når det vert sunge, er det meste av det kreative arbeidet.</p>
+        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Kva det har gjort med måten eg høyrer på</h2>
+        <p className="mb-5">Å laga musikk — sjølv på denne måten — har gjort at eg set stor pris på musikk. Eg er merksam på tekststruktur no på ein måte eg ikkje var før. Eg legg merke til produksjonsval, korleis ein beat sit under ei vokallinje, kor energien i eit spor kjem frå. Eg har lært meir om korleis songar faktisk fungerer ved å prøva å laga dei, enn eg gjorde frå mange år med berre å lytta.</p>
+        <p className="mb-5">Det er òg meir produktiv bruk av ein sein kveld enn å sjå endå ein Netflix-serie. Det høyrest kanskje ut som ein låg standard, men det er ærleg talt slik eg tenkjer på det. Du går ut med noko — nokre gonger noko du faktisk likar.</p>
+        <h2 className="mb-3 mt-8 text-base font-semibold" style={{ color: "var(--t-text)" }}>Tilknyting, som kanskje er litt narsissistisk</h2>
+        <p className="mb-5">Songane eg har brukt skikkeleg tid på tyder noko for meg på ein måte som songar eg berre har konsumert ikkje gjer. Det er kanskje litt narsissistisk — å lika sitt eige verk meir fordi det er ditt — men eg trur det òg berre er slik kreativ investering fungerer. Når du har brukt ein kveld på å gå fram og attende på ein tekst, lytta til ti versjonar, endeleg landa på noko som kjennest rett, er du knytt til det. Dei i spellelista her er dei eg heldt på å koma attende til. Det er det einaste filteret som tyder noko.</p>
     </>
 );
 
@@ -65,7 +65,7 @@ export default function SunoPage() {
                     We were golden
                 </h1>
                 <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    {no ? "av Sortina — laget med Suno" : "by Sortina — made with Suno"}
+                    {no ? "av Sortina — laga med Suno" : "by Sortina — made with Suno"}
                 </p>
             </section>
 
@@ -91,7 +91,7 @@ export default function SunoPage() {
                     <aside className="order-1 lg:order-2">
                         <div className="sticky top-[calc(var(--nav-height)+20px)]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border-subtle)", padding: "20px" }}>
                             <h3 className="mb-4 text-sm font-semibold" style={{ color: "var(--t-text)" }}>
-                                {no ? "Sanger" : "Songs"}
+                                {no ? "Songar" : "Songs"}
                             </h3>
                             <div className="space-y-3">
                                 {songs.map((song) => (
@@ -115,7 +115,7 @@ export default function SunoPage() {
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link href="/ai" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {no ? "Tilbake til AI" : "Back to AI"}
+                    {no ? "Attende til AI" : "Back to AI"}
                 </Link>
             </section>
         </main>
