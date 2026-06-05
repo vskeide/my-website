@@ -138,7 +138,7 @@ const fmtM = (v: number) => (v / 1e6).toFixed(1);
 const DarkTip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 280 }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: "10px 14px", maxWidth: 280 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 6, fontSize: 13 }}>{label}</p>
             {payload.filter((p: any) => p.dataKey !== "_total").map((p: any, i: number) => (
                 <p key={i} style={{ color: p.color || C.text, fontSize: 12, margin: "2px 0" }}>
@@ -153,7 +153,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
     const v = payload[0]?.value ?? 0;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px", maxWidth: 270 }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: "10px 14px", maxWidth: 270 }}>
             <p style={{ color: C.text, fontWeight: 700, marginBottom: 4, fontSize: 13 }}>{label}</p>
             <p style={{ color: v > 0 ? C.negative : v < 0 ? C.positive : C.neutralColor, fontSize: 12, margin: 0 }}>
                 {v > 0 ? `Betalar ${Math.abs(v).toLocaleString("nb-NO")} kr meir per pers enn flat fordeling`
@@ -167,7 +167,7 @@ const SubsidieTip = ({ active, payload, label }: any) => {
 const PieTip = ({ active, payload }: any) => {
     if (!active || !payload?.length) return null;
     return (
-        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 14px" }}>
+        <div style={{ background: C.tooltipBg, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: "10px 14px" }}>
             <p style={{ color: C.text, fontWeight: 700, fontSize: 13, margin: "0 0 3px" }}>{payload[0].name}</p>
             <p style={{ color: payload[0].payload.color, fontSize: 12, margin: 0 }}>
                 {fmtM(payload[0].value)} MNOK ({(payload[0].payload.percent * 100).toFixed(1)}%)
@@ -263,14 +263,14 @@ const CostInput = ({ name, value, color, onChange, isIncome }: {
 const InfoBox = ({ children, color = "59,130,246" }: { children: React.ReactNode; color?: string }) => (
     <div style={{
         background: `rgba(${color},0.07)`, border: `1px solid rgba(${color},0.22)`,
-        borderRadius: 0, padding: "13px 16px", marginBottom: 20
+        borderRadius: "var(--r-panel)", padding: "13px 16px", marginBottom: 20
     }}>
         <p style={{ margin: 0, fontSize: 13, color: C.muted, lineHeight: 1.75 }}>{children}</p>
     </div>
 );
 
 const StatCard = ({ label, val, sub, c }: { label: string; val: string; sub?: string; c: string }) => (
-    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "10px 12px" }}>
+    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: "10px 12px" }}>
         <p style={{ color: C.muted, fontSize: 9, margin: "0 0 3px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{label}</p>
         <p style={{ color: c, fontSize: 16, fontWeight: 800, margin: "0 0 2px" }}>{val}</p>
         {sub && <p style={{ color: C.muted, fontSize: 10, margin: 0 }}>{sub}</p>}
@@ -361,7 +361,7 @@ export default function VoldabadViz() {
                 <div style={{ marginBottom: 22 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 5 }}>
                         <div style={{ width: 4, height: 28, background: C.c1, borderRadius: 2 }} />
-                        <h1 style={{ fontSize: 21, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+                        <h1 style={{ fontSize: 26, fontWeight: 800, margin: 0, letterSpacing: "-0.02em", fontFamily: "var(--font-display)" }}>
                             Voldabadet — Kostnadsanalyse
                         </h1>
                     </div>
@@ -375,7 +375,7 @@ export default function VoldabadViz() {
                     {/* Left Column: Inputs & Summary (1/4) */}
                     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                         {/* inputs */}
-                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: "16px 20px" }}>
+                        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: "16px 20px" }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
                                 <div>
                                     <h3 style={{
@@ -448,12 +448,12 @@ export default function VoldabadViz() {
                     {/* Right Column: Tabs & Visualizations (3/4) */}
                     <div style={{ minWidth: 0 }}>
                         {/* tabs */}
-                        <div className="vb-tabs" style={{ background: "#000000", borderRadius: 4, marginBottom: 16, display: "flex", overflow: "hidden" }}>
+                        <div className="vb-tabs" style={{ background: "var(--t-surface)", borderRadius: "var(--r-control)", marginBottom: 16, display: "flex", overflow: "hidden", border: `1px solid ${C.border}` }}>
                             {TABS.map(t => (
                                 <button key={t.id} onClick={() => setTab(t.id)} style={{
-                                    background: tab === t.id ? C.c1 : "transparent",
+                                    background: tab === t.id ? "var(--ch-accent)" : "transparent",
                                     border: "none",
-                                    color: tab === t.id ? "#ffffff" : "#a1a1aa",
+                                    color: tab === t.id ? "#ffffff" : "var(--t-text-muted)",
                                     fontWeight: tab === t.id ? 600 : 400,
                                     fontSize: 14, cursor: "pointer", padding: "12px 24px",
                                     transition: "all 0.15s",
@@ -467,7 +467,7 @@ export default function VoldabadViz() {
                             {/* ══ OVERVIEW ══ */}
                             {tab === "overview" && (
                                 <div style={{ minWidth: 0, width: "100%" }}>
-                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, marginBottom: 20, overflowX: "auto" }}>
+                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: 24, marginBottom: 20, overflowX: "auto" }}>
                                         <h3 style={{ margin: "0 0 5px", fontSize: 15, fontWeight: 700 }}>Total kostnad per husstandstype (kr/år)</h3>
                                         <p style={{ color: C.muted, fontSize: 12, margin: "0 0 20px" }}>
                                             Nedste tre delar = skatt (betalast uansett). Y-aksen er fast.
@@ -524,7 +524,7 @@ export default function VoldabadViz() {
                                                 style={{
                                                     background: selected?.type === h.type ? C.bg : C.card,
                                                     border: `1px solid ${selected?.type === h.type ? C.c4 : C.border}`,
-                                                    borderRadius: 0, padding: 15, cursor: "pointer", transition: "all 0.15s"
+                                                    borderRadius: "var(--r-panel)", padding: 15, cursor: "pointer", transition: "all 0.15s"
                                                 }}>
                                                 <div style={{ marginBottom: 10 }}><HouseholdIcon adults={h.adults} kids={h.kids} size={36} /></div>
                                                 <p style={{ fontWeight: 700, margin: "0 0 2px", fontSize: 13 }}>{h.type}</p>
@@ -536,7 +536,7 @@ export default function VoldabadViz() {
                                         ))}
                                     </div>
                                     {selected && (
-                                        <div style={{ background: C.card, border: `1px solid ${C.c4}`, borderRadius: 0, padding: 20 }}>
+                                        <div style={{ background: C.card, border: `1px solid ${C.c4}`, borderRadius: "var(--r-panel)", padding: 20 }}>
                                             <h3 style={{ margin: "0 0 14px", fontSize: 13, fontWeight: 700 }}>Detaljar: {selected.type}</h3>
                                             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                                                 {[
@@ -557,7 +557,7 @@ export default function VoldabadViz() {
                             {/* ══ COSTS ══ */}
                             {tab === "costs" && (
                                 <div>
-                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24 }}>
+                                    <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: 24 }}>
                                         <div className="vb-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
                                             <ResponsiveContainer width="99%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                                 <PieChart>
@@ -589,7 +589,7 @@ export default function VoldabadViz() {
                             {/* ══ SUBSIDY ══ */}
                             {tab === "subsidy" && (
                                 <div style={{ minWidth: 0, width: "100%" }}>
-                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 0, padding: 24, overflowX: "auto" }}>
+                                    <div className="vb-chart-container" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: "var(--r-panel)", padding: 24, overflowX: "auto" }}>
                                         <h3 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700 }}>Subsidie per husstand (kr/år)</h3>
                                         <ResponsiveContainer width="99%" height={420} style={{ backgroundColor: CH.bg, borderRadius: 4 }}>
                                             <BarChart data={households} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>

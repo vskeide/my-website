@@ -17,6 +17,16 @@
   "home": {
     "title": "Personleg økonomi og samfunnsøkonomi",
     "subtitle": "Uavhengige analysar og praktiske innsikter om investering, personleg økonomi og lokalpolitikk. Kut gjennom støyen og ta betre økonomiske avgjerder.",
+    "tagline": "Uavhengig finans og økonomi",
+    "heroLead": "Få oversikt over",
+    "heroEmph": "pengane dine",
+    "heroSubtitle": "Uavhengig analyse av økonomi, investeringar, privatøkonomi og politikk.",
+    "ctaReadBlog": "Les bloggen",
+    "ctaTryCalculators": "Prøv kalkulatorane",
+    "featuredKicker": "Utvalt · Nyaste",
+    "calculatorsKicker": "Interaktivt",
+    "latestKicker": "Ferskt",
+    "minRead": "min lesing",
     "calculators": "Kalkulatorar",
     "allCalculators": "Alle kalkulatorar →",
     "latestArticles": "Siste artiklar",
@@ -29,6 +39,7 @@
   },
   "blog": {
     "title": "Blogg",
+    "subtitle": "Notat frå marknadene, pengar og politikken som flyttar dei.",
     "backToArticles": "Attende til alle artiklar",
     "readMore": "Les meir",
     "explore": "Utforsk →",
@@ -61,6 +72,8 @@
   "calculators": {
     "title": "Kalkulatorar",
     "subtitle": "Interaktive verktøy for personleg økonomi og offentleg politikk.",
+    "kicker": "Interaktive verktøy",
+    "heroSubtitle": "Køyr tala sjølv — juster føresetnadene og sjå kva som faktisk skjer med pengane.",
     "backToHome": "Attende til framsida",
     "openCalculator": "Opna kalkulator"
   },
@@ -69,7 +82,14 @@
     "notAvailable": "Denne artikkelen er ikkje tilgjengeleg på norsk enno. Viser engelsk versjon.",
     "showIn": "Vis på",
     "norwegian": "norsk",
-    "english": "engelsk"
+    "english": "engelsk",
+    "by": "Av Skeide",
+    "minRead": "min lesing",
+    "shareThis": "Del denne saka",
+    "copyLink": "Kopier lenke",
+    "share": "Del",
+    "keepReading": "Les meir",
+    "moreIn": "Meir i"
   },
   "footer": {
     "rights": "Alle rettar atterhaldne"

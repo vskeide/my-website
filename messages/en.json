@@ -17,6 +17,16 @@
   "home": {
     "title": "Personal Finance & Economics",
     "subtitle": "Independent analysis and practical insights on investing, personal economy, and local economic policy. Cut through the noise and make better financial decisions.",
+    "tagline": "Independent finance & economics",
+    "heroLead": "Make sense of",
+    "heroEmph": "your money",
+    "heroSubtitle": "Independent analysis of economics, investing, personal finance and politics.",
+    "ctaReadBlog": "Read the blog",
+    "ctaTryCalculators": "Try the calculators",
+    "featuredKicker": "Featured · Latest",
+    "calculatorsKicker": "Interactive",
+    "latestKicker": "Fresh",
+    "minRead": "min read",
     "calculators": "Calculators",
     "allCalculators": "All calculators →",
     "latestArticles": "Latest Articles",
@@ -29,6 +39,7 @@
   },
   "blog": {
     "title": "Blog",
+    "subtitle": "Field notes on markets, money and the policies that move them.",
     "backToArticles": "Back to all articles",
     "readMore": "Read more",
     "explore": "Explore →",
@@ -61,6 +72,8 @@
   "calculators": {
     "title": "Calculators",
     "subtitle": "Interactive tools for personal finance and public policy.",
+    "kicker": "Interactive tools",
+    "heroSubtitle": "Run the numbers yourself — adjust the assumptions and see what actually happens to your money.",
     "backToHome": "Back to home",
     "openCalculator": "Open calculator"
   },
@@ -69,7 +82,14 @@
     "notAvailable": "This article is not yet available in English. Showing Norwegian version.",
     "showIn": "Show in",
     "norwegian": "Norwegian",
-    "english": "English"
+    "english": "English",
+    "by": "By Skeide",
+    "minRead": "min read",
+    "shareThis": "Share this story",
+    "copyLink": "Copy link",
+    "share": "Share",
+    "keepReading": "Keep reading",
+    "moreIn": "More in"
   },
   "footer": {
     "rights": "All rights reserved"

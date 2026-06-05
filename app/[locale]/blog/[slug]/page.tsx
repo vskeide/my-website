@@ -14,13 +14,13 @@ const chartArticles: Record<string, typeof silverPriceAnalysis> = {
 
 const mdxComponents = {
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-        <p style={{ marginBottom: "1.25rem", fontSize: "0.875rem", lineHeight: "1.75", color: "var(--t-text-secondary)" }} {...props} />
+        <p style={{ marginBottom: "1.25rem", fontSize: "1.05rem", lineHeight: "1.72", color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }} {...props} />
     ),
     h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h2 style={{ marginTop: "2.5rem", marginBottom: "0.75rem", fontSize: "1.1rem", fontWeight: 700, color: "var(--t-text)" }} {...props} />
+        <h2 style={{ marginTop: "2.5rem", marginBottom: "0.75rem", fontSize: "1.25rem", fontWeight: 700, color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }} {...props} />
     ),
     h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h3 style={{ marginTop: "2rem", marginBottom: "0.5rem", fontSize: "0.95rem", fontWeight: 700, color: "var(--t-text)" }} {...props} />
+        <h3 style={{ marginTop: "2rem", marginBottom: "0.5rem", fontSize: "1.05rem", fontWeight: 700, color: "var(--t-text)", fontFamily: "var(--font-display)" }} {...props} />
     ),
     iframe: (props: React.IframeHTMLAttributes<HTMLIFrameElement>) => (
         <div style={{ margin: "3rem 0 3.5rem" }}>
@@ -69,17 +69,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
             </nav>
 
             <header className="pb-6">
-                <span className="mb-3 inline-block px-2 py-0.5 text-xs font-semibold" style={{ background: badgeStyle.bg, color: badgeStyle.text, borderRadius: 0 }}>
+                <span className="mb-3 inline-block px-3 py-1 text-xs font-semibold" style={{ background: badgeStyle.bg, color: badgeStyle.text, borderRadius: "var(--r-pill)" }}>
                     {article.category}
                 </span>
-                <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-text-primary sm:text-3xl">
+                <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight sm:text-3xl" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.025em", color: "var(--t-text)" }}>
                     {article.title}
                 </h1>
-                <time className="text-sm text-text-muted">{article.date}</time>
+                <time className="text-sm" style={{ color: "var(--t-text-muted)" }}>{article.date}</time>
             </header>
 
             {article.imageUrl && (
-                <div className="mb-8 h-64 w-full overflow-hidden sm:h-80" style={{ background: `url(${article.imageUrl}) center/cover no-repeat` }} />
+                <div className="mb-8 overflow-hidden" style={{ maxWidth: 720, aspectRatio: "16/7", maxHeight: 340, borderRadius: "var(--r-card)" }}>
+                    <img src={article.imageUrl} alt="" className="h-full w-full object-cover" style={{ filter: "grayscale(0.3) contrast(1.02)" }} />
+                </div>
             )}
 
             <article className="pb-12">

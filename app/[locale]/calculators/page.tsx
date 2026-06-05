@@ -1,8 +1,10 @@
 import { Link } from "@/lib/i18n-navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function CalculatorsPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     const no = locale === "no";
+    const t = await getTranslations("calculators");
 
     const calcs = [
         {
@@ -11,11 +13,11 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             titleEn: "Voldabadet — Cost Analysis",
             descNo: "Kva kostar symjeanlegget kvar innbyggar? Interaktiv kalkulator med justérbare føresetnader og subsidieanalyse.",
             descEn: "What does the swimming facility cost per resident? Interactive calculator with adjustable assumptions and subsidy analysis.",
-            gradient: "linear-gradient(135deg, #0c4a6e 0%, #0369a1 60%, #0284c7 100%)",
-            accentColor: "#38bdf8",
+            gradient: "linear-gradient(140deg, #0070C0 0%, #0070C0CC 100%)",
             labelNo: "Kommuneøkonomi",
             labelEn: "Municipal",
-            imageUrl: "/images/articles/voldabadet.png",
+            stat: "230M",
+            statLabel: no ? "MNOK investering" : "MNOK investment",
         },
         {
             id: "norgespris",
@@ -23,11 +25,11 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             titleEn: "Norgespris vs. Spot Price",
             descNo: "Lønner fastpristilbodet 'Norgespris' seg kontra tradisjonell spotpris og strømstøtte?",
             descEn: "Does the fixed-price offer 'Norgespris' pay off compared to traditional spot price and electricity subsidies?",
-            gradient: "linear-gradient(135deg, #451a03 0%, #92400e 60%, #d97706 100%)",
-            accentColor: "#fbbf24",
+            gradient: "linear-gradient(140deg, #FFC000 0%, #FFC000CC 100%)",
             labelNo: "Energi",
             labelEn: "Energy",
-            imageUrl: "/images/articles/noregespris.png",
+            stat: "35k",
+            statLabel: "kWh / year",
         },
         {
             id: "sparing",
@@ -35,45 +37,53 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             titleEn: "Investment Calculator",
             descNo: "Sjå korleis startkapital, årlege innskot, gebyr og inflasjon formar det du faktisk sit att med.",
             descEn: "See how starting capital, annual contributions, fees, and inflation shape what you actually end up with.",
-            gradient: "linear-gradient(135deg, #052e16 0%, #166534 60%, #16a34a 100%)",
-            accentColor: "#4ade80",
+            gradient: "linear-gradient(140deg, #00B050 0%, #00B050CC 100%)",
             labelNo: "Sparing",
             labelEn: "Savings",
-            imageUrl: "/images/articles/sparing.png",
+            stat: "7%",
+            statLabel: no ? "snittavkastning" : "avg. return",
         },
     ];
 
     return (
-        <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
-            <section className="pb-6 pt-8">
-                <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
-                    {no ? "Kalkulatorar" : "Calculators"}
+        <main className="mx-auto max-w-[75rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
+            <section className="pb-4 pt-14 text-center">
+                <div className="mb-4 text-xs font-bold uppercase tracking-widest" style={{ color: "var(--ch-accent)", letterSpacing: "0.12em" }}>
+                    {t("kicker")}
+                </div>
+                <h1 className="mb-4 text-4xl font-bold sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.035em", lineHeight: 0.96, color: "var(--t-text)" }}>
+                    {t("title")}
                 </h1>
-                <p className="max-w-xl text-xs" style={{ color: "var(--t-text-muted)" }}>
-                    {no ? "Interaktive verktøy for personleg økonomi og offentleg politikk." : "Interactive tools for personal finance and public policy."}
+                <p className="mx-auto max-w-xl text-base" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)", lineHeight: 1.55 }}>
+                    {t("heroSubtitle")}
                 </p>
             </section>
 
-            <section className="stagger-children grid gap-4 pb-12 sm:grid-cols-2 lg:grid-cols-3">
+            <section className="stagger-children grid gap-5 pb-16 pt-8 sm:grid-cols-2 lg:grid-cols-3">
                 {calcs.map((calc) => (
                     <div key={calc.id} className="animate-fade-in-up">
                         <Link href={`/calculators/${calc.id}`} className="group block h-full">
-                            <div className="h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>
-                                <div className="relative flex h-32 items-end overflow-hidden p-4" style={{ backgroundImage: `url(${calc.imageUrl}), ${calc.gradient}`, backgroundSize: "cover", backgroundPosition: "center top" }}>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <span className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold tracking-wide" style={{ background: "rgba(0,0,0,0.55)", color: calc.accentColor, border: `1px solid color-mix(in srgb, ${calc.accentColor} 50%, transparent)` }}>
+                            <div className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_22px_48px_-24px_rgba(60,30,110,0.32)]" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
+                                <div className="relative overflow-hidden p-5 pb-4" style={{ background: calc.gradient }}>
+                                    <div className="text-xs font-bold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.85)", letterSpacing: "0.08em" }}>
                                         {no ? calc.labelNo : calc.labelEn}
-                                    </span>
+                                    </div>
+                                    <div className="mt-2 text-4xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#fff", lineHeight: 1.05 }}>
+                                        {calc.stat}
+                                    </div>
+                                    <div className="mt-1 text-xs" style={{ color: "rgba(255,255,255,0.8)" }}>
+                                        {calc.statLabel}
+                                    </div>
                                 </div>
-                                <div className="p-4">
-                                    <h3 className="mb-1.5 text-sm font-semibold transition-colors group-hover:underline" style={{ color: "var(--t-text)" }}>
+                                <div className="p-5">
+                                    <h3 className="mb-2 text-base font-semibold" style={{ color: "var(--t-text)", fontFamily: "var(--font-display)" }}>
                                         {no ? calc.titleNo : calc.titleEn}
                                     </h3>
-                                    <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                                    <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }}>
                                         {no ? calc.descNo : calc.descEn}
                                     </p>
-                                    <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
-                                        {no ? "Opna kalkulator →" : "Open calculator →"}
+                                    <span className="inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--ch-accent)" }}>
+                                        {t("openCalculator")} →
                                     </span>
                                 </div>
                             </div>
@@ -83,9 +93,9 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             </section>
 
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
-                <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
+                <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)", borderRadius: "var(--r-pill)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    {no ? "Attende til framsida" : "Back to home"}
+                    {t("backToHome")}
                 </Link>
             </section>
         </main>

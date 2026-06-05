@@ -23,7 +23,7 @@ export default async function ArchivePage({ params }: { params: Promise<{ locale
     return (
         <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
             <section className="pb-4 pt-8">
-                <h1 className="mb-1 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
+                <h1 className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl" style={{ color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
                     {locale === "no" ? "Arkiv" : "Archive"}
                 </h1>
                 <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>

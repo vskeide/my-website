@@ -191,13 +191,13 @@ export default function ArticleLayout({
                         {/* Category tag */}
                         <span
                             className="mb-2 inline-block px-1.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider"
-                            style={{ background: tag.bg, color: tag.text, borderRadius: 0 }}
+                            style={{ background: tag.bg, color: tag.text, borderRadius: "var(--r-pill)" }}
                         >
                             {category}
                         </span>
 
                         {/* Title */}
-                        <h1 className="mb-1.5 font-bold leading-tight tracking-tight" style={{ fontSize: 22, color: "var(--t-text)" }}>
+                        <h1 className="mb-1.5 font-bold leading-tight tracking-tight" style={{ fontSize: 24, color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
                             {title}
                         </h1>
 
@@ -211,7 +211,7 @@ export default function ArticleLayout({
                                 return (
                                     <div key={`t-${i}`}>
                                         {block.content.split("\n\n").map((p, j) => (
-                                            <p key={`${i}-${j}`} className="mb-4 text-sm leading-7" style={{ color: "var(--t-text-secondary)" }}>
+                                            <p key={`${i}-${j}`} className="mb-4 text-sm leading-7" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }}>
                                                 {p}
                                             </p>
                                         ))}
@@ -225,7 +225,7 @@ export default function ArticleLayout({
                                     <div
                                         key={chart.id}
                                         className="my-5 overflow-hidden"
-                                        style={{ border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}
+                                        style={{ border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }}
                                     >
                                         <div
                                             className="flex items-center justify-between px-3 py-2"
@@ -240,7 +240,7 @@ export default function ArticleLayout({
                                                     background: isPinned ? "var(--ch-c1)" : "var(--t-card)",
                                                     color: isPinned ? "#ffffff" : "var(--t-text-muted)",
                                                     border: `1px solid ${isPinned ? "var(--ch-c1)" : "var(--t-border-subtle)"}`,
-                                                    borderRadius: 0,
+                                                    borderRadius: "var(--r-pill)",
                                                     opacity: !isPinned && isFull ? 0.4 : 1,
                                                     cursor: !isPinned && isFull ? "not-allowed" : "pointer",
                                                 }}

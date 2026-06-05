@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Bricolage_Grotesque, Newsreader } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,6 +10,16 @@ import "../globals.css";
 
 const inter = Inter({
     variable: "--font-geist-sans",
+    subsets: ["latin"],
+    display: "swap",
+});
+const bricolage = Bricolage_Grotesque({
+    variable: "--font-bricolage",
+    subsets: ["latin"],
+    display: "swap",
+});
+const newsreader = Newsreader({
+    variable: "--font-newsreader",
     subsets: ["latin"],
     display: "swap",
 });
@@ -39,7 +49,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} suppressHydrationWarning>
-            <body className={`${inter.variable} antialiased`} suppressHydrationWarning>
+            <body className={`${inter.variable} ${bricolage.variable} ${newsreader.variable} antialiased`} suppressHydrationWarning>
                 <NextIntlClientProvider messages={messages}>
                     <ThemeProvider>
                         <Navigation />

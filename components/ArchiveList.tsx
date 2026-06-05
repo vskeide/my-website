@@ -54,7 +54,7 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                                         background: isActive ? "var(--t-text)" : "var(--t-card)",
                                         color: isActive ? "var(--t-bg)" : "var(--t-text-muted)",
                                         border: `1px solid ${isActive ? "var(--t-text)" : "var(--t-border-medium)"}`,
-                                        borderRadius: 0,
+                                        borderRadius: "var(--r-pill)",
                                     }}
                                 >
                                     All
@@ -73,7 +73,7 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                                         : `color-mix(in srgb, ${s.bg} 13%, var(--t-card))`,
                                     color: isActive ? s.text : s.bg,
                                     border: `1px solid color-mix(in srgb, ${s.bg} 35%, transparent)`,
-                                    borderRadius: 0,
+                                    borderRadius: "var(--r-pill)",
                                 }}
                             >
                                 {cat}

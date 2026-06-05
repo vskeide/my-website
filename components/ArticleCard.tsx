@@ -305,38 +305,87 @@ function ArticleThumbnail({ category, imageUrl }: { category: string; imageUrl?:
     );
 }
 
+/* ── Category color hex lookup for gradient wash ─────────────────────────── */
+const CAT_HEX: Record<string, string> = {
+    "Investing & Finance":   "#0070C0",  // c1 blue
+    "Investering og finans": "#0070C0",
+    "Personal Economy":      "#7030A0",  // c4 purple
+    "Personleg økonomi":     "#7030A0",
+    "Personlig økonomi":     "#7030A0",
+    "Local Politics":        "#FFC000",  // c3 gold
+    "Lokalpolitikk":         "#FFC000",
+    "AI":                    "#00B050",  // c5 green
+    "China":                 "#FF3333",  // c2 red
+    "Kina":                  "#FF3333",
+};
+
 /* ── Card ─────────────────────────────────────────────────────────────────── */
 export default function ArticleCard({ slug, title, excerpt, date, category, imageUrl, locale }: ArticleCardProps) {
     const tag = getCategoryBadgeStyle(category);
     const href = locale === "en" ? `/en/blog/${slug}` : `/blog/${slug}`;
+    const catHex = CAT_HEX[category] ?? "#7030A0";
     return (
         <Link href={href} className="group block h-full">
             <article
-                className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg"
-                style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--t-border-medium)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--t-border-subtle)"; }}
+                className="h-full overflow-hidden transition-all duration-300"
+                style={{
+                    background: "var(--t-card)",
+                    border: "1px solid var(--t-border-subtle)",
+                    borderRadius: "var(--r-card)",
+                }}
+                onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.transform = "translateY(-5px)";
+                    el.style.boxShadow = "0 22px 48px -24px rgba(60,30,110,0.32)";
+                }}
+                onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.transform = "translateY(0)";
+                    el.style.boxShadow = "none";
+                }}
             >
-                <div className="relative h-36 w-full overflow-hidden">
-                    <ArticleThumbnail category={category} imageUrl={imageUrl} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute bottom-3 left-3">
+                <div className="relative h-40 w-full overflow-hidden" style={{ background: "#111" }}>
+                    {imageUrl ? (
+                        <div
+                            className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                            style={{
+                                background: `url(${imageUrl}) center/cover no-repeat`,
+                                filter: "grayscale(1) contrast(1.04)",
+                            }}
+                        />
+                    ) : (
+                        <ArticleThumbnail category={category} imageUrl={imageUrl} />
+                    )}
+                    {imageUrl && (
+                        <div
+                            className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
+                            style={{
+                                background: `linear-gradient(150deg, ${catHex}EE 0%, ${catHex}77 45%, transparent 100%)`,
+                                mixBlendMode: "multiply",
+                                opacity: 0.78,
+                            }}
+                        />
+                    )}
+                    <div className="absolute top-3 left-3">
                         <span
-                            className="inline-block px-2 py-0.5 text-xs font-semibold"
-                            style={{ background: tag.bg, color: tag.text, borderRadius: 0 }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold"
+                            style={{ background: tag.bg, color: tag.text, borderRadius: "var(--r-pill)" }}
                         >
                             {category}
                         </span>
                     </div>
                 </div>
-                <div className="p-4">
-                    <time className="mb-1.5 block text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
+                <div className="p-5">
+                    <time className="mb-2 block text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
                         {date}
                     </time>
-                    <h3 className="mb-1.5 text-sm font-semibold leading-snug transition-colors group-hover:underline" style={{ color: "var(--t-text)" }}>
+                    <h3
+                        className="mb-2 text-base font-semibold leading-snug transition-colors"
+                        style={{ color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}
+                    >
                         {title}
                     </h3>
-                    <p className="line-clamp-2 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                    <p className="line-clamp-2 text-sm leading-relaxed" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }}>
                         {excerpt}
                     </p>
                 </div>

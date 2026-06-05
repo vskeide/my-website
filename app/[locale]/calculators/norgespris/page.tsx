@@ -50,7 +50,7 @@ const Card = ({ children, className = "", style = {} }: { children: React.ReactN
         style={{
             background: C.card,
             border: `1px solid ${C.border}`,
-            borderRadius: 0,
+            borderRadius: "var(--r-panel)",
             ...style,
         }}
     >
@@ -360,7 +360,7 @@ export default function NorgesprisKalkulator() {
                         <div style={{ background: C.c1, color: "#fff", padding: 8, borderRadius: 8 }}>
                             <Zap size={24} />
                         </div>
-                        <h1 style={{ margin: 0, fontSize: 24, fontWeight: 800, color: C.text }}>
+                        <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: C.text, fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
                             Strømkalkulator <span style={{ fontWeight: 400, color: C.muted }}>| Norgespris</span>
                         </h1>
                     </div>
