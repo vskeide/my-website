@@ -1,7 +1,10 @@
 "use client";
 import { useEffect } from "react";
+import { useTheme } from "./ThemeProvider";
 
 export default function DatawrapperResizer() {
+    const { theme } = useTheme();
+
     useEffect(() => {
         function handleMessage(e: MessageEvent) {
             if (typeof e.data?.["datawrapper-height"] === "undefined") return;
@@ -17,5 +20,21 @@ export default function DatawrapperResizer() {
         window.addEventListener("message", handleMessage);
         return () => window.removeEventListener("message", handleMessage);
     }, []);
+
+    useEffect(() => {
+        const isDark = theme === "dark";
+        const iframes = document.querySelectorAll<HTMLIFrameElement>("iframe");
+        for (const iframe of iframes) {
+            const src = iframe.getAttribute("src");
+            if (!src || !src.includes("datawrapper.dwcdn.net")) continue;
+            const url = new URL(src, window.location.origin);
+            url.searchParams.set("dark", String(isDark));
+            const newSrc = url.toString();
+            if (iframe.src !== newSrc) {
+                iframe.src = newSrc;
+            }
+        }
+    }, [theme]);
+
     return null;
 }
