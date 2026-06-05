@@ -29,8 +29,11 @@ export default function DatawrapperResizer() {
             if (!src || !src.includes("datawrapper.dwcdn.net")) continue;
             const url = new URL(src, window.location.origin);
             url.searchParams.set("dark", String(isDark));
+            url.searchParams.set("transparent", "true");
             const newSrc = url.toString();
             if (iframe.src !== newSrc) {
+                iframe.setAttribute("allowTransparency", "true");
+                iframe.style.background = "transparent";
                 iframe.src = newSrc;
             }
         }
