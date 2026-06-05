@@ -79,8 +79,8 @@ export default function SunoPage() {
                         {/* In-article language toggle */}
                         <div className="mb-6 flex items-center gap-2">
                             <span className="text-xs" style={{ color: "var(--t-text-muted)" }}>{no ? "Les på:" : "Read in:"}</span>
-                            <button onClick={() => setShowNo(true)} className="px-2 py-0.5 text-xs font-semibold" style={{ background: showNo ? "var(--ch-accent)" : "var(--t-surface)", color: showNo ? "#fff" : "var(--t-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>NO</button>
-                            <button onClick={() => setShowNo(false)} className="px-2 py-0.5 text-xs font-semibold" style={{ background: !showNo ? "var(--ch-accent)" : "var(--t-surface)", color: !showNo ? "#fff" : "var(--t-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>EN</button>
+                            <button onClick={() => setShowNo(true)} className="px-2 py-0.5 text-xs font-semibold" style={{ background: showNo ? "var(--ch-accent)" : "var(--t-surface)", color: showNo ? "#fff" : "var(--t-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-pill)" }}>NO</button>
+                            <button onClick={() => setShowNo(false)} className="px-2 py-0.5 text-xs font-semibold" style={{ background: !showNo ? "var(--ch-accent)" : "var(--t-surface)", color: !showNo ? "#fff" : "var(--t-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-pill)" }}>EN</button>
                         </div>
 
                         <article className="text-sm leading-relaxed" style={{ color: "var(--t-text)" }}>

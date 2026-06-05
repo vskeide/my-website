@@ -21,7 +21,7 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
                     </Link>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    <Link href="/ai/suno" className="group block h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>
+                    <Link href="/ai/suno" className="group block h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
                         <div className="relative flex h-36 items-end overflow-hidden p-4" style={{ backgroundImage: "url(/images/articles/suno.png)", backgroundSize: "cover", backgroundPosition: "center top" }}>
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <span className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold tracking-wide" style={{ background: "rgba(0,0,0,0.55)", color: "#c7d2fe", border: "1px solid color-mix(in srgb, #c7d2fe 50%, transparent)" }}>

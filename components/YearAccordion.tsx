@@ -33,9 +33,9 @@ export default function YearAccordion({
                 onClick={() => setOpen(!open)}
                 className="flex w-full items-center justify-between px-5 py-3.5 text-left transition-colors"
                 style={{
-                    backgroundColor: "var(--t-nav-bg)",
-                    color: "var(--t-nav-text)",
-                    borderRadius: 0,
+                    backgroundColor: "var(--t-surface)",
+                    color: "var(--t-text)",
+                    borderRadius: "var(--r-panel)",
                 }}
                 aria-expanded={open}
             >
@@ -85,7 +85,7 @@ export default function YearAccordion({
                                         </time>
                                         <span
                                             className="shrink-0 px-1.5 py-0.5 text-[0.65rem] font-semibold leading-tight"
-                                            style={{ borderRadius: 0, background: badge.bg, color: badge.text }}
+                                            style={{ borderRadius: "var(--r-pill)", background: badge.bg, color: badge.text }}
                                         >
                                             {entry.category}
                                         </span>

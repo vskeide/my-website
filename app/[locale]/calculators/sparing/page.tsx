@@ -83,12 +83,12 @@ function KpiCard({
     dotColor: string;
 }) {
     return (
-        <div className="p-4" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}>
+        <div className="p-4" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }}>
             <div className="mb-2 flex items-center gap-1.5">
                 <div className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: dotColor }} />
                 <p className="text-xs" style={{ color: "var(--t-text-muted)" }}>{label}</p>
             </div>
-            <p className="text-lg font-bold leading-none" style={{ color: "var(--t-text)" }}>{value}</p>
+            <p className="text-lg font-bold leading-none" style={{ color: "var(--t-text)", fontFamily: "var(--font-display)" }}>{value}</p>
             <p className="mt-1 text-xs" style={{ color: "var(--t-text-muted)" }}>{sub}</p>
         </div>
     );
@@ -164,10 +164,10 @@ export default function SparingPage() {
                 >
                     Sparing · kostnad · realavkastning
                 </p>
-                <h1 className="mb-2 text-xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
+                <h1 className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl" style={{ color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
                     Kva kostnader og inflasjon gjer med sluttverdien
                 </h1>
-                <p className="max-w-2xl text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }}>
                     Dra i parametrane og sjå korleis startkapital, sparing, avkastning, gebyr og inflasjon
                     formar det du faktisk sit att med — i nominelle og reelle kroner.
                 </p>
@@ -178,7 +178,7 @@ export default function SparingPage() {
                 {/* ── Left panel ── */}
                 <div
                     className="mb-5 p-5 lg:mb-0"
-                    style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}
+                    style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }}
                 >
                     <p
                         className="mb-5 text-xs uppercase tracking-widest"
@@ -211,7 +211,7 @@ export default function SparingPage() {
                         {/* Mode toggle */}
                         <div
                             className="flex gap-1 p-0.5"
-                            style={{ background: "var(--t-surface)", border: "1px solid var(--t-border-subtle)" }}
+                            style={{ background: "var(--t-surface)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-control)" }}
                         >
                             {(["flat", "indexed"] as const).map((m) => (
                                 <button
@@ -222,6 +222,7 @@ export default function SparingPage() {
                                         background: mode === m ? "var(--t-card)" : "transparent",
                                         color: mode === m ? "var(--ch-accent)" : "var(--t-text-muted)",
                                         boxShadow: mode === m ? "0 1px 3px rgba(0,0,0,.1)" : "none",
+                                        borderRadius: "var(--r-control)",
                                     }}
                                 >
                                     {m === "flat" ? "Fast nominelt" : "Dagens kroner"}
@@ -294,7 +295,7 @@ export default function SparingPage() {
                     {/* Chart */}
                     <div
                         className="p-4"
-                        style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}
+                        style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }}
                     >
                         <ResponsiveContainer width="100%" height={340}>
                             <LineChart data={rows} margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
@@ -324,7 +325,7 @@ export default function SparingPage() {
                                     contentStyle={{
                                         background: "var(--ch-tooltip-bg)",
                                         border: "1px solid var(--ch-border)",
-                                        borderRadius: 0,
+                                        borderRadius: 12,
                                         fontSize: 12,
                                     }}
                                     labelFormatter={(v) => `År ${v}`}
@@ -379,7 +380,7 @@ export default function SparingPage() {
                     {/* Composition bar */}
                     <div
                         className="p-4"
-                        style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)" }}
+                        style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }}
                     >
                         <p
                             className="mb-3 text-xs uppercase tracking-widest"
@@ -389,7 +390,7 @@ export default function SparingPage() {
                         </p>
                         <div
                             className="flex h-10 overflow-hidden"
-                            style={{ border: "1px solid var(--t-border-subtle)" }}
+                            style={{ border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-control)" }}
                         >
                             <div
                                 style={{
@@ -448,6 +449,8 @@ export default function SparingPage() {
                             background: "var(--t-surface)",
                             border: "1px solid var(--t-border-subtle)",
                             color: "var(--t-text-secondary)",
+                            borderRadius: "var(--r-panel)",
+                            fontFamily: "var(--font-serif)",
                         }}
                     >
                         <strong style={{ color: "var(--t-text)" }}>Føresetnader:</strong>{" "}
@@ -466,7 +469,7 @@ export default function SparingPage() {
                 <Link
                     href="/calculators"
                     className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline"
-                    style={{ color: "var(--ch-accent)" }}
+                    style={{ color: "var(--ch-accent)", borderRadius: "var(--r-pill)" }}
                 >
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />

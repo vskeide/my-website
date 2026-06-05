@@ -41,7 +41,7 @@ function ChartTooltip({ active, payload, label }: any) {
             style={{
                 background: "var(--ch-tooltip-bg)",
                 border: "1px solid var(--t-border-medium)",
-                borderRadius: 0,
+                borderRadius: 12,
                 padding: "8px 12px",
                 fontSize: 12,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",

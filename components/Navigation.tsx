@@ -54,13 +54,13 @@ export default function Navigation() {
                 style={{
                     height: "var(--nav-height)",
                     backgroundColor: scrolled ? "var(--t-nav-bg-scroll)" : "var(--t-nav-bg)",
-                    backdropFilter: "blur(12px)",
+                    backdropFilter: "blur(14px)",
                 }}
             >
                 <nav className="mx-auto flex h-full max-w-[90rem] items-center justify-between px-4 sm:px-6">
                     {/* Logo */}
                     <Link href="/" locale={locale} className="group flex items-center gap-2 text-lg font-bold tracking-tight transition-colors" style={{ color: "var(--t-nav-text)" }}>
-                        <img src="/images/logo-light.png" alt="Skeide.me Logo" className="h-8 w-auto transition-transform group-hover:scale-105" />
+                        <img src={logoSrc} alt="Skeide.me Logo" className="h-8 w-auto transition-transform group-hover:scale-105" />
                     </Link>
 
                     {/* Desktop links */}
@@ -71,17 +71,15 @@ export default function Navigation() {
                                     <Link
                                         href={link.href}
                                         locale={locale}
-                                        className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${isActive(link.href) ? "font-semibold" : ""}`}
+                                        className="relative px-4 py-2 text-sm font-medium transition-all"
                                         style={{
-                                            color: isActive(link.href) ? "var(--t-nav-text)" : "var(--t-nav-text-muted)",
-                                            backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.08)" : "transparent",
-                                            borderRadius: 0,
+                                            color: isActive(link.href) ? "#fff" : "var(--t-nav-text-muted)",
+                                            backgroundColor: isActive(link.href) ? "var(--ch-accent)" : "transparent",
+                                            borderRadius: "var(--r-pill)",
+                                            fontWeight: isActive(link.href) ? 600 : 500,
                                         }}
                                     >
                                         {link.label}
-                                        {isActive(link.href) && (
-                                            <span className="absolute bottom-0 left-3 right-3 h-px" style={{ background: "var(--ch-c1)" }} />
-                                        )}
                                     </Link>
                                 </li>
                             ))}
@@ -90,8 +88,8 @@ export default function Navigation() {
                         {/* Language toggle */}
                         <button
                             onClick={switchLocale}
-                            className="ml-1 px-2 py-1 text-xs font-semibold transition-colors hover:text-white"
-                            style={{ color: "var(--t-nav-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}
+                            className="ml-2 px-3 py-1.5 text-xs font-semibold transition-colors"
+                            style={{ color: "var(--t-nav-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-pill)" }}
                             title={locale === "no" ? "Switch to English" : "Bytt til norsk"}
                         >
                             {locale === "no" ? "EN" : "NO"}
@@ -100,8 +98,8 @@ export default function Navigation() {
                         {/* Theme toggle */}
                         <button
                             onClick={toggle}
-                            className="ml-1 flex h-8 w-8 items-center justify-center transition-colors hover:text-white"
-                            style={{ color: "var(--t-nav-text-muted)" }}
+                            className="ml-1 flex h-9 w-9 items-center justify-center transition-colors"
+                            style={{ color: "var(--t-nav-text-muted)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-pill)" }}
                             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                         >
                             {theme === "dark" ? (
@@ -125,15 +123,15 @@ export default function Navigation() {
                     >
                         <span className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} style={{ background: mobileOpen ? "var(--t-text)" : "var(--t-nav-text)" }} />
                         <span className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} style={{ background: "var(--t-nav-text)" }} />
-                        <span className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} style={{ background: "var(--t-nav-text)" }} />
+                        <span className={`block h-0.5 w-5 transition-all duration-300 ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} style={{ background: mobileOpen ? "var(--t-text)" : "var(--t-nav-text)" }} />
                     </button>
                 </nav>
             </header>
 
             {/* Mobile overlay */}
             {mobileOpen && (
-                <div className="fixed inset-0 z-[55] flex flex-col md:hidden" style={{ backgroundColor: "var(--t-card)" }}>
-                    <div className="flex items-center justify-between px-4" style={{ height: "var(--nav-height)", borderBottom: "1px solid var(--t-border-subtle)", backgroundColor: theme === "dark" ? "#000000" : "transparent" }}>
+                <div className="fixed inset-0 z-[55] flex flex-col md:hidden" style={{ backgroundColor: "var(--t-bg)" }}>
+                    <div className="flex items-center justify-between px-4" style={{ height: "var(--nav-height)", borderBottom: "1px solid var(--t-border-subtle)" }}>
                         <img src={logoSrc} alt="Skeide.me Logo" className="h-7 w-auto" />
                         <button onClick={() => setMobileOpen(false)} className="flex h-10 w-10 items-center justify-center" style={{ color: "var(--t-text)" }} aria-label="Close menu">
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -149,14 +147,20 @@ export default function Navigation() {
                                 href={link.href}
                                 locale={locale}
                                 onClick={() => setMobileOpen(false)}
-                                className="w-full py-5 text-center text-3xl font-bold tracking-tight transition-colors"
-                                style={{ color: isActive(link.href) ? "var(--ch-accent)" : "var(--t-text)", borderBottom: "1px solid var(--t-border-subtle)" }}
+                                className="w-full py-5 text-center text-3xl tracking-tight transition-colors"
+                                style={{
+                                    color: isActive(link.href) ? "var(--ch-accent)" : "var(--t-text)",
+                                    borderBottom: "1px solid var(--t-border-subtle)",
+                                    fontFamily: "var(--font-display)",
+                                    fontWeight: 700,
+                                    letterSpacing: "-0.02em",
+                                }}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
-                        <button onClick={switchLocale} className="mt-6 px-4 py-2 text-base font-semibold" style={{ color: "var(--t-text-secondary)", border: "1px solid var(--t-border-subtle)" }}>
+                        <button onClick={switchLocale} className="mt-6 px-4 py-2 text-base font-semibold" style={{ color: "var(--t-text-secondary)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-pill)" }}>
                             {locale === "no" ? "Switch to English" : "Bytt til norsk"}
                         </button>
 

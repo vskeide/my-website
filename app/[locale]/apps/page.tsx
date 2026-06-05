@@ -61,7 +61,7 @@ export default async function AppsPage({ params }: { params: Promise<{ locale: s
                 {apps.map((app) => (
                     <div key={app.id} className="animate-fade-in-up">
                         <a href={app.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
-                            <div className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: 0 }}>
+                            <div className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
                                 <div className="relative flex h-28 items-center justify-center overflow-hidden" style={{ background: `color-mix(in srgb, ${app.accentColor} 15%, var(--t-surface))` }}>
                                     <span className="relative z-10 text-5xl transition-transform group-hover:scale-110">{app.icon}</span>
                                 </div>

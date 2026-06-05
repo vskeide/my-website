@@ -5,14 +5,14 @@ export const CH_COLORS = [
 
 export const categoryIndex: Record<string, number> = {
     "Investing & Finance": 0,   // #0070C0 blue
-    "Personal Economy":    7,   // #00B0F0 cyan  (swapped)
+    "Personal Economy":    3,   // #7030A0 purple
     "Local Politics":      2,   // #FFC000 gold
     "Calculators":         3,   // #7030A0 purple
     "AI":                  4,   // #00B050 green
     "China":               1,   // #FF3333 red   (swapped)
     // Norwegian equivalents
     "Investering og finans": 0,
-    "Personlig økonomi":     7,
+    "Personlig økonomi":     3,
     "Lokalpolitikk":         2,
     "Kina":                  1,
 };

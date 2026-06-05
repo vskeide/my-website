@@ -46,7 +46,7 @@ export default function ArticleToggle({
                             background: !showOther ? "var(--ch-accent)" : "var(--t-surface)",
                             color: !showOther ? "#fff" : "var(--t-text-muted)",
                             border: "1px solid var(--t-border-subtle)",
-                            borderRadius: 0,
+                            borderRadius: "var(--r-pill)",
                         }}
                     >
                         {currentLabel}
@@ -58,7 +58,7 @@ export default function ArticleToggle({
                             background: showOther ? "var(--ch-accent)" : "var(--t-surface)",
                             color: showOther ? "#fff" : "var(--t-text-muted)",
                             border: "1px solid var(--t-border-subtle)",
-                            borderRadius: 0,
+                            borderRadius: "var(--r-pill)",
                         }}
                     >
                         {otherLabel}

@@ -26,72 +26,40 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+  --font-serif: var(--font-newsreader);
+}
+
+/* ── Radius scale ───────────────────────────────────────────────────────── */
+:root {
+  --r-card:    22px;
+  --r-panel:   16px;
+  --r-control: 12px;
+  --r-pill:    999px;
 }
 
 /* ── Light theme ─────────────────────────────────────────────────────────── */
 :root {
   --nav-height: 3.5rem;
 
-  --t-bg: #F2F5F9;
-  --t-surface: #E8EBF0;
-  --t-card: #FFFFFF;
-  --t-card-hover: #F8F9FB;
-  --t-border-strong: #CBD2DB;
-  --t-border-subtle: rgba(15, 23, 42, 0.06);
-  --t-border-medium: #CBD2DB;
+  --t-bg:            #FBFAFF;
+  --t-surface:       #F6F3FE;
+  --t-card:          #FFFFFF;
+  --t-card-hover:    #FBF9FF;
+  --t-border-strong: #E0D8F0;
+  --t-border-subtle: rgba(22, 17, 31, 0.09);
+  --t-border-medium: #E0D8F0;
 
-  --t-text: #0D1117;
-  --t-text-secondary: #374151;
-  --t-text-muted: #6B7280;
+  --t-text:           #16111F;
+  --t-text-secondary: #5C5470;
+  --t-text-muted:     #938AA6;
 
-  --t-nav-bg: #000000;
-  --t-nav-text: #ffffff;
-  --t-nav-text-muted: #a1a1aa;
-  --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
+  --t-nav-bg:         rgba(251, 250, 255, 0.82);
+  --t-nav-bg-scroll:  rgba(251, 250, 255, 0.92);
+  --t-nav-text:       #16111F;
+  --t-nav-text-muted: #5C5470;
 
-  /* Chart palette — Macrobond grade, full saturation */
-  --ch-c1: #0070C0;   /* Macrobond Blue  */
-  --ch-c2: #FF3333;   /* Vivid Red       */
-  --ch-c3: #FFC000;   /* Chart Gold      */
-  --ch-c4: #7030A0;   /* Deep Purple     */
-  --ch-c5: #00B050;   /* Signal Green    */
-  --ch-c6: #FF66CC;   /* Hot Pink        */
-  --ch-c7: #FF8C00;   /* Saturated Orange*/
-  --ch-c8: #00B0F0;   /* Sky Cyan        */
-
-  --ch-accent: #0070C0;
-  --ch-text: #0D1117;
-  --ch-muted: #374151;
-  --ch-border: #CBD2DB;
-  --ch-tooltip-bg: #FFFFFF;
-  --ch-bg: #FFFFFF;
-  --ch-axis-text: #374151;
-
-  --ch-positive: #10B981;
-  --ch-negative: #EF4444;
-  --ch-neutral: #6B7280;
-}
-
-/* ── Dark theme ──────────────────────────────────────────────────────────── */
-[data-theme="dark"] {
-  --t-bg: #080C14;
-  --t-surface: #0F1520;
-  --t-card: #141B2D;
-  --t-card-hover: #1A2238;
-  --t-border-strong: #253047;
-  --t-border-subtle: rgba(255, 255, 255, 0.055);
-  --t-border-medium: #253047;
-
-  --t-text: #E8EDF5;
-  --t-text-secondary: #9AA8BC;
-  --t-text-muted: #5C6E8A;
-
-  --t-nav-bg: #000000;
-  --t-nav-text: #ffffff;
-  --t-nav-text-muted: #a1a1aa;
-  --t-nav-bg-scroll: rgba(0, 0, 0, 0.95);
-
-  /* Same Macrobond palette on white chart surfaces */
+  /* Chart palette — unchanged */
   --ch-c1: #0070C0;
   --ch-c2: #FF3333;
   --ch-c3: #FFC000;
@@ -101,13 +69,56 @@
   --ch-c7: #FF8C00;
   --ch-c8: #00B0F0;
 
-  --ch-accent: #0070C0;
-  --ch-text: #0D1117;
-  --ch-muted: #374151;
-  --ch-border: #E5E7EB;
+  --ch-accent:  #8B3DD0;
+  --t-accent-2: #0F73C9;
+  --ch-text: #16111F;
+  --ch-muted: #5C5470;
+  --ch-border: #E0D8F0;
   --ch-tooltip-bg: #FFFFFF;
   --ch-bg: #FFFFFF;
-  --ch-axis-text: #374151;
+  --ch-axis-text: #5C5470;
+
+  --ch-positive: #10B981;
+  --ch-negative: #EF4444;
+  --ch-neutral: #6B7280;
+}
+
+/* ── Dark theme ──────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --t-bg:            #120E1C;
+  --t-surface:       #221A3A;
+  --t-card:          #1B1530;
+  --t-card-hover:    #271E44;
+  --t-border-strong: #322A4A;
+  --t-border-subtle: rgba(255, 255, 255, 0.10);
+  --t-border-medium: #322A4A;
+
+  --t-text:           #F4F0FB;
+  --t-text-secondary: #AAA0C4;
+  --t-text-muted:     #7E749A;
+
+  --t-nav-bg:         rgba(18, 14, 28, 0.78);
+  --t-nav-bg-scroll:  rgba(18, 14, 28, 0.90);
+  --t-nav-text:       #F4F0FB;
+  --t-nav-text-muted: #AAA0C4;
+
+  --ch-c1: #0070C0;
+  --ch-c2: #FF3333;
+  --ch-c3: #FFC000;
+  --ch-c4: #7030A0;
+  --ch-c5: #00B050;
+  --ch-c6: #FF66CC;
+  --ch-c7: #FF8C00;
+  --ch-c8: #00B0F0;
+
+  --ch-accent:  #B57AF0;
+  --t-accent-2: #5AABF2;
+  --ch-text: #16111F;
+  --ch-muted: #5C5470;
+  --ch-border: #322A4A;
+  --ch-tooltip-bg: #1B1530;
+  --ch-bg: #1B1530;
+  --ch-axis-text: #AAA0C4;
 
   --ch-positive: #10B981;
   --ch-negative: #EF4444;
@@ -145,7 +156,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: #2563eb;
+  background: var(--ch-accent);
   color: white;
 }
 
@@ -157,8 +168,20 @@ html {
 
 /* Focus */
 :focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--ch-accent);
   outline-offset: 2px;
+}
+
+/* Spectrum gradient helpers */
+.spectrum-gradient-text {
+  background: linear-gradient(100deg, var(--ch-accent), var(--t-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.spectrum-gradient-bg {
+  background: linear-gradient(100deg, var(--ch-accent), var(--t-accent-2));
+  color: #fff;
 }
 
 /* Range inputs — global base style.

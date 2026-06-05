@@ -11,15 +11,14 @@ interface CategoryFilterProps {
 export default function CategoryFilter({ categories, active, onSelect }: CategoryFilterProps) {
     return (
         <div className="flex flex-wrap gap-2">
-            {/* "All" pill — neutral */}
             <button
                 onClick={() => onSelect(null)}
-                className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+                className="px-4 py-1.5 text-xs font-semibold transition-all duration-200"
                 style={{
-                    background: active === null ? "var(--t-text)" : "var(--t-card)",
+                    background: active === null ? "var(--t-text)" : "transparent",
                     color: active === null ? "var(--t-bg)" : "var(--t-text-muted)",
-                    border: `1px solid ${active === null ? "var(--t-text)" : "var(--t-border-medium)"}`,
-                    borderRadius: 0,
+                    border: `1.5px solid ${active === null ? "var(--t-text)" : "var(--t-border-medium)"}`,
+                    borderRadius: "var(--r-pill)",
                 }}
             >
                 All
@@ -32,17 +31,15 @@ export default function CategoryFilter({ categories, active, onSelect }: Categor
                     <button
                         key={cat}
                         onClick={() => onSelect(cat)}
-                        className="px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold transition-all duration-200"
                         style={{
-                            /* Always tinted; fully saturated when active */
-                            background: isActive
-                                ? s.bg
-                                : `color-mix(in srgb, ${s.bg} 13%, var(--t-card))`,
-                            color: isActive ? s.text : s.bg,
-                            border: `1px solid color-mix(in srgb, ${s.bg} 35%, transparent)`,
-                            borderRadius: 0,
+                            background: isActive ? s.bg : "transparent",
+                            color: isActive ? s.text : "var(--t-text-muted)",
+                            border: `1.5px solid ${isActive ? s.bg : "var(--t-border-medium)"}`,
+                            borderRadius: "var(--r-pill)",
                         }}
                     >
+                        <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: s.bg }} />
                         {cat}
                     </button>
                 );
