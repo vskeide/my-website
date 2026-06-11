@@ -140,7 +140,7 @@ const stadSkipComponents = {
         <li style={{ marginBottom: "0.4rem" }} {...props} />
     ),
     em: (props: React.HTMLAttributes<HTMLElement>) => (
-        <em style={{ color: "var(--t-text-muted)", fontStyle: "italic", fontSize: "0.85rem" }} {...props} />
+        <em style={{ color: "var(--t-text)", fontStyle: "italic", fontWeight: 700 }} {...props} />
     ),
 };
 
