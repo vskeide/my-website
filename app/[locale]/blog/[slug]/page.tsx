@@ -1,5 +1,6 @@
 import { Link } from "@/lib/i18n-navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import ArticleLayout from "@/components/ArticleLayout";
 import { silverPriceAnalysis } from "@/lib/articles/silver-price-analysis";
 import { getCategoryBadgeStyle } from "@/lib/categories";
@@ -106,8 +107,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
         : "This article is not yet available in English. Showing Norwegian version.";
 
     const components = getMdxComponents(slug);
-    const currentContent = <MDXRemote source={article.content} components={components} />;
-    const otherContent = otherArticle ? <MDXRemote source={otherArticle.content} components={components} /> : null;
+    const mdxOptions = { mdxOptions: { remarkPlugins: [remarkGfm] } };
+    const currentContent = <MDXRemote source={article.content} components={components} options={mdxOptions} />;
+    const otherContent = otherArticle ? <MDXRemote source={otherArticle.content} components={components} options={mdxOptions} /> : null;
 
     return (
         <main className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
