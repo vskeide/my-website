@@ -85,16 +85,49 @@ const stadSkipComponents = {
     thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
         <thead style={{ background: "var(--t-surface)" }} {...props} />
     ),
-    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
-        <th style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", letterSpacing: "0.06em", textTransform: "uppercase", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], padding: "0.65rem 1rem", borderBottom: "2px solid var(--t-border-strong)", color: "var(--t-text-muted)", fontWeight: 500, whiteSpace: "nowrap" }} {...props} />
-    ),
+    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => {
+        const { style: inStyle, ...rest } = props;
+        return (
+            <th
+                {...rest}
+                style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    textAlign: "left",   // default; overridden by inStyle
+                    padding: "0.65rem 1rem",
+                    borderBottom: "2px solid var(--t-border-strong)",
+                    color: "var(--t-text-muted)",
+                    fontWeight: 500,
+                    ...inStyle,          // picks up textAlign from remark-gfm
+                    whiteSpace: "nowrap" // always last — cannot be overridden
+                }}
+            />
+        );
+    },
     td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => {
-        const isRight = props.align === "right";
+        const { style: inStyle, ...rest } = props;
+        const isRight = (inStyle as React.CSSProperties | undefined)?.textAlign === "right";
         const text = cellText(props.children);
         const color = numColor(text) ?? (isRight ? "var(--t-text)" : "var(--t-text-secondary)");
         const isBold = !!numColor(text);
         return (
-            <td style={{ padding: "0.65rem 1rem", borderBottom: "1px solid var(--t-border-subtle)", verticalAlign: "top", textAlign: (isRight ? "right" : "left") as React.CSSProperties["textAlign"], fontFamily: isRight ? "var(--font-mono)" : undefined, fontSize: isRight ? "0.85rem" : "0.9rem", color, fontWeight: isBold ? 600 : undefined, lineHeight: 1.5 }} {...props} />
+            <td
+                {...rest}
+                style={{
+                    padding: "0.65rem 1rem",
+                    borderBottom: "1px solid var(--t-border-subtle)",
+                    verticalAlign: "top",
+                    textAlign: "left",   // default; overridden by inStyle
+                    fontFamily: isRight ? "var(--font-mono)" : undefined,
+                    fontSize: isRight ? "0.85rem" : "0.9rem",
+                    lineHeight: 1.5,
+                    ...inStyle,          // picks up textAlign from remark-gfm
+                    color,               // always our color
+                    fontWeight: isBold ? 600 : undefined,
+                }}
+            />
         );
     },
     a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
