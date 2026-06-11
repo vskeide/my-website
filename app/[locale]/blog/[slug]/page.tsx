@@ -17,6 +17,23 @@ import {
     Merk,
 } from "@/components/articles/StadSkipCharts";
 
+function cellText(node: React.ReactNode): string {
+    if (typeof node === "string" || typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(cellText).join("");
+    if (node && typeof node === "object" && "props" in node)
+        return cellText((node as { props: { children?: React.ReactNode } }).props.children);
+    return "";
+}
+
+function numColor(text: string): string | undefined {
+    const t = text.trim();
+    if (t.startsWith("−") || t.startsWith("-")) return "#E05A3A";
+    if (t.startsWith("+")) return "#00B050";
+    if (/^(Sterkt negativ|Negativ)/i.test(t)) return "#E05A3A";
+    if (/^(Aldri statleg|Ikkje rekna)/i.test(t)) return "var(--t-text-muted)";
+    return undefined;
+}
+
 const chartArticles: Record<string, typeof silverPriceAnalysis> = {
     "silver-price-analysis": silverPriceAnalysis,
 };
@@ -59,19 +76,27 @@ const stadSkipComponents = {
         }} {...props} />
     ),
     table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-        <div style={{ overflowX: "auto", margin: "1.75rem 0 2rem" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem", background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }} {...props} />
+        <div style={{ margin: "1.75rem 0 2rem", borderRadius: "var(--r-panel)", border: "1px solid var(--t-border-subtle)", overflow: "hidden" }}>
+            <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem", background: "var(--t-card)", tableLayout: "auto" }} {...props} />
+            </div>
         </div>
     ),
     thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
         <thead style={{ background: "var(--t-surface)" }} {...props} />
     ),
     th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
-        <th style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", letterSpacing: "0.06em", textTransform: "uppercase", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], padding: "0.6rem 0.875rem", borderBottom: "2px solid var(--t-border-strong)", color: "var(--t-text-muted)", fontWeight: 500 }} {...props} />
+        <th style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", letterSpacing: "0.06em", textTransform: "uppercase", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], padding: "0.65rem 1rem", borderBottom: "2px solid var(--t-border-strong)", color: "var(--t-text-muted)", fontWeight: 500, whiteSpace: "nowrap" }} {...props} />
     ),
-    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
-        <td style={{ padding: "0.6rem 0.875rem", borderBottom: "1px solid var(--t-border-subtle)", verticalAlign: "top", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], fontFamily: props.align === "right" ? "var(--font-mono)" : undefined, fontSize: props.align === "right" ? "0.85rem" : undefined, color: "var(--t-text-secondary)" }} {...props} />
-    ),
+    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => {
+        const isRight = props.align === "right";
+        const text = cellText(props.children);
+        const color = numColor(text) ?? (isRight ? "var(--t-text)" : "var(--t-text-secondary)");
+        const isBold = !!numColor(text);
+        return (
+            <td style={{ padding: "0.65rem 1rem", borderBottom: "1px solid var(--t-border-subtle)", verticalAlign: "top", textAlign: (isRight ? "right" : "left") as React.CSSProperties["textAlign"], fontFamily: isRight ? "var(--font-mono)" : undefined, fontSize: isRight ? "0.85rem" : "0.9rem", color, fontWeight: isBold ? 600 : undefined, lineHeight: 1.5 }} {...props} />
+        );
+    },
     a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
         <a style={{ color: "var(--ch-accent)", textDecoration: "underline", textUnderlineOffset: "3px" }} target={props.href?.startsWith("http") ? "_blank" : undefined} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} {...props} />
     ),
