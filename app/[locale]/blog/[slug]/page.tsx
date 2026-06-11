@@ -7,12 +7,20 @@ import { getArticle, getArticleWithFallback, getAllArticles } from "@/lib/articl
 import { notFound } from "next/navigation";
 import DatawrapperResizer from "@/components/DatawrapperResizer";
 import ArticleToggle from "@/components/ArticleToggle";
+import {
+    KostnadChart,
+    NytteChart,
+    AvgiftChart,
+    AltChart,
+    OyreGrid,
+    Merk,
+} from "@/components/articles/StadSkipCharts";
 
 const chartArticles: Record<string, typeof silverPriceAnalysis> = {
     "silver-price-analysis": silverPriceAnalysis,
 };
 
-const mdxComponents = {
+const baseMdxComponents = {
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p style={{ marginBottom: "1.25rem", fontSize: "1.05rem", lineHeight: "1.72", color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }} {...props} />
     ),
@@ -28,6 +36,48 @@ const mdxComponents = {
         </div>
     ),
 };
+
+const stadSkipComponents = {
+    ...baseMdxComponents,
+    KostnadChart,
+    NytteChart,
+    AvgiftChart,
+    AltChart,
+    OyreGrid,
+    Merk,
+    blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
+        <blockquote style={{
+            borderLeft: "3px solid #E05A3A",
+            paddingLeft: "1.25rem",
+            margin: "2rem 0",
+            fontFamily: "var(--font-serif)",
+            fontSize: "1.1rem",
+            lineHeight: 1.6,
+            color: "var(--t-text-secondary)",
+            fontStyle: "italic",
+        }} {...props} />
+    ),
+    table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+        <div style={{ overflowX: "auto", margin: "1.75rem 0 2rem" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem", background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-panel)" }} {...props} />
+        </div>
+    ),
+    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+        <thead style={{ background: "var(--t-surface)" }} {...props} />
+    ),
+    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+        <th style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", letterSpacing: "0.06em", textTransform: "uppercase", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], padding: "0.6rem 0.875rem", borderBottom: "2px solid var(--t-border-strong)", color: "var(--t-text-muted)", fontWeight: 500 }} {...props} />
+    ),
+    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+        <td style={{ padding: "0.6rem 0.875rem", borderBottom: "1px solid var(--t-border-subtle)", verticalAlign: "top", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], fontFamily: props.align === "right" ? "var(--font-mono)" : undefined, fontSize: props.align === "right" ? "0.85rem" : undefined, color: "var(--t-text-secondary)" }} {...props} />
+    ),
+};
+
+function getMdxComponents(slug: string) {
+    if (slug === "stad-skipstunnel") return stadSkipComponents;
+    return baseMdxComponents;
+}
+
 
 export async function generateStaticParams() {
     const noArticles = getAllArticles("no").map((a) => ({ slug: a.slug, locale: "no" }));
@@ -55,8 +105,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
         ? "Denne artikkelen er ikkje tilgjengeleg på norsk enno. Viser engelsk versjon."
         : "This article is not yet available in English. Showing Norwegian version.";
 
-    const currentContent = <MDXRemote source={article.content} components={mdxComponents} />;
-    const otherContent = otherArticle ? <MDXRemote source={otherArticle.content} components={mdxComponents} /> : null;
+    const components = getMdxComponents(slug);
+    const currentContent = <MDXRemote source={article.content} components={components} />;
+    const otherContent = otherArticle ? <MDXRemote source={otherArticle.content} components={components} /> : null;
 
     return (
         <main className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
@@ -79,8 +130,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
             </header>
 
             {article.imageUrl && (
-                <div className="mb-8 overflow-hidden" style={{ maxWidth: 720, aspectRatio: "16/7", maxHeight: 340, borderRadius: "var(--r-card)" }}>
+                <div className="relative mb-8 overflow-hidden" style={{ maxWidth: 720, aspectRatio: "16/7", maxHeight: 340, borderRadius: "var(--r-card)" }}>
                     <img src={article.imageUrl} alt="" className="h-full w-full object-cover" style={{ filter: "grayscale(0.3) contrast(1.02)" }} />
+                    {slug === "stad-skipstunnel" && (
+                        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(18,14,28,0.18) 0%, rgba(18,14,28,0.62) 100%)", borderRadius: "var(--r-card)" }} />
+                    )}
                 </div>
             )}
 
