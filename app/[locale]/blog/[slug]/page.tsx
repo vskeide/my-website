@@ -72,6 +72,18 @@ const stadSkipComponents = {
     td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
         <td style={{ padding: "0.6rem 0.875rem", borderBottom: "1px solid var(--t-border-subtle)", verticalAlign: "top", textAlign: (props.align === "right" ? "right" : "left") as React.CSSProperties["textAlign"], fontFamily: props.align === "right" ? "var(--font-mono)" : undefined, fontSize: props.align === "right" ? "0.85rem" : undefined, color: "var(--t-text-secondary)" }} {...props} />
     ),
+    a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+        <a style={{ color: "var(--ch-accent)", textDecoration: "underline", textUnderlineOffset: "3px" }} target={props.href?.startsWith("http") ? "_blank" : undefined} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} {...props} />
+    ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+        <ul style={{ margin: "0.5rem 0 1.25rem 1.25rem", listStyleType: "disc", color: "var(--t-text-secondary)", fontSize: "0.95rem", lineHeight: 1.7 }} {...props} />
+    ),
+    li: (props: React.HTMLAttributes<HTMLLIElement>) => (
+        <li style={{ marginBottom: "0.4rem" }} {...props} />
+    ),
+    em: (props: React.HTMLAttributes<HTMLElement>) => (
+        <em style={{ color: "var(--t-text-muted)", fontStyle: "italic", fontSize: "0.85rem" }} {...props} />
+    ),
 };
 
 function getMdxComponents(slug: string) {
