@@ -217,12 +217,53 @@ export function AltChart() {
 
 /* ── 5. The øyre grid (100 dots) ─────────────────────────────────────────── */
 export function OyreGrid() {
+    const rowStyle: React.CSSProperties = {
+        display: "flex",
+        justifyContent: "space-between",
+        fontSize: "0.72rem",
+        color: "var(--t-text-muted)",
+        fontFamily: "monospace",
+        marginBottom: "0.2rem",
+    };
+    const valStyle: React.CSSProperties = { color: "var(--t-text-secondary)", fontWeight: 600 };
+    const redVal: React.CSSProperties = { ...valStyle, color: RED };
+    const greenVal: React.CSSProperties = { ...valStyle, color: GREEN };
+
     return (
         <div style={{ ...panelStyle, margin: "2rem 0 1.5rem" }}>
             <div style={titleStyle}>Kva får samfunnet att per investert krone?</div>
             <div style={subStyle}>
-                Netto nytte per budsjettkrone (NNB) = −0,95 · Regjeringas avgjerdsgrunnlag, mai 2026
+                Netto nytte per budsjettkrone (NNB) = −0,95 · Kjelde: Kystverkets analyse (omtalt av NRK, april 2025)
             </div>
+
+            {/* Calculation breakdown */}
+            <div style={{ margin: "0 0 1rem", padding: "0.75rem 1rem", background: "var(--t-surface)", borderRadius: "var(--r-panel)", fontSize: "0.72rem", fontFamily: "monospace" }}>
+                <div style={rowStyle}>
+                    <span>Investeringskostnad</span>
+                    <span style={redVal}>−7,0 mrd.</span>
+                </div>
+                <div style={rowStyle}>
+                    <span>+ Skattefinansieringskostnad (20 % av invest.)</span>
+                    <span style={redVal}>−1,4 mrd.</span>
+                </div>
+                <div style={{ ...rowStyle, borderTop: "1px solid var(--t-border-subtle)", paddingTop: "0.3rem", marginTop: "0.1rem" }}>
+                    <span>= Samla kostnad</span>
+                    <span style={redVal}>−8,4 mrd.</span>
+                </div>
+                <div style={{ ...rowStyle, marginTop: "0.4rem" }}>
+                    <span>Prissett nytte (steinmassar, ventetid, drivstoff m.m.)</span>
+                    <span style={greenVal}>+2,0 mrd.</span>
+                </div>
+                <div style={{ ...rowStyle, borderTop: "1px solid var(--t-border-subtle)", paddingTop: "0.3rem", marginTop: "0.1rem", fontWeight: 700 }}>
+                    <span>= Netto samfunnsøkonomisk tap</span>
+                    <span style={redVal}>−6,4 mrd.</span>
+                </div>
+                <div style={{ ...rowStyle, marginTop: "0.5rem", color: "var(--t-text-muted)" }}>
+                    <span>NNB = netto tap / investeringskostnad</span>
+                    <span style={redVal}>−6,4 / 7,0 = −0,95</span>
+                </div>
+            </div>
+
             <div style={{ display: "grid", gridTemplateColumns: "repeat(20, 1fr)", gap: 5, margin: "0.5rem 0 0.75rem" }}>
                 {Array.from({ length: 100 }).map((_, i) => (
                     <div
@@ -240,6 +281,7 @@ export function OyreGrid() {
                 <strong>95 øre</strong> i rekna velferdstap per krone &nbsp;·&nbsp;
                 <span style={{ display: "inline-block", width: 9, height: 9, borderRadius: "50%", background: GREEN, verticalAlign: "middle", marginRight: 5 }} />
                 <strong>5 øre</strong> netto att til samfunnet. Kvar sirkel er eitt øre av ei investert krone.
+                {" "}Skattefinansieringskostnaden på 20 % reflekterer at kvar krone staten bruker kostar meir enn ein krone å krevje inn — eit standardkrav i norsk samfunnsøkonomisk analyse (NOU 2012:16). Kystverkets fullstendige rapport er ikkje offentleggjord.
             </div>
         </div>
     );
