@@ -247,7 +247,7 @@ export function OyreGrid() {
                     <span style={redVal}>−1,4 mrd.</span>
                 </div>
                 <div style={{ ...rowStyle }}>
-                    <span>+ Andre kostnadspostar (ikkje spesifisert i kjelde)</span>
+                    <span>+ Neddiskonterte driftskostnader e.l. (ikkje spesifisert i kjelde)</span>
                     <span style={redVal}>≈ −0,25 mrd.</span>
                 </div>
                 <div style={{ ...rowStyle, borderTop: "1px solid var(--t-border-subtle)", paddingTop: "0.3rem", marginTop: "0.1rem" }}>
