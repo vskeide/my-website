@@ -291,6 +291,59 @@ export function OyreGrid() {
     );
 }
 
+/* ── 6. Deaths at Stad by 5-year period ──────────────────────────────────── */
+export function DødsfallChart() {
+    const data = [
+        { period: "1955–59", val: 19, note: "MS Brenning 1956" },
+        { period: "1960–64", val: 0,  note: null },
+        { period: "1965–69", val: 4,  note: null },
+        { period: "1970–74", val: 1,  note: null },
+        { period: "1975–79", val: 3,  note: null },
+        { period: "1980–84", val: 7,  note: null },
+        { period: "1985–89", val: 0,  note: null },
+        { period: "1990–94", val: 0,  note: null },
+        { period: "1995–99", val: 0,  note: null },
+        { period: "2000–04", val: 0,  note: null },
+        { period: "2005–09", val: 0,  note: null },
+        { period: "2010–14", val: 0,  note: null },
+        { period: "2015–19", val: 0,  note: null },
+        { period: "2020–24", val: 0,  note: null },
+    ];
+
+    return (
+        <div style={panelStyle}>
+            <div style={titleStyle}>Dødsulukker ved Stad etter andre verdskrigen</div>
+            <div style={subStyle}>Tal på omkomne per femårsperiode · Kjelder: NTNU arbeidsrapport, NRK</div>
+            <ResponsiveContainer width="100%" height={280}>
+                <BarChart data={data} margin={{ top: 20, right: 16, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--t-border-subtle)" vertical={false} />
+                    <XAxis dataKey="period" tick={{ fontSize: 9, fill: "var(--t-text-muted)" }} axisLine={false} tickLine={false} interval={0} angle={-35} textAnchor="end" height={48} />
+                    <YAxis tick={{ fontSize: 10, fill: "var(--t-text-muted)" }} axisLine={false} tickLine={false} domain={[0, 22]} ticks={[0, 5, 10, 15, 19]} />
+                    <Tooltip
+                        contentStyle={tooltipStyle}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        formatter={(v: any, _: any, entry: any) => {
+                            const note = entry?.payload?.note;
+                            return [note ? `${v} omkomne (${note})` : `${v} omkomne`, ""];
+                        }}
+                        cursor={{ fill: "rgba(0,0,0,0.04)" }}
+                    />
+                    <ReferenceLine y={0} stroke="var(--t-border-strong)" />
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    <Bar dataKey="val" maxBarSize={36} radius={[3, 3, 0, 0]} label={{ position: "top", fontSize: 10, fill: "var(--t-text-muted)", formatter: (v: any) => v > 0 ? v : "" }}>
+                        {data.map((d, i) => (
+                            <Cell key={i} fill={d.note ? RED : (d.val > 0 ? GRAY : "var(--t-border-subtle)")} />
+                        ))}
+                    </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+            <div style={capStyle}>
+                19 av 34 omkomne skjedde i éin einaste ulukke: MS Brenning forliste 1. mars 1956. Siste registrerte dødsulukke var i 1984. Data for perioden 1945–54 er ikkje kartlagde i kjeldematerialet.
+            </div>
+        </div>
+    );
+}
+
 /* ── Note box ─────────────────────────────────────────────────────────────── */
 export function Merk({ children }: { children: React.ReactNode }) {
     return (

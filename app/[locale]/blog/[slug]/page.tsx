@@ -14,6 +14,7 @@ import {
     AvgiftChart,
     AltChart,
     OyreGrid,
+    DødsfallChart,
     Merk,
 } from "@/components/articles/StadSkipCharts";
 
@@ -62,6 +63,7 @@ const stadSkipComponents = {
     AvgiftChart,
     AltChart,
     OyreGrid,
+    DødsfallChart,
     Merk,
     blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
         <blockquote style={{
