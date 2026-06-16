@@ -246,9 +246,13 @@ export function OyreGrid() {
                     <span>+ Skattefinansieringskostnad (20 % av invest.)</span>
                     <span style={redVal}>−1,4 mrd.</span>
                 </div>
+                <div style={{ ...rowStyle }}>
+                    <span>+ Andre kostnadspostar (ikkje spesifisert i kjelde)</span>
+                    <span style={redVal}>≈ −0,25 mrd.</span>
+                </div>
                 <div style={{ ...rowStyle, borderTop: "1px solid var(--t-border-subtle)", paddingTop: "0.3rem", marginTop: "0.1rem" }}>
                     <span>= Samla kostnad</span>
-                    <span style={redVal}>−8,4 mrd.</span>
+                    <span style={redVal}>−8,65 mrd.</span>
                 </div>
                 <div style={{ ...rowStyle, marginTop: "0.4rem" }}>
                     <span>Prissett nytte (steinmassar, ventetid, drivstoff m.m.)</span>
@@ -256,11 +260,11 @@ export function OyreGrid() {
                 </div>
                 <div style={{ ...rowStyle, borderTop: "1px solid var(--t-border-subtle)", paddingTop: "0.3rem", marginTop: "0.1rem", fontWeight: 700 }}>
                     <span>= Netto samfunnsøkonomisk tap</span>
-                    <span style={redVal}>−6,4 mrd.</span>
+                    <span style={redVal}>−6,65 mrd.</span>
                 </div>
                 <div style={{ ...rowStyle, marginTop: "0.5rem", color: "var(--t-text-muted)" }}>
                     <span>NNB = netto tap / investeringskostnad</span>
-                    <span style={redVal}>−6,4 / 7,0 = −0,95</span>
+                    <span style={redVal}>−6,65 / 7,0 = −0,95</span>
                 </div>
             </div>
 
