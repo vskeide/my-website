@@ -30,7 +30,9 @@ function numColor(text: string): string | undefined {
     const t = text.trim();
     if (t.startsWith("−") || t.startsWith("-")) return "#E05A3A";
     if (t.startsWith("+")) return "#00B050";
-    if (/^(Sterkt negativ|Negativ)/i.test(t)) return "#E05A3A";
+    if (/^(Sterkt negativ|Negativ|Klart ul|Ekstremt ul)/i.test(t)) return "#E05A3A";
+    if (/^(Svært h|^Høg$)/i.test(t)) return "#00B050";
+    if (/^(Låg|Svært låg|Låg–)/i.test(t)) return "#938AA6";
     if (/^(Aldri statleg|Ikkje rekna)/i.test(t)) return "var(--t-text-muted)";
     return undefined;
 }
