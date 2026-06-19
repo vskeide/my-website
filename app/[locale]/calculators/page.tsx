@@ -43,6 +43,18 @@ export default async function CalculatorsPage({ params }: { params: Promise<{ lo
             stat: "7%",
             statLabel: no ? "snittavkastning" : "avg. return",
         },
+        {
+            id: "kpi",
+            titleNo: "Personleg KPI-kalkulator",
+            titleEn: "Personal CPI Calculator",
+            descNo: "Vekt SSBs konsumprisindeks med di eiga forbrukskurv og sjå korleis di personlege inflasjon og kjøpekraft utviklar seg.",
+            descEn: "Weight Statistics Norway's CPI with your own consumption basket to see how your personal inflation and purchasing power evolve.",
+            gradient: "linear-gradient(140deg, #8B3DD0 0%, #8B3DD0CC 100%)",
+            labelNo: "Inflasjon",
+            labelEn: "Inflation",
+            stat: "SSB",
+            statLabel: no ? "live KPI-data" : "live CPI data",
+        },
     ];
 
     return (

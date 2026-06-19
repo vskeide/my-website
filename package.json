@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
+    "jsonstat-toolkit": "^2.2.2",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "next-intl": "^4.13.0",
