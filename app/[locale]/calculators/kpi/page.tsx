@@ -863,6 +863,17 @@ function SummaryCards({ result }: { result: CalcResult }) {
 }
 
 /* ── Charts ─────────────────────────────────────────────────────────────── */
+// Renders a category label on a single line (Recharts' default tick wraps long
+// text to fit the axis width, which we don't want here).
+const CATEGORY_LABEL_WIDTH = 330;
+function CategoryTick({ x, y, payload }: { x?: number; y?: number; payload?: { value?: string } }) {
+    return (
+        <text x={x} y={y} dy={4} textAnchor="end" fontSize={11} fill={C.axisText}>
+            {payload?.value}
+        </text>
+    );
+}
+
 function IndexChart({ yearPoints }: { yearPoints: YearPoint[] }) {
     if (yearPoints.length < 2) return null;
     return (
@@ -928,7 +939,7 @@ function ContributionsChart({ contributions }: { contributions: ContributionItem
                 <BarChart data={data} layout="vertical" margin={{ top: 0, right: 60, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} horizontal={false} />
                     <XAxis type="number" domain={domain} tickFormatter={(v) => fmtPct(v)} tick={{ fontSize: 11, fill: C.axisText }} />
-                    <YAxis type="category" dataKey="label" width={280} tick={{ fontSize: 12, fill: C.axisText }} />
+                    <YAxis type="category" dataKey="label" width={CATEGORY_LABEL_WIDTH} tick={<CategoryTick />} interval={0} />
                     <Tooltip contentStyle={tooltipStyle} formatter={(value) => [fmtPct(Number(value)), "Bidrag"]} />
                     <ReferenceLine x={0} stroke={C.muted} />
                     <Bar dataKey="ci" name="Bidrag" radius={[0, 3, 3, 0]}>
@@ -949,7 +960,7 @@ function BasketComparisonChart({ basketItems }: { basketItems: BasketItem[] }) {
                 <BarChart data={basketItems} layout="vertical" margin={{ top: 0, right: 80, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} horizontal={false} />
                     <XAxis type="number" tickFormatter={(v) => `${fmtNum(v)}%`} tick={{ fontSize: 11, fill: C.axisText }} />
-                    <YAxis type="category" dataKey="label" width={280} tick={{ fontSize: 12, fill: C.axisText }} />
+                    <YAxis type="category" dataKey="label" width={CATEGORY_LABEL_WIDTH} tick={<CategoryTick />} interval={0} />
                     <Tooltip
                         contentStyle={tooltipStyle}
                         formatter={(value, name, props) => {
@@ -1028,7 +1039,7 @@ function PriceRankingChart({ data, level, startYear, endYear }: { data: SsbData;
                         <BarChart data={items} layout="vertical" margin={{ top: 4, right: 70, left: 0, bottom: 4 }} barSize={BAR_H - 4}>
                             <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} horizontal={false} />
                             <XAxis type="number" tickFormatter={(v) => `${v >= 0 ? "+" : ""}${fmtNum(v, 0)}%`} tick={{ fontSize: 11, fill: C.axisText }} />
-                            <YAxis type="category" dataKey="shortLabel" width={labelWidth} tick={{ fontSize: 11, fill: C.axisText }} />
+                            <YAxis type="category" dataKey="shortLabel" width={labelWidth} tick={<CategoryTick />} interval={0} />
                             <Tooltip
                                 contentStyle={tooltipStyle}
                                 formatter={(value: unknown) => {
