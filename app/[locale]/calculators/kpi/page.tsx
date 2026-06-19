@@ -514,6 +514,13 @@ export default function KpiKalkulator() {
                     outline: none;
                 }
                 .kpi-select:focus { border-color: var(--ch-accent); }
+                .kpi-stack-wrap { display: flex; gap: 24px; align-items: center; }
+                .kpi-stack-chart { flex: 1; min-width: 0; }
+                .kpi-stack-legend { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; max-width: 260px; }
+                @media (max-width: 640px) {
+                    .kpi-stack-wrap { flex-direction: column; align-items: stretch; gap: 14px; }
+                    .kpi-stack-legend { max-width: none; }
+                }
             `}</style>
 
             <div className="mx-auto max-w-[75rem]" style={{ padding: "20px 16px", paddingTop: "calc(var(--nav-height) + 20px)" }}>
@@ -1025,33 +1032,37 @@ function ContributionsChart({ data, level, weights, inputMode }: {
                 title="Bidrag til personleg KPI per år"
                 desc="Kvar kolonne er den årlege prisveksten dei siste fem åra, dekomponert på kategoriar og vekta med kurva di. Summen av kolonnen er di personlege KPI-inflasjon det året."
             />
-            <ResponsiveContainer width="100%" height={380}>
-                <BarChart data={rows} margin={{ top: 10, right: 16, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} vertical={false} />
-                    <XAxis dataKey="year" tick={{ fontSize: 12, fill: C.axisText }} axisLine={false} tickLine={false} />
-                    <YAxis tickFormatter={(v) => `${v >= 0 ? "+" : ""}${fmtNum(v, 0)} %`} tick={{ fontSize: 11, fill: C.axisText }} width={55} axisLine={false} tickLine={false} />
-                    <Tooltip cursor={{ fill: "var(--ch-axis-text)", opacity: 0.08 }} content={<StackTooltip />} />
-                    <ReferenceLine y={0} stroke={C.muted} />
-                    {series.map((s, i) => (
-                        <Bar
-                            key={s.key}
-                            dataKey={s.key}
-                            name={s.label}
-                            stackId="kpi"
-                            fill={s.color}
-                            maxBarSize={64}
-                            radius={i === series.length - 1 ? [3, 3, 0, 0] : undefined}
-                        />
+            <div className="kpi-stack-wrap">
+                <div className="kpi-stack-chart">
+                    <ResponsiveContainer width="100%" height={420}>
+                        <BarChart data={rows} barCategoryGap="3%" margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
+                            <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} vertical={false} />
+                            <XAxis dataKey="year" tick={{ fontSize: 12, fill: C.axisText }} axisLine={false} tickLine={false} />
+                            <YAxis tickFormatter={(v) => `${v >= 0 ? "+" : ""}${fmtNum(v, 0)} %`} tick={{ fontSize: 11, fill: C.axisText }} width={55} axisLine={false} tickLine={false} />
+                            <Tooltip cursor={{ fill: "var(--ch-axis-text)", opacity: 0.08 }} content={<StackTooltip />} />
+                            <ReferenceLine y={0} stroke={C.muted} />
+                            {series.map((s, i) => (
+                                <Bar
+                                    key={s.key}
+                                    dataKey={s.key}
+                                    name={s.label}
+                                    stackId="kpi"
+                                    fill={s.color}
+                                    radius={i === series.length - 1 ? [3, 3, 0, 0] : undefined}
+                                />
+                            ))}
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+                {/* Legend ordered top-to-bottom to match the visual stack (last series sits on top). */}
+                <div className="kpi-stack-legend">
+                    {[...series].reverse().map((s) => (
+                        <span key={s.key} style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 12, color: C.muted, lineHeight: 1.25 }}>
+                            <span style={{ width: 11, height: 11, borderRadius: 3, background: s.color, flexShrink: 0 }} />
+                            {s.label}
+                        </span>
                     ))}
-                </BarChart>
-            </ResponsiveContainer>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 14 }}>
-                {series.map((s) => (
-                    <span key={s.key} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: C.muted }}>
-                        <span style={{ width: 11, height: 11, borderRadius: 3, background: s.color, flexShrink: 0 }} />
-                        {s.label}
-                    </span>
-                ))}
+                </div>
             </div>
         </div>
     );
