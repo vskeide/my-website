@@ -130,7 +130,9 @@ body {
   background-color: var(--t-bg);
   color: var(--t-text);
   transition: background-color 0.25s ease, color 0.25s ease;
-  overflow-x: hidden;
+  /* `clip` (not `hidden`) prevents horizontal scroll without creating a
+     scroll container — `hidden` here silently breaks `position: sticky`. */
+  overflow-x: clip;
 }
 
 /* Theme-responsive logos */
