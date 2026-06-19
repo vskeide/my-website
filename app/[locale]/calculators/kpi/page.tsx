@@ -569,7 +569,7 @@ export default function KpiKalkulator() {
                                     <BuyingPowerChart yearPoints={result.yearPoints} />
                                 </Card>
                                 <Card style={{ padding: "20px 16px" }}>
-                                    <ContributionsChart contributions={result.contributions} />
+                                    <ContributionsChart data={data} level={state.level} weights={state.weights} inputMode={state.inputMode} />
                                 </Card>
                                 <Card style={{ padding: "20px 16px" }}>
                                     <BasketComparisonChart basketItems={result.basketItems} />
@@ -927,26 +927,132 @@ function BuyingPowerChart({ yearPoints }: { yearPoints: YearPoint[] }) {
     );
 }
 
-function ContributionsChart({ contributions }: { contributions: ContributionItem[] }) {
-    if (contributions.length === 0) return null;
-    const data = contributions.slice(0, 20).map((c) => ({ ...c, color: c.ci >= 0 ? C.accent : C.negative }));
-    const maxAbs = Math.max(...data.map((d) => Math.abs(d.ci)));
-    const domain: [number, number] = [-maxAbs * 1.1, maxAbs * 1.1];
+// Distinct colour per category for the stacked contribution chart.
+const CATEGORY_PALETTE = [
+    "var(--ch-c1)", "var(--ch-c4)", "var(--ch-c5)", "var(--ch-c3)",
+    "var(--ch-c8)", "var(--ch-c6)", "var(--ch-c7)", "var(--ch-c2)",
+    "#14B8A6", "#A855F7", "#F59E0B", "#3B82F6", "#EC4899", "#22C55E",
+];
+const OTHER_COLOR = "var(--t-text-muted)";
+
+const fmtSignedPp = (v: number) => `${v >= 0 ? "+" : ""}${fmtNum(v, 1)} pp`;
+
+function StackTooltip({ active, payload, label }: {
+    active?: boolean;
+    label?: string | number;
+    payload?: { dataKey?: string; name?: string; value?: number; color?: string }[];
+}) {
+    if (!active || !payload?.length) return null;
+    const total = payload.reduce((s, p) => s + (p.value ?? 0), 0);
+    const rows = payload.filter((p) => Math.abs(p.value ?? 0) > 0.001).sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
+    return (
+        <div style={{ ...tooltipStyle, minWidth: 220 }}>
+            <div style={{ fontWeight: 700, marginBottom: 6 }}>{label}</div>
+            {rows.map((p) => (
+                <div key={p.dataKey} style={{ display: "flex", justifyContent: "space-between", gap: 16, fontSize: 12, padding: "1px 0" }}>
+                    <span style={{ color: p.color, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 170 }}>{p.name}</span>
+                    <span style={{ fontVariantNumeric: "tabular-nums" }}>{fmtSignedPp(p.value ?? 0)}</span>
+                </div>
+            ))}
+            <div style={{ borderTop: `1px solid ${C.border}`, marginTop: 6, paddingTop: 6, display: "flex", justifyContent: "space-between", gap: 16, fontWeight: 700, fontSize: 12 }}>
+                <span>Personleg KPI</span>
+                <span style={{ fontVariantNumeric: "tabular-nums" }}>{fmtSignedPp(total)}</span>
+            </div>
+        </div>
+    );
+}
+
+function ContributionsChart({ data, level, weights, inputMode }: {
+    data: SsbData;
+    level: GranularityLevel;
+    weights: Record<string, number>;
+    inputMode: InputMode;
+}) {
+    const { years, series, rows } = useMemo(() => {
+        const empty = { years: [] as number[], series: [] as { key: string; label: string; color: string }[], rows: [] as Record<string, number | string>[] };
+        const selectedCodes = codesAtLevel(data.codes, level);
+        if (selectedCodes.length === 0) return empty;
+
+        const shares = computeShares(selectedCodes, weights, inputMode);
+
+        // Last 5 years (year-over-year contributions need the year before each).
+        const yrs: number[] = [];
+        for (let y = data.lastYear - 4; y <= data.lastYear; y++) yrs.push(y);
+
+        // Per-category year-over-year contribution in percentage points.
+        // contribᵢ(y) = shareᵢ · (Iᵢ(y)/Iᵢ(y−1) − 1) · 100  → Σᵢ ≈ personal CPI inflation that year.
+        const contribByCode: Record<string, Record<number, number>> = {};
+        for (const c of selectedCodes) {
+            contribByCode[c.code] = {};
+            for (const y of yrs) {
+                const I0 = data.annualIndex[c.code]?.[y - 1];
+                const I1 = data.annualIndex[c.code]?.[y];
+                contribByCode[c.code][y] = I0 && I1 ? shares[c.code] * (I1 / I0 - 1) * 100 : 0;
+            }
+        }
+
+        // Rank categories by total absolute contribution across the window.
+        const ranked = [...selectedCodes].sort((a, b) => {
+            const sa = yrs.reduce((s, y) => s + Math.abs(contribByCode[a.code][y]), 0);
+            const sb = yrs.reduce((s, y) => s + Math.abs(contribByCode[b.code][y]), 0);
+            return sb - sa;
+        });
+
+        // Keep the most important categories distinct; fold the long tail into "Andre".
+        const MAX_DISTINCT = CATEGORY_PALETTE.length;
+        const useOther = ranked.length > MAX_DISTINCT;
+        const distinct = useOther ? ranked.slice(0, MAX_DISTINCT - 1) : ranked;
+        const tail = useOther ? ranked.slice(MAX_DISTINCT - 1) : [];
+
+        const seriesDef = distinct.map((c, i) => ({ key: c.code, label: c.label, color: CATEGORY_PALETTE[i] }));
+        if (tail.length) seriesDef.push({ key: "__other__", label: "Andre kategoriar", color: OTHER_COLOR });
+
+        const rows = yrs.map((y) => {
+            const row: Record<string, number | string> = { year: String(y) };
+            for (const c of distinct) row[c.code] = contribByCode[c.code][y];
+            if (tail.length) row["__other__"] = tail.reduce((s, c) => s + contribByCode[c.code][y], 0);
+            return row;
+        });
+
+        return { years: yrs, series: seriesDef, rows };
+    }, [data, level, weights, inputMode]);
+
+    if (years.length === 0 || !series.length || !rows) return null;
+
     return (
         <div>
-            <SectionTitle title="Bidrag til personleg inflasjon per kategori" desc="Kvar søyle viser kor mykje ein kategori bidreg til den totale prisindeksen din (prosentpoeng)." />
-            <ResponsiveContainer width="100%" height={Math.max(220, data.length * 28)}>
-                <BarChart data={data} layout="vertical" margin={{ top: 0, right: 60, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} horizontal={false} />
-                    <XAxis type="number" domain={domain} tickFormatter={(v) => fmtPct(v)} tick={{ fontSize: 11, fill: C.axisText }} />
-                    <YAxis type="category" dataKey="label" width={CATEGORY_LABEL_WIDTH} tick={<CategoryTick />} interval={0} />
-                    <Tooltip contentStyle={tooltipStyle} formatter={(value) => [fmtPct(Number(value)), "Bidrag"]} />
-                    <ReferenceLine x={0} stroke={C.muted} />
-                    <Bar dataKey="ci" name="Bidrag" radius={[0, 3, 3, 0]}>
-                        {data.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
-                    </Bar>
+            <SectionTitle
+                title="Bidrag til personleg KPI per år"
+                desc="Kvar kolonne er den årlege prisveksten dei siste fem åra, dekomponert på kategoriar og vekta med kurva di. Summen av kolonnen er di personlege KPI-inflasjon det året."
+            />
+            <ResponsiveContainer width="100%" height={380}>
+                <BarChart data={rows} margin={{ top: 10, right: 16, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke={C.axisText} opacity={0.2} vertical={false} />
+                    <XAxis dataKey="year" tick={{ fontSize: 12, fill: C.axisText }} axisLine={false} tickLine={false} />
+                    <YAxis tickFormatter={(v) => `${v >= 0 ? "+" : ""}${fmtNum(v, 0)} %`} tick={{ fontSize: 11, fill: C.axisText }} width={55} axisLine={false} tickLine={false} />
+                    <Tooltip cursor={{ fill: "var(--ch-axis-text)", opacity: 0.08 }} content={<StackTooltip />} />
+                    <ReferenceLine y={0} stroke={C.muted} />
+                    {series.map((s, i) => (
+                        <Bar
+                            key={s.key}
+                            dataKey={s.key}
+                            name={s.label}
+                            stackId="kpi"
+                            fill={s.color}
+                            maxBarSize={64}
+                            radius={i === series.length - 1 ? [3, 3, 0, 0] : undefined}
+                        />
+                    ))}
                 </BarChart>
             </ResponsiveContainer>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 14 }}>
+                {series.map((s) => (
+                    <span key={s.key} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: C.muted }}>
+                        <span style={{ width: 11, height: 11, borderRadius: 3, background: s.color, flexShrink: 0 }} />
+                        {s.label}
+                    </span>
+                ))}
+            </div>
         </div>
     );
 }
