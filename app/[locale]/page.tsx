@@ -6,6 +6,20 @@ import { getCategoryBadgeStyle } from "@/lib/categories";
 
 const calculators = [
     {
+        id: "kpi",
+        titleNo: "Personleg KPI-kalkulator",
+        titleEn: "Personal CPI Calculator",
+        descNo: "Vekt SSBs konsumprisindeks med di eiga forbrukskurv og sjå korleis di personlege inflasjon og kjøpekraft utviklar seg.",
+        descEn: "Weight Statistics Norway's CPI with your own consumption basket to see how your personal inflation and purchasing power evolve.",
+        gradient: "linear-gradient(140deg, #8B3DD0 0%, #8B3DD0CC 100%)",
+        accentColor: "#c084fc",
+        labelNo: "Inflasjon",
+        labelEn: "Inflation",
+        stat: "SSB",
+        statLabel: "live KPI-data",
+        imageUrl: "/images/articles/kpi.png",
+    },
+    {
         id: "voldabadet",
         titleNo: "Voldabadet — Kostnadsanalyse",
         titleEn: "Voldabadet — Cost Analysis",
@@ -54,7 +68,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     const t = await getTranslations("home");
     const allArticles = getAllArticles(locale);
     const featured = allArticles[0];
-    const latestArticles = allArticles.slice(1, 7);
+    const latestArticles = allArticles.slice(1, 6);
     const categories = [...new Set(allArticles.map((a) => a.category))];
 
     return (
@@ -193,6 +207,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </Link>
                 </div>
                 <div className="stagger-children grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {/* Newly published: SSB personal CPI calculator, featured first */}
+                    <div className="animate-fade-in-up">
+                        <Link href="/calculators/kpi" className="group block h-full">
+                            <article className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_22px_48px_-24px_rgba(60,30,110,0.32)]" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
+                                <div className="relative h-40 w-full overflow-hidden" style={{ background: "linear-gradient(140deg, #8B3DD0 0%, #8B3DD0CC 100%)" }}>
+                                    <div className="absolute top-3 left-3">
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold" style={{ background: "rgba(255,255,255,0.18)", color: "#fff", borderRadius: "var(--r-pill)" }}>
+                                            {locale === "no" ? "Kalkulator" : "Calculator"}
+                                        </span>
+                                    </div>
+                                    <div className="absolute bottom-3 right-4 text-4xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#fff", opacity: 0.92, lineHeight: 1 }}>
+                                        SSB
+                                    </div>
+                                </div>
+                                <div className="p-5">
+                                    <span className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--ch-accent)", letterSpacing: "0.08em" }}>
+                                        {locale === "no" ? "Ny kalkulator" : "New calculator"}
+                                    </span>
+                                    <h3 className="mb-2 text-base font-semibold leading-snug" style={{ color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}>
+                                        {locale === "no" ? "Personleg KPI-kalkulator" : "Personal CPI Calculator"}
+                                    </h3>
+                                    <p className="line-clamp-2 text-sm leading-relaxed" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)" }}>
+                                        {locale === "no"
+                                            ? "Vekt SSBs konsumprisindeks med di eiga forbrukskurv og sjå korleis di personlege inflasjon og kjøpekraft utviklar seg."
+                                            : "Weight Statistics Norway's CPI with your own consumption basket to see how your personal inflation and purchasing power evolve."}
+                                    </p>
+                                </div>
+                            </article>
+                        </Link>
+                    </div>
                     {latestArticles.map((article) => (
                         <div key={article.slug} className="animate-fade-in-up">
                             <ArticleCard {...article} locale={locale} />
