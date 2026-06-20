@@ -17,6 +17,7 @@ import {
     DødsfallChart,
     Merk,
 } from "@/components/articles/StadSkipCharts";
+import * as StadScroll from "@/components/articles/StadScroll";
 
 function cellText(node: React.ReactNode): string {
     if (typeof node === "string" || typeof node === "number") return String(node);
@@ -148,8 +149,20 @@ const stadSkipComponents = {
     ),
 };
 
+// Same rich components as the inline version, but charts become sticky-rail
+// anchors handled by ScrollytellingArticle. Tables stay inline.
+const stadScrollComponents = {
+    ...stadSkipComponents,
+    KostnadChart: StadScroll.KostnadChart,
+    NytteChart: StadScroll.NytteChart,
+    AvgiftChart: StadScroll.AvgiftChart,
+    AltChart: StadScroll.AltChart,
+    OyreGrid: StadScroll.OyreGrid,
+    DødsfallChart: StadScroll.DødsfallChart,
+};
+
 function getMdxComponents(slug: string) {
-    if (slug === "stad-skipstunnel") return stadSkipComponents;
+    if (slug === "stad-skipstunnel") return stadScrollComponents;
     return baseMdxComponents;
 }
 
@@ -180,13 +193,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
         ? "Denne artikkelen er ikkje tilgjengeleg på norsk enno. Viser engelsk versjon."
         : "This article is not yet available in English. Showing Norwegian version.";
 
+    const isScroll = slug === "stad-skipstunnel";
     const components = getMdxComponents(slug);
     const mdxOptions = { mdxOptions: { remarkPlugins: [remarkGfm] } };
     const currentContent = <MDXRemote source={article.content} components={components} options={mdxOptions} />;
     const otherContent = otherArticle ? <MDXRemote source={otherArticle.content} components={components} options={mdxOptions} /> : null;
 
     return (
-        <main className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
+        <main className={isScroll ? "mx-auto max-w-[90rem] px-4 pt-20 sm:px-6" : "mx-auto max-w-3xl px-4 pt-20 sm:px-6"}>
             <nav className="pb-4 text-xs text-text-muted">
                 <Link href="/" className="transition-colors hover:text-text-secondary">{locale === "no" ? "Heim" : "Home"}</Link>
                 <span className="mx-2">/</span>
@@ -195,7 +209,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
                 <span className="text-text-secondary">{article.title}</span>
             </nav>
 
-            <header className="pb-6">
+            <header className="pb-6" style={isScroll ? { maxWidth: 640 } : undefined}>
                 <span className="mb-3 inline-block px-3 py-1 text-xs font-semibold" style={{ background: badgeStyle.bg, color: badgeStyle.text, borderRadius: "var(--r-pill)" }}>
                     {article.category}
                 </span>
@@ -206,7 +220,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
             </header>
 
             {article.imageUrl && (
-                <div className="relative mb-8 overflow-hidden" style={{ maxWidth: 720, aspectRatio: "16/7", maxHeight: 340, borderRadius: "var(--r-card)" }}>
+                <div className="relative mb-8 overflow-hidden" style={{ maxWidth: isScroll ? 640 : 720, aspectRatio: "16/7", maxHeight: isScroll ? 300 : 340, borderRadius: "var(--r-card)" }}>
                     <img src={article.imageUrl} alt="" className="h-full w-full object-cover" style={{ filter: "grayscale(0.3) contrast(1.02)" }} />
                     {slug === "stad-skipstunnel" && (
                         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(18,14,28,0.18) 0%, rgba(18,14,28,0.62) 100%)", borderRadius: "var(--r-card)" }} />
@@ -215,14 +229,18 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
             )}
 
             <article className="pb-12">
-                <ArticleToggle
-                    defaultLocale={isFallback ? (fallbackLocale ?? otherLocale) : locale}
-                    otherLocale={otherLocale}
-                    currentContent={currentContent}
-                    otherContent={otherContent}
-                    isFallback={isFallback}
-                    fallbackMessage={isFallback ? fallbackMessage : undefined}
-                />
+                {isScroll ? (
+                    <StadScroll.ScrollytellingArticle>{currentContent}</StadScroll.ScrollytellingArticle>
+                ) : (
+                    <ArticleToggle
+                        defaultLocale={isFallback ? (fallbackLocale ?? otherLocale) : locale}
+                        otherLocale={otherLocale}
+                        currentContent={currentContent}
+                        otherContent={otherContent}
+                        isFallback={isFallback}
+                        fallbackMessage={isFallback ? fallbackMessage : undefined}
+                    />
+                )}
             </article>
 
             <div className="border-t border-border-subtle py-6">
