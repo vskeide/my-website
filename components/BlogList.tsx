@@ -9,10 +9,11 @@ interface Props {
     articles: ArticleMeta[];
     categories: string[];
     locale: string;
+    initialCategory?: string | null;
 }
 
-export default function BlogList({ articles, categories, locale }: Props) {
-    const [activeCategory, setActiveCategory] = useState<string | null>(null);
+export default function BlogList({ articles, categories, locale, initialCategory = null }: Props) {
+    const [activeCategory, setActiveCategory] = useState<string | null>(initialCategory);
 
     const filtered = activeCategory
         ? articles.filter((a) => a.category === activeCategory)

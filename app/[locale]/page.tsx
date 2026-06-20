@@ -98,7 +98,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     {categories.map((cat) => {
                         const s = getCategoryBadgeStyle(cat);
                         return (
-                            <Link key={cat} href="/blog" className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold transition-all duration-200" style={{ background: s.bg, color: s.text, borderRadius: "var(--r-pill)" }}>
+                            <Link key={cat} href={`/blog?category=${encodeURIComponent(cat)}`} className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold transition-all duration-200" style={{ background: s.bg, color: s.text, borderRadius: "var(--r-pill)" }}>
                                 <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: s.text, opacity: 0.6 }} />
                                 {cat}
                             </Link>
