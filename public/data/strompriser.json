@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-31",
+  "lastUpdated": "2026-08-01",
   "zone": "NO3",
   "year": 2026,
   "note": "spotAvg = monthly average spot price in NOK/kWh (excl. VAT). Updated by GitHub Action.",
@@ -43,7 +43,7 @@
     {
       "month": 7,
       "name": "Jul",
-      "spotAvg": null,
+      "spotAvg": 0.737,
       "norgespris": 0.4
     },
     {
