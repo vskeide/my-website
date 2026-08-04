@@ -5,6 +5,8 @@ export default createMiddleware(routing);
 
 export const config = {
     matcher: [
-        "/((?!api|_next|_vercel|favicon\\.ico|images|fonts|.*\\..*).*)",
+        // «treverket» er ei statisk under-side i public/ og skal ikkje få
+        // språkprefiks lagt på av i18n-middlewaren.
+        "/((?!api|_next|_vercel|favicon\\.ico|images|fonts|treverket|.*\\..*).*)",
     ],
 };
