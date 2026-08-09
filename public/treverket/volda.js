@@ -275,7 +275,7 @@
     }
   });
 
-  const LAGERNOKKEL = 'volda-tekst';
+  const LAGERNOKKEL = 'volda-tekst-2';
   const standard = Object.fromEntries(TEKSTFELT.map((f) => [f.nokkel, f.standard]));
   let tekst = { ...standard };
 
@@ -334,12 +334,30 @@
     }
   }
 
+  // Vi lagrar BERRE felta som skil seg frå det sida blir levert med.
+  // Lagra vi heile objektet, ville eit einaste tastetrykk frose alle 43 felta,
+  // og nye tekstar vi legg ut ville aldri nå fram til nokon som har vore
+  // innom panelet.
   function lagre() {
-    try { localStorage.setItem(LAGERNOKKEL, JSON.stringify(tekst)); } catch { /* full disk e.l. */ }
+    try {
+      const endra = {};
+      for (const n of Object.keys(standard)) {
+        if (tekst[n] !== standard[n]) endra[n] = tekst[n];
+      }
+      if (Object.keys(endra).length) {
+        localStorage.setItem(LAGERNOKKEL, JSON.stringify(endra));
+      } else {
+        localStorage.removeItem(LAGERNOKKEL);
+      }
+    } catch { /* fullt lager e.l. — teksten står framleis på skjermen */ }
   }
 
   function lastInnLagra() {
     try {
+      // Gamle versjonar lagra alle felta under ein annan nøkkel. Den må vekk,
+      // elles held han att tekstar som er oppdaterte sidan.
+      localStorage.removeItem('volda-tekst');
+
       const r = localStorage.getItem(LAGERNOKKEL);
       if (r) tekst = { ...standard, ...JSON.parse(r) };
     } catch { /* øydelagt lager — bruk standard */ }
