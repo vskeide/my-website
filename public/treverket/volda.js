@@ -299,6 +299,17 @@
     document.querySelectorAll(`[data-tekst="${nokkel}"]`).forEach((el) => {
       el.textContent = verdi;
       el.hidden = String(verdi).trim() === '';
+
+      // E-post og telefon står både som tekst og som lenke. Utan dette peikar
+      // lenka framleis på plassholdaren når teksten er endra.
+      if (el.tagName === 'A') {
+        const h = el.getAttribute('href') || '';
+        if (h.startsWith('mailto:')) {
+          el.setAttribute('href', 'mailto:' + String(verdi).trim());
+        } else if (h.startsWith('tel:')) {
+          el.setAttribute('href', 'tel:' + String(verdi).replace(/[^\d+]/g, ''));
+        }
+      }
     });
     document.querySelectorAll(`[data-tekst-rik="${nokkel}"]`).forEach((el) => {
       el.innerHTML = rikTilHtml(verdi);
