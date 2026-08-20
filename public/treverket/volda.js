@@ -71,7 +71,7 @@
   function leggIKorg(handle) {
     const v = VARER[handle];
     if (!v) return;
-    if (v.seld) { varsle('Dette stykket er alt seld.'); return; }
+    if (v.seld) { varsle('Dette produktet er alt seld.'); return; }
     if (korg.includes(handle)) {
       varsle(`Det finst berre eitt eksemplar av «${v.tittel}», og det ligg alt i korga di.`);
       return;
@@ -222,47 +222,27 @@
     sokfelt.closest('form')?.addEventListener('submit', (ev) => { ev.preventDefault(); kjor(); });
   }
 
-  /* -------------------------------------------------------- Farge og font */
+  /* ------------------------------------------------------- Mørk modus */
 
   function settPalett(namn) {
     rot.dataset.palett = namn;
-    document.querySelectorAll('[data-palett-vel]').forEach((b) => {
-      b.setAttribute('aria-pressed', String(b.dataset.palettVel === namn));
-    });
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = getComputedStyle(rot).getPropertyValue('--bg').trim();
   }
 
-  let sisteLys = rot.dataset.palett && rot.dataset.palett !== 'kveld'
-    ? rot.dataset.palett : 'havre';
+  // Fargen er avgjord: Havre. Mørk modus byter til Kveld og tilbake.
+  const LYS = 'havre';
 
   function settMorkmodus(pa) {
     document.querySelectorAll('[data-morkmodus]').forEach((b) => {
       b.setAttribute('aria-pressed', String(pa));
     });
-    if (pa) {
-      if (rot.dataset.palett !== 'kveld') sisteLys = rot.dataset.palett;
-      settPalett('kveld');
-    } else {
-      settPalett(sisteLys);
-    }
-  }
-
-  function settFont(namn) {
-    rot.dataset.font = namn;
-    document.querySelectorAll('[data-fontveljar]').forEach((s) => {
-      if (s.value !== namn) s.value = namn;
-    });
+    settPalett(pa ? 'kveld' : LYS);
   }
 
   document.addEventListener('click', (ev) => {
-    const sw = ev.target.closest('[data-palett-vel]');
-    if (sw) { sisteLys = sw.dataset.palettVel; settMorkmodus(false); return; }
     const mk = ev.target.closest('[data-morkmodus]');
     if (mk) { settMorkmodus(mk.getAttribute('aria-pressed') !== 'true'); return; }
-  });
-  document.querySelectorAll('[data-fontveljar]').forEach((sel) => {
-    sel.addEventListener('change', () => settFont(sel.value));
   });
 
   /* ---------------------------------------------------- Tekstpanelet */
@@ -429,7 +409,6 @@
   /* ------------------------------------------------------------- Start */
 
   settPalett(rot.dataset.palett || 'havre');
-  settFont(rot.dataset.font || 'figtree');
 
   lastInnLagra();
   fyllSkjema();

@@ -175,21 +175,12 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 }
 .topp nav a:hover, .topp nav button.navknapp:hover { border-bottom-color: var(--line); }
 .topp nav a[aria-current="page"] { border-bottom-color: var(--accent); }
-.topp nav button.navknapp[aria-expanded="true"] { border-bottom-color: var(--accent); }
 @media (min-width: 56rem) { .topp nav { display: flex; align-items: center; } }
 
 /* ---- Innstillingar: farge og skrift, i header på desktop --------- */
 
-.instillingar { display: none; align-items: center; gap: .9rem; }
-@media (min-width: 56rem) { .instillingar { display: flex; } }
+@media (min-width: 56rem) { }
 
-.fargevalg { display: flex; align-items: center; gap: .4rem; }
-.swatch {
-  width: 26px; height: 26px; padding: 0; border-radius: 50%;
-  border: 2px solid transparent; background: var(--sw); cursor: pointer;
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
-}
-.swatch[aria-pressed="true"] { border-color: var(--ink); }
 .morkbytte {
   display: inline-grid; place-items: center;
   width: 30px; height: 30px; border-radius: 50%;
@@ -201,32 +192,6 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .morkbytte__sol { display: none; }
 .morkbytte[aria-pressed="true"] .morkbytte__mane { display: none; }
 .morkbytte[aria-pressed="true"] .morkbytte__sol { display: block; }
-
-.fontveljar-wrap select {
-  appearance: none;
-  padding: .35rem 1.5rem .35rem .65rem; min-height: 30px;
-  border: 1px solid var(--line); border-radius: var(--r-pille);
-  background: var(--bg) no-repeat right .55rem center/.55rem
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
-  color: var(--ink); font-size: .8125rem; cursor: pointer; max-width: 9.5rem;
-}
-
-/* Mørk knapp i mobilmenyen si innstillingsbolk (større, med tekst) */
-.mobilmeny__instillingar {
-  margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
-}
-.mobilmeny__instillingar h2 {
-  font-family: var(--font-mono); font-size: .68rem; font-weight: 400;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft);
-  margin-bottom: .9rem;
-}
-.mobilmeny__instillingar .fargevalg { margin-bottom: 1rem; }
-.mobilmeny__instillingar .swatch { width: 34px; height: 34px; }
-.mobilmeny__instillingar .morkbytte { width: 38px; height: 38px; }
-.mobilmeny__instillingar .morkbytte svg { width: 18px; height: 18px; }
-.mobilmeny__instillingar .fontveljar-wrap select {
-  width: 100%; max-width: none; min-height: 44px; font-size: .9375rem;
-}
 
 .filterknapp {
   display: none; align-items: center; gap: .5rem;
@@ -809,44 +774,6 @@ body:has(dialog.korg[open]) { overflow: hidden; }
   --font-mono: "Figtree", system-ui, sans-serif;
   --fw-tung: 600; --ls-tittel: -0.03em;
 }
-[data-font="bricolage"] {
-  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
-  --font-body: "Bricolage Grotesque", system-ui, sans-serif;
-  --font-mono: "Bricolage Grotesque", system-ui, sans-serif;
-  --fw-tung: 600; --ls-tittel: -0.03em;
-}
-[data-font="instrument"] {
-  --font-display: "Instrument Sans", system-ui, sans-serif;
-  --font-body: "Instrument Sans", system-ui, sans-serif;
-  --font-mono: "Instrument Sans", system-ui, sans-serif;
-  --fw-tung: 600; --ls-tittel: -0.025em;
-}
-[data-font="space"] {
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "Space Grotesk", system-ui, sans-serif;
-  --fw-tung: 600; --ls-tittel: -0.03em;
-}
-[data-font="fraunces"] {
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Fraunces", Georgia, serif;
-  --font-mono: "Fraunces", Georgia, serif;
-  --fw-tung: 600; --ls-tittel: -0.02em;
-}
-[data-font="literata"] {
-  --font-display: "Literata", Georgia, serif;
-  --font-body: "Literata", Georgia, serif;
-  --font-mono: "Literata", Georgia, serif;
-  --fw-tung: 600; --ls-tittel: -0.015em;
-}
-
-/* Serifane treng litt mindre trykk i småtekst */
-[data-font="fraunces"] .eyebrow, [data-font="literata"] .eyebrow,
-[data-font="fraunces"] .kort__nr, [data-font="literata"] .kort__nr,
-[data-font="fraunces"] .merkelapp, [data-font="literata"] .merkelapp {
-  letter-spacing: .06em;
-}
-
 /* ================================================================
    FARGAR — Havre (standard), Jern, Terrakotta, Kveld (mørk modus)
    Sju verdiar kvar; resten reknar CSS-en ut ovanfor.
@@ -855,14 +782,6 @@ body:has(dialog.korg[open]) { overflow: hidden; }
 :root, [data-palett="havre"] {
   --bg:#FBF7EF; --bg-alt:#F0E7D5; --ink:#241F16; --ink-soft:#665D4C;
   --line:#E2D8C2; --accent:#55401F; --accent-ink:#FBF7EF; --accent-lys:#DCC8A0;
-}
-[data-palett="jern"] {
-  --bg:#F4F4F3; --bg-alt:#E5E5E3; --ink:#1A1B1B; --ink-soft:#575958;
-  --line:#D2D3D1; --accent:#3A464A; --accent-ink:#F4F4F3; --accent-lys:#AEBBBF;
-}
-[data-palett="terrakotta"] {
-  --bg:#FDF8F5; --bg-alt:#F5E5DC; --ink:#2A1D17; --ink-soft:#6A574B;
-  --line:#EAD6CB; --accent:#A3441F; --accent-ink:#FDF8F5; --accent-lys:#EBB59A;
 }
 [data-palett="kveld"] {
   --bg:#16151A; --bg-alt:#201F27; --ink:#EAE6DE; --ink-soft:#9C978E;
@@ -883,3 +802,16 @@ body:has(dialog.korg[open]) { overflow: hidden; }
 [data-palett="kveld"] .hero__inn .knapp:hover {
   background: var(--accent-lys); border-color: var(--accent-lys); color: var(--accent-ink);
 }
+
+/* ---- Verktøylenke i botnteksten ---------------------------------- */
+/* Tekstpanelet er eit verktøy for Ove, ikkje ein del av butikken. Difor
+   ligg det her nede og ikkje i menyen. */
+
+.botn__verktoy { grid-column: 1 / -1; margin: 1.25rem 0 0; padding-top: 1.25rem;
+                 border-top: 1px solid var(--line); }
+.botn__lenkeknapp {
+  background: none; border: 0; padding: .3rem 0; min-height: 30px;
+  color: var(--ink-soft); font: inherit; font-size: .8125rem;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.botn__lenkeknapp:hover { color: var(--accent); }

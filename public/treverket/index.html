@@ -11,7 +11,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600&family=Figtree:wght@400;600&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;600&family=Literata:opsz,wght@7..72,400;7..72,600&family=Space+Grotesk:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap">
     <link rel="stylesheet" href="/treverket/volda.css">
   </head>
 
@@ -24,21 +24,9 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="topp__inn">
         <a class="merke" href="#/heim">Treverket<span data-tekst="merke_under">Volda</span></a>
 
-        <nav data-meny aria-label="Hovudmeny">
-          <a href="#/heim">Heim</a><a href="#/butikk">Butikk</a><a href="#/om-oss">Om verkstaden</a><a href="#/prosess">Prosess</a><a href="#/stell">Stell</a>
-          <button type="button" class="navknapp" popovertarget="tekstpanel">Tekst</button>
-        </nav>
+        <nav data-meny aria-label="Hovudmeny"><a href="#/heim">Heim</a><a href="#/butikk">Butikk</a><a href="#/om-oss">Om verkstaden</a><a href="#/prosess">Prosess</a><a href="#/stell">Stell</a></nav>
 
-        <span class="instillingar">
-          <div class="fargevalg" role="group" aria-label="Fargeval"><button type="button" class="swatch" data-palett-vel="havre" style="--sw:#55401F" aria-pressed="true" title="Havre"><span class="vh">Havre</span></button><button type="button" class="swatch" data-palett-vel="jern" style="--sw:#3A464A" aria-pressed="false" title="Jern"><span class="vh">Jern</span></button><button type="button" class="swatch" data-palett-vel="terrakotta" style="--sw:#A3441F" aria-pressed="false" title="Terrakotta"><span class="vh">Terrakotta</span></button>
-        <button type="button" class="morkbytte" data-morkmodus aria-pressed="false"
-                aria-label="Mørk modus"><svg class="morkbytte__mane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg><svg class="morkbytte__sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg></button>
-      </div>
-          <span class="fontveljar-wrap">
-        <label class="vh" for="fontveljar">Skrift</label>
-        <select data-fontveljar aria-label="Skrift"><option value="figtree">Figtree</option><option value="bricolage">Bricolage Grotesque</option><option value="instrument">Instrument Sans</option><option value="space">Space Grotesk</option><option value="fraunces">Fraunces</option><option value="literata">Literata</option></select>
-      </span>
-        </span>
+        <button type="button" class="morkbytte" data-morkmodus aria-pressed="false" aria-label="Mørk modus"><svg class="morkbytte__mane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg><svg class="morkbytte__sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg></button>
 
         <button type="button" class="filterknapp" popovertarget="filterpanel" data-tal="0">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg> Filter <span class="filterknapp__tal"></span>
@@ -60,22 +48,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
              stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <ul>
-        <li><a href="#/heim"><span>01</span>Heim</a></li><li><a href="#/butikk"><span>02</span>Butikk</a></li><li><a href="#/om-oss"><span>03</span>Om verkstaden</a></li><li><a href="#/prosess"><span>04</span>Prosess</a></li><li><a href="#/stell"><span>05</span>Stell</a></li>
-        <li><button type="button" class="mobmenyknapp" popovertarget="tekstpanel"
-                    popovertargetaction="show"><span>05</span>Tekst</button></li>
-      </ul>
-      <div class="mobilmeny__instillingar">
-        <h2>Farge og skrift</h2>
-        <div class="fargevalg" role="group" aria-label="Fargeval"><button type="button" class="swatch" data-palett-vel="havre" style="--sw:#55401F" aria-pressed="true" title="Havre"><span class="vh">Havre</span></button><button type="button" class="swatch" data-palett-vel="jern" style="--sw:#3A464A" aria-pressed="false" title="Jern"><span class="vh">Jern</span></button><button type="button" class="swatch" data-palett-vel="terrakotta" style="--sw:#A3441F" aria-pressed="false" title="Terrakotta"><span class="vh">Terrakotta</span></button>
-        <button type="button" class="morkbytte" data-morkmodus aria-pressed="false"
-                aria-label="Mørk modus"><svg class="morkbytte__mane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg><svg class="morkbytte__sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg></button>
-      </div>
-        <span class="fontveljar-wrap">
-        <label class="vh" for="fontveljar">Skrift</label>
-        <select data-fontveljar aria-label="Skrift"><option value="figtree">Figtree</option><option value="bricolage">Bricolage Grotesque</option><option value="instrument">Instrument Sans</option><option value="space">Space Grotesk</option><option value="fraunces">Fraunces</option><option value="literata">Literata</option></select>
-      </span>
-      </div>
+      <ul><li><a href="#/heim"><span>01</span>Heim</a></li><li><a href="#/butikk"><span>02</span>Butikk</a></li><li><a href="#/om-oss"><span>03</span>Om verkstaden</a></li><li><a href="#/prosess"><span>04</span>Prosess</a></li><li><a href="#/stell"><span>05</span>Stell</a></li></ul>
       <p class="mobilmeny__fot">Handlaga i Volda, Sunnmøre</p>
     </nav>
 
@@ -97,7 +70,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
         </div>
       </div>
       <div class="hero__tillit">
-        <span>14 ledige stykke no</span>
+        <span>14 tilgjengelege no</span>
         <span data-tekst="tillit_2">Sendt frå Volda på 1–3 dagar</span>
         <span data-tekst="tillit_3">14 dagar angrerett</span>
       </div>
@@ -115,7 +88,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
         <div class="hovudrad">
           <div>
             <span class="eyebrow" data-tekst="ledige_eyebrow">Nytt i verkstaden</span>
-            <h2 data-tekst="ledige_overskrift">Ledige no</h2>
+            <h2 data-tekst="ledige_overskrift">Tilgjengeleg no</h2>
           </div>
           <a class="strek" href="#/butikk">Sjå alle 14</a>
         </div>
@@ -265,7 +238,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--alt">
       <div class="wrap forteljing">
-        <img src="/treverket/bilete/verkstad.jpg" alt="Ferdige stykke på arbeidsbordet"
+        <img src="/treverket/bilete/verkstad.jpg" alt="Ferdige arbeid på arbeidsbordet"
              width="1200" height="900" loading="lazy" decoding="async">
         <div>
           <span class="eyebrow" data-tekst="fort_eyebrow">Om verkstaden</span>
@@ -284,7 +257,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
             <h2 data-tekst="prosess_overskrift">Slik blir det til</h2>
           </div>
         </div>
-        <ol class="steg"><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-1.jpg" alt="Kappstykke i eik, valnøtt, ask, sedertre og purpurhjarte stabla på arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">1</span><h3 data-tekst="steg1_tittel">Tre som ligg att</h3><p data-tekst="steg1_tekst">Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-2.jpg" alt="Limte fjøler i tvingar på benken, med fleire emne i bakgrunnen" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">2</span><h3 data-tekst="steg2_tittel">Limt og pressa</h3><p data-tekst="steg2_tekst">Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-3.jpg" alt="Ove formar ei fjøl for hand ved arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">3</span><h3 data-tekst="steg3_tittel">Forma for hand</h3><p data-tekst="steg3_tekst">Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-4.jpg" alt="Ferdig fjøl blir olja inn med klut, ved sida av eit glas treolje" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">4</span><h3 data-tekst="steg4_tittel">Olja og merkt</h3><p data-tekst="steg4_tekst">Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut.</p></li></ol>
+        <ol class="steg"><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-1.jpg" alt="Kappstykke i eik, valnøtt, teak og bjørk stabla på arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">1</span><h3 data-tekst="steg1_tittel">Tre som ligg att</h3><p data-tekst="steg1_tekst">Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-2.jpg" alt="Limte fjøler i tvingar på benken, med fleire emne i bakgrunnen" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">2</span><h3 data-tekst="steg2_tittel">Limt og pressa</h3><p data-tekst="steg2_tekst">Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-3.jpg" alt="Ove formar ei fjøl for hand ved arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">3</span><h3 data-tekst="steg3_tittel">Forma for hand</h3><p data-tekst="steg3_tekst">Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-4.jpg" alt="Ferdig fjøl blir olja inn med klut, ved sida av eit glas treolje" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">4</span><h3 data-tekst="steg4_tittel">Olja og merkt</h3><p data-tekst="steg4_tekst">Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut.</p></li></ol>
       </div>
     </div>
     </section>    <section class="side" data-side="butikk">
@@ -293,7 +266,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
         <div class="hovudrad">
           <div>
             <h1 data-tekst="butikk_overskrift">Butikk</h1>
-            <p class="lead" data-tekst="butikk_lead">Alt som finst akkurat no. Kvart stykke er eitt av eitt — når det er seld, er det borte.</p>
+            <p class="lead" data-tekst="butikk_lead">Alt som finst akkurat no. Kvart produkt er eitt av eitt — når det er seld, er det borte.</p>
           </div>
         </div>
 
@@ -563,7 +536,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       </article>
             </div>
             <p class="ingen" data-ingen-treff hidden>
-              Ingen stykke passar. Nullstill filteret, eller
+              Ingenting passar. Nullstill filteret, eller
               <a href="mailto:ove.krumsvik@gmail.com">send meg ein e-post</a> — eg lagar gjerne på bestilling.
             </p>
           </div>
@@ -575,7 +548,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="wrap">
         <div class="hovudrad">
           <div>
-            <span class="eyebrow">4 ledige stykke</span>
+            <span class="eyebrow">4 tilgjengelege</span>
             <h1>Skjerefjøler</h1>
           </div>
           <a class="strek" href="#/butikk">Alle kategoriar</a>
@@ -662,7 +635,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="wrap">
         <div class="hovudrad">
           <div>
-            <span class="eyebrow">4 ledige stykke</span>
+            <span class="eyebrow">4 tilgjengelege</span>
             <h1>Serveringsbrett</h1>
           </div>
           <a class="strek" href="#/butikk">Alle kategoriar</a>
@@ -735,7 +708,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="wrap">
         <div class="hovudrad">
           <div>
-            <span class="eyebrow">3 ledige stykke</span>
+            <span class="eyebrow">3 tilgjengelege</span>
             <h1>Modellbilar</h1>
           </div>
           <a class="strek" href="#/butikk">Alle kategoriar</a>
@@ -808,7 +781,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="wrap">
         <div class="hovudrad">
           <div>
-            <span class="eyebrow">3 ledige stykke</span>
+            <span class="eyebrow">3 tilgjengelege</span>
             <h1>Boksar og krukker</h1>
           </div>
           <a class="strek" href="#/butikk">Alle kategoriar</a>
@@ -881,13 +854,13 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="wrap">
         <div class="hovudrad">
           <div>
-            <span class="eyebrow">6 ledige stykke</span>
+            <span class="eyebrow">6 tilgjengelege</span>
             <h1>Julegåver</h1>
           </div>
           <a class="strek" href="#/butikk">Alle kategoriar</a>
         </div>
         <div class="rte" style="max-width:52ch;margin-bottom:2rem"
-             data-tekst-rik="kat_julegaver"><p>Eit utval som passar å gi bort. Kvart stykke finst i eitt eksemplar, så det som står her i dag er ikkje sikkert her i morgon.</p></div>
+             data-tekst-rik="kat_julegaver"><p>Eit utval som passar å gi bort. Kvart produkt finst i eitt eksemplar, så det som står her i dag er ikkje sikkert her i morgon.</p></div>
         <div class="rutenett">
           <article class="kort spar-arbeid"
         data-vare data-sokbar="endevedfjøl i eik massiv eik, endeved skjerefjøler 38 × 26 × 5 cm" data-kategori="skjerefjoler julegaver"
@@ -1004,7 +977,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="endevedfjøl i eik massiv eik, endeved skjerefjøler 38 × 26 × 5 cm" data-kategori="skjerefjoler julegaver"
         data-prisband="over2000" data-treslag="eik">
@@ -1106,7 +1079,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="sjakkfjøl nr. 01 valnøtt, furu, bjørk, sebrafinér skjerefjøler 32 × 22 × 2 cm" data-kategori="skjerefjoler"
         data-prisband="1000-2000" data-treslag="valnøtt furu bjørk sebrafinér">
@@ -1208,7 +1181,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="sjakkfjøl nr. 01 valnøtt, furu, bjørk, sebrafinér skjerefjøler 32 × 22 × 2 cm" data-kategori="skjerefjoler"
         data-prisband="1000-2000" data-treslag="valnøtt furu bjørk sebrafinér">
@@ -1294,8 +1267,8 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
             
             <div class="produkt__pris">Seld</div>
             <button type="button" class="knapp knapp--blokk" disabled>
-            Dette stykket er seld</button>
-          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna stykke.</p></div>
+            Dette er seld</button>
+          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna.</p></div>
             <table class="spek"><tbody><tr><th scope="row">Treslag</th><td>Valnøtt, furu, bjørk</td></tr><tr><th scope="row">Mål</th><td>30 × 20 × 2 cm</td></tr><tr><th scope="row">Vekt</th><td>0,8 kg</td></tr><tr><th scope="row">Katalognr.</th><td>0004</td></tr></tbody></table>
             <div class="rte" style="margin-top:1.6rem"><p>Same mønster som nr. 01, men mindre og med færre purpurbitar. Seld i juni.</p></div>
             <div class="stell">
@@ -1309,7 +1282,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="sjakkfjøl nr. 01 valnøtt, furu, bjørk, sebrafinér skjerefjøler 32 × 22 × 2 cm" data-kategori="skjerefjoler"
         data-prisband="1000-2000" data-treslag="valnøtt furu bjørk sebrafinér">
@@ -1411,7 +1384,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="sjakkfjøl nr. 01 valnøtt, furu, bjørk, sebrafinér skjerefjøler 32 × 22 × 2 cm" data-kategori="skjerefjoler"
         data-prisband="1000-2000" data-treslag="valnøtt furu bjørk sebrafinér">
@@ -1513,7 +1486,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="serveringsbrett, lyst teak, lys splintved serveringsbrett 58 × 14 × 2 cm" data-kategori="serveringsbrett"
         data-prisband="1000-2000" data-treslag="teak">
@@ -1615,7 +1588,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="serveringsbrett i teak teak serveringsbrett 62 × 15 × 2 cm" data-kategori="serveringsbrett"
         data-prisband="1000-2000" data-treslag="teak">
@@ -1717,7 +1690,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="serveringsbrett i teak teak serveringsbrett 62 × 15 × 2 cm" data-kategori="serveringsbrett"
         data-prisband="1000-2000" data-treslag="teak">
@@ -1819,7 +1792,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="serveringsbrett i teak teak serveringsbrett 62 × 15 × 2 cm" data-kategori="serveringsbrett"
         data-prisband="1000-2000" data-treslag="teak">
@@ -1921,7 +1894,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="sportsbil, open mahogni, eik, ask modellbilar 30 × 12 × 8 cm" data-kategori="modellbilar julegaver"
         data-prisband="1000-2000" data-treslag="eik ask mahogni">
@@ -2023,7 +1996,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="lastebil med lem valnøtt, eik, bjørk, messingskruar modellbilar 34 × 14 × 13 cm" data-kategori="modellbilar"
         data-prisband="1000-2000" data-treslag="eik valnøtt bjørk">
@@ -2109,8 +2082,8 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
             
             <div class="produkt__pris">Seld</div>
             <button type="button" class="knapp knapp--blokk" disabled>
-            Dette stykket er seld</button>
-          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna stykke.</p></div>
+            Dette er seld</button>
+          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna.</p></div>
             <table class="spek"><tbody><tr><th scope="row">Treslag</th><td>Beisa valnøtt, eik</td></tr><tr><th scope="row">Mål</th><td>32 × 13 × 12 cm</td></tr><tr><th scope="row">Vekt</th><td>1,0 kg</td></tr><tr><th scope="row">Katalognr.</th><td>0012</td></tr></tbody></table>
             <div class="rte" style="margin-top:1.6rem"><p>Same modell som nr. 01, beisa mørk. Seld i mai.</p></div>
             <div class="stell">
@@ -2124,7 +2097,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="lastebil med lem valnøtt, eik, bjørk, messingskruar modellbilar 34 × 14 × 13 cm" data-kategori="modellbilar"
         data-prisband="1000-2000" data-treslag="eik valnøtt bjørk">
@@ -2226,7 +2199,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="lastebil med lem valnøtt, eik, bjørk, messingskruar modellbilar 34 × 14 × 13 cm" data-kategori="modellbilar"
         data-prisband="1000-2000" data-treslag="eik valnøtt bjørk">
@@ -2328,7 +2301,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="krukke med lok, lys ask og frukttre, dreidd boksar og krukker ø 9 × 10 cm" data-kategori="boksar-og-krukker"
         data-prisband="under1000" data-treslag="ask frukttre">
@@ -2430,7 +2403,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="krukke med lok, valnøtt valnøtt og ask, dreidd boksar og krukker ø 9 × 11 cm" data-kategori="boksar-og-krukker julegaver"
         data-prisband="under1000" data-treslag="valnøtt ask">
@@ -2532,7 +2505,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="krukke med lok, valnøtt valnøtt og ask, dreidd boksar og krukker ø 9 × 11 cm" data-kategori="boksar-og-krukker julegaver"
         data-prisband="under1000" data-treslag="valnøtt ask">
@@ -2618,8 +2591,8 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
             
             <div class="produkt__pris">Seld</div>
             <button type="button" class="knapp knapp--blokk" disabled>
-            Dette stykket er seld</button>
-          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna stykke.</p></div>
+            Dette er seld</button>
+          <div class="stell" data-tekst-rik="seld_tekst"><p>Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna.</p></div>
             <table class="spek"><tbody><tr><th scope="row">Treslag</th><td>Valnøtt, mahogni</td></tr><tr><th scope="row">Mål</th><td>11 × 11 × 10 cm</td></tr><tr><th scope="row">Vekt</th><td>0,55 kg</td></tr><tr><th scope="row">Katalognr.</th><td>0017</td></tr></tbody></table>
             <div class="rte" style="margin-top:1.6rem"><p>Mørkare søsken til den firkanta boksen. Seld i juli.</p></div>
             <div class="stell">
@@ -2633,7 +2606,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 
     <div class="seksjon seksjon--tett">
       <div class="wrap">
-        <div class="hovudrad"><h2>Andre stykke</h2></div>
+        <div class="hovudrad"><h2>Meir frå verkstaden</h2></div>
         <div class="rutenett"><article class="kort spar-arbeid"
         data-vare data-sokbar="krukke med lok, valnøtt valnøtt og ask, dreidd boksar og krukker ø 9 × 11 cm" data-kategori="boksar-og-krukker julegaver"
         data-prisband="under1000" data-treslag="valnøtt ask">
@@ -2720,13 +2693,13 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
 <div class="seksjon">
       <div class="wrap tekst">
         <h1 data-tekst="prosess_overskrift">Slik blir det til</h1>
-        <p class="lead" data-tekst="prosess_lead">Frå kappstykke til ferdig stykke går det mellom to til sju dagar. Mesteparten av tida er venting — lim som skal setje seg, olje som skal tørke.</p>
+        <p class="lead" data-tekst="prosess_lead">Frå kappstykke til ferdig produkt går det mellom to til sju dagar. Mesteparten av tida er venting — lim som skal setje seg, olje som skal tørke.</p>
       </div>
     </div>
     <div class="seksjon">
       <div class="wrap">
         
-        <ol class="steg"><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-1.jpg" alt="Kappstykke i eik, valnøtt, ask, sedertre og purpurhjarte stabla på arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">1</span><h3 data-tekst="steg1_tittel">Tre som ligg att</h3><p data-tekst="steg1_tekst">Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-2.jpg" alt="Limte fjøler i tvingar på benken, med fleire emne i bakgrunnen" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">2</span><h3 data-tekst="steg2_tittel">Limt og pressa</h3><p data-tekst="steg2_tekst">Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-3.jpg" alt="Ove formar ei fjøl for hand ved arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">3</span><h3 data-tekst="steg3_tittel">Forma for hand</h3><p data-tekst="steg3_tekst">Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-4.jpg" alt="Ferdig fjøl blir olja inn med klut, ved sida av eit glas treolje" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">4</span><h3 data-tekst="steg4_tittel">Olja og merkt</h3><p data-tekst="steg4_tekst">Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut.</p></li></ol>
+        <ol class="steg"><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-1.jpg" alt="Kappstykke i eik, valnøtt, teak og bjørk stabla på arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">1</span><h3 data-tekst="steg1_tittel">Tre som ligg att</h3><p data-tekst="steg1_tekst">Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-2.jpg" alt="Limte fjøler i tvingar på benken, med fleire emne i bakgrunnen" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">2</span><h3 data-tekst="steg2_tittel">Limt og pressa</h3><p data-tekst="steg2_tekst">Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-3.jpg" alt="Ove formar ei fjøl for hand ved arbeidsbenken" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">3</span><h3 data-tekst="steg3_tittel">Forma for hand</h3><p data-tekst="steg3_tekst">Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går.</p></li><li class="steg__punkt"><figure class="steg__bilete"><img src="/treverket/bilete/prosess-4.jpg" alt="Ferdig fjøl blir olja inn med klut, ved sida av eit glas treolje" width="1024" height="244" loading="lazy" decoding="async" onerror="this.closest('.steg__bilete').hidden=true"></figure><span class="steg__nr">4</span><h3 data-tekst="steg4_tittel">Olja og merkt</h3><p data-tekst="steg4_tekst">Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut.</p></li></ol>
       </div>
     </div>
     </section>    <section class="side" data-side="stell">
@@ -3004,7 +2977,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="botn__inn">
         <div>
           <h3>Treverket</h3>
-          <div data-tekst-rik="botn_om"><p>Handlaga ting i tre frå ein liten verkstad på Sunnmøre. Kvart stykke finst berre i eitt eksemplar.</p></div>
+          <div data-tekst-rik="botn_om"><p>Handlaga ting i tre frå ein liten verkstad på Sunnmøre. Kvart produkt finst berre i eitt eksemplar.</p></div>
         </div>
         <div>
           <h3>Sider</h3>
@@ -3024,6 +2997,11 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
             <li data-tekst="botn_orgnr">Org.nr 936 927 947</li>
           </ul>
         </div>
+        <p class="botn__verktoy">
+          <button type="button" class="botn__lenkeknapp" popovertarget="tekstpanel">
+            Rediger tekstane på sida
+          </button>
+        </p>
       </div>
     </footer>
 
@@ -3053,7 +3031,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
       <div class="filterpanel__botn">
         <button type="button" class="knapp knapp--tom" data-nullstill>Nullstill</button>
         <button type="button" class="knapp" popovertarget="filterpanel"
-                popovertargetaction="hide">Vis <span data-treff>17</span> stykke</button>
+                popovertargetaction="hide">Vis <span data-treff>17</span></button>
       </div>
     </div>
     <div id="tekstpanel" popover="manual" class="tekstpanel"
@@ -3107,7 +3085,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
               <input id="felt-hero_knapp" type="text" data-tekstfelt="hero_knapp">
             </div><div class="felt">
               <label for="felt-tillit_2">Løfte 2</label>
-              <small>Løfte 1 blir rekna ut automatisk (kor mange som er ledige).</small>
+              <small>Løfte 1 blir rekna ut automatisk (kor mange som er tilgjengelege).</small>
               <input id="felt-tillit_2" type="text" data-tekstfelt="tillit_2">
             </div><div class="felt">
               <label for="felt-tillit_3">Løfte 3</label>
@@ -3238,7 +3216,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
               <small>Same tekst på alle produktsider.</small>
               <textarea id="felt-stell" rows="7" data-tekstfelt="stell"></textarea>
             </div><div class="felt">
-              <label for="felt-seld_tekst">Tekst når eit stykke er seld</label>
+              <label for="felt-seld_tekst">Tekst når eit produkt er seld</label>
               
               <textarea id="felt-seld_tekst" rows="3" data-tekstfelt="seld_tekst"></textarea>
             </div>
@@ -3323,7 +3301,7 @@ krukker i massivt tre. Kvart stykke finst i eitt eksemplar.">
     </dialog>
 
     <script type="application/json" id="varedata">{"fjol-sjakk-01":{"tittel":"Sjakkfjøl nr. 01","pris":1290,"seld":false,"bilete":"bilete/fjol-sjakk-01.jpg"},"fjol-endeved-eik":{"tittel":"Endevedfjøl i eik","pris":2490,"seld":false,"bilete":"bilete/fjol-endeved-eik.jpg"},"fjol-bolge-valnott":{"tittel":"Bølgjefjøl i valnøtt","pris":1890,"seld":false,"bilete":"bilete/fjol-bolge.jpg"},"fjol-sjakk-02":{"tittel":"Sjakkfjøl nr. 02","pris":1190,"seld":true,"bilete":"bilete/fjol-sjakk-02.jpg"},"fjol-endeved-02":{"tittel":"Endevedfjøl, liten","pris":1690,"seld":false,"bilete":"bilete/fjol-endeved-02.jpg"},"brett-rosentre-lang":{"tittel":"Serveringsbrett i teak","pris":1690,"seld":false,"bilete":"bilete/brett-eitt.jpg"},"brett-lyst":{"tittel":"Serveringsbrett, lyst","pris":1490,"seld":false,"bilete":"bilete/brett-lys.jpg"},"brett-mork":{"tittel":"Serveringsbrett, mørkt","pris":1590,"seld":false,"bilete":"bilete/brett-mork.jpg"},"brett-sett-tre":{"tittel":"Tre brett i følgje","pris":3990,"seld":false,"bilete":"bilete/brett-alle.jpg"},"bil-lastebil-01":{"tittel":"Lastebil med lem","pris":1450,"seld":false,"bilete":"bilete/bil-lastebil.jpg"},"bil-sportsbil-01":{"tittel":"Sportsbil, open","pris":1150,"seld":false,"bilete":"bilete/bil-sportsbil.jpg"},"bil-lastebil-02":{"tittel":"Lastebil, mørk","pris":1350,"seld":true,"bilete":"bilete/bil-lastebil-02.jpg"},"bil-sportsbil-02":{"tittel":"Sportsbil, stripete","pris":1250,"seld":false,"bilete":"bilete/bil-sportsbil-02.jpg"},"krukke-valnott":{"tittel":"Krukke med lok, valnøtt","pris":890,"seld":false,"bilete":"bilete/krukke-valnott.jpg"},"krukke-lys":{"tittel":"Krukke med lok, lys","pris":790,"seld":false,"bilete":"bilete/krukke-lys.jpg"},"boks-firkanta":{"tittel":"Firkanta boks med lok","pris":990,"seld":false,"bilete":"bilete/boks-firkanta.jpg"},"boks-mork":{"tittel":"Firkanta boks, mørk","pris":950,"seld":true,"bilete":"bilete/boks-mork.jpg"}}</script>
-    <script type="application/json" id="tekstfelt">[{"nokkel":"toppmelding","merke":"Melding øvst på sida","standard":"Kvart produkt finst i eitt eksemplar"},{"nokkel":"merke_under","merke":"Undertittel under namnet","standard":"Volda"},{"nokkel":"hero_eyebrow","merke":"Liten tekst over overskrifta","standard":"Verkstad i Volda sidan 2020"},{"nokkel":"hero_tittel","merke":"Overskrift","standard":"Treet bestemmer"},{"nokkel":"hero_kursiv","merke":"Overskrift, kursiv del","standard":"kva det blir"},{"nokkel":"hero_tekst","merke":"Tekst under overskrifta","standard":"Gamle bord, hyller og benkeplater får eit nytt liv. Kva det blir, kjem an på kva som ligg på benken den dagen."},{"nokkel":"hero_knapp","merke":"Tekst på knappen","standard":"Sjå kva som står på hylla"},{"nokkel":"tillit_2","merke":"Løfte 2","standard":"Sendt frå Volda på 1–3 dagar"},{"nokkel":"tillit_3","merke":"Løfte 3","standard":"14 dagar angrerett"},{"nokkel":"kat_overskrift","merke":"Overskrift over kategoriane","standard":"Kva eg lagar"},{"nokkel":"ledige_eyebrow","merke":"Liten tekst over produkta","standard":"Nytt i verkstaden"},{"nokkel":"ledige_overskrift","merke":"Overskrift over produkta","standard":"Ledige no"},{"nokkel":"fort_eyebrow","merke":"Liten tekst over forteljinga","standard":"Om verkstaden"},{"nokkel":"fort_overskrift","merke":"Overskrift på forteljinga","standard":"Hobby i ein verkstad"},{"nokkel":"fort_tekst","merke":"Forteljinga","standard":"Verkstaden ligg i kjellaren i Volda. Det starta med ein leikebil til barnebarnet, og no er hyllene fulle.\n\nEg har vore lærar i 38 år. Før eg vart lærar, jobba eg i seks år som snikkar/bygningsarbeidar i lokale firma."},{"nokkel":"fort_lenke","merke":"Lenketekst under forteljinga","standard":"Les meir om verkstaden"},{"nokkel":"butikk_overskrift","merke":"Overskrift på butikksida","standard":"Butikk"},{"nokkel":"butikk_lead","merke":"Tekst under overskrifta i butikken","standard":"Alt som finst akkurat no. Kvart stykke er eitt av eitt — når det er seld, er det borte."},{"nokkel":"prosess_eyebrow","merke":"Liten tekst over stega","standard":"Frå planke til produkt"},{"nokkel":"prosess_overskrift","merke":"Overskrift over stega","standard":"Slik blir det til"},{"nokkel":"prosess_lead","merke":"Innleiing på prosess-sida","standard":"Frå kappstykke til ferdig stykke går det mellom to til sju dagar. Mesteparten av tida er venting — lim som skal setje seg, olje som skal tørke."},{"nokkel":"steg1_tittel","merke":"Steg 1 — tittel","standard":"Tre som ligg att"},{"nokkel":"steg1_tekst","merke":"Steg 1 — tekst","standard":"Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre."},{"nokkel":"steg2_tittel","merke":"Steg 2 — tittel","standard":"Limt og pressa"},{"nokkel":"steg2_tekst","merke":"Steg 2 — tekst","standard":"Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn."},{"nokkel":"steg3_tittel","merke":"Steg 3 — tittel","standard":"Forma for hand"},{"nokkel":"steg3_tekst","merke":"Steg 3 — tekst","standard":"Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går."},{"nokkel":"steg4_tittel","merke":"Steg 4 — tittel","standard":"Olja og merkt"},{"nokkel":"steg4_tekst","merke":"Steg 4 — tekst","standard":"Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut."},{"nokkel":"om_tittel","merke":"Overskrift","standard":"Om verkstaden"},{"nokkel":"om_lead","merke":"Innleiing","standard":"Verkstaden ligg i kjellaren i Volda. Det starta med ein leikebil til barnebarnet, og no er hyllene fulle."},{"nokkel":"om_tekst","merke":"Heile teksten","standard":"Eg har vore lærar i 38 år. Før eg vart lærar, jobba eg i seks år som snikkar/bygningsarbeidar i lokale firma. Eg har alltid hatt ein arbeidsbenk i kjellaren, mest til å reparere ting. Etter kvart kom trongen til å lage fleire ting. Først gamle modellbilar i tre, så blei det skjerefjøler, boksar og anna.\n\n## Treet er gjenbruk\n\nMest alt trevirket er gamle bord, hyller og benkeplater i heiltre, kjøpt på gjenbruksbutikkar, loppemarknad, Facebook eller på Finn.no. Tresortane som blir nytta er eik, valnøtt, bjørk, teak, akasie og furu.\n\n## Difor finst det berre ei utgåve av kvart produkt\n\nEg lagar ikkje serier. Kvar fjøl blir sett saman av dei bitane som ligg på benken den dagen, og neste gong ligg der andre bitar.\n\n## Frakt og retur\n\nAlle varer kan hentast heime i Smiebakken 32 i Volda, eller bli sende i posten, pakka i bobleplast, papp og papir. Frakt kjem då i tillegg. Du har fjorten dagar angrerett. Er noko skada i posten, ta kontakt, så ordnar vi det."},{"nokkel":"stell_kort","merke":"Kort stellinje på produktsidene","standard":"Vask for hand, tørk med ein gong, og olje fjøla når ho ser tørr ut. Aldri i oppvaskmaskin."},{"nokkel":"stell_tittel","merke":"Overskrift på stellsida","standard":"Slik tek du vare på fjøla"},{"nokkel":"stell","merke":"Heile stellrådet","standard":"## Reingjering\n\nEtter bruk: vask fjøla for hand med mildt såpevatn og mjuk klut. Tørk fjøla med eit handkle, og la den stå oppreist slik at den tørkar på begge sider. Dette hindrar at treet slår seg eller sprekk.\n\n## Gi fjøla næring med olje\n\nTre er eit levande materiale som treng pleie. Bruk nøytral, naturleg olje — mineralolje eller spesialolje for trefjøler. Påfør eit tynt lag, og la det trekke inn over natta. Tørk av overflødig olje neste morgon. Gjenta dette etter 3–4 månader, eller når fjøla ser tørr ut.\n\n## Oppbevaring\n\nLa fjøla stå luftig og tørt, helst på høgkant.\n\nTips: strø litt grovsalt og sitronsaft på fjøla ein gong i blant for naturleg desinfisering og frisk duft.\n\n## Om materialet\n\nProdukta er laga av gjenbruksmateriale. Alle er laga for hand, og det vil vere litt skilnad på produkta i storleik."},{"nokkel":"seld_tekst","merke":"Tekst når eit stykke er seld","standard":"Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna stykke."},{"nokkel":"botn_om","merke":"Kort om verkstaden","standard":"Handlaga ting i tre frå ein liten verkstad på Sunnmøre. Kvart stykke finst berre i eitt eksemplar."},{"nokkel":"botn_epost","merke":"E-post","standard":"ove.krumsvik@gmail.com"},{"nokkel":"botn_tlf","merke":"Telefon","standard":"+47 48260965"},{"nokkel":"botn_stad","merke":"Stad","standard":"Smiebakken 32, 6100 Volda"},{"nokkel":"botn_orgnr","merke":"Organisasjonsnummer","standard":"Org.nr 936 927 947"},{"nokkel":"kat_skjerefjoler","merke":"Tekst på «Skjerefjøler»","standard":"Fjøler i massivt tre, limte opp av restar frå heiltre benkeplater, hyller og bord. Nokre i endeved, nokre i mønster. Alle er olja og klare til bruk."},{"nokkel":"kat_serveringsbrett","merke":"Tekst på «Serveringsbrett»","standard":"Lange brett skorne ut av éi fjøl, så fargeskiftet i treet går uavbrote frå ende til ende."},{"nokkel":"kat_modellbilar","merke":"Tekst på «Modellbilar»","standard":"Gamle modellbilar og lastebilar med hjul som går rundt. Ingen lakk, berre olje — mest til pynt."},{"nokkel":"kat_boksar-og-krukker","merke":"Tekst på «Boksar og krukker»","standard":"Krukker og limte boksar med lok som fell ned i og blir ståande utan å klemme. Større boksar til å setje ting i. Kan også nyttast til serveringsbrett."},{"nokkel":"kat_julegaver","merke":"Tekst på «Julegåver»","standard":"Eit utval som passar å gi bort. Kvart stykke finst i eitt eksemplar, så det som står her i dag er ikkje sikkert her i morgon."}]</script>
+    <script type="application/json" id="tekstfelt">[{"nokkel":"toppmelding","merke":"Melding øvst på sida","standard":"Kvart produkt finst i eitt eksemplar"},{"nokkel":"merke_under","merke":"Undertittel under namnet","standard":"Volda"},{"nokkel":"hero_eyebrow","merke":"Liten tekst over overskrifta","standard":"Verkstad i Volda sidan 2020"},{"nokkel":"hero_tittel","merke":"Overskrift","standard":"Treet bestemmer"},{"nokkel":"hero_kursiv","merke":"Overskrift, kursiv del","standard":"kva det blir"},{"nokkel":"hero_tekst","merke":"Tekst under overskrifta","standard":"Gamle bord, hyller og benkeplater får eit nytt liv. Kva det blir, kjem an på kva som ligg på benken den dagen."},{"nokkel":"hero_knapp","merke":"Tekst på knappen","standard":"Sjå kva som står på hylla"},{"nokkel":"tillit_2","merke":"Løfte 2","standard":"Sendt frå Volda på 1–3 dagar"},{"nokkel":"tillit_3","merke":"Løfte 3","standard":"14 dagar angrerett"},{"nokkel":"kat_overskrift","merke":"Overskrift over kategoriane","standard":"Kva eg lagar"},{"nokkel":"ledige_eyebrow","merke":"Liten tekst over produkta","standard":"Nytt i verkstaden"},{"nokkel":"ledige_overskrift","merke":"Overskrift over produkta","standard":"Tilgjengeleg no"},{"nokkel":"fort_eyebrow","merke":"Liten tekst over forteljinga","standard":"Om verkstaden"},{"nokkel":"fort_overskrift","merke":"Overskrift på forteljinga","standard":"Hobby i ein verkstad"},{"nokkel":"fort_tekst","merke":"Forteljinga","standard":"Verkstaden ligg i kjellaren i Volda. Det starta med ein leikebil til barnebarnet, og no er hyllene fulle.\n\nEg har vore lærar i 38 år. Før eg vart lærar, jobba eg i seks år som snikkar/bygningsarbeidar i lokale firma."},{"nokkel":"fort_lenke","merke":"Lenketekst under forteljinga","standard":"Les meir om verkstaden"},{"nokkel":"butikk_overskrift","merke":"Overskrift på butikksida","standard":"Butikk"},{"nokkel":"butikk_lead","merke":"Tekst under overskrifta i butikken","standard":"Alt som finst akkurat no. Kvart produkt er eitt av eitt — når det er seld, er det borte."},{"nokkel":"prosess_eyebrow","merke":"Liten tekst over stega","standard":"Frå planke til produkt"},{"nokkel":"prosess_overskrift","merke":"Overskrift over stega","standard":"Slik blir det til"},{"nokkel":"prosess_lead","merke":"Innleiing på prosess-sida","standard":"Frå kappstykke til ferdig produkt går det mellom to til sju dagar. Mesteparten av tida er venting — lim som skal setje seg, olje som skal tørke."},{"nokkel":"steg1_tittel","merke":"Steg 1 — tittel","standard":"Tre som ligg att"},{"nokkel":"steg1_tekst","merke":"Steg 1 — tekst","standard":"Gjenbruk av gamle bord, hyller og benkeplater i heiltre. Eik, valnøtt, teak, bjørk, furu og litt frå ulike typar frukttre."},{"nokkel":"steg2_tittel","merke":"Steg 2 — tittel","standard":"Limt og pressa"},{"nokkel":"steg2_tekst","merke":"Steg 2 — tekst","standard":"Bitane blir høvla, sortert etter farge og limt saman. Fjøla ligg i pressa i eitt døgn."},{"nokkel":"steg3_tittel","merke":"Steg 3 — tittel","standard":"Forma for hand"},{"nokkel":"steg3_tekst","merke":"Steg 3 — tekst","standard":"Kappa, frest og pussa gjennom fem korn. Det er her mesteparten av tida går."},{"nokkel":"steg4_tittel","merke":"Steg 4 — tittel","standard":"Olja og merkt"},{"nokkel":"steg4_tekst","merke":"Steg 4 — tekst","standard":"Tre strøk mineraloljeblanding, og eit brennmerke nedst. Så får det tørke ei veke før det blir lagt ut."},{"nokkel":"om_tittel","merke":"Overskrift","standard":"Om verkstaden"},{"nokkel":"om_lead","merke":"Innleiing","standard":"Verkstaden ligg i kjellaren i Volda. Det starta med ein leikebil til barnebarnet, og no er hyllene fulle."},{"nokkel":"om_tekst","merke":"Heile teksten","standard":"Eg har vore lærar i 38 år. Før eg vart lærar, jobba eg i seks år som snikkar/bygningsarbeidar i lokale firma. Eg har alltid hatt ein arbeidsbenk i kjellaren, mest til å reparere ting. Etter kvart kom trongen til å lage fleire ting. Først gamle modellbilar i tre, så blei det skjerefjøler, boksar og anna.\n\n## Treet er gjenbruk\n\nMest alt trevirket er gamle bord, hyller og benkeplater i heiltre, kjøpt på gjenbruksbutikkar, loppemarknad, Facebook eller på Finn.no. Tresortane som blir nytta er eik, valnøtt, bjørk, teak, akasie og furu.\n\n## Difor finst det berre ei utgåve av kvart produkt\n\nEg lagar ikkje serier. Kvar fjøl blir sett saman av dei bitane som ligg på benken den dagen, og neste gong ligg der andre bitar.\n\n## Frakt og retur\n\nAlle varer kan hentast heime i Smiebakken 32 i Volda, eller bli sende i posten, pakka i bobleplast, papp og papir. Frakt kjem då i tillegg. Du har fjorten dagar angrerett. Er noko skada i posten, ta kontakt, så ordnar vi det."},{"nokkel":"stell_kort","merke":"Kort stellinje på produktsidene","standard":"Vask for hand, tørk med ein gong, og olje fjøla når ho ser tørr ut. Aldri i oppvaskmaskin."},{"nokkel":"stell_tittel","merke":"Overskrift på stellsida","standard":"Slik tek du vare på fjøla"},{"nokkel":"stell","merke":"Heile stellrådet","standard":"## Reingjering\n\nEtter bruk: vask fjøla for hand med mildt såpevatn og mjuk klut. Tørk fjøla med eit handkle, og la den stå oppreist slik at den tørkar på begge sider. Dette hindrar at treet slår seg eller sprekk.\n\n## Gi fjøla næring med olje\n\nTre er eit levande materiale som treng pleie. Bruk nøytral, naturleg olje — mineralolje eller spesialolje for trefjøler. Påfør eit tynt lag, og la det trekke inn over natta. Tørk av overflødig olje neste morgon. Gjenta dette etter 3–4 månader, eller når fjøla ser tørr ut.\n\n## Oppbevaring\n\nLa fjøla stå luftig og tørt, helst på høgkant.\n\nTips: strø litt grovsalt og sitronsaft på fjøla ein gong i blant for naturleg desinfisering og frisk duft.\n\n## Om materialet\n\nProdukta er laga av gjenbruksmateriale. Alle er laga for hand, og det vil vere litt skilnad på produkta i storleik."},{"nokkel":"seld_tekst","merke":"Tekst når eit produkt er seld","standard":"Kvart produkt finst i eitt eksemplar. Vil du ha noko liknande, ta kontakt, så lagar eg eit nytt — men det blir eit anna."},{"nokkel":"botn_om","merke":"Kort om verkstaden","standard":"Handlaga ting i tre frå ein liten verkstad på Sunnmøre. Kvart produkt finst berre i eitt eksemplar."},{"nokkel":"botn_epost","merke":"E-post","standard":"ove.krumsvik@gmail.com"},{"nokkel":"botn_tlf","merke":"Telefon","standard":"+47 48260965"},{"nokkel":"botn_stad","merke":"Stad","standard":"Smiebakken 32, 6100 Volda"},{"nokkel":"botn_orgnr","merke":"Organisasjonsnummer","standard":"Org.nr 936 927 947"},{"nokkel":"kat_skjerefjoler","merke":"Tekst på «Skjerefjøler»","standard":"Fjøler i massivt tre, limte opp av restar frå heiltre benkeplater, hyller og bord. Nokre i endeved, nokre i mønster. Alle er olja og klare til bruk."},{"nokkel":"kat_serveringsbrett","merke":"Tekst på «Serveringsbrett»","standard":"Lange brett skorne ut av éi fjøl, så fargeskiftet i treet går uavbrote frå ende til ende."},{"nokkel":"kat_modellbilar","merke":"Tekst på «Modellbilar»","standard":"Gamle modellbilar og lastebilar med hjul som går rundt. Ingen lakk, berre olje — mest til pynt."},{"nokkel":"kat_boksar-og-krukker","merke":"Tekst på «Boksar og krukker»","standard":"Krukker og limte boksar med lok som fell ned i og blir ståande utan å klemme. Større boksar til å setje ting i. Kan også nyttast til serveringsbrett."},{"nokkel":"kat_julegaver","merke":"Tekst på «Julegåver»","standard":"Eit utval som passar å gi bort. Kvart produkt finst i eitt eksemplar, så det som står her i dag er ikkje sikkert her i morgon."}]</script>
     <script src="/treverket/volda.js"></script>
   </body>
 </html>
