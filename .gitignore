@@ -45,3 +45,9 @@ next-env.d.ts
 
 # Lock files
 *.af~lock~
+
+# OWID fetch scratch — regenerable
+.owid_tmp/
+
+# Unpacked design-handoff bundle (38 MB of unoptimised PNGs); keep the zip, not the extract
+design_handoff_spectrum/
