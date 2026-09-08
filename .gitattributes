@@ -1,0 +1,3 @@
+# The TANKWARS build under public/games is a compiled artifact: keep git from
+# trying to normalise line endings or diff it.
+public/games/** binary

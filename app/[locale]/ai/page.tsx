@@ -41,6 +41,33 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
                 </div>
             </section>
 
+            <section className="pb-12">
+                <div className="mb-4 flex items-center justify-between">
+                    <h2 className="text-base font-semibold" style={{ color: "var(--t-text)" }}>{no ? "Spel" : "Games"}</h2>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <Link href="/ai/games/tankwars" className="group block h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
+                        <div className="relative flex h-36 items-end overflow-hidden p-4" style={{ backgroundImage: "url(/images/articles/tankwars.png)", backgroundSize: "cover", backgroundPosition: "center", imageRendering: "pixelated" }}>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <span className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold tracking-wide" style={{ background: "rgba(0,0,0,0.55)", color: "#fcd34d", border: "1px solid color-mix(in srgb, #fcd34d 50%, transparent)" }}>
+                                {no ? "Spel i nettlesaren" : "Play in browser"}
+                            </span>
+                        </div>
+                        <div className="p-4">
+                            <h3 className="mb-1.5 text-sm font-semibold transition-colors group-hover:underline" style={{ color: "var(--t-text)" }}>
+                                TANKWARS
+                            </h3>
+                            <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                                {no ? "Artillerispel med øydeleggjeleg terreng, femten våpen, hotseat og kampanje med bossar." : "Artillery game with destructible terrain, fifteen weapons, hotseat and a boss campaign."}
+                            </p>
+                            <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
+                                {no ? "Spel no →" : "Play now →"}
+                            </span>
+                        </div>
+                    </Link>
+                </div>
+            </section>
+
             <section className="py-6" style={{ borderTop: "1px solid var(--t-border-subtle)" }}>
                 <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors hover:underline" style={{ color: "var(--ch-accent)" }}>
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
