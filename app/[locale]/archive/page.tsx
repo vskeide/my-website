@@ -1,5 +1,5 @@
 import ArchiveList from "@/components/ArchiveList";
-import { getAllArticles } from "@/lib/articles";
+import { getArticlesForLocale } from "@/lib/articles";
 import { type ArchiveEntry } from "@/components/YearAccordion";
 
 function formatDate(iso: string, locale: string): string {
@@ -13,11 +13,12 @@ function formatDate(iso: string, locale: string): string {
 export default async function ArchivePage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
 
-    const mdxEntries: (ArchiveEntry & { year: number })[] = getAllArticles(locale).map((a) => ({
+    const mdxEntries: (ArchiveEntry & { year: number })[] = getArticlesForLocale(locale).map((a) => ({
         slug: a.slug,
         title: a.title,
         date: formatDate(a.date, locale),
         category: a.category,
+        fallbackLocale: a.fallbackLocale,
         year: parseInt(a.date.split("-")[0], 10),
     }));
 

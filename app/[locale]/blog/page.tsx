@@ -1,5 +1,6 @@
 import BlogList from "@/components/BlogList";
-import { getAllArticles } from "@/lib/articles";
+import { getArticlesForLocale } from "@/lib/articles";
+import { categoriesForLocale } from "@/lib/categories";
 
 export default async function BlogPage({
     params,
@@ -10,9 +11,10 @@ export default async function BlogPage({
 }) {
     const { locale } = await params;
     const { category } = await searchParams;
-    const articles = getAllArticles(locale);
-    // Derived from what is actually published, so no empty filter chips appear.
-    const categories = [...new Set(articles.map((a) => a.category))];
+    const articles = getArticlesForLocale(locale);
+    // Full vocabulary, not just what is published — a category with no articles
+    // still gets a chip (it renders the empty state).
+    const categories = categoriesForLocale(locale, articles.map((a) => a.category));
     const initialCategory = category && categories.includes(category) ? category : null;
     return (
         <main className="mx-auto max-w-[90rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>

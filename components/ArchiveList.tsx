@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import YearAccordion, { type ArchiveEntry } from "@/components/YearAccordion";
-import { getCategoryBadgeStyle } from "@/lib/categories";
+import { categoriesForLocale, getCategoryBadgeStyle } from "@/lib/categories";
 
 function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
     const years: Record<number, ArchiveEntry[]> = {};
@@ -16,11 +17,12 @@ function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
 }
 
 export default function ArchiveList({ entries, locale = "en" }: { entries: (ArchiveEntry & { year: number })[]; locale?: string }) {
+    const t = useTranslations("archive");
     const [activeFilter, setActiveFilter] = useState("All");
 
-    // Derived from the entries themselves, so the chips are in the page's own
-    // language and no empty categories are offered.
-    const allCategories = ["All", ...new Set(entries.map((e) => e.category))];
+    // Full vocabulary in the page's own language, so every category keeps its
+    // chip even with nothing filed under it yet.
+    const allCategories = ["All", ...categoriesForLocale(locale, entries.map((e) => e.category))];
 
     const filtered =
         activeFilter === "All"
@@ -51,7 +53,7 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                                         borderRadius: "var(--r-pill)",
                                     }}
                                 >
-                                    All
+                                    {locale === "no" ? "Alle" : "All"}
                                 </button>
                             );
                         }
@@ -84,14 +86,13 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                         year={group.year}
                         entries={group.entries}
                         defaultOpen={i === 0}
+                        locale={locale}
                     />
                 ))}
                 {grouped.length === 0 && (
                     <div className="py-16 text-center">
                         <p className="text-sm" style={{ color: "var(--t-text-muted)" }}>
-                            {locale === "no"
-                                ? "Ingen artiklar i denne kategorien."
-                                : "No entries found for this category."}
+                            {t("noEntries")}
                         </p>
                     </div>
                 )}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { getCategoryBadgeStyle } from "@/lib/categories";
+import { onlyInLabel } from "@/lib/locale-labels";
 
 export interface ArticleCardProps {
     slug: string;
@@ -11,6 +12,8 @@ export interface ArticleCardProps {
     category: string;
     imageUrl?: string | null;
     locale?: string;
+    /** Set when the article exists only in the other language. */
+    fallbackLocale?: string;
 }
 
 /* ── Per-category gradient backgrounds ────────────────────────────────────── */
@@ -320,7 +323,7 @@ const CAT_HEX: Record<string, string> = {
 };
 
 /* ── Card ─────────────────────────────────────────────────────────────────── */
-export default function ArticleCard({ slug, title, excerpt, date, category, imageUrl, locale }: ArticleCardProps) {
+export default function ArticleCard({ slug, title, excerpt, date, category, imageUrl, locale, fallbackLocale }: ArticleCardProps) {
     const tag = getCategoryBadgeStyle(category);
     const href = locale === "en" ? `/en/blog/${slug}` : `/blog/${slug}`;
     const catHex = CAT_HEX[category] ?? "#7030A0";
@@ -376,9 +379,24 @@ export default function ArticleCard({ slug, title, excerpt, date, category, imag
                     </div>
                 </div>
                 <div className="p-5">
-                    <time className="mb-2 block text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
-                        {date}
-                    </time>
+                    <div className="mb-2 flex items-center gap-2">
+                        <time className="block text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
+                            {date}
+                        </time>
+                        {fallbackLocale && (
+                            <span
+                                className="inline-flex items-center gap-1 px-2 py-0.5 text-[0.65rem] font-semibold uppercase"
+                                style={{
+                                    borderRadius: "var(--r-pill)",
+                                    border: "1px solid var(--t-border-medium)",
+                                    color: "var(--t-text-muted)",
+                                    letterSpacing: "0.04em",
+                                }}
+                            >
+                                {onlyInLabel(fallbackLocale, locale ?? "no")}
+                            </span>
+                        )}
+                    </div>
                     <h3
                         className="mb-2 text-base font-semibold leading-snug transition-colors"
                         style={{ color: "var(--t-text)", fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}

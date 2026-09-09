@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { localizeCategory } from "./categories";
 
 export interface ArticleMeta {
     slug: string;
@@ -11,6 +12,12 @@ export interface ArticleMeta {
     imageUrl: string;
     /** true = kept in the repo but not listed anywhere on the site */
     draft: boolean;
+    /**
+     * Set when this article has no version in the locale being viewed, so the
+     * metadata here comes from the other locale. Listings show it anyway, with
+     * a "Norwegian only" marker.
+     */
+    fallbackLocale?: string;
 }
 
 export interface Article extends ArticleMeta {
@@ -60,6 +67,34 @@ export function getAllArticles(
         })
         .filter((a): a is ArticleMeta => a !== null && (includeDrafts || !a.draft))
         .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+const OTHER_LOCALE: Record<string, string> = { no: "en", en: "no" };
+
+/**
+ * Every article a locale should LIST: its own, plus any that exist only in the
+ * other language, tagged with `fallbackLocale` so the UI can mark them.
+ *
+ * Use this for listings. `getAllArticles` alone hides single-language articles
+ * from the locale they were not written in, which is how `stad-skipstunnel`
+ * (Nynorsk-only) went missing from the English blog.
+ */
+export function getArticlesForLocale(
+    locale = "en",
+    opts: { includeDrafts?: boolean } = {}
+): ArticleMeta[] {
+    const own = getAllArticles(locale, opts);
+    const other = OTHER_LOCALE[locale];
+    if (!other) return own;
+
+    const haveSlugs = new Set(own.map((a) => a.slug));
+    const onlyInOther = getAllArticles(other, opts)
+        .filter((a) => !haveSlugs.has(a.slug))
+        // Re-label the category into this locale's wording, so it collapses
+        // onto the existing chip instead of adding a duplicate.
+        .map((a) => ({ ...a, category: localizeCategory(a.category, locale), fallbackLocale: other }));
+
+    return [...own, ...onlyInOther].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getArticle(locale: string, slug: string): Article | null {

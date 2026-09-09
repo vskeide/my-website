@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n-navigation";
 import ArticleCard from "@/components/ArticleCard";
-import { getAllArticles } from "@/lib/articles";
-import { getCategoryBadgeStyle } from "@/lib/categories";
+import { getArticlesForLocale } from "@/lib/articles";
+import { categoriesForLocale, getCategoryBadgeStyle } from "@/lib/categories";
+import { onlyInNotice } from "@/lib/locale-labels";
 
 const calculators = [
     {
@@ -66,10 +67,10 @@ const calculators = [
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     const t = await getTranslations("home");
-    const allArticles = getAllArticles(locale);
+    const allArticles = getArticlesForLocale(locale);
     const featured = allArticles[0];
     const latestArticles = allArticles.slice(1, 6);
-    const categories = [...new Set(allArticles.map((a) => a.category))];
+    const categories = categoriesForLocale(locale, allArticles.map((a) => a.category));
 
     return (
         <main className="mx-auto max-w-[75rem] px-4 sm:px-6" style={{ paddingTop: "var(--nav-height)" }}>
@@ -130,8 +131,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                                 <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--t-text-secondary)", fontFamily: "var(--font-serif)", lineHeight: 1.6 }}>
                                     {featured.excerpt}
                                 </p>
-                                <div className="flex items-center gap-3 text-xs" style={{ color: "var(--t-text-muted)" }}>
+                                <div className="flex flex-wrap items-center gap-3 text-xs" style={{ color: "var(--t-text-muted)" }}>
                                     <time>{featured.date}</time>
+                                    {featured.fallbackLocale && (
+                                        <span
+                                            className="px-2 py-0.5 font-semibold"
+                                            style={{
+                                                borderRadius: "var(--r-pill)",
+                                                border: "1px solid var(--t-border-medium)",
+                                            }}
+                                        >
+                                            {onlyInNotice(featured.fallbackLocale, locale)}
+                                        </span>
+                                    )}
                                 </div>
                                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--ch-accent)" }}>
                                     {locale === "no" ? "Les saka" : "Read story"} →

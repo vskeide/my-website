@@ -6,9 +6,10 @@ interface CategoryFilterProps {
     categories: string[];
     active: string | null;
     onSelect: (category: string | null) => void;
+    locale?: string;
 }
 
-export default function CategoryFilter({ categories, active, onSelect }: CategoryFilterProps) {
+export default function CategoryFilter({ categories, active, onSelect, locale = "no" }: CategoryFilterProps) {
     return (
         <div className="flex flex-wrap gap-2">
             <button
@@ -21,7 +22,7 @@ export default function CategoryFilter({ categories, active, onSelect }: Categor
                     borderRadius: "var(--r-pill)",
                 }}
             >
-                All
+                {locale === "no" ? "Alle" : "All"}
             </button>
 
             {categories.map((cat) => {

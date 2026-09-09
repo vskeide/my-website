@@ -9,20 +9,25 @@ export interface ArchiveEntry {
     date: string;
     category: string;
     type?: "article" | "calculator";
+    /** Set when the article exists only in the other language. */
+    fallbackLocale?: string;
 }
 
 interface YearAccordionProps {
     year: number;
     entries: ArchiveEntry[];
     defaultOpen?: boolean;
+    locale?: string;
 }
 
 import { getCategoryBadgeStyle } from "@/lib/categories";
+import { onlyInLabel } from "@/lib/locale-labels";
 
 export default function YearAccordion({
     year,
     entries,
     defaultOpen = false,
+    locale = "no",
 }: YearAccordionProps) {
     const [open, setOpen] = useState(defaultOpen);
 
@@ -42,7 +47,10 @@ export default function YearAccordion({
                 <div className="flex items-center gap-4">
                     <span className="text-lg font-bold tracking-tight">{year}</span>
                     <span className="text-xs font-medium" style={{ color: "var(--t-text-muted)" }}>
-                        {entries.length} {entries.length === 1 ? "entry" : "entries"}
+                        {entries.length}{" "}
+                        {locale === "no"
+                            ? entries.length === 1 ? "oppføring" : "oppføringar"
+                            : entries.length === 1 ? "entry" : "entries"}
                     </span>
                 </div>
                 <svg
@@ -66,10 +74,13 @@ export default function YearAccordion({
                     <ul className="divide-y" style={{ borderColor: "var(--t-border-subtle)" }}>
                         {entries.map((entry) => {
                             const badge = getCategoryBadgeStyle(entry.category);
+                            // Entries were previously always linked without a
+                            // locale prefix, sending English readers to /blog/…
+                            const prefix = locale === "en" ? "/en" : "";
                             const href =
                                 entry.type === "calculator"
-                                    ? "/calculators"
-                                    : `/blog/${entry.slug}`;
+                                    ? `${prefix}/calculators`
+                                    : `${prefix}/blog/${entry.slug}`;
 
                             return (
                                 <li key={entry.slug}>
@@ -92,6 +103,19 @@ export default function YearAccordion({
                                         <span className="truncate text-sm font-medium" style={{ color: "var(--t-text-secondary)" }}>
                                             {entry.title}
                                         </span>
+                                        {entry.fallbackLocale && (
+                                            <span
+                                                className="ml-auto shrink-0 px-1.5 py-0.5 text-[0.6rem] font-semibold uppercase"
+                                                style={{
+                                                    borderRadius: "var(--r-pill)",
+                                                    border: "1px solid var(--t-border-medium)",
+                                                    color: "var(--t-text-muted)",
+                                                    letterSpacing: "0.04em",
+                                                }}
+                                            >
+                                                {onlyInLabel(entry.fallbackLocale, locale)}
+                                            </span>
+                                        )}
                                     </Link>
                                 </li>
                             );
