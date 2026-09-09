@@ -2,11 +2,12 @@ import ArchiveList from "@/components/ArchiveList";
 import { getAllArticles } from "@/lib/articles";
 import { type ArchiveEntry } from "@/components/YearAccordion";
 
-function formatDate(iso: string): string {
+function formatDate(iso: string, locale: string): string {
     const [, month, day] = iso.split("-");
     const monthsNo = ["jan.", "feb.", "mar.", "apr.", "mai", "jun.", "jul.", "aug.", "sep.", "okt.", "nov.", "des."];
     const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return { no: monthsNo, en: monthsEn }["no"][parseInt(month, 10) - 1] + " " + parseInt(day, 10);
+    const months = locale === "no" ? monthsNo : monthsEn;
+    return months[parseInt(month, 10) - 1] + " " + parseInt(day, 10);
 }
 
 export default async function ArchivePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -15,7 +16,7 @@ export default async function ArchivePage({ params }: { params: Promise<{ locale
     const mdxEntries: (ArchiveEntry & { year: number })[] = getAllArticles(locale).map((a) => ({
         slug: a.slug,
         title: a.title,
-        date: formatDate(a.date),
+        date: formatDate(a.date, locale),
         category: a.category,
         year: parseInt(a.date.split("-")[0], 10),
     }));

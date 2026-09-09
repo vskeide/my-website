@@ -168,8 +168,9 @@ function getMdxComponents(slug: string) {
 
 
 export async function generateStaticParams() {
-    const noArticles = getAllArticles("no").map((a) => ({ slug: a.slug, locale: "no" }));
-    const enArticles = getAllArticles("en").map((a) => ({ slug: a.slug, locale: "en" }));
+    // includeDrafts: a draft is hidden from listings but its URL must still work.
+    const noArticles = getAllArticles("no", { includeDrafts: true }).map((a) => ({ slug: a.slug, locale: "no" }));
+    const enArticles = getAllArticles("en", { includeDrafts: true }).map((a) => ({ slug: a.slug, locale: "en" }));
     return [...noArticles, ...enArticles];
 }
 

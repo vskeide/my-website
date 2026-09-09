@@ -9,6 +9,8 @@ export interface ArticleMeta {
     category: string;
     excerpt: string;
     imageUrl: string;
+    /** true = kept in the repo but not listed anywhere on the site */
+    draft: boolean;
 }
 
 export interface Article extends ArticleMeta {
@@ -19,7 +21,15 @@ function contentDir(locale: string) {
     return path.join(process.cwd(), "content", locale);
 }
 
-export function getAllArticles(locale = "en"): ArticleMeta[] {
+/**
+ * All articles for a locale, newest first.
+ * Drafts (frontmatter `draft: true`) are excluded unless `includeDrafts` is set —
+ * they stay in the repo as templates but never appear in a listing.
+ */
+export function getAllArticles(
+    locale = "en",
+    { includeDrafts = false }: { includeDrafts?: boolean } = {}
+): ArticleMeta[] {
     const dir = contentDir(locale);
     if (!fs.existsSync(dir)) return [];
 
@@ -45,10 +55,11 @@ export function getAllArticles(locale = "en"): ArticleMeta[] {
                 category: (data.category as string) ?? "General",
                 excerpt: (data.excerpt as string) ?? "",
                 imageUrl: (data.imageUrl as string) ?? "",
+                draft: data.draft === true,
             };
         })
-        .filter(Boolean)
-        .sort((a, b) => (a!.date < b!.date ? 1 : -1)) as ArticleMeta[];
+        .filter((a): a is ArticleMeta => a !== null && (includeDrafts || !a.draft))
+        .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getArticle(locale: string, slug: string): Article | null {
@@ -69,6 +80,7 @@ export function getArticle(locale: string, slug: string): Article | null {
         category: (data.category as string) ?? "General",
         excerpt: (data.excerpt as string) ?? "",
         imageUrl: (data.imageUrl as string) ?? "",
+        draft: data.draft === true,
         content,
     };
 }

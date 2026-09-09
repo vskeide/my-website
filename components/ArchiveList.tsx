@@ -4,16 +4,6 @@ import { useState } from "react";
 import YearAccordion, { type ArchiveEntry } from "@/components/YearAccordion";
 import { getCategoryBadgeStyle } from "@/lib/categories";
 
-const ALL_CATEGORIES = [
-    "All",
-    "Investing & Finance",
-    "Personal Economy",
-    "Local Politics",
-    "AI",
-    "China",
-    "Calculators",
-];
-
 function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
     const years: Record<number, ArchiveEntry[]> = {};
     entries.forEach((entry) => {
@@ -27,6 +17,10 @@ function groupByYear(entries: (ArchiveEntry & { year: number })[]) {
 
 export default function ArchiveList({ entries, locale = "en" }: { entries: (ArchiveEntry & { year: number })[]; locale?: string }) {
     const [activeFilter, setActiveFilter] = useState("All");
+
+    // Derived from the entries themselves, so the chips are in the page's own
+    // language and no empty categories are offered.
+    const allCategories = ["All", ...new Set(entries.map((e) => e.category))];
 
     const filtered =
         activeFilter === "All"
@@ -42,7 +36,7 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                 style={{ backgroundColor: "var(--t-bg)", borderBottom: "1px solid var(--t-border-subtle)" }}
             >
                 <div className="flex flex-wrap gap-2">
-                    {ALL_CATEGORIES.map((cat) => {
+                    {allCategories.map((cat) => {
                         const isActive = activeFilter === cat;
                         if (cat === "All") {
                             return (
@@ -95,7 +89,9 @@ export default function ArchiveList({ entries, locale = "en" }: { entries: (Arch
                 {grouped.length === 0 && (
                     <div className="py-16 text-center">
                         <p className="text-sm" style={{ color: "var(--t-text-muted)" }}>
-                            No entries found for this category.
+                            {locale === "no"
+                                ? "Ingen artiklar i denne kategorien."
+                                : "No entries found for this category."}
                         </p>
                     </div>
                 )}
