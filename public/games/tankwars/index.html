@@ -33,11 +33,14 @@
       }
       #fs:active { background: rgba(240, 217, 168, 0.25); }
     </style>
-    <script type="module" crossorigin src="./assets/index-b7WJ4ID2.js"></script>
+    <script type="module" crossorigin src="./assets/index-91anC7OM.js"></script>
   </head>
   <body>
-    <div id="game"></div>
-    <div id="rotate"><span>⟲</span>TURN YOUR DEVICE<br /><small>TANKWARS plays in landscape</small></div>
-    <button id="fs" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
+    <!-- The overlays sit inside #game, which is the fullscreen element: anything
+         outside it disappears while fullscreen, and that once hid the way out. -->
+    <div id="game">
+      <div id="rotate"><span>⟲</span>TURN YOUR DEVICE<br /><small>TANKWARS plays in landscape</small></div>
+      <button id="fs" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
+    </div>
   </body>
 </html>
