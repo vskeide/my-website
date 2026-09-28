@@ -1,0 +1,11 @@
+{
+  "canvas": { "w": 1024, "h": 1024 },
+  "species": "einhyrning",
+  "base": "animal-iris",
+  "regions": {
+    "salteppe": { "x": 390, "y": 340, "w": 280, "h": 240 },
+    "dekken": { "x": 220, "y": 340, "w": 580, "h": 320 },
+    "grime": { "x": 100, "y": 40, "w": 220, "h": 320 },
+    "sloyfe": { "x": 120, "y": 20, "w": 360, "h": 330 }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "canvas": { "w": 1024, "h": 1024 },
+  "species": "dolahest",
+  "base": "animal-stjerna",
+  "regions": {
+    "salteppe": { "x": 440, "y": 300, "w": 350, "h": 290 },
+    "dekken": { "x": 200, "y": 270, "w": 700, "h": 430 },
+    "grime": { "x": 60, "y": 45, "w": 310, "h": 390 },
+    "sloyfe": { "x": 90, "y": 40, "w": 350, "h": 250 }
+  }
+}

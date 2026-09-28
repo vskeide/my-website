@@ -65,6 +65,25 @@ export default async function AIPage({ params }: { params: Promise<{ locale: str
                             </span>
                         </div>
                     </Link>
+                    <Link href="/ai/games/mi-magiske-verd" className="group block h-full overflow-hidden transition-all duration-200 hover:shadow-xl" style={{ background: "var(--t-card)", border: "1px solid var(--t-border-subtle)", borderRadius: "var(--r-card)" }}>
+                        <div className="relative flex h-36 items-end overflow-hidden p-4" style={{ backgroundImage: "url(/images/articles/mi-magiske-verd.webp)", backgroundSize: "cover", backgroundPosition: "center" }}>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <span className="relative z-10 inline-block px-2 py-0.5 text-xs font-semibold tracking-wide" style={{ background: "rgba(0,0,0,0.55)", color: "#f9a8d4", border: "1px solid color-mix(in srgb, #f9a8d4 50%, transparent)" }}>
+                                {no ? "Beta-test" : "Beta test"}
+                            </span>
+                        </div>
+                        <div className="p-4">
+                            <h3 className="mb-1.5 text-sm font-semibold transition-colors group-hover:underline" style={{ color: "var(--t-text)" }}>
+                                Mi magiske verd
+                            </h3>
+                            <p className="mb-3 text-xs leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+                                {no ? "Livs- og samlespel på nynorsk for 10–11-åringar, der rettskriving og matte er valutaen. Foreldremodus med PIN. Lagrar i nettlesaren." : "A Nynorsk life-and-collecting game for 10–11-year-olds where spelling and maths are the currency. Parent mode with PIN. Saves in the browser."}
+                            </p>
+                            <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "var(--ch-accent)" }}>
+                                {no ? "Prøv beta →" : "Try the beta →"}
+                            </span>
+                        </div>
+                    </Link>
                 </div>
             </section>
 

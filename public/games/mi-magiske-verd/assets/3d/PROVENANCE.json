@@ -1,0 +1,25 @@
+{
+  "_comment": "Third-party files shipped under public/assets/3d/ (docs/09 §11). Each file listed here needs an entry in content/ride3d/models.json or sounds.json with an allow-listed licence (CC0-1.0, CC-BY-3.0, CC-BY-4.0) and its `retrieved` date; tests/ride3d-provenance.test.ts checks both ways. Files were fetched 2026-09-27 with the licence read on each source page that day (Kenney: License.txt in the kit, CC0).",
+  "files": [
+    "3d/models/kenney-bridge-wood.glb",
+    "3d/models/kenney-fence-gate.glb",
+    "3d/models/kenney-fence-simple-low.glb",
+    "3d/models/kenney-fence-simple.glb",
+    "3d/models/kenney-flower-purple-a.glb",
+    "3d/models/kenney-flower-red-a.glb",
+    "3d/models/kenney-flower-yellow-a.glb",
+    "3d/models/kenney-grass.glb",
+    "3d/models/kenney-log.glb",
+    "3d/models/kenney-rock-a.glb",
+    "3d/models/kenney-stump.glb",
+    "3d/models/kenney-tree-default.glb",
+    "3d/models/kenney-tree-oak.glb",
+    "3d/models/polygoogle-goat.glb",
+    "3d/models/quaternius-bee.glb",
+    "3d/models/quaternius-birch.glb",
+    "3d/models/quaternius-bush-berries.glb",
+    "3d/models/quaternius-fantasy-stable.glb",
+    "3d/models/quaternius-horse.glb",
+    "3d/models/quaternius-white-horse.glb"
+  ]
+}

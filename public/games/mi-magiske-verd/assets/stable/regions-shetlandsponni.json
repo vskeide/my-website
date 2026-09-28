@@ -1,0 +1,11 @@
+{
+  "canvas": { "w": 1024, "h": 1024 },
+  "species": "shetlandsponni",
+  "base": "animal-kanel",
+  "regions": {
+    "salteppe": { "x": 440, "y": 300, "w": 330, "h": 300 },
+    "dekken": { "x": 210, "y": 290, "w": 690, "h": 420 },
+    "grime": { "x": 50, "y": 55, "w": 320, "h": 370 },
+    "sloyfe": { "x": 85, "y": 55, "w": 330, "h": 240 }
+  }
+}
