@@ -1,0 +1,131 @@
+{
+  "_comment": "Written by tools/build_sfx.py.",
+  "files": [
+    {
+      "file": "sfx/tap.mp3",
+      "source": "https://kenney.nl/assets/ui-audio (UI Audio: click1.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/coin.mp3",
+      "source": "https://kenney.nl/assets/rpg-audio (RPG Audio: handleCoins2.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/correct.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds (Interface Sounds: confirmation_002.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/retry.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds (Interface Sounds: question_001.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/levelUp.mp3",
+      "source": "https://kenney.nl/assets/music-jingles (Music Jingles: jingles_PIZZI07.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/collection.mp3",
+      "source": "https://kenney.nl/assets/music-jingles (Music Jingles: jingles_STEEL07.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/letter.mp3",
+      "source": "https://kenney.nl/assets/rpg-audio (RPG Audio: bookFlip2.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/story.mp3",
+      "source": "https://kenney.nl/assets/music-jingles (Music Jingles: jingles_STEEL02.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/purchase.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds (Interface Sounds: glass_004.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/place.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds (Impact Sounds: impactWood_light_000.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/brush.mp3",
+      "source": "https://kenney.nl/assets/rpg-audio (RPG Audio: cloth2.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/jump.mp3",
+      "source": "https://kenney.nl/assets/rpg-audio (RPG Audio: creak3.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/land.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds (Impact Sounds: impactSoft_medium_000.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/coinPick.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds (Interface Sounds: pluck_002.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/hurt.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds (Impact Sounds: impactSoft_heavy_000.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/finish.mp3",
+      "source": "https://kenney.nl/assets/music-jingles (Music Jingles: jingles_PIZZI03.ogg)",
+      "author": "Kenney",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/neigh.mp3",
+      "source": "https://freesound.org/s/510903/",
+      "author": "Lydmakeren",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/water.mp3",
+      "source": "freesound.org (fill in FREESOUND in tools/build_sfx.py)",
+      "author": "",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/hoof.mp3",
+      "source": "freesound.org (fill in FREESOUND in tools/build_sfx.py)",
+      "author": "",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/walk.mp3",
+      "source": "https://freesound.org/s/843303/",
+      "author": "BorzSounds",
+      "licence": "CC0-1.0"
+    },
+    {
+      "file": "sfx/gallop.mp3",
+      "source": "https://freesound.org/s/843303/",
+      "author": "BorzSounds",
+      "licence": "CC0-1.0"
+    }
+  ]
+}

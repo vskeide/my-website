@@ -1,0 +1,65 @@
+{
+  "_comment": "Written by tools/build_music.py.",
+  "files": [
+    {
+      "file": "music/heime.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/oppgaver.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/butikk.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/stallen.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/forteljing.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/ride-enga.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/ride-skogen.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/ride-vatnet.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/ride-fjellet.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    },
+    {
+      "file": "music/fri-ridetur-3d.mp3",
+      "source": "Generated with Google Lyria (Gemini) from docs/MUSIC-PROMPTS.md",
+      "author": "Vebjørn Skeide",
+      "licence": "own"
+    }
+  ]
+}

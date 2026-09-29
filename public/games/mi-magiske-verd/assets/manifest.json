@@ -825,7 +825,7 @@
       "id": "hat-einhyrning-horn",
       "path": "wardrobe/hat-einhyrning-horn.webp",
       "category": "hat",
-      "name": "Einhyrninghorn",
+      "name": "Einhyrningshorn",
       "width": 1024,
       "height": 1536,
       "transparent": true,
@@ -833,7 +833,7 @@
       "placeholder": {
         "color": "#e8b85a",
         "shape": "rect",
-        "label": "Einhyrninghorn"
+        "label": "Einhyrningshorn"
       },
       "prompt": "EDIT the attached base doll image (doll-base-medium.png). Change ONLY the masked region: the top of the head and forehead. Draw a white headband with a spiralled gold unicorn horn and two small white ears, worn naturally on this exact character over her plain grey base clothes, following her pose and the key light from the upper left. Keep the pose, face, skin, silhouette, lighting and everything outside the mask exactly as in the input. No extra objects, no background. Output the full 1024x1536 image.\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "slot": "hat",
@@ -1078,7 +1078,7 @@
       "id": "hand-einhyrning-bamse",
       "path": "wardrobe/hand-einhyrning-bamse.webp",
       "category": "hand",
-      "name": "Einhyrningbamse",
+      "name": "Einhyrningsbamse",
       "width": 1024,
       "height": 1536,
       "transparent": true,
@@ -1086,7 +1086,7 @@
       "placeholder": {
         "color": "#fad3b8",
         "shape": "rect",
-        "label": "Einhyrningbamse"
+        "label": "Einhyrningsbamse"
       },
       "prompt": "EDIT the attached base doll image (doll-base-medium.png). Change ONLY the masked region: the doll's right hand and the space beside her right hip (the LEFT side of the image). Draw a small plush white unicorn toy with a lavender mane, dangling from her right hand held by one front leg, the toy beside her right hip, worn naturally on this exact character over her plain grey base clothes, following her pose and the key light from the upper left. The object hangs from or rests in her right hand, BELOW the hand, beside her right hip: the hand, the fingers, the arm and the shoulder stay exactly as in the input, and the object must not cover them. Draw only the object and its handle or strap. Keep the pose, face, skin, silhouette, lighting and everything outside the mask exactly as in the input. No extra objects, no background. Output the full 1024x1536 image.\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "slot": "hand",
@@ -1647,7 +1647,7 @@
       "id": "disp-figur-einhyrning",
       "path": "display/disp-figur-einhyrning.webp",
       "category": "display",
-      "name": "Einhyrningfigur",
+      "name": "Einhyrningsfigur",
       "width": 1024,
       "height": 1024,
       "transparent": true,
@@ -1655,7 +1655,7 @@
       "placeholder": {
         "color": "#e8b85a",
         "shape": "rect",
-        "label": "Einhyrningfigur"
+        "label": "Einhyrningsfigur"
       },
       "prompt": "SUBJECT: a small porcelain figurine of a white unicorn with a lavender mane\n\nFRAMING: A small collectible object that sits on a shelf, ISOLATED on a fully transparent background, front view seen very slightly from above, centred, filling about 70% of the canvas, with a soft contact shadow. Key light upper left.\n\nOUTPUT: 1024x1024, fully transparent background (PNG with alpha).\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image."
     },
@@ -2585,7 +2585,7 @@
       "id": "icon-flamme",
       "path": "icons/icon-flamme.webp",
       "category": "icon",
-      "name": "Streak",
+      "name": "Dagar på rad",
       "width": 1024,
       "height": 1024,
       "transparent": true,
@@ -2593,7 +2593,7 @@
       "placeholder": {
         "color": "#b79cd8",
         "shape": "circle",
-        "label": "Streak"
+        "label": "Dagar på rad"
       },
       "prompt": "SUBJECT: a small warm flame, peach to gold\n\nFRAMING: A single UI icon for a children's game: a glossy, softly rounded, gently 3D object with a subtle highlight on top, centred on a fully transparent background, filling about 80% of the canvas. Simple, readable at 64 pixels. No text.\n\nOUTPUT: 1024x1024, fully transparent background (PNG with alpha).\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image."
     },
@@ -4125,7 +4125,7 @@
       "id": "rider-body-medium",
       "path": "ride/rider-body-medium.webp",
       "category": "rider",
-      "name": "Rytter (medium hud)",
+      "name": "Ryttar (medium hud)",
       "width": 1024,
       "height": 1024,
       "transparent": true,
@@ -4133,7 +4133,7 @@
       "placeholder": {
         "color": "#bfddf5",
         "shape": "rect",
-        "label": "Rytter (medium hud)"
+        "label": "Ryttar (medium hud)"
       },
       "prompt": "SUBJECT: the girl of the character anchor in riding clothes: a lavender riding jacket, cream riding trousers, brown riding boots; skin tone medium, warm light-olive on the hands and the neck.\n\nFRAMING: The main character's BODY in riding clothes, SIDE VIEW facing LEFT, sitting astride as if on an invisible horse: the near leg hanging down in a riding boot, the hands forward as if holding reins. ONLY ONE LEG IS VISIBLE: the far leg is completely hidden behind the (invisible) horse's body, so the picture shows one thigh, one knee and one boot, never a second knee or thigh. Like a paper-doll body, the picture ends at the collar: NO head and no hair (the game adds her own head). Layout on the 1024x1024 canvas (the game relies on it): her seat, where she sits on the saddle, at the horizontal centre and 64% from the top; the collar at 48% across and 19% from the top; she fills about 70% of the canvas height. Fully transparent background, no horse, no saddle.\n\nOUTPUT: 1024x1024, fully transparent background (PNG with alpha).\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "notes": "Ridetur step 1 (docs/ASSET-BRIEF-RIDE.md). Make this one first."
@@ -4142,7 +4142,7 @@
       "id": "rider-body-light",
       "path": "ride/rider-body-light.webp",
       "category": "rider",
-      "name": "Rytter (lys hud)",
+      "name": "Ryttar (lys hud)",
       "width": 1024,
       "height": 1024,
       "transparent": true,
@@ -4150,7 +4150,7 @@
       "placeholder": {
         "color": "#bfddf5",
         "shape": "rect",
-        "label": "Rytter (lys hud)"
+        "label": "Ryttar (lys hud)"
       },
       "prompt": "SUBJECT: the girl of the character anchor in riding clothes: a lavender riding jacket, cream riding trousers, brown riding boots; skin tone light, warm peach on the hands and the neck.\n\nFRAMING: The main character's BODY in riding clothes, SIDE VIEW facing LEFT, sitting astride as if on an invisible horse: the near leg hanging down in a riding boot, the hands forward as if holding reins. ONLY ONE LEG IS VISIBLE: the far leg is completely hidden behind the (invisible) horse's body, so the picture shows one thigh, one knee and one boot, never a second knee or thigh. Like a paper-doll body, the picture ends at the collar: NO head and no hair (the game adds her own head). Layout on the 1024x1024 canvas (the game relies on it): her seat, where she sits on the saddle, at the horizontal centre and 64% from the top; the collar at 48% across and 19% from the top; she fills about 70% of the canvas height. Fully transparent background, no horse, no saddle.\n\nOUTPUT: 1024x1024, fully transparent background (PNG with alpha).\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "notes": "Ridetur step 1 (docs/ASSET-BRIEF-RIDE.md). EDIT of rider-body-medium: change only the skin colour."
@@ -4159,7 +4159,7 @@
       "id": "rider-body-dark",
       "path": "ride/rider-body-dark.webp",
       "category": "rider",
-      "name": "Rytter (mørk hud)",
+      "name": "Ryttar (mørk hud)",
       "width": 1024,
       "height": 1024,
       "transparent": true,
@@ -4167,7 +4167,7 @@
       "placeholder": {
         "color": "#bfddf5",
         "shape": "rect",
-        "label": "Rytter (mørk hud)"
+        "label": "Ryttar (mørk hud)"
       },
       "prompt": "SUBJECT: the girl of the character anchor in riding clothes: a lavender riding jacket, cream riding trousers, brown riding boots; skin tone deep warm brown on the hands and the neck.\n\nFRAMING: The main character's BODY in riding clothes, SIDE VIEW facing LEFT, sitting astride as if on an invisible horse: the near leg hanging down in a riding boot, the hands forward as if holding reins. ONLY ONE LEG IS VISIBLE: the far leg is completely hidden behind the (invisible) horse's body, so the picture shows one thigh, one knee and one boot, never a second knee or thigh. Like a paper-doll body, the picture ends at the collar: NO head and no hair (the game adds her own head). Layout on the 1024x1024 canvas (the game relies on it): her seat, where she sits on the saddle, at the horizontal centre and 64% from the top; the collar at 48% across and 19% from the top; she fills about 70% of the canvas height. Fully transparent background, no horse, no saddle.\n\nOUTPUT: 1024x1024, fully transparent background (PNG with alpha).\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "notes": "Ridetur step 1 (docs/ASSET-BRIEF-RIDE.md). EDIT of rider-body-medium: change only the skin colour."
