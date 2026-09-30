@@ -733,7 +733,7 @@
       "id": "hat-caps-blaa",
       "path": "wardrobe/hat-caps-blaa.webp",
       "category": "hat",
-      "name": "Blå caps",
+      "name": "Blå kaps",
       "width": 1024,
       "height": 1536,
       "transparent": true,
@@ -741,7 +741,7 @@
       "placeholder": {
         "color": "#e8b85a",
         "shape": "rect",
-        "label": "Blå caps"
+        "label": "Blå kaps"
       },
       "prompt": "EDIT the attached base doll image (doll-base-medium.png). Change ONLY the masked region: the top of the head and forehead. Draw a sky-blue baseball cap worn forwards, worn naturally on this exact character over her plain grey base clothes, following her pose and the key light from the upper left. Keep the pose, face, skin, silhouette, lighting and everything outside the mask exactly as in the input. No extra objects, no background. Output the full 1024x1536 image.\n\nSTYLE: warm, cozy, semi-realistic 3D render in the look of a high-end modern mobile game or a cozy animated film. Soft, slightly stylised proportions; not hyper-realistic, not flat cartoon. Key light: golden evening light from the UPPER LEFT, plus a warm lamp glow; soft shadows, gentle ambient occlusion, a touch of bloom. Palette: pink, peach, beige, cream, warm brown and muted purple, with magical accents of lavender, mint, sky blue and gold glitter. Everything clean, polished, inviting and safe. Absolutely no text, letters, numbers, logos, signatures or watermarks anywhere in the image.",
       "slot": "hat",
